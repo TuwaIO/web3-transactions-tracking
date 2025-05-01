@@ -1,0 +1,17 @@
+{
+  "short_name": "Web3-txs-tracking",
+  "name": "Web3 transactions tracking",
+  "description": "Reliably track the lifecycle of web3 transactions with this intuitive package. Get real-time insights into on-chain processes with ease.",
+  "iconPath": "vercel.svg",
+  "icons": [
+    {
+      "src": "vercel.svg",
+      "sizes": "32x32",
+      "type": "image/svg"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
