@@ -120,7 +120,7 @@ export async function gelatoTracker<T extends Transaction>({
   };
 
   let retryCount = 10;
-  pollingInterval = setInterval(async () => {
+  pollingInterval = window.setInterval(async () => {
     if (retryCount > 0) {
       const response = await fetchTxFromGelatoAPI<T>({
         taskId: tx.txKey,

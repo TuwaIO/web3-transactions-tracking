@@ -9,7 +9,6 @@ import { sepolia } from 'viem/chains';
 import { CounterAbi } from '@/abis/CounterAbi';
 import { appChains, config } from '@/configs/wagmiConfig';
 import { useTxTrackingStore } from '@/hooks/txTrackingHooks';
-import { increment } from '@/transactions/actions/increment';
 import { incrementGelato } from '@/transactions/actions/incrementGelato';
 import { TxType } from '@/transactions/onSucceedCallbacks';
 
