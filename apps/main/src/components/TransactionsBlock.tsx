@@ -10,6 +10,7 @@ import { CounterAbi } from '@/abis/CounterAbi';
 import { appChains, config } from '@/configs/wagmiConfig';
 import { useTxTrackingStore } from '@/hooks/txTrackingHooks';
 import { increment } from '@/transactions/actions/increment';
+import { incrementGelato } from '@/transactions/actions/incrementGelato';
 import { TxType } from '@/transactions/onSucceedCallbacks';
 
 export const COUNTER_ADDRESS = '0xAe7f46914De82028eCB7E2bF97Feb3D3dDCc2BAB';
@@ -22,7 +23,7 @@ export const TransactionsBlock = () => {
   const handleIncrement = async () => {
     await handleTransaction({
       config,
-      actionFunction: () => increment({ wagmiConfig: config }),
+      actionFunction: () => incrementGelato(),
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,

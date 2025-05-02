@@ -1,21 +1,12 @@
-import { Chain, Client, GetTransactionReturnType, Hex, isHex, ReplacementReturnType, TransactionReceipt } from 'viem';
+import { Client, GetTransactionReturnType, Hex, isHex, ReplacementReturnType, TransactionReceipt } from 'viem';
 import { getBlock, getTransaction, waitForTransactionReceipt } from 'viem/actions';
 
 import { createViemClient } from '../helpers/createViemClient';
 import { ITxTrackingStore } from '../store/txTrackingStore';
-import { BaseTransaction, Transaction, TransactionStatus } from '../types';
+import { TrackerParams, Transaction, TransactionStatus } from '../types';
 
-export type EthereumTransaction = BaseTransaction & {
-  to?: Hex;
-  nonce?: number;
-};
-
-type EthereumTrackerParams<T extends Transaction> = {
-  tx: T;
-  chains: Chain[];
-  onInitialize?: () => void;
+type EthereumTrackerParams<T extends Transaction> = TrackerParams<T> & {
   onSucceed: (localTx: GetTransactionReturnType, txn: TransactionReceipt, client: Client) => Promise<void>;
-  onFailed: (e?: unknown) => void;
   onReplaced: (replacement: ReplacementReturnType) => void;
 };
 
@@ -84,22 +75,24 @@ export async function ethereumTrackerForStore<T extends Transaction>({
   tx,
   chains,
   transactionsPool,
-  updateTxStatus,
+  updateTxParams,
   onSucceedCallbacks,
-}: Pick<EthereumTrackerParams<T>, 'tx' | 'chains'> &
-  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxStatus' | 'onSucceedCallbacks'>) {
+}: Pick<TrackerParams<T>, 'tx' | 'chains'> &
+  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks'>) {
   return await ethereumTracker<T>({
     tx,
     chains,
     onInitialize: () => {
-      updateTxStatus({
+      updateTxParams({
         txKey: tx.txKey,
         hash: tx.txKey as Hex,
         pending: tx.pending,
       });
     },
     onSucceed: async (localTx, txn, client) => {
-      updateTxStatus({
+      const txBlock = await getBlock(client, { blockNumber: txn.blockNumber });
+      const timestamp = Number(txBlock.timestamp);
+      updateTxParams({
         txKey: tx.txKey,
         status: txn.status === 'success' ? TransactionStatus.Success : TransactionStatus.Reverted,
         to: isHex(txn.to) ? txn.to : undefined,
@@ -107,19 +100,13 @@ export async function ethereumTrackerForStore<T extends Transaction>({
         pending: false,
         isError: txn.status !== 'success',
         hash: localTx.hash,
+        finishedTimestamp: timestamp,
       });
-
       const updatedTX = transactionsPool[tx.txKey];
-      const txBlock = await getBlock(client, { blockNumber: txn.blockNumber });
-      const timestamp = Number(txBlock.timestamp);
-
-      onSucceedCallbacks({
-        ...updatedTX,
-        timestamp,
-      });
+      onSucceedCallbacks(updatedTX);
     },
     onReplaced: (replacement) => {
-      updateTxStatus({
+      updateTxParams({
         txKey: tx.txKey,
         status: TransactionStatus.Replaced,
         replacedTxHash: replacement.transaction.hash,
@@ -128,7 +115,7 @@ export async function ethereumTrackerForStore<T extends Transaction>({
       });
     },
     onFailed: () => {
-      updateTxStatus({
+      updateTxParams({
         txKey: tx.txKey,
         status: TransactionStatus.Failed,
         pending: false,

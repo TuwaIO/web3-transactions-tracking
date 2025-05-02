@@ -8,9 +8,24 @@ import { persist, PersistOptions } from 'zustand/middleware';
 import { checkChainForTx } from '../helpers/checkChainForTx';
 import { getActiveWallet } from '../helpers/getActiveWallet';
 import { ethereumTrackerForStore } from '../trackers/ethereumTracker';
-import { Transaction, TransactionStatus, TransactionTracker } from '../types';
+import { gelatoTrackerForStore, isGelatoTxKey } from '../trackers/gelatoTracker';
+import { ActionTxKey, Transaction, TransactionStatus, TransactionTracker } from '../types';
 
 export type TransactionPool<T extends Transaction> = Record<string, T>;
+
+type UpdatedParamsFields = Pick<
+  Transaction,
+  | 'to'
+  | 'nonce'
+  | 'txKey'
+  | 'pending'
+  | 'isError'
+  | 'hash'
+  | 'status'
+  | 'replacedTxHash'
+  | 'errorMessage'
+  | 'finishedTimestamp'
+>;
 
 export type ITxTrackingStore<T extends Transaction> = {
   onSucceedCallbacks: (tx: T) => void;
@@ -28,7 +43,7 @@ export type ITxTrackingStore<T extends Transaction> = {
   };
   handleTransaction: (params: {
     config: Config;
-    actionFunction: () => Promise<string | undefined>;
+    actionFunction: () => Promise<ActionTxKey | undefined>;
     params: {
       type: T['type'];
       payload: T['payload'];
@@ -37,9 +52,8 @@ export type ITxTrackingStore<T extends Transaction> = {
   }) => Promise<void>;
 
   addTxToPool: ({ tx }: { tx: T }) => void;
-  updateTxStatus: (
-    fields: Pick<Transaction, 'to' | 'nonce' | 'txKey' | 'pending' | 'isError' | 'hash' | 'status' | 'replacedTxHash'>,
-  ) => void;
+  updateTxParams: (fields: UpdatedParamsFields, withTracked?: boolean) => void;
+  updateTxParamsForTrackedTransaction: (fields: UpdatedParamsFields) => void;
   removeTxFromPool: (txKey: string) => void;
 };
 
@@ -122,14 +136,26 @@ export function initializeTxTrackingStore<T extends Transaction>({
           try {
             const txKeyFromAction = await actionFunction();
             if (txKeyFromAction) {
+              let updatedTracker = txInitialParams.tracker;
+              let finalTxKey = txInitialParams.txKey;
+              if (isGelatoTxKey(txKeyFromAction)) {
+                updatedTracker = TransactionTracker.Gelato;
+                finalTxKey = txKeyFromAction.taskId;
+              } else {
+                finalTxKey = txKeyFromAction;
+              }
+
               get().addTxToPool({
                 tx: {
                   ...txInitialParams,
-                  txKey: txKeyFromAction,
-                  hash: txKeyFromAction,
+                  tracker: updatedTracker,
+                  txKey: finalTxKey,
+                  hash: updatedTracker === TransactionTracker.Ethereum ? txKeyFromAction : undefined,
                 } as T,
               });
-              const tx = get().transactionsPool[txKeyFromAction];
+
+              const tx = get().transactionsPool[finalTxKey];
+
               set((state) =>
                 produce(state, (draft) => {
                   draft.trackedTransaction = {
@@ -141,11 +167,17 @@ export function initializeTxTrackingStore<T extends Transaction>({
               );
 
               try {
-                switch (txInitialParams.tracker) {
+                switch (updatedTracker) {
                   case TransactionTracker.Ethereum:
                     await ethereumTrackerForStore({
                       tx,
                       chains: appChains,
+                      ...get(),
+                    });
+                    break;
+                  case TransactionTracker.Gelato:
+                    await gelatoTrackerForStore({
+                      tx,
                       ...get(),
                     });
                     break;
@@ -156,7 +188,7 @@ export function initializeTxTrackingStore<T extends Transaction>({
                       ...get(),
                     }); // TODO: need new tracking for safe
                     break;
-                  // more
+                  // ...more
                   default:
                     await ethereumTrackerForStore({
                       tx,
@@ -164,7 +196,7 @@ export function initializeTxTrackingStore<T extends Transaction>({
                       ...get(),
                     });
                 }
-                const finalTx = get().transactionsPool[txKeyFromAction];
+                const finalTx = get().transactionsPool[finalTxKey];
                 set((state) =>
                   produce(state, (draft) => {
                     draft.trackedTransaction = {
@@ -180,7 +212,7 @@ export function initializeTxTrackingStore<T extends Transaction>({
                   }),
                 );
               } catch (e) {
-                const errorTx = get().transactionsPool[txKeyFromAction];
+                const errorTx = get().transactionsPool[finalTxKey];
                 handleError(e, trackingTxInitialParams, errorTx);
               }
             }
@@ -201,12 +233,36 @@ export function initializeTxTrackingStore<T extends Transaction>({
             }),
           );
         },
-        updateTxStatus: (tx) => {
+        updateTxParams: (tx, withTracked) => {
           set((state) =>
             produce(state, (draft) => {
               draft.transactionsPool[tx.txKey] = {
                 ...draft.transactionsPool[tx.txKey],
                 ...tx,
+              };
+            }),
+          );
+          if (withTracked) {
+            get().updateTxParamsForTrackedTransaction(tx);
+          }
+        },
+        updateTxParamsForTrackedTransaction: (tx) => {
+          set((state) =>
+            produce(state, (draft) => {
+              draft.trackedTransaction = {
+                ...draft.trackedTransaction,
+                initializedOnChain: draft.trackedTransaction?.initializedOnChain || false,
+                isSucceed: tx?.status === TransactionStatus.Success,
+                isReplaced: tx?.status === TransactionStatus.Replaced,
+                error: tx?.errorMessage ?? '',
+                isFailed: !!tx.errorMessage || tx.isError || false,
+                isProcessing: draft.trackedTransaction?.isProcessing || false,
+                tx: draft.trackedTransaction?.tx
+                  ? ({
+                      ...draft.trackedTransaction?.tx,
+                      ...tx,
+                    } as Draft<T>)
+                  : undefined,
               };
             }),
           );

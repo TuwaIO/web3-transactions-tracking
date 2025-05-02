@@ -1,6 +1,6 @@
-import { Hex } from 'viem';
+import { Chain, Hex } from 'viem';
 
-import { EthereumTransaction } from './trackers/ethereumTracker';
+import { GelatoTxKey } from './trackers/gelatoTracker';
 
 export enum TransactionTracker {
   Ethereum = 'ethereum',
@@ -16,7 +16,9 @@ export enum TransactionStatus {
   Failed = 'Failed',
 }
 
-export type BaseTransaction = {
+export type ActionTxKey = Hex | GelatoTxKey;
+
+export type Transaction = {
   tracker: TransactionTracker;
   chainId: number;
   type: string;
@@ -32,6 +34,13 @@ export type BaseTransaction = {
   errorMessage?: string;
   isError?: boolean;
   replacedTxHash?: Hex;
+  to?: Hex;
+  nonce?: number;
 };
 
-export type Transaction = EthereumTransaction; // more
+export type TrackerParams<T extends Transaction> = {
+  tx: T;
+  chains: Chain[];
+  onInitialize?: () => void;
+  onFailed: (e?: unknown) => void;
+};
