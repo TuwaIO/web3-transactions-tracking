@@ -6,9 +6,10 @@ import { create } from 'zustand';
 import { persist, PersistOptions } from 'zustand/middleware';
 
 import { checkChainForTx } from '../helpers/checkChainForTx';
+import { checkTransactionsTracker } from '../helpers/checkTransactionsTracker';
 import { getActiveWallet } from '../helpers/getActiveWallet';
 import { ethereumTrackerForStore } from '../trackers/ethereumTracker';
-import { gelatoTrackerForStore, isGelatoTxKey } from '../trackers/gelatoTracker';
+import { gelatoTrackerForStore } from '../trackers/gelatoTracker';
 import { ActionTxKey, Transaction, TransactionStatus, TransactionTracker } from '../types';
 
 export type TransactionPool<T extends Transaction> = Record<string, T>;
@@ -136,14 +137,7 @@ export function initializeTxTrackingStore<T extends Transaction>({
           try {
             const txKeyFromAction = await actionFunction();
             if (txKeyFromAction) {
-              let updatedTracker = txInitialParams.tracker;
-              let finalTxKey = txInitialParams.txKey;
-              if (isGelatoTxKey(txKeyFromAction)) {
-                updatedTracker = TransactionTracker.Gelato;
-                finalTxKey = txKeyFromAction.taskId;
-              } else {
-                finalTxKey = txKeyFromAction;
-              }
+              const { tracker: updatedTracker, txKey: finalTxKey } = checkTransactionsTracker(txKeyFromAction);
 
               get().addTxToPool({
                 tx: {
@@ -186,7 +180,7 @@ export function initializeTxTrackingStore<T extends Transaction>({
                       tx,
                       chains: appChains,
                       ...get(),
-                    }); // TODO: need new tracking for safe
+                    });
                     break;
                   // ...more
                   default:

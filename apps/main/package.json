@@ -1,5 +1,5 @@
 {
-  "name": "@tuwa/web3-transactions-tracking-site",
+  "name": "@tuwa/web3-txs-tracking-site",
   "description": "Reliably track the lifecycle of web3 transactions with this intuitive package. Get real-time insights into on-chain processes with ease.",
   "version": "0.0.1",
   "author": "Oleksandr Tkach",

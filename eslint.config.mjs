@@ -30,6 +30,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       'prettier/prettier': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
       // Turn off or set to "off" import rules that can conflict with simple-import-sort
       'sort-imports': 'off',
       'import/order': 'off',

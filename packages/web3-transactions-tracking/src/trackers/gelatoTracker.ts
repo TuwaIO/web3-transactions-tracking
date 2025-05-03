@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { Hex } from 'viem';
 
+import { initializePollingTracker } from '../helpers/initializePollingTracker';
 import { ITxTrackingStore } from '../store/txTrackingStore';
 import { ActionTxKey, TrackerParams, Transaction, TransactionStatus } from '../types';
 
@@ -51,16 +52,16 @@ function isGelatoTxPending(gelatoStatus?: GelatoTaskState) {
 }
 
 async function fetchTxFromGelatoAPI<T extends Transaction>({
-  taskId,
+  txKey,
   onSucceed,
   onFailed,
   onIntervalTick,
   clearWatch,
 }: {
-  taskId: string;
-  clearWatch: () => void;
+  txKey: string;
+  clearWatch: (withoutRemoving?: boolean) => void;
 } & Pick<GelatoTrackerParams<T>, 'onIntervalTick' | 'onSucceed' | 'onFailed'>) {
-  const response = await fetch(`https://api.gelato.digital/tasks/status/${taskId}/`);
+  const response = await fetch(`https://api.gelato.digital/tasks/status/${txKey}/`);
 
   if (response.ok) {
     const gelatoStatus = (await response.json()) as GelatoTaskStatusResponse;
@@ -81,7 +82,7 @@ async function fetchTxFromGelatoAPI<T extends Transaction>({
     }
 
     if (!isPending) {
-      clearWatch();
+      clearWatch(true);
       if (gelatoStatus.task.taskState === 'ExecSuccess') {
         onSucceed(gelatoStatus);
       } else if (gelatoStatus.task.taskState > GelatoTaskState.WaitingForConfirmation) {
@@ -101,42 +102,15 @@ export async function gelatoTracker<T extends Transaction>({
   removeTxFromPool,
   tx,
 }: GelatoTrackerParams<T>) {
-  if (onInitialize) {
-    onInitialize();
-  }
-
-  let pollingInterval: number | undefined = undefined;
-  const isPending = tx.pending;
-  if (!isPending) {
-    return;
-  }
-  clearInterval(pollingInterval);
-
-  const clearWatch = () => {
-    clearInterval(pollingInterval);
-    if (removeTxFromPool) {
-      removeTxFromPool(tx.txKey);
-    }
-  };
-
-  let retryCount = 10;
-  pollingInterval = window.setInterval(async () => {
-    if (retryCount > 0) {
-      const response = await fetchTxFromGelatoAPI<T>({
-        taskId: tx.txKey,
-        onSucceed,
-        onFailed,
-        onIntervalTick,
-        clearWatch,
-      });
-      if (!response.ok) {
-        retryCount--;
-      }
-    } else {
-      clearWatch();
-      return;
-    }
-  }, 5000);
+  await initializePollingTracker({
+    onInitialize,
+    onSucceed,
+    onFailed,
+    onIntervalTick,
+    removeTxFromPool,
+    tx,
+    fetcher: fetchTxFromGelatoAPI<T>,
+  });
 }
 
 export async function gelatoTrackerForStore<T extends Transaction>({

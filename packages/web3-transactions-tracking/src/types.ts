@@ -1,6 +1,7 @@
 import { Chain, Hex } from 'viem';
 
 import { GelatoTxKey } from './trackers/gelatoTracker';
+import { SafeTx } from './trackers/safeTracker';
 
 export enum TransactionTracker {
   Ethereum = 'ethereum',
@@ -15,8 +16,6 @@ export enum TransactionStatus {
   Replaced = 'Replaced',
   Failed = 'Failed',
 }
-
-export type ActionTxKey = Hex | GelatoTxKey;
 
 export type Transaction = {
   tracker: TransactionTracker;
@@ -44,3 +43,5 @@ export type TrackerParams<T extends Transaction> = {
   onInitialize?: () => void;
   onFailed: (e?: unknown) => void;
 };
+
+export type ActionTxKey = Hex | GelatoTxKey | SafeTx; // ...more;

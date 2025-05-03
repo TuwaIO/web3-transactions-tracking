@@ -8,6 +8,7 @@ export default defineConfig([
       './src/trackers/**.ts',
       './src/store/txTrackingStore.ts',
       './src/store/selectors/transactionsSelectors.ts',
+      './src/types.ts',
     ],
     treeshake: true,
     sourcemap: true,
