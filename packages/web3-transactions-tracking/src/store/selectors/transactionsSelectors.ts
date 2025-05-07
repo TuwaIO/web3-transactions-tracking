@@ -1,7 +1,7 @@
 import { Chain, Hex } from 'viem';
 
-import { gnosisSafeLinksHelper } from '../../helpers/safeConstants';
 import { Transaction, TransactionTracker } from '../../types';
+import { gnosisSafeLinksHelper } from '../../utils/safeConstants';
 import { TransactionPool } from '../txTrackingStore';
 
 export const selectAllTransactions = <T extends Transaction>(transactionsPool: TransactionPool<T>) => {

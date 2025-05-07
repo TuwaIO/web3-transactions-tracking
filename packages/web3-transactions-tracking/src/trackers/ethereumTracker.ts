@@ -1,9 +1,9 @@
 import { Client, GetTransactionReturnType, Hex, isHex, ReplacementReturnType, TransactionReceipt } from 'viem';
 import { getBlock, getTransaction, waitForTransactionReceipt } from 'viem/actions';
 
-import { createViemClient } from '../helpers/createViemClient';
 import { ITxTrackingStore } from '../store/txTrackingStore';
 import { TrackerParams, Transaction, TransactionStatus } from '../types';
+import { createViemClient } from '../utils/createViemClient';
 
 type EthereumTrackerParams<T extends Transaction> = TrackerParams<T> & {
   onSucceed: (localTx: GetTransactionReturnType, txn: TransactionReceipt, client: Client) => Promise<void>;
@@ -111,7 +111,6 @@ export async function ethereumTrackerForStore<T extends Transaction>({
         status: TransactionStatus.Replaced,
         replacedTxHash: replacement.transaction.hash,
         pending: false,
-        isError: true,
       });
     },
     onFailed: () => {

@@ -4,10 +4,11 @@ export default defineConfig([
   {
     format: ['cjs', 'esm'],
     entry: [
-      './src/helpers/**.ts',
-      './src/trackers/**.ts',
+      './src/providers/InitializeTransactionsPoolProvider.tsx',
       './src/store/txTrackingStore.ts',
       './src/store/selectors/transactionsSelectors.ts',
+      './src/trackers/**.ts',
+      './src/utils/**.ts',
       './src/types.ts',
     ],
     treeshake: true,

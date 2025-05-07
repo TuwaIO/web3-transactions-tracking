@@ -2,15 +2,14 @@ import { Config } from '@wagmi/core';
 import dayjs from 'dayjs';
 import { Draft, produce } from 'immer';
 import { Chain, zeroAddress } from 'viem';
-import { create } from 'zustand';
 import { persist, PersistOptions } from 'zustand/middleware';
+import { createStore } from 'zustand/vanilla';
 
-import { checkChainForTx } from '../helpers/checkChainForTx';
-import { checkTransactionsTracker } from '../helpers/checkTransactionsTracker';
-import { getActiveWallet } from '../helpers/getActiveWallet';
-import { ethereumTrackerForStore } from '../trackers/ethereumTracker';
-import { gelatoTrackerForStore } from '../trackers/gelatoTracker';
 import { ActionTxKey, Transaction, TransactionStatus, TransactionTracker } from '../types';
+import { checkAndInitializeTrackerInStore } from '../utils/checkAndInitializeTrackerInStore';
+import { checkChainForTx } from '../utils/checkChainForTx';
+import { checkTransactionsTracker } from '../utils/checkTransactionsTracker';
+import { getActiveWalletAndClient } from '../utils/getActiveWalletAndClient';
 
 export type TransactionPool<T extends Transaction> = Record<string, T>;
 
@@ -32,6 +31,8 @@ export type ITxTrackingStore<T extends Transaction> = {
   onSucceedCallbacks: (tx: T) => void;
 
   transactionsPool: TransactionPool<T>;
+
+  initializeTransactionsPool: () => Promise<void>;
 
   trackedTransaction?: {
     initializedOnChain: boolean;
@@ -66,16 +67,26 @@ export function initializeTxTrackingStore<T extends Transaction>({
   appChains: Chain[];
   onSucceedCallbacks(tx: unknown): Promise<void>;
 } & PersistOptions<ITxTrackingStore<T>>) {
-  return create<ITxTrackingStore<T>>()(
+  return createStore<ITxTrackingStore<T>>()(
     persist(
       (set, get) => ({
         onSucceedCallbacks,
 
         transactionsPool: {},
 
+        initializeTransactionsPool: async () => {
+          await Promise.all(
+            Object.values(get().transactionsPool).map(async (tx) => {
+              if (tx.pending) {
+                checkAndInitializeTrackerInStore({ tracker: tx.tracker, tx, chains: appChains, ...get() });
+              }
+            }),
+          );
+        },
+
         handleTransaction: async ({ actionFunction, params, config }) => {
           const { desiredChainID, payload, type } = params;
-          const activeWallet = getActiveWallet(config);
+          const { activeWallet } = getActiveWalletAndClient(config);
           const chainId = Number(desiredChainID);
           const tracker = TransactionTracker.Ethereum;
 
@@ -161,35 +172,7 @@ export function initializeTxTrackingStore<T extends Transaction>({
               );
 
               try {
-                switch (updatedTracker) {
-                  case TransactionTracker.Ethereum:
-                    await ethereumTrackerForStore({
-                      tx,
-                      chains: appChains,
-                      ...get(),
-                    });
-                    break;
-                  case TransactionTracker.Gelato:
-                    await gelatoTrackerForStore({
-                      tx,
-                      ...get(),
-                    });
-                    break;
-                  case TransactionTracker.Safe:
-                    await ethereumTrackerForStore({
-                      tx,
-                      chains: appChains,
-                      ...get(),
-                    });
-                    break;
-                  // ...more
-                  default:
-                    await ethereumTrackerForStore({
-                      tx,
-                      chains: appChains,
-                      ...get(),
-                    });
-                }
+                await checkAndInitializeTrackerInStore({ tracker: updatedTracker, tx, chains: appChains, ...get() });
                 const finalTx = get().transactionsPool[finalTxKey];
                 set((state) =>
                   produce(state, (draft) => {

@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import { Hex } from 'viem';
 
-import { initializePollingTracker } from '../helpers/initializePollingTracker';
 import { ITxTrackingStore } from '../store/txTrackingStore';
 import { ActionTxKey, TrackerParams, Transaction, TransactionStatus } from '../types';
+import { initializePollingTracker } from '../utils/initializePollingTracker';
 
 export type GelatoTxKey = {
   taskId: string;
@@ -119,28 +119,26 @@ export async function gelatoTrackerForStore<T extends Transaction>({
   updateTxParams,
   onSucceedCallbacks,
   removeTxFromPool,
-}: Pick<GelatoTrackerParams<T>, 'tx' | 'removeTxFromPool'> &
-  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks'>) {
+}: Pick<GelatoTrackerParams<T>, 'tx'> &
+  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks' | 'removeTxFromPool'>) {
   return await gelatoTracker<T>({
     tx,
     removeTxFromPool,
-    onSucceed: async (gelatoResponse) => {
+    onSucceed: async (response) => {
       updateTxParams({
         txKey: tx.txKey,
         status: TransactionStatus.Success,
         pending: false,
-        hash: gelatoResponse.task.transactionHash,
-        finishedTimestamp: gelatoResponse.task.executionDate
-          ? dayjs(gelatoResponse.task.executionDate).unix()
-          : undefined,
+        hash: response.task.transactionHash,
+        finishedTimestamp: response.task.executionDate ? dayjs(response.task.executionDate).unix() : undefined,
       });
       const updatedTX = transactionsPool[tx.txKey];
       onSucceedCallbacks(updatedTX);
     },
-    onIntervalTick: async (gelatoResponse) => {
-      const pending = isGelatoTxPending(gelatoResponse.task.taskState);
+    onIntervalTick: async (response) => {
+      const pending = isGelatoTxPending(response.task.taskState);
       const status =
-        gelatoResponse.task.taskState === 'ExecSuccess'
+        response.task.taskState === 'ExecSuccess'
           ? TransactionStatus.Success
           : pending
             ? undefined
@@ -151,30 +149,26 @@ export async function gelatoTrackerForStore<T extends Transaction>({
           status,
           pending,
           txKey: tx.txKey,
-          hash: gelatoResponse.task.transactionHash,
-          finishedTimestamp: gelatoResponse.task.executionDate
-            ? dayjs(gelatoResponse.task.executionDate).unix()
-            : undefined,
+          hash: response.task.transactionHash,
+          finishedTimestamp: response.task.executionDate ? dayjs(response.task.executionDate).unix() : undefined,
           errorMessage:
-            gelatoResponse.task.taskState > GelatoTaskState.WaitingForConfirmation
-              ? gelatoResponse.task.lastCheckMessage
+            response.task.taskState > GelatoTaskState.WaitingForConfirmation
+              ? response.task.lastCheckMessage
               : undefined,
           isError: !pending && status !== TransactionStatus.Success,
         },
         true,
       );
     },
-    onFailed: (gelatoResponse) => {
+    onFailed: (response) => {
       updateTxParams({
         txKey: tx.txKey,
         status: TransactionStatus.Failed,
         pending: false,
         isError: true,
-        hash: gelatoResponse.task.transactionHash,
-        errorMessage: gelatoResponse.task.lastCheckMessage,
-        finishedTimestamp: gelatoResponse.task.executionDate
-          ? dayjs(gelatoResponse.task.executionDate).unix()
-          : undefined,
+        hash: response.task.transactionHash,
+        errorMessage: response.task.lastCheckMessage,
+        finishedTimestamp: response.task.executionDate ? dayjs(response.task.executionDate).unix() : undefined,
       });
     },
   });
