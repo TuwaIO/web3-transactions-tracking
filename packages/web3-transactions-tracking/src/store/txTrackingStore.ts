@@ -148,7 +148,10 @@ export function initializeTxTrackingStore<T extends Transaction>({
           try {
             const txKeyFromAction = await actionFunction();
             if (txKeyFromAction) {
-              const { tracker: updatedTracker, txKey: finalTxKey } = checkTransactionsTracker(txKeyFromAction);
+              const { tracker: updatedTracker, txKey: finalTxKey } = checkTransactionsTracker(
+                txKeyFromAction,
+                walletType,
+              );
 
               get().addTxToPool({
                 tx: {
