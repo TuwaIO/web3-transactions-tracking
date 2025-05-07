@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { Hex } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
-import { ActionTxKey, TrackerParams, Transaction, TransactionStatus } from '../types';
+import { ActionTxKey, Transaction, TransactionStatus } from '../types';
 import { initializePollingTracker } from '../utils/initializePollingTracker';
 
 export type GelatoTxKey = {
@@ -35,11 +35,15 @@ type GelatoTaskStatusResponse = {
   };
 };
 
-type GelatoTrackerParams<T extends Transaction> = Omit<TrackerParams<T>, 'chains' | 'onFailed'> & {
+export type GelatoTrackerParams = {
   onSucceed: (gelatoResponse: GelatoTaskStatusResponse) => void;
   onFailed: (gelatoResponse: GelatoTaskStatusResponse) => void;
   onIntervalTick?: (gelatoResponse: GelatoTaskStatusResponse) => void;
   removeTxFromPool?: (taskId: string) => void;
+  onInitialize?: () => void;
+  tx: Pick<Transaction, 'txKey'> & {
+    pending?: boolean;
+  };
 };
 
 function isGelatoTxPending(gelatoStatus?: GelatoTaskState) {
@@ -51,17 +55,16 @@ function isGelatoTxPending(gelatoStatus?: GelatoTaskState) {
   );
 }
 
-async function fetchTxFromGelatoAPI<T extends Transaction>({
-  txKey,
+async function fetchTxFromGelatoAPI({
+  tx,
   onSucceed,
   onFailed,
   onIntervalTick,
   clearWatch,
 }: {
-  txKey: string;
   clearWatch: (withoutRemoving?: boolean) => void;
-} & Pick<GelatoTrackerParams<T>, 'onIntervalTick' | 'onSucceed' | 'onFailed'>) {
-  const response = await fetch(`https://api.gelato.digital/tasks/status/${txKey}/`);
+} & Pick<GelatoTrackerParams, 'onIntervalTick' | 'onSucceed' | 'onFailed' | 'tx'>) {
+  const response = await fetch(`https://api.gelato.digital/tasks/status/${tx.txKey}/`);
 
   if (response.ok) {
     const gelatoStatus = (await response.json()) as GelatoTaskStatusResponse;
@@ -94,14 +97,14 @@ async function fetchTxFromGelatoAPI<T extends Transaction>({
   return response;
 }
 
-export async function gelatoTracker<T extends Transaction>({
+export async function gelatoTracker({
   onInitialize,
   onSucceed,
   onFailed,
   onIntervalTick,
   removeTxFromPool,
   tx,
-}: GelatoTrackerParams<T>) {
+}: GelatoTrackerParams) {
   await initializePollingTracker({
     onInitialize,
     onSucceed,
@@ -109,7 +112,7 @@ export async function gelatoTracker<T extends Transaction>({
     onIntervalTick,
     removeTxFromPool,
     tx,
-    fetcher: fetchTxFromGelatoAPI<T>,
+    fetcher: fetchTxFromGelatoAPI,
   });
 }
 
@@ -119,9 +122,10 @@ export async function gelatoTrackerForStore<T extends Transaction>({
   updateTxParams,
   onSucceedCallbacks,
   removeTxFromPool,
-}: Pick<GelatoTrackerParams<T>, 'tx'> &
-  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks' | 'removeTxFromPool'>) {
-  return await gelatoTracker<T>({
+}: Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks' | 'removeTxFromPool'> & {
+  tx: T;
+}) {
+  return await gelatoTracker({
     tx,
     removeTxFromPool,
     onSucceed: async (response) => {

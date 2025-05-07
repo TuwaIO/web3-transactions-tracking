@@ -2,16 +2,9 @@ import dayjs from 'dayjs';
 import { Hex, isHex, zeroHash } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
-import { ActionTxKey, TrackerParams, Transaction, TransactionStatus } from '../types';
+import { Transaction, TransactionStatus } from '../types';
+import { initializePollingTracker } from '../utils/initializePollingTracker';
 import { SafeTransactionServiceUrls } from '../utils/safeConstants';
-
-export type SafeTx = {
-  safeTxHash: string;
-};
-
-export function isSafeTxKey(txKey: ActionTxKey): txKey is SafeTx {
-  return (txKey as SafeTx).safeTxHash !== undefined;
-}
 
 type SafeTxStatusResponse = {
   transactionHash: string;
@@ -31,38 +24,35 @@ type SafeTxSameNonceResponse = {
   results: SafeTxStatusResponse[];
 };
 
-type SafeTrackerParams<T extends Transaction> = Omit<TrackerParams<T>, 'chains' | 'onFailed'> & {
+export type SafeTrackerParams = {
   onSucceed: (safeResponse: SafeTxStatusResponse) => void;
   onFailed: (safeResponse: SafeTxStatusResponse) => void;
-  onReplaced: (safeResponse: SafeTxStatusResponse) => void;
+  onReplaced?: (safeResponse: SafeTxStatusResponse) => void;
   onIntervalTick?: (safeResponse: SafeTxStatusResponse) => void;
+  onInitialize?: () => void;
   removeTxFromPool?: (txKey: string) => void;
+  tx: Pick<Transaction, 'txKey' | 'chainId' | 'from'> & {
+    pending?: boolean;
+  };
 };
 
-async function fetchTxFromSafeAPI<T extends Transaction>({
-  txKey,
-  txChainId,
+async function fetchTxFromSafeAPI({
+  tx,
   onSucceed,
   onFailed,
   onIntervalTick,
-  walletAddress,
   onReplaced,
   clearWatch,
 }: {
-  txKey: string;
-  txChainId: number;
-  walletAddress: string;
   clearWatch: (withoutRemoving?: boolean) => void;
-} & Pick<SafeTrackerParams<T>, 'onIntervalTick' | 'onSucceed' | 'onFailed' | 'onReplaced'>) {
-  const response = await fetch(`${SafeTransactionServiceUrls[txChainId]}/multisig-transactions/${txKey}/`);
+} & Pick<SafeTrackerParams, 'onIntervalTick' | 'onSucceed' | 'onFailed' | 'onReplaced' | 'tx'>) {
+  const response = await fetch(`${SafeTransactionServiceUrls[tx.chainId]}/multisig-transactions/${tx.txKey}/`);
 
   if (response.ok) {
     const safeStatus = (await response.json()) as SafeTxStatusResponse;
     if (!!safeStatus.nonce || safeStatus.nonce === 0) {
       const allTxWithSameNonceResponse = await fetch(
-        `${SafeTransactionServiceUrls[txChainId]}/safes/${
-          walletAddress
-        }/multisig-transactions/?nonce=${safeStatus.nonce}`,
+        `${SafeTransactionServiceUrls[tx.chainId]}/safes/${tx.from}/multisig-transactions/?nonce=${safeStatus.nonce}`,
       );
 
       if (allTxWithSameNonceResponse.ok) {
@@ -84,7 +74,11 @@ async function fetchTxFromSafeAPI<T extends Transaction>({
           )[0].safeTxHash;
 
           if (isHex(replacedHash)) {
-            onReplaced({ ...safeStatus, replacedHash });
+            if (onReplaced) {
+              onReplaced({ ...safeStatus, replacedHash });
+            } else if (onIntervalTick) {
+              onIntervalTick({ ...safeStatus, replacedHash });
+            }
             clearWatch(true);
             return response;
           }
@@ -109,7 +103,7 @@ async function fetchTxFromSafeAPI<T extends Transaction>({
   return response;
 }
 
-export async function safeTracker<T extends Transaction>({
+export async function safeTracker({
   onInitialize,
   onReplaced,
   onSucceed,
@@ -117,46 +111,17 @@ export async function safeTracker<T extends Transaction>({
   onIntervalTick,
   removeTxFromPool,
   tx,
-}: SafeTrackerParams<T>) {
-  if (onInitialize) {
-    onInitialize();
-  }
-
-  let pollingInterval: number | undefined = undefined;
-  const isPending = tx.pending;
-  if (!isPending) {
-    return;
-  }
-  clearInterval(pollingInterval);
-
-  const clearWatch = (withoutRemoving?: boolean) => {
-    clearInterval(pollingInterval);
-    if (removeTxFromPool && !withoutRemoving) {
-      removeTxFromPool(tx.txKey);
-    }
-  };
-
-  let retryCount = 10;
-  pollingInterval = window.setInterval(async () => {
-    if (retryCount > 0) {
-      const response = await fetchTxFromSafeAPI<T>({
-        txKey: tx.txKey,
-        txChainId: tx.chainId,
-        walletAddress: tx.from,
-        onSucceed,
-        onFailed,
-        onIntervalTick,
-        onReplaced,
-        clearWatch,
-      });
-      if (!response.ok) {
-        retryCount--;
-      }
-    } else {
-      clearWatch();
-      return;
-    }
-  }, 5000);
+}: SafeTrackerParams) {
+  await initializePollingTracker({
+    onInitialize,
+    onSucceed,
+    onFailed,
+    onIntervalTick,
+    removeTxFromPool,
+    tx,
+    onReplaced,
+    fetcher: fetchTxFromSafeAPI,
+  });
 }
 
 export async function safeTrackerForStore<T extends Transaction>({
@@ -165,9 +130,10 @@ export async function safeTrackerForStore<T extends Transaction>({
   updateTxParams,
   onSucceedCallbacks,
   removeTxFromPool,
-}: Pick<SafeTrackerParams<T>, 'tx' | 'removeTxFromPool'> &
-  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks'>) {
-  return await safeTracker<T>({
+}: Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks' | 'removeTxFromPool'> & {
+  tx: T;
+}) {
+  return await safeTracker({
     tx,
     removeTxFromPool,
     onSucceed: async (response) => {

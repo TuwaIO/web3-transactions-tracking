@@ -1,10 +1,20 @@
 import { arbitrum, avalanche, base, bsc, goerli, mainnet, optimism, polygon, sepolia } from 'viem/chains';
 
+/**
+ * Configuration options for the safeSdk.
+ * @typedef {Object} safeSdkOptions
+ * @property {RegExp[]} allowedDomains - An array of regular expressions representing the allowed domains.
+ * @property {boolean} debug - A boolean flag indicating whether debug mode is enabled.
+ */
 export const safeSdkOptions = {
   allowedDomains: [/gnosis-safe.io$/, /app.safe.global$/, /metissafe.tech$/],
   debug: false,
 };
 
+/**
+ * Represents a helper object for generating Gnosis Safe links based on network IDs.
+ * @type {Record<number, string>}
+ */
 export const gnosisSafeLinksHelper: Record<number, string> = {
   [mainnet.id]: 'https://app.safe.global/eth:',
   [goerli.id]: 'https://app.safe.global/gor:',
@@ -17,6 +27,13 @@ export const gnosisSafeLinksHelper: Record<number, string> = {
   [sepolia.id]: 'https://app.safe.global/sep:',
 };
 
+/**
+ * Represents the URLs for Safe Transaction services based on network IDs.
+ * @typedef {Object} SafeTransactionServiceUrls
+ * @property {string} [networkID] - The URL for the Safe Transaction service of the corresponding network ID.
+ * @type {Object.<number, string>}
+ * @constant
+ */
 export const SafeTransactionServiceUrls: { [key in number]: string } = {
   [mainnet.id]: 'https://safe-transaction-mainnet.safe.global/api/v1',
   [goerli.id]: 'https://safe-transaction-goerli.safe.global/api/v1',

@@ -27,6 +27,11 @@ type UpdatedParamsFields = Pick<
   | 'finishedTimestamp'
 >;
 
+/**
+ * Represents an interface for a transaction tracking store.
+ *
+ * @template T - The type of transaction
+ */
 export type ITxTrackingStore<T extends Transaction> = {
   onSucceedCallbacks: (tx: T) => void;
 
@@ -59,6 +64,13 @@ export type ITxTrackingStore<T extends Transaction> = {
   removeTxFromPool: (txKey: string) => void;
 };
 
+/**
+ * Initializes the transaction tracking store with the provided options and callbacks.
+ *
+ * @param {Object} options - Options object containing configuration for the transaction tracking store. (zustand persist: https://zustand.docs.pmnd.rs/integrations/persisting-store-data)
+ * @param {Chain[]} options.appChains - Array of chains to be used in the transaction tracking.
+ * @param {Function} options.onSucceedCallbacks - Callback function to be executed when a transaction succeeds.
+ */
 export function initializeTxTrackingStore<T extends Transaction>({
   onSucceedCallbacks,
   appChains,

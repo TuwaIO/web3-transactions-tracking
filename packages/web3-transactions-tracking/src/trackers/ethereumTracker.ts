@@ -1,23 +1,27 @@
-import { Client, GetTransactionReturnType, Hex, isHex, ReplacementReturnType, TransactionReceipt } from 'viem';
+import { Chain, Client, GetTransactionReturnType, Hex, isHex, ReplacementReturnType, TransactionReceipt } from 'viem';
 import { getBlock, getTransaction, waitForTransactionReceipt } from 'viem/actions';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
-import { TrackerParams, Transaction, TransactionStatus } from '../types';
+import { Transaction, TransactionStatus } from '../types';
 import { createViemClient } from '../utils/createViemClient';
 
-type EthereumTrackerParams<T extends Transaction> = TrackerParams<T> & {
+export type EthereumTrackerParams = {
   onSucceed: (localTx: GetTransactionReturnType, txn: TransactionReceipt, client: Client) => Promise<void>;
   onReplaced: (replacement: ReplacementReturnType) => void;
+  chains: Chain[];
+  onFailed: (e?: unknown) => void;
+  onInitialize?: () => void;
+  tx: Pick<Transaction, 'chainId' | 'txKey'>;
 };
 
-export async function ethereumTracker<T extends Transaction>({
+export async function ethereumTracker({
   onInitialize,
   onSucceed,
   onFailed,
   onReplaced,
   tx,
   chains,
-}: EthereumTrackerParams<T>) {
+}: EthereumTrackerParams) {
   const retryCount = 10;
   const client = createViemClient(tx.chainId, chains);
 
@@ -28,14 +32,12 @@ export async function ethereumTracker<T extends Transaction>({
   if (client) {
     for (let i = 0; i < retryCount; i++) {
       try {
-        // Find the transaction in the waiting pool
         const localTx = await getTransaction(client, { hash: tx.txKey as Hex });
 
         let txWasReplaced = false;
         const hash = localTx.hash as Hex;
 
         try {
-          // If the transaction is found, wait for the receipt
           const txn = await waitForTransactionReceipt(client, {
             hash,
             onReplaced: (replacement: ReplacementReturnType) => {
@@ -58,14 +60,12 @@ export async function ethereumTracker<T extends Transaction>({
         return;
       } catch (e) {
         if (i === retryCount - 1) {
-          // If the transaction is not found after the last retry, set the status to unknownError (it could be replaced with completely new one or lost in mempool)
           onFailed(e);
           console.error('Error when tracking ETH TX:', e);
           return;
         }
       }
 
-      // Wait before the next retry
       await new Promise((resolve) => setTimeout(resolve, 3000));
     }
   }
@@ -77,9 +77,11 @@ export async function ethereumTrackerForStore<T extends Transaction>({
   transactionsPool,
   updateTxParams,
   onSucceedCallbacks,
-}: Pick<TrackerParams<T>, 'tx' | 'chains'> &
-  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks'>) {
-  return await ethereumTracker<T>({
+}: Pick<EthereumTrackerParams, 'chains'> &
+  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks'> & {
+    tx: T;
+  }) {
+  return await ethereumTracker({
     tx,
     chains,
     onInitialize: () => {
