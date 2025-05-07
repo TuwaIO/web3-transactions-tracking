@@ -6,7 +6,7 @@ import { Transaction, TransactionStatus } from '../types';
 import { createViemClient } from '../utils/createViemClient';
 
 export type EthereumTrackerParams = {
-  onSucceed: (localTx: GetTransactionReturnType, txn: TransactionReceipt, client: Client) => Promise<void>;
+  onFinished: (localTx: GetTransactionReturnType, txn: TransactionReceipt, client: Client) => Promise<void>;
   onReplaced: (replacement: ReplacementReturnType) => void;
   chains: Chain[];
   onFailed: (e?: unknown) => void;
@@ -16,7 +16,7 @@ export type EthereumTrackerParams = {
 
 export async function ethereumTracker({
   onInitialize,
-  onSucceed,
+  onFinished,
   onFailed,
   onReplaced,
   tx,
@@ -51,7 +51,7 @@ export async function ethereumTracker({
             return;
           }
 
-          await onSucceed(localTx, txn, client);
+          await onFinished(localTx, txn, client);
         } catch (e) {
           onFailed(e);
           console.error('Error when check TX receipt:', e);
@@ -91,7 +91,7 @@ export async function ethereumTrackerForStore<T extends Transaction>({
         pending: tx.pending,
       });
     },
-    onSucceed: async (localTx, txn, client) => {
+    onFinished: async (localTx, txn, client) => {
       const txBlock = await getBlock(client, { blockNumber: txn.blockNumber });
       const timestamp = Number(txBlock.timestamp);
       updateTxParams({

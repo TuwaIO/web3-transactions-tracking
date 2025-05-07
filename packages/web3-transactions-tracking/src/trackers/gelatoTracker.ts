@@ -13,7 +13,7 @@ export function isGelatoTxKey(txKey: ActionTxKey): txKey is GelatoTxKey {
   return (txKey as GelatoTxKey).taskId !== undefined;
 }
 
-enum GelatoTaskState {
+export enum GelatoTaskState {
   CheckPending = 'CheckPending',
   ExecPending = 'ExecPending',
   WaitingForConfirmation = 'WaitingForConfirmation',
@@ -22,7 +22,7 @@ enum GelatoTaskState {
   Cancelled = 'Cancelled',
 }
 
-type GelatoTaskStatusResponse = {
+export type GelatoTaskStatusResponse = {
   task: {
     chainId: number;
     taskId: string;
@@ -55,7 +55,7 @@ function isGelatoTxPending(gelatoStatus?: GelatoTaskState) {
   );
 }
 
-async function fetchTxFromGelatoAPI({
+export async function fetchTxFromGelatoAPI({
   tx,
   onSucceed,
   onFailed,
