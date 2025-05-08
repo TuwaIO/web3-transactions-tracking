@@ -1,7 +1,7 @@
 import { Chain } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
-import { ethereumTrackerForStore } from '../trackers/ethereumTracker';
+import { evmTrackerForStore } from '../trackers/evmTracker';
 import { gelatoTrackerForStore } from '../trackers/gelatoTracker';
 import { safeTrackerForStore } from '../trackers/safeTracker';
 import { Transaction, TransactionTracker } from '../types';
@@ -33,7 +33,7 @@ export async function checkAndInitializeTrackerInStore<T extends Transaction>({
 }): Promise<void> {
   switch (tracker) {
     case TransactionTracker.Ethereum:
-      await ethereumTrackerForStore({
+      await evmTrackerForStore({
         tx,
         chains,
         ...rest,
@@ -53,7 +53,7 @@ export async function checkAndInitializeTrackerInStore<T extends Transaction>({
       break;
     // ...more
     default:
-      await ethereumTrackerForStore({
+      await evmTrackerForStore({
         tx,
         chains,
         ...rest,

@@ -3,8 +3,12 @@ import { Hex, isHex, zeroHash } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
 import { Transaction, TransactionStatus } from '../types';
-import { initializePollingTracker } from '../utils/initializePollingTracker';
+import { InitializePollingTracker, initializePollingTracker } from '../utils/initializePollingTracker';
 import { SafeTransactionServiceUrls } from '../utils/safeConstants';
+
+type InitialSafeTx = Pick<Transaction, 'txKey' | 'chainId' | 'from'> & {
+  pending?: boolean;
+};
 
 export type SafeTxStatusResponse = {
   transactionHash: string;
@@ -24,17 +28,18 @@ type SafeTxSameNonceResponse = {
   results: SafeTxStatusResponse[];
 };
 
-export type SafeTrackerParams = {
-  onSucceed: (safeResponse: SafeTxStatusResponse) => void;
-  onFailed: (safeResponse: SafeTxStatusResponse) => void;
-  onReplaced?: (safeResponse: SafeTxStatusResponse) => void;
-  onIntervalTick?: (safeResponse: SafeTxStatusResponse) => void;
-  onInitialize?: () => void;
-  removeTxFromPool?: (txKey: string) => void;
-  tx: Pick<Transaction, 'txKey' | 'chainId' | 'from'> & {
-    pending?: boolean;
-  };
-};
+export type SafeTrackerParams = Pick<
+  InitializePollingTracker<SafeTxStatusResponse, InitialSafeTx>,
+  | 'tx'
+  | 'removeTxFromPool'
+  | 'onInitialize'
+  | 'onSucceed'
+  | 'onFailed'
+  | 'onReplaced'
+  | 'onIntervalTick'
+  | 'pollingInterval'
+  | 'retryCount'
+>;
 
 async function fetchTxFromSafeAPI({
   tx,
@@ -103,6 +108,21 @@ async function fetchTxFromSafeAPI({
   return response;
 }
 
+/**
+ * Method for tracking the status of a safe (https://help.safe.global/en/) transaction
+ *
+ * @param {SafeTrackerParams} options - Object containing parameters for the safe tracker function.
+ * @param {Function} options.onInitialize - Callback function to be executed on tracker initialization.
+ * @param {Function} options.onReplaced - Callback function to be executed when a replace is needed.
+ * @param {Function} options.onSucceed - Callback function to be executed when tracker succeeds.
+ * @param {Function} options.onFailed - Callback function to be executed when tracker fails.
+ * @param {Function} options.onIntervalTick - Callback function to be executed on each interval tick.
+ * @param {Function} options.removeTxFromPool - Function to remove transaction from tracking pool.
+ * @param {Object} options.tx - Transaction object to track.
+ * @param {Object} options.rest - Additional parameters to be provided to the tracker function.
+ *
+ * @return {Promise<void>} A promise that resolves once the safe tracker has completed its monitoring task.
+ */
 export async function safeTracker({
   onInitialize,
   onReplaced,
@@ -111,8 +131,9 @@ export async function safeTracker({
   onIntervalTick,
   removeTxFromPool,
   tx,
-}: SafeTrackerParams) {
-  await initializePollingTracker({
+  ...rest
+}: SafeTrackerParams): Promise<void> {
+  await initializePollingTracker<SafeTxStatusResponse, InitialSafeTx>({
     onInitialize,
     onSucceed,
     onFailed,
@@ -121,6 +142,7 @@ export async function safeTracker({
     tx,
     onReplaced,
     fetcher: fetchTxFromSafeAPI,
+    ...rest,
   });
 }
 

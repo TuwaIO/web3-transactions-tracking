@@ -2,15 +2,15 @@ import { zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { ethereumTracker, EthereumTrackerParams } from './ethereumTracker';
+import { evmTracker, EVMTrackerParams } from './evmTracker';
 
-vi.mock('./ethereumTracker', { spy: true });
+vi.mock('./evmTracker', { spy: true });
 
 describe('Testing ethereumTracker function', () => {
-  let ethereumTrackerParams: EthereumTrackerParams;
+  let evmTrackerParams: EVMTrackerParams;
 
   beforeEach(() => {
-    ethereumTrackerParams = {
+    evmTrackerParams = {
       onInitialize: vi.fn(),
       onFinished: vi.fn(),
       onFailed: vi.fn(),
@@ -20,42 +20,43 @@ describe('Testing ethereumTracker function', () => {
         chainId: sepolia.id,
       },
       chains: [sepolia],
+      retryCount: 1,
     };
   });
 
   test('It should call onInitialize initially', async () => {
-    await vi.mocked(ethereumTracker(ethereumTrackerParams));
-    expect(ethereumTrackerParams.onInitialize).toBeCalledTimes(1);
+    await vi.mocked(evmTracker(evmTrackerParams));
+    expect(evmTrackerParams.onInitialize).toBeCalledTimes(1);
   });
 
   test('It should call onFinished if the transaction is successful', async () => {
-    await vi.mocked(ethereumTracker(ethereumTrackerParams));
-    expect(ethereumTrackerParams.onFinished).toBeCalledTimes(1);
+    await vi.mocked(evmTracker(evmTrackerParams));
+    expect(evmTrackerParams.onFinished).toBeCalledTimes(1);
   });
 
   test('It should call onFinished if the transaction is fail', async () => {
     await vi.mocked(
-      ethereumTracker({
-        ...ethereumTrackerParams,
+      evmTracker({
+        ...evmTrackerParams,
         tx: {
-          ...ethereumTrackerParams.tx,
+          ...evmTrackerParams.tx,
           txKey: '0x2a429e307a27fcbe7ae8379d80c8de0162a1b8ff3403f517f17352a4c8771654',
         },
       }),
     );
-    expect(ethereumTrackerParams.onFinished).toBeCalledTimes(1);
+    expect(evmTrackerParams.onFinished).toBeCalledTimes(1);
   });
 
   test('If a transaction get any error before initialize onchain, it should call onFailed', async () => {
     await vi.mocked(
-      ethereumTracker({
-        ...ethereumTrackerParams,
+      evmTracker({
+        ...evmTrackerParams,
         tx: {
-          ...ethereumTrackerParams.tx,
+          ...evmTrackerParams.tx,
           txKey: zeroHash,
         },
       }),
     );
-    expect(ethereumTrackerParams.onFailed).toBeCalledTimes(1);
+    expect(evmTrackerParams.onFailed).toBeCalledTimes(1);
   }, 100000);
 });

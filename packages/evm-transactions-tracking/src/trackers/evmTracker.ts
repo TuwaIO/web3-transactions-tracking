@@ -1,28 +1,59 @@
-import { Chain, Client, GetTransactionReturnType, Hex, isHex, ReplacementReturnType, TransactionReceipt } from 'viem';
+import {
+  Chain,
+  Client,
+  GetTransactionReturnType,
+  Hex,
+  isHex,
+  ReplacementReturnType,
+  TransactionReceipt,
+  WaitForTransactionReceiptParameters,
+} from 'viem';
 import { getBlock, getTransaction, waitForTransactionReceipt } from 'viem/actions';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
 import { Transaction, TransactionStatus } from '../types';
 import { createViemClient } from '../utils/createViemClient';
 
-export type EthereumTrackerParams = {
+export type EVMTrackerParams = {
   onFinished: (localTx: GetTransactionReturnType, txn: TransactionReceipt, client: Client) => Promise<void>;
   onReplaced: (replacement: ReplacementReturnType) => void;
   chains: Chain[];
   onFailed: (e?: unknown) => void;
   onInitialize?: () => void;
   tx: Pick<Transaction, 'chainId' | 'txKey'>;
+  retryCount?: number;
+  retryTimeout?: number;
+  waitForTransactionReceiptParams?: WaitForTransactionReceiptParameters; // https://viem.sh/docs/actions/public/waitForTransactionReceipt#parameters
 };
 
-export async function ethereumTracker({
+/**
+ * Tracker method to track a transaction on the all viem (https://viem.sh/) supported chains
+ *
+ * @param {Object} params - The parameters object containing various callback functions and configuration options.
+ * @param {Function} params.onInitialize - Callback function to be executed when the tracking process initializes.
+ * @param {Function} params.onFinished - Callback function to be executed when the transaction is successfully tracked.
+ * @param {Function} params.onFailed - Callback function to be executed when an error occurs during tracking.
+ * @param {Function} params.onReplaced - Callback function to be executed when the transaction is replaced.
+ * @param {Object} params.tx - Transaction details object.
+ * @param {Array} params.chains - Array of chain details.
+ * @param {number} params.retryCount - Number of times to retry tracking the transaction.
+ * @param {number} params.retryTimeout - Timeout value in milliseconds between retry attempts.
+ * @param {Object} params.waitForTransactionReceiptParams - Additional parameters for waiting for transaction receipt.
+ *
+ * @return {Promise<void>} A Promise that resolves once the tracking process is completed.
+ */
+export async function evmTracker({
   onInitialize,
   onFinished,
   onFailed,
   onReplaced,
   tx,
   chains,
-}: EthereumTrackerParams) {
-  const retryCount = 10;
+  retryCount,
+  retryTimeout,
+  waitForTransactionReceiptParams,
+}: EVMTrackerParams): Promise<void> {
+  const rc = retryCount ?? 10;
   const client = createViemClient(tx.chainId, chains);
 
   if (onInitialize) {
@@ -30,7 +61,7 @@ export async function ethereumTracker({
   }
 
   if (client) {
-    for (let i = 0; i < retryCount; i++) {
+    for (let i = 0; i < rc; i++) {
       try {
         const localTx = await getTransaction(client, { hash: tx.txKey as Hex });
 
@@ -44,7 +75,8 @@ export async function ethereumTracker({
               onReplaced(replacement);
               txWasReplaced = true;
             },
-            pollingInterval: 10_000,
+            ...waitForTransactionReceiptParams,
+            pollingInterval: waitForTransactionReceiptParams?.pollingInterval ?? 10_000,
           });
 
           if (txWasReplaced) {
@@ -59,29 +91,29 @@ export async function ethereumTracker({
 
         return;
       } catch (e) {
-        if (i === retryCount - 1) {
+        if (i === rc - 1) {
           onFailed(e);
           console.error('Error when tracking ETH TX:', e);
           return;
         }
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, retryTimeout ?? 3000));
     }
   }
 }
 
-export async function ethereumTrackerForStore<T extends Transaction>({
+export async function evmTrackerForStore<T extends Transaction>({
   tx,
   chains,
   transactionsPool,
   updateTxParams,
   onSucceedCallbacks,
-}: Pick<EthereumTrackerParams, 'chains'> &
+}: Pick<EVMTrackerParams, 'chains'> &
   Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks'> & {
     tx: T;
   }) {
-  return await ethereumTracker({
+  return await evmTracker({
     tx,
     chains,
     onInitialize: () => {

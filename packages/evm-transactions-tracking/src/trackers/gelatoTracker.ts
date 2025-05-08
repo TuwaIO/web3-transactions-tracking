@@ -3,7 +3,7 @@ import { Hex } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
 import { ActionTxKey, Transaction, TransactionStatus } from '../types';
-import { initializePollingTracker } from '../utils/initializePollingTracker';
+import { InitializePollingTracker, initializePollingTracker } from '../utils/initializePollingTracker';
 
 export type GelatoTxKey = {
   taskId: string;
@@ -35,16 +35,21 @@ export type GelatoTaskStatusResponse = {
   };
 };
 
-export type GelatoTrackerParams = {
-  onSucceed: (gelatoResponse: GelatoTaskStatusResponse) => void;
-  onFailed: (gelatoResponse: GelatoTaskStatusResponse) => void;
-  onIntervalTick?: (gelatoResponse: GelatoTaskStatusResponse) => void;
-  removeTxFromPool?: (taskId: string) => void;
-  onInitialize?: () => void;
-  tx: Pick<Transaction, 'txKey'> & {
-    pending?: boolean;
-  };
+type InitialGelatoTx = Pick<Transaction, 'txKey'> & {
+  pending?: boolean;
 };
+
+export type GelatoTrackerParams = Pick<
+  InitializePollingTracker<GelatoTaskStatusResponse, InitialGelatoTx>,
+  | 'tx'
+  | 'removeTxFromPool'
+  | 'onInitialize'
+  | 'onSucceed'
+  | 'onFailed'
+  | 'onIntervalTick'
+  | 'pollingInterval'
+  | 'retryCount'
+>;
 
 function isGelatoTxPending(gelatoStatus?: GelatoTaskState) {
   return (
@@ -97,6 +102,20 @@ export async function fetchTxFromGelatoAPI({
   return response;
 }
 
+/**
+ * Tracks the progress of a Gelato (https://www.gelato.network/) transaction.
+ *
+ * @param {Object} params - The parameters for the Gelato tracker.
+ * @param {Function} params.onInitialize - Callback function to execute on initialization.
+ * @param {Function} params.onSucceed - Callback function to execute when the transaction succeeds.
+ * @param {Function} params.onFailed - Callback function to execute when the transaction fails.
+ * @param {Function} params.onIntervalTick - Callback function to execute on each interval tick.
+ * @param {Function} params.removeTxFromPool - Function to remove transaction from the pool.
+ * @param {Object} params.tx - The transaction to track.
+ * @param {Object} [params.rest] - Extra parameters to pass to the tracker.
+ *
+ * @return {Promise} - A promise that resolves when the tracking is complete.
+ */
 export async function gelatoTracker({
   onInitialize,
   onSucceed,
@@ -104,6 +123,7 @@ export async function gelatoTracker({
   onIntervalTick,
   removeTxFromPool,
   tx,
+  ...rest
 }: GelatoTrackerParams) {
   await initializePollingTracker({
     onInitialize,
@@ -113,6 +133,7 @@ export async function gelatoTracker({
     removeTxFromPool,
     tx,
     fetcher: fetchTxFromGelatoAPI,
+    ...rest,
   });
 }
 
