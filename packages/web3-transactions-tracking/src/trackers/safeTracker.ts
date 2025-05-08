@@ -6,7 +6,7 @@ import { Transaction, TransactionStatus } from '../types';
 import { initializePollingTracker } from '../utils/initializePollingTracker';
 import { SafeTransactionServiceUrls } from '../utils/safeConstants';
 
-type SafeTxStatusResponse = {
+export type SafeTxStatusResponse = {
   transactionHash: string;
   safeTxHash: string;
   isExecuted: boolean;
