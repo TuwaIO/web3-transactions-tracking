@@ -1,0 +1,45 @@
+{
+  "name": "@tuwa/web3-txs-tracking-docs",
+  "description": "Reliably track the lifecycle of web3 transactions with this intuitive package. Get real-time insights into on-chain processes with ease.",
+  "version": "0.0.1",
+  "author": "Oleksandr Tkach",
+  "license": "Apache-2.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "contributors": [
+    {
+      "name": "Oleksandr Tkach",
+      "url": "https://github.com/Argeare5"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
+  },
+  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build && pnpm postbuild",
+    "start": "next start",
+    "lint": "next lint",
+    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "15.3.1",
+    "nextra": "^4.2.17",
+    "nextra-theme-docs": "^4.2.17",
+    "pagefind": "^1.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19"
+  }
+}
