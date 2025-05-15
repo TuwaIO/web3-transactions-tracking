@@ -1,3 +1,8 @@
+import {
+  IInitializeTxTrackingStore,
+  initializeTxTrackingStore,
+} from '@tuwa/web3-transactions-tracking-core/dist/store/initializeTxTrackingStore';
+import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import { Config } from '@wagmi/core';
 import dayjs from 'dayjs';
 import { Draft, produce } from 'immer';
@@ -5,38 +10,16 @@ import { Chain, zeroAddress } from 'viem';
 import { persist, PersistOptions } from 'zustand/middleware';
 import { createStore } from 'zustand/vanilla';
 
-import { ActionTxKey, Transaction, TransactionStatus, TransactionTracker } from '../types';
+import { ActionTxKey, TransactionTracker } from '../types';
 import { checkAndInitializeTrackerInStore } from '../utils/checkAndInitializeTrackerInStore';
 import { checkChainForTx } from '../utils/checkChainForTx';
 import { checkTransactionsTracker } from '../utils/checkTransactionsTracker';
 import { getActiveWalletAndClient } from '../utils/getActiveWalletAndClient';
 
-export type TransactionPool<T extends Transaction> = Record<string, T>;
-
-type UpdatedParamsFields = Pick<
-  Transaction,
-  | 'to'
-  | 'nonce'
-  | 'txKey'
-  | 'pending'
-  | 'isError'
-  | 'hash'
-  | 'status'
-  | 'replacedTxHash'
-  | 'errorMessage'
-  | 'finishedTimestamp'
->;
-
-/**
- * Represents an interface for a transaction tracking store.
- *
- * @template T - The type of transaction
- */
-export type ITxTrackingStore<T extends Transaction> = {
-  onSucceedCallbacks: (tx: T) => void;
-
-  transactionsPool: TransactionPool<T>;
-
+export type ITxTrackingStore<T extends Transaction<TransactionTracker>> = IInitializeTxTrackingStore<
+  TransactionTracker,
+  T
+> & {
   initializeTransactionsPool: () => Promise<void>;
 
   trackedTransaction?: {
@@ -57,21 +40,9 @@ export type ITxTrackingStore<T extends Transaction> = {
       desiredChainID: number;
     };
   }) => Promise<void>;
-
-  addTxToPool: ({ tx }: { tx: T }) => void;
-  updateTxParams: (fields: UpdatedParamsFields, withTracked?: boolean) => void;
-  updateTxParamsForTrackedTransaction: (fields: UpdatedParamsFields) => void;
-  removeTxFromPool: (txKey: string) => void;
 };
 
-/**
- * Initializes the transaction tracking store with the provided options and callbacks.
- *
- * @param {Object} options - Options object containing configuration for the transaction tracking store. (zustand persist: https://zustand.docs.pmnd.rs/integrations/persisting-store-data)
- * @param {Chain[]} options.appChains - Array of chains to be used in the transaction tracking.
- * @param {Function} options.onSucceedCallbacks - Callback function to be executed when a transaction succeeds.
- */
-export function initializeTxTrackingStore<T extends Transaction>({
+export function createTxTrackingStore<T extends Transaction<TransactionTracker>>({
   onSucceedCallbacks,
   appChains,
   ...options
@@ -82,9 +53,7 @@ export function initializeTxTrackingStore<T extends Transaction>({
   return createStore<ITxTrackingStore<T>>()(
     persist(
       (set, get) => ({
-        onSucceedCallbacks,
-
-        transactionsPool: {},
+        ...initializeTxTrackingStore<TransactionTracker, T>({ onSucceedCallbacks })(set, get),
 
         initializeTransactionsPool: async () => {
           await Promise.all(
@@ -211,60 +180,6 @@ export function initializeTxTrackingStore<T extends Transaction>({
           } catch (e) {
             handleError(e, trackingTxInitialParams);
           }
-        },
-
-        addTxToPool: ({ tx }) => {
-          set((state) =>
-            produce(state, (draft) => {
-              if (tx.txKey) {
-                draft.transactionsPool[tx.txKey] = {
-                  ...tx,
-                  pending: true,
-                } as Draft<T>;
-              }
-            }),
-          );
-        },
-        updateTxParams: (tx, withTracked) => {
-          set((state) =>
-            produce(state, (draft) => {
-              draft.transactionsPool[tx.txKey] = {
-                ...draft.transactionsPool[tx.txKey],
-                ...tx,
-              };
-            }),
-          );
-          if (withTracked) {
-            get().updateTxParamsForTrackedTransaction(tx);
-          }
-        },
-        updateTxParamsForTrackedTransaction: (tx) => {
-          set((state) =>
-            produce(state, (draft) => {
-              draft.trackedTransaction = {
-                ...draft.trackedTransaction,
-                initializedOnChain: draft.trackedTransaction?.initializedOnChain || false,
-                isSucceed: tx?.status === TransactionStatus.Success,
-                isReplaced: tx?.status === TransactionStatus.Replaced,
-                error: tx?.errorMessage ?? '',
-                isFailed: !!tx.errorMessage || tx.isError || false,
-                isProcessing: draft.trackedTransaction?.isProcessing || false,
-                tx: draft.trackedTransaction?.tx
-                  ? ({
-                      ...draft.trackedTransaction?.tx,
-                      ...tx,
-                    } as Draft<T>)
-                  : undefined,
-              };
-            }),
-          );
-        },
-        removeTxFromPool: (txKey) => {
-          set((state) =>
-            produce(state, (draft) => {
-              delete draft.transactionsPool[txKey];
-            }),
-          );
         },
       }),
       {

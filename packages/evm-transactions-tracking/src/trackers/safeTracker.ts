@@ -1,12 +1,16 @@
+import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import {
+  InitializePollingTracker,
+  initializePollingTracker,
+} from '@tuwa/web3-transactions-tracking-core/dist/utils/initializePollingTracker';
 import dayjs from 'dayjs';
 import { Hex, isHex, zeroHash } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
-import { Transaction, TransactionStatus } from '../types';
-import { InitializePollingTracker, initializePollingTracker } from '../utils/initializePollingTracker';
+import { TransactionTracker } from '../types';
 import { SafeTransactionServiceUrls } from '../utils/safeConstants';
 
-type InitialSafeTx = Pick<Transaction, 'txKey' | 'chainId' | 'from'> & {
+type InitialSafeTx = Pick<Transaction<TransactionTracker>, 'txKey' | 'chainId' | 'from'> & {
   pending?: boolean;
 };
 
@@ -29,7 +33,7 @@ type SafeTxSameNonceResponse = {
 };
 
 export type SafeTrackerParams = Pick<
-  InitializePollingTracker<SafeTxStatusResponse, InitialSafeTx>,
+  InitializePollingTracker<SafeTxStatusResponse, InitialSafeTx, TransactionTracker>,
   | 'tx'
   | 'removeTxFromPool'
   | 'onInitialize'
@@ -133,7 +137,7 @@ export async function safeTracker({
   tx,
   ...rest
 }: SafeTrackerParams): Promise<void> {
-  await initializePollingTracker<SafeTxStatusResponse, InitialSafeTx>({
+  await initializePollingTracker<SafeTxStatusResponse, InitialSafeTx, TransactionTracker>({
     onInitialize,
     onSucceed,
     onFailed,
@@ -146,7 +150,7 @@ export async function safeTracker({
   });
 }
 
-export async function safeTrackerForStore<T extends Transaction>({
+export async function safeTrackerForStore<T extends Transaction<TransactionTracker>>({
   tx,
   transactionsPool,
   updateTxParams,

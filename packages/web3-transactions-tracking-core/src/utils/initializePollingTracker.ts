@@ -1,6 +1,6 @@
 import { Transaction } from '../types';
 
-export type InitializePollingTracker<R, T> = {
+export type InitializePollingTracker<R, T, TR> = {
   removeTxFromPool?: (taskId: string) => void;
   onSucceed: (response: R) => void;
   onFailed: (response: R) => void;
@@ -25,7 +25,7 @@ export type InitializePollingTracker<R, T> = {
 } & {
   onInitialize?: () => void;
   tx: T &
-    Pick<Transaction, 'txKey'> & {
+    Pick<Transaction<TR>, 'txKey'> & {
       pending?: boolean;
     };
   pollingInterval?: number;
@@ -49,7 +49,7 @@ export type InitializePollingTracker<R, T> = {
  *
  * @return {Promise<void>} - A promise that resolves once the polling tracker is initialized.
  */
-export async function initializePollingTracker<R, T>({
+export async function initializePollingTracker<R, T, TR>({
   onInitialize,
   tx,
   removeTxFromPool,
@@ -60,7 +60,7 @@ export async function initializePollingTracker<R, T>({
   pollingInterval,
   retryCount,
   onReplaced,
-}: InitializePollingTracker<R, T>): Promise<void> {
+}: InitializePollingTracker<R, T, TR>): Promise<void> {
   if (onInitialize) {
     onInitialize();
   }

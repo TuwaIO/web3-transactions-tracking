@@ -1,3 +1,4 @@
+import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import {
   Chain,
   Client,
@@ -11,7 +12,7 @@ import {
 import { getBlock, getTransaction, waitForTransactionReceipt } from 'viem/actions';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
-import { Transaction, TransactionStatus } from '../types';
+import { TransactionTracker } from '../types';
 import { createViemClient } from '../utils/createViemClient';
 
 export type EVMTrackerParams = {
@@ -20,7 +21,7 @@ export type EVMTrackerParams = {
   chains: Chain[];
   onFailed: (e?: unknown) => void;
   onInitialize?: () => void;
-  tx: Pick<Transaction, 'chainId' | 'txKey'>;
+  tx: Pick<Transaction<TransactionTracker>, 'chainId' | 'txKey'>;
   retryCount?: number;
   retryTimeout?: number;
   waitForTransactionReceiptParams?: WaitForTransactionReceiptParameters; // https://viem.sh/docs/actions/public/waitForTransactionReceipt#parameters
@@ -103,7 +104,7 @@ export async function evmTracker({
   }
 }
 
-export async function evmTrackerForStore<T extends Transaction>({
+export async function evmTrackerForStore<T extends Transaction<TransactionTracker>>({
   tx,
   chains,
   transactionsPool,

@@ -5,9 +5,10 @@ export default defineConfig([
     format: ['cjs', 'esm'],
     entry: [
       './src/hooks/useInitializeTransactionsPool.tsx',
-      './src/store/txTrackingStore.ts',
-      './src/store/selectors/transactionsSelectors.ts',
-      './src/trackers/**.ts',
+      './src/store/**.ts',
+      './src/trackers/evmTracker.ts',
+      './src/trackers/gelatoTracker.ts',
+      './src/trackers/safeTracker.ts',
       './src/utils/**.ts',
       './src/types.ts',
     ],

@@ -2,12 +2,13 @@
  * @vitest-environment jsdom
  */
 
+import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import dayjs from 'dayjs';
 import { zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';
 import { describe, expect, it, vi } from 'vitest';
 
-import { Transaction } from '../types';
+import { TransactionTracker } from '../types';
 import { GelatoTaskState, GelatoTaskStatusResponse, gelatoTracker, GelatoTrackerParams } from './gelatoTracker';
 
 const createMockResponse = ({
@@ -37,7 +38,7 @@ const createMockResponse = ({
 const createMockTransaction = (
   txKey?: string,
   pending?: boolean,
-): Pick<Transaction, 'txKey'> & { pending?: boolean } => {
+): Pick<Transaction<TransactionTracker>, 'txKey'> & { pending?: boolean } => {
   return { txKey: txKey ?? '0x8c1f0b04fb55c528a46c1497b80121644819a0ca6622faba1aa3b942415d3122', pending };
 };
 

@@ -2,12 +2,13 @@
  * @vitest-environment jsdom
  */
 
+import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import dayjs from 'dayjs';
 import { zeroAddress, zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';
 import { describe, expect, it, vi } from 'vitest';
 
-import { Transaction } from '../types';
+import { TransactionTracker } from '../types';
 import { safeTracker, SafeTrackerParams, SafeTxStatusResponse } from './safeTracker';
 
 const initialSafeTxHash = '0x91d23240ffbf66a85d3e6057ca9d7826b47de1095a0e85f3d65a113ddfe48ee9';
@@ -41,7 +42,7 @@ const createMockResponse = ({
 const createMockTransaction = (
   txKey?: string,
   pending?: boolean,
-): Pick<Transaction, 'txKey' | 'from' | 'chainId'> & { pending?: boolean } => {
+): Pick<Transaction<TransactionTracker>, 'txKey' | 'from' | 'chainId'> & { pending?: boolean } => {
   return {
     chainId: sepolia.id,
     txKey: txKey ?? initialSafeTxHash,
@@ -57,6 +58,8 @@ const mockParams: Omit<SafeTrackerParams, 'tx'> = {
   removeTxFromPool: vi.fn(),
   onInitialize: vi.fn(),
   onReplaced: vi.fn(),
+  pollingInterval: 1000,
+  retryCount: 1,
 };
 
 describe('safeTracker', () => {

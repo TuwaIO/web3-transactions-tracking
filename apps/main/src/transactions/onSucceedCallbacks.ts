@@ -1,10 +1,11 @@
-import { Transaction } from '@tuwa/evm-transactions-tracking/src/types';
+import { TransactionTracker } from '@tuwa/evm-transactions-tracking/dist/types';
+import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
 
 export enum TxType {
   increment = 'increment',
 }
 
-type IncrementTx = Transaction & {
+type IncrementTx = Transaction<TransactionTracker> & {
   type: TxType.increment;
   payload: {
     value: number;

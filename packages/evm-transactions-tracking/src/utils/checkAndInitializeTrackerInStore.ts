@@ -1,10 +1,11 @@
+import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import { Chain } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
 import { evmTrackerForStore } from '../trackers/evmTracker';
 import { gelatoTrackerForStore } from '../trackers/gelatoTracker';
 import { safeTrackerForStore } from '../trackers/safeTracker';
-import { Transaction, TransactionTracker } from '../types';
+import { TransactionTracker } from '../types';
 
 /**
  * Check and initialize a transaction tracker in the store based on the given parameters.
@@ -21,7 +22,7 @@ import { Transaction, TransactionTracker } from '../types';
  *
  * @return {Promise<void>} A promise that resolves once the tracker is initialized.
  */
-export async function checkAndInitializeTrackerInStore<T extends Transaction>({
+export async function checkAndInitializeTrackerInStore<T extends Transaction<TransactionTracker>>({
   tracker,
   tx,
   chains,

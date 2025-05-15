@@ -1,9 +1,13 @@
+import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import {
+  InitializePollingTracker,
+  initializePollingTracker,
+} from '@tuwa/web3-transactions-tracking-core/dist/utils/initializePollingTracker';
 import dayjs from 'dayjs';
 import { Hex } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';
-import { ActionTxKey, Transaction, TransactionStatus } from '../types';
-import { InitializePollingTracker, initializePollingTracker } from '../utils/initializePollingTracker';
+import { ActionTxKey, TransactionTracker } from '../types';
 
 export type GelatoTxKey = {
   taskId: string;
@@ -35,12 +39,12 @@ export type GelatoTaskStatusResponse = {
   };
 };
 
-type InitialGelatoTx = Pick<Transaction, 'txKey'> & {
+type InitialGelatoTx = Pick<Transaction<TransactionTracker>, 'txKey'> & {
   pending?: boolean;
 };
 
 export type GelatoTrackerParams = Pick<
-  InitializePollingTracker<GelatoTaskStatusResponse, InitialGelatoTx>,
+  InitializePollingTracker<GelatoTaskStatusResponse, InitialGelatoTx, TransactionTracker>,
   | 'tx'
   | 'removeTxFromPool'
   | 'onInitialize'
@@ -137,7 +141,7 @@ export async function gelatoTracker({
   });
 }
 
-export async function gelatoTrackerForStore<T extends Transaction>({
+export async function gelatoTrackerForStore<T extends Transaction<TransactionTracker>>({
   tx,
   transactionsPool,
   updateTxParams,
