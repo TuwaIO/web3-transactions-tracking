@@ -24,7 +24,7 @@
   "homepage": "https://github.com/TuwaIO/web3-transactions-tracking",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "pnpm --filter web3-transactions-tracking-core build && pnpm --filter evm-transactions-tracking build && next build",
     "start": "next start",
     "lint": "next lint"
   },
