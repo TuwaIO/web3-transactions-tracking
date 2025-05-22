@@ -1,4 +1,4 @@
-import { Line, OrbitControls } from '@react-three/drei';
+import { Line } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber'; // useFrame is correctly imported
 import React, { Suspense, useMemo, useRef } from 'react';
 import * as THREE from 'three';

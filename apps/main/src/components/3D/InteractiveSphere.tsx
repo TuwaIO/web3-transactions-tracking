@@ -1,5 +1,5 @@
 import { Sphere } from '@react-three/drei';
-import { ThreeEvent, useFrame } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import React, { useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 
@@ -19,13 +19,13 @@ const InteractiveSphere: React.FC<InteractiveSphereProps> = ({
   animationSeed = 0,
 }) => {
   const meshRef = useRef<THREE.Mesh>(null!);
-  const [hovered, setHover] = useState<boolean>(false);
+  const [hovered] = useState<boolean>(false);
 
   // Store initial position for relative animation
   const initialPosition = useMemo(() => new THREE.Vector3().fromArray(position), [position]);
 
   // Continuous animation for each sphere
-  useFrame((state, delta) => {
+  useFrame((state) => {
     if (meshRef.current) {
       const elapsedTime = state.clock.getElapsedTime();
       const speedFactor = 0.3 + animationSeed * 0.4; // Vary speed based on seed
@@ -46,32 +46,26 @@ const InteractiveSphere: React.FC<InteractiveSphereProps> = ({
     }
   });
 
-  const handlePointerOver = (event: ThreeEvent<PointerEvent>) => {
-    event.stopPropagation();
-    setHover(true);
-    document.body.style.cursor = 'pointer';
-  };
-
-  const handlePointerOut = (event: ThreeEvent<PointerEvent>) => {
-    setHover(false);
-    document.body.style.cursor = 'auto';
-  };
+  // const handlePointerOver = (event: ThreeEvent<PointerEvent>) => {
+  //   event.stopPropagation();
+  //   setHover(true);
+  //   document.body.style.cursor = 'pointer';
+  // };
+  //
+  // const handlePointerOut = (event: ThreeEvent<PointerEvent>) => {
+  //   setHover(false);
+  //   document.body.style.cursor = 'auto';
+  // };
 
   return (
-    <Sphere
-      ref={meshRef}
-      args={[size, 24, 24]} // Slightly fewer segments for performance with more spheres
-      // Set initial position via the mesh itself, not a prop, if animating from origin
-      // For this setup, initial position is set by the parent group.
-      // position={position} // Already handled by the parent group + procedural generation
-    >
+    <Sphere ref={meshRef} args={[size, 24, 24]}>
       <meshStandardMaterial
         color={hovered ? hoverColor : color}
         emissive={hovered ? hoverColor : color}
         emissiveIntensity={hovered ? 0.6 : 0.2}
         roughness={0.4}
         metalness={0.2}
-        transparent // If colors have alpha or for smoother look
+        transparent
         opacity={0.9}
       />
     </Sphere>
