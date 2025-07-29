@@ -1,3 +1,26 @@
-# Welcome to Nextra
+# Introduction
 
-Hello, world!
+Welcome to the documentation for the Web3 Transaction Tracking suite. This collection of packages offers a powerful, headless solution designed to dramatically simplify and automate real-time transaction monitoring in your web3 applications.
+
+### The Challenge
+
+Developing a robust decentralized application involves more than just submitting transactions to the blockchain. Users expect a smooth, informative experience where they can see the status of their actions in real time—from the moment a transaction is sent, to its confirmation, and even if it fails. Manually building and maintaining this tracking logic is a complex, time-consuming, and repetitive task that distracts from building the core features of your product.
+
+### Our Solution
+
+This suite of npm packages handles the entire lifecycle of transaction tracking for you. By providing a modular and extensible framework, we empower you to deliver a seamless user experience with minimal setup. Our goal is to manage the complexities of on-chain activity so you can focus on what matters most: your application's unique value proposition.
+
+### Core Features
+
+* **Real-Time Monitoring:** Automatically track transactions through their entire lifecycle: submitted, pending, confirmed, or failed.
+* **Modular Architecture:** The system is built around a central `web3-transactions-tracking-core` package, which provides shared TypeScript types and a Zustand-based store for a global transaction history.
+* **Extensible EVM Support:** The `evm-transactions-tracking` package offers comprehensive support for all EVM-compatible chains available in `viem.sh`.
+* **Smart Tracker Detection:** The library intelligently selects the appropriate tracker for your needs. It includes built-in support for standard EVM transactions, as well as specialized trackers for meta-transactions via [**Gelato**](https://www.gelato.cloud/) and multi-signature operations with [**Safe**](https://safe.global/).
+* **Wallet Agnostic:** The `evm-transactions-tracking` packages are unopinionated about wallet connections. They are designed to integrate seamlessly with any setup built on `wagmi`, including popular solutions like [**RainbowKit**](https://rainbowkit.com/), [**ConnectKit**](https://family.co/docs/connectkit), and others.
+* **Future-Proof Design:** The architecture is built for growth, with planned support for non-EVM ecosystems.
+
+### Who Is This For?
+
+This project is for any developer or team building a web3 application that needs a reliable, easy-to-integrate, and scalable system for tracking on-chain transactions. If you're tired of boilerplate code for transaction monitoring, this is the solution for you.
+
+Let's get started!

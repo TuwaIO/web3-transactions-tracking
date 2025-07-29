@@ -1,29 +1,40 @@
 import 'nextra-theme-docs/style.css';
+import '@/styles/app.css';
 
-import { Banner, Head } from 'nextra/components';
+import { Head } from 'nextra/components';
 import { getPageMap } from 'nextra/page-map';
 import { Footer, Layout, Navbar } from 'nextra-theme-docs';
+import Image from 'next/image';
+import Logo from '@/assets/tuwaLogo.svg';
 
 export const metadata = {
   // Define your metadata here
   // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 };
 
-const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>;
+function svgXmlToBase64(svgXmlString) {
+  // Encode the string for URI components to handle special characters
+  const encodedSvg = encodeURIComponent(svgXmlString);
+
+  // Convert the encoded string to Base64
+  const base64 = btoa(encodedSvg);
+
+  // Return the Base64 data URI
+  return `data:image/svg+xml;base64,${base64}`;
+}
+
 const navbar = (
   <Navbar
-    logo={<b>Nextra</b>}
+    logo={<Image width={50} height={50} src={Logo} alt="Logo" />}
     // ... Your additional navbar options
   />
 );
-const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>;
+const footer = <Footer>Apache License {new Date().getFullYear()} © TUWA.</Footer>;
 
 export default async function RootLayout({ children }) {
   return (
     <html
-      // Not required, but good for SEO
       lang="en"
-      // Required to be set
       dir="ltr"
       // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
       suppressHydrationWarning
@@ -35,7 +46,6 @@ export default async function RootLayout({ children }) {
       </Head>
       <body>
         <Layout
-          banner={banner}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
