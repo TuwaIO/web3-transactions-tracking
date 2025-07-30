@@ -48,8 +48,11 @@ export default async function RootLayout({ children }) {
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs" // TODO: need fix
           footer={footer}
+          // editLink // TODO: need change
+          // feedback // TODO: need change
+          navigation={{ prev: true, next: true }}
           // ... Your additional layout options
         >
           {children}
