@@ -1,4 +1,4 @@
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import { Chain } from 'viem';
 
 import { ITxTrackingStore } from '../store/txTrackingStore';

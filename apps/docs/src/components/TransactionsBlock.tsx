@@ -2,6 +2,7 @@
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { createViemClient } from '@tuwa/evm-transactions-tracking/dist/utils/createViemClient';
+import { useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
@@ -19,7 +20,17 @@ export const TransactionsBlock = () => {
   const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
   const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
 
+  const [currentCount, setCurrentCount] = useState(0);
+
   const handleIncrement = async () => {
+    const lCurrentCount = Number(
+      await readContract(createViemClient(sepolia.id, appChains) as Client, {
+        abi: CounterAbi,
+        address: COUNTER_ADDRESS,
+        functionName: 'getCurrentNumber',
+      }),
+    );
+    setCurrentCount(lCurrentCount);
     await handleTransaction({
       config,
       actionFunction: () => increment({ wagmiConfig: config }),
@@ -27,13 +38,7 @@ export const TransactionsBlock = () => {
         type: TxType.increment,
         desiredChainID: sepolia.id,
         payload: {
-          value: Number(
-            await readContract(createViemClient(sepolia.id, appChains) as Client, {
-              abi: CounterAbi,
-              address: COUNTER_ADDRESS,
-              functionName: 'getCurrentNumber',
-            }),
-          ),
+          value: lCurrentCount,
         },
       },
     });
@@ -43,15 +48,24 @@ export const TransactionsBlock = () => {
 
   return (
     <div>
-      <ConnectButton />
+      <div>
+        <ConnectButton />
+
+        <div className="mt-4">Current count: {currentCount}</div>
+
+        <div className="m-4">
+          <button
+            className="py-2.5 px-6 text-sm bg-indigo-500 text-white rounded-lg cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-700"
+            type="button"
+            onClick={handleIncrement}
+          >
+            Execute increment TX
+          </button>
+        </div>
+      </div>
 
       <div>
-        <h2>Transactions</h2>
-
-        <button type="button" onClick={handleIncrement}>
-          Increment TX
-        </button>
-
+        <h3 className="font-bold mb-3">Executed tx's</h3>
         {Object.values(transactionsPool).map((transaction) => (
           <div key={transaction.txKey} style={{ marginBottom: 10 }}>
             {transaction.txKey} <p>{transaction.status}</p>{' '}
