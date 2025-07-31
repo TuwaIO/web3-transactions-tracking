@@ -138,7 +138,9 @@ export async function evmTrackerForStore<T extends Transaction<TransactionTracke
         finishedTimestamp: timestamp,
       });
       const updatedTX = transactionsPool[tx.txKey];
-      onSucceedCallbacks(updatedTX);
+      if (onSucceedCallbacks) {
+        onSucceedCallbacks(updatedTX);
+      }
     },
     onReplaced: (replacement) => {
       updateTxParams({

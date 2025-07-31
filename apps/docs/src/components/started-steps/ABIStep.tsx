@@ -38,9 +38,7 @@ export function ABIStep() {
   return (
     <div>
       <h3 className="text-[18px] font-bold mb-2">Step 2: Contract ABI</h3>
-      <p className="mb-2">
-        Next, choose the contract for the interaction. In this guide, we'll use a standard Counter ABI.
-      </p>
+      <p className="mb-2">Choose the contract for the interaction. In this guide, we'll use a standard Counter ABI.</p>
       <CodeBlock title="CounterAbi.ts" titleIcons={<DocumentTextIcon />} textToCopy={codeBlock}>
         <CodeHighlighter children={codeBlock} language="ts" />
       </CodeBlock>

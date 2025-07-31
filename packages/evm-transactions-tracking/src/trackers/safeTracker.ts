@@ -171,7 +171,9 @@ export async function safeTrackerForStore<T extends Transaction<TransactionTrack
         finishedTimestamp: response.executionDate ? dayjs(response.executionDate).unix() : undefined,
       });
       const updatedTX = transactionsPool[tx.txKey];
-      onSucceedCallbacks(updatedTX);
+      if (onSucceedCallbacks) {
+        onSucceedCallbacks(updatedTX);
+      }
     },
     onIntervalTick: async (response) => {
       let status = undefined;

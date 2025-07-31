@@ -162,7 +162,9 @@ export async function gelatoTrackerForStore<T extends Transaction<TransactionTra
         finishedTimestamp: response.task.executionDate ? dayjs(response.task.executionDate).unix() : undefined,
       });
       const updatedTX = transactionsPool[tx.txKey];
-      onSucceedCallbacks(updatedTX);
+      if (onSucceedCallbacks) {
+        onSucceedCallbacks(updatedTX);
+      }
     },
     onIntervalTick: async (response) => {
       const pending = isGelatoTxPending(response.task.taskState);

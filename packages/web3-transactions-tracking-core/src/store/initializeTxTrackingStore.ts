@@ -19,7 +19,7 @@ type UpdatedParamsFields<TR> = Pick<
 >;
 
 export type IInitializeTxTrackingStore<TR, T extends Transaction<TR>> = {
-  onSucceedCallbacks: (tx: T) => void;
+  onSucceedCallbacks?: (tx: T) => void;
 
   transactionsPool: TransactionPool<TR, T>;
 
@@ -42,7 +42,7 @@ export type IInitializeTxTrackingStore<TR, T extends Transaction<TR>> = {
 export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
   onSucceedCallbacks,
 }: {
-  onSucceedCallbacks(tx: unknown): Promise<void>;
+  onSucceedCallbacks?(tx: unknown): Promise<void>;
 }): StoreSlice<IInitializeTxTrackingStore<TR, T>> {
   return (set, get) => ({
     onSucceedCallbacks,

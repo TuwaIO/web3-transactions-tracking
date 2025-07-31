@@ -3,11 +3,11 @@
 import { Tabs } from 'nextra/components';
 import { useState } from 'react';
 
-import { RainbowKit } from '@/components/RainbowKit';
+import { RainbowKit } from '@/components/started-blocks/RainbowKit';
 
 const trackingPackages = ['evm-transactions-tracking'];
 
-export function Examples() {
+export function StartedWrapper() {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (

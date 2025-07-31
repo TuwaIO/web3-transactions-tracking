@@ -48,7 +48,7 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
   ...options
 }: {
   appChains: Chain[];
-  onSucceedCallbacks(tx: unknown): Promise<void>;
+  onSucceedCallbacks?(tx: unknown): Promise<void>;
 } & PersistOptions<ITxTrackingStore<T>>) {
   return createStore<ITxTrackingStore<T>>()(
     persist(
