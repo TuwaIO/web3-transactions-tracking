@@ -36,7 +36,17 @@ export function RainbowKit({ trackingPackageName }: PackageInstallationTabsProps
             <TxBlockStep />
 
             <div>
-              <h4 className="font-bold text-[18px] my-4">Try it out:</h4>
+              <h4 className="font-bold text-[18px] my-4">
+                Try it out (
+                <a
+                  className="text-blue-600 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-blue-600 hover:after:bg-blue-800 after:transition"
+                  href="https://cloud.google.com/application/web3/faucet"
+                  target="_blank"
+                >
+                  sepolia faucet
+                </a>
+                ):
+              </h4>
               <TransactionsBlock />
             </div>
           </div>

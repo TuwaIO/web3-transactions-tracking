@@ -6,6 +6,7 @@ import { CodeHighlighter } from '@/components/CodeHighlighter';
 const codeBlock = `'use client';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool';
 import { sepolia } from 'viem/chains';
 
 import { config } from '@/configs/wagmiConfig';
@@ -16,6 +17,9 @@ import { TxType } from '@/transactions/onSucceedCallbacks';
 export const Increment = () => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
   const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
+  
+  const initializeTransactionsPool = useTxTrackingStore((store) => store.initializeTransactionsPool);
+  useInitializeTransactionsPool(initializeTransactionsPool); // required for continue tracking after page reload
 
   const handleIncrement = async () => {
     await handleTransaction({
