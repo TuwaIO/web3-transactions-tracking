@@ -6,8 +6,8 @@ import { Chain, Hex } from 'viem';
 import { TransactionTracker } from '../types';
 import { gnosisSafeLinksHelper } from '../utils/safeConstants';
 
-export const selectTxExplorerLink = <T extends Transaction<TransactionTracker>>(
-  transactionsPool: TransactionPool<TransactionTracker, T>,
+export const selectTxExplorerLink = <TR, T extends Transaction<TR>>(
+  transactionsPool: TransactionPool<TR, T>,
   chains: Chain[],
   txHash: Hex,
   replacedTxHash?: Hex,

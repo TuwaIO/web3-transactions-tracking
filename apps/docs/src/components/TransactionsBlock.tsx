@@ -3,13 +3,14 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { createViemClient } from '@tuwa/evm-transactions-tracking/dist/utils/createViemClient';
 import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool';
+import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/src/providers/TransactionsWidget';
+import { GetAccountReturnType, watchAccount } from '@wagmi/core';
 import { useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
 
 import { CounterAbi } from '@/abis/CounterAbi';
-import { TransactionsHistory } from '@/components/TransactionsHistory';
 import { appChains, config } from '@/configs/wagmiConfig';
 import { useTxTrackingStore } from '@/hooks/txTrackingHooks';
 import { increment } from '@/transactions/actions/increment';
@@ -19,12 +20,20 @@ export const COUNTER_ADDRESS = '0xAe7f46914De82028eCB7E2bF97Feb3D3dDCc2BAB';
 
 export const TransactionsBlock = () => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
+  const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
   const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
 
   const initializeTransactionsPool = useTxTrackingStore((store) => store.initializeTransactionsPool);
   useInitializeTransactionsPool(initializeTransactionsPool);
 
   const [currentCount, setCurrentCount] = useState(0);
+  const [account, setAccount] = useState<GetAccountReturnType | undefined>(undefined);
+
+  watchAccount(config, {
+    onChange(account) {
+      setAccount(account);
+    },
+  });
 
   const handleIncrement = async () => {
     const lCurrentCount = Number(
@@ -68,7 +77,7 @@ export const TransactionsBlock = () => {
         </div>
       </div>
 
-      <TransactionsHistory />
+      <TransactionsWidget appChains={appChains} transactionsPool={transactionsPool} walletAddress={account?.address} />
     </div>
   );
 };

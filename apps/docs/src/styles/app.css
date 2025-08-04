@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@rainbow-me/rainbowkit/styles.css";
+@import "@tuwa/transactions-tracking-ui/dist/index.css";
 
 .nextra-breadcrumb span {
 

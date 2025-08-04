@@ -33,4 +33,6 @@ export type Transaction<T> = {
   replacedTxHash?: string;
   to?: string;
   nonce?: number;
+  title?: string | [string, string, string, string];
+  description?: string | [string, string, string, string];
 };

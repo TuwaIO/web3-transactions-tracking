@@ -1,0 +1,88 @@
+// JUST for test remove after package finished
+
+'use client';
+
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { createViemClient } from '@tuwa/evm-transactions-tracking/dist/utils/createViemClient';
+import { Client } from 'viem';
+import { readContract } from 'viem/actions';
+import { sepolia } from 'viem/chains';
+
+import { CounterAbi } from '../abis/CounterAbi';
+import { appChains, config } from '../configs/wagmiConfig';
+import { COUNTER_ADDRESS } from '../constants';
+import { useTxTrackingStore } from '../hooks/txTrackingHooks';
+import { increment } from '../transactions/actions/increment';
+import { incrementGelato } from '../transactions/actions/incrementGelato';
+import { TxType } from '../transactions/onSucceedCallbacks';
+
+export const TransactionsBlock = () => {
+  const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
+
+  const handleIncrement = async () => {
+    const currentCount = Number(
+      await readContract(createViemClient(sepolia.id, appChains) as Client, {
+        abi: CounterAbi,
+        address: COUNTER_ADDRESS,
+        functionName: 'getCurrentNumber',
+      }),
+    );
+
+    await handleTransaction({
+      config,
+      actionFunction: () => increment({ wagmiConfig: config }),
+      params: {
+        type: TxType.increment,
+        desiredChainID: sepolia.id,
+        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
+        description: [
+          `Value after incrementing ${currentCount + 1}`,
+          `Successes. Current value is ${currentCount + 1}`,
+          'Something went wrong when increment.',
+          'Transaction replaced. Please take a look details in your wallet.',
+        ],
+        payload: {
+          value: currentCount,
+        },
+      },
+    });
+  };
+
+  const handleIncrementGelato = async () => {
+    await handleTransaction({
+      config,
+      actionFunction: () => incrementGelato(),
+      params: {
+        type: TxType.increment,
+        desiredChainID: sepolia.id,
+        payload: {
+          value: Number(
+            await readContract(createViemClient(sepolia.id, appChains) as Client, {
+              abi: CounterAbi,
+              address: COUNTER_ADDRESS,
+              functionName: 'getCurrentNumber',
+            }),
+          ),
+        },
+      },
+    });
+  };
+
+  return (
+    <div>
+      <ConnectButton />
+
+      <div>
+        <h2>Transactions</h2>
+
+        <button type="button" onClick={handleIncrement}>
+          Increment TX
+        </button>
+
+        <button type="button" onClick={handleIncrementGelato}>
+          Increment TX GELATO
+        </button>
+      </div>
+    </div>
+  );
+};

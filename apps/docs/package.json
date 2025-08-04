@@ -24,7 +24,7 @@
   "homepage": "https://github.com/TuwaIO/web3-transactions-tracking",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "pnpm --filter web3-transactions-tracking-core build && pnpm --filter evm-transactions-tracking build && next build && pnpm postbuild",
+    "build": "pnpm --filter web3-transactions-tracking-core build && pnpm --filter evm-transactions-tracking build && pnpm --filter transactions-tracking-ui tsup-build && next build && pnpm postbuild",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
@@ -35,6 +35,7 @@
     "@rainbow-me/rainbowkit": "^2.2.5",
     "@tanstack/react-query": "^5.76.1",
     "@tuwa/evm-transactions-tracking": "workspace:^",
+    "@tuwa/transactions-tracking-ui": "workspace:^",
     "@tuwa/web3-transactions-tracking-core": "workspace:^",
     "@wagmi/core": "^2.17.2",
     "dayjs": "^1.11.13",

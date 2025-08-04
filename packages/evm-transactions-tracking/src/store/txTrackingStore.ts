@@ -36,8 +36,10 @@ export type ITxTrackingStore<T extends Transaction<TransactionTracker>> = IIniti
     actionFunction: () => Promise<ActionTxKey | undefined>;
     params: {
       type: T['type'];
-      payload: T['payload'];
       desiredChainID: number;
+      payload?: T['payload'];
+      title?: T['title'];
+      description?: T['description'];
     };
   }) => Promise<void>;
 };
@@ -66,7 +68,7 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
         },
 
         handleTransaction: async ({ actionFunction, params, config }) => {
-          const { desiredChainID, payload, type } = params;
+          const { desiredChainID, payload, type, title, description } = params;
           const { activeWallet } = getActiveWalletAndClient(config);
           const chainId = Number(desiredChainID);
           const tracker = TransactionTracker.Ethereum;
@@ -85,6 +87,8 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
             from: activeWallet.address ?? zeroAddress,
             txKey: '',
             pending: false,
+            title,
+            description,
           } as Draft<T>;
 
           const trackingTxInitialParams = {

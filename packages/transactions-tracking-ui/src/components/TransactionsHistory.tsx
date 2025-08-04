@@ -1,7 +1,7 @@
 import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import { selectAllTransactionsByActiveWallet } from '@tuwa/web3-transactions-tracking-core/src/store/transactionsSelectors';
 
-import { TransactionsExplorerModalProps } from './TransactionsExplorerModal';
+import { WalletInfoModalProps } from './WalletInfoModal';
 
 export function TransactionHistoryItem<TR, T extends Transaction<TR>>({ tx }: { tx: T }) {
   return (
@@ -14,7 +14,7 @@ export function TransactionHistoryItem<TR, T extends Transaction<TR>>({ tx }: { 
 export function TransactionsHistory<TR, T extends Transaction<TR>>({
   walletAddress,
   transactionsPool,
-}: TransactionsExplorerModalProps<TR, T>) {
+}: WalletInfoModalProps<TR, T>) {
   const transactionsByWallet = selectAllTransactionsByActiveWallet(
     transactionsPool,
     walletAddress ?? '0x0000000000000000000000000000000000000000',
