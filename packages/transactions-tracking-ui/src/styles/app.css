@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @import "@rainbow-me/rainbowkit/styles.css";
+
+.tuwa-tx-tracking-wallet-info-modal-open {
+  overflow: hidden;
+}

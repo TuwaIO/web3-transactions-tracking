@@ -4,7 +4,7 @@ import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import { Chain, Hex } from 'viem';
 
 import { HashLink } from './HashLink';
-import { WalletInfoModalProps } from './WalletInfoModal';
+import { WalletInfoModalProps } from './WalletInfoModal/WalletInfoModal';
 
 export function ToastTransactionKey<TR, T extends Transaction<TR>>({
   tx,

@@ -8,7 +8,7 @@ import { Chain } from 'viem';
 import { StatusAwareText } from './StatusAwareText';
 import { ToastTransactionKey } from './ToastTransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';
-import { WalletInfoModalProps } from './WalletInfoModal';
+import { WalletInfoModalProps } from './WalletInfoModal/WalletInfoModal';
 
 export function ToastTransaction<TR, T extends Transaction<TR>>({
   openWalletInfoModal,

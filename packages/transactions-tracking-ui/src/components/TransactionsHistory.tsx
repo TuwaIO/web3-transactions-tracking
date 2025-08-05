@@ -2,7 +2,7 @@ import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import { selectAllTransactionsByActiveWallet } from '@tuwa/web3-transactions-tracking-core/src/store/transactionsSelectors';
 
 import { TransactionHistoryItem } from './TransactionHistoryItem';
-import { WalletInfoModalProps } from './WalletInfoModal';
+import { WalletInfoModalProps } from './WalletInfoModal/WalletInfoModal';
 
 function HistoryPlaceholder({ title, message }: { title: string; message: string }) {
   return (

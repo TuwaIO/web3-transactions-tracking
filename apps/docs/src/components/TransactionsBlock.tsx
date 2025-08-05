@@ -5,7 +5,7 @@ import { createViemClient } from '@tuwa/evm-transactions-tracking/dist/utils/cre
 import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool';
 import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/src/providers/TransactionsWidget';
 import { GetAccountReturnType, watchAccount } from '@wagmi/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
@@ -21,7 +21,6 @@ export const COUNTER_ADDRESS = '0xAe7f46914De82028eCB7E2bF97Feb3D3dDCc2BAB';
 export const TransactionsBlock = () => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
   const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
-  const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
 
   const initializeTransactionsPool = useTxTrackingStore((store) => store.initializeTransactionsPool);
   useInitializeTransactionsPool(initializeTransactionsPool);
@@ -35,15 +34,15 @@ export const TransactionsBlock = () => {
     },
   });
 
+  useEffect(() => {
+    readContract(createViemClient(sepolia.id, appChains) as Client, {
+      abi: CounterAbi,
+      address: COUNTER_ADDRESS,
+      functionName: 'getCurrentNumber',
+    }).then((count) => setCurrentCount(Number(count)));
+  }, []);
+
   const handleIncrement = async () => {
-    const lCurrentCount = Number(
-      await readContract(createViemClient(sepolia.id, appChains) as Client, {
-        abi: CounterAbi,
-        address: COUNTER_ADDRESS,
-        functionName: 'getCurrentNumber',
-      }),
-    );
-    setCurrentCount(lCurrentCount);
     await handleTransaction({
       config,
       actionFunction: () => increment({ wagmiConfig: config }),
@@ -51,13 +50,11 @@ export const TransactionsBlock = () => {
         type: TxType.increment,
         desiredChainID: sepolia.id,
         payload: {
-          value: lCurrentCount,
+          value: currentCount,
         },
       },
     });
   };
-
-  console.log(trackedTransaction);
 
   return (
     <div>
