@@ -1,4 +1,4 @@
-**@tuwa/web3-transactions-tracking-core**
+# @tuwa/web3-transactions-tracking-core
 
 This package provides the core, headless engine for the TUWA Web3 transaction tracking suite. It manages the state of all tracked transactions, handling the full lifecycle from submission (pending) to finality (success, failed, reverted) and complex scenarios like dropped or replaced transactions.
 
