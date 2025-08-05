@@ -1,6 +1,6 @@
 {
   "name": "@tuwa/web3-transactions-tracking-core",
-  "description": "Reliably track the lifecycle of evm transactions with this intuitive package. Get real-time insights into on-chain processes with ease.",
+  "description": "The core, framework-agnostic engine for real-time tracking of Web3 transaction lifecycles (pending, success, failed, replaced).",
   "version": "0.0.1",
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
@@ -29,12 +29,11 @@
     "ci:publish:beta": "npm run build && npm publish --tag beta --access=public"
   },
   "dependencies": {
-    "dayjs": "^1.11.13",
     "immer": "^10.1.1",
-    "zustand": "^5.0.4"
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "tsup": "^8.5.0"
   }
 }

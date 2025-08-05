@@ -31,6 +31,7 @@ export type IInitializeTxTrackingStore<TR, T extends Transaction<TR>> = {
     isProcessing: boolean;
     error: string;
     tx?: T;
+    isTrackedModalOpen?: boolean;
   };
 
   addTxToPool: ({ tx }: { tx: T }) => void;

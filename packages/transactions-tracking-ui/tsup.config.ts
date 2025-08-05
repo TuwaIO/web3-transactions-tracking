@@ -1,3 +1,5 @@
+// еще нужно добавить переводы текстов (на несколько базовых языков по окончанию всех текстовых работ с пакетом)
+
 import { defineConfig } from 'tsup';
 
 export default defineConfig([

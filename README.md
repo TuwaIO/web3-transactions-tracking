@@ -1,26 +1,39 @@
-# Web3 transactions tracking library
+# TUWA Web3 Transaction Tracking Suite
 
-<div style="text-align: center"><img width="250px" src="./banner.jpeg" alt="Web3 transactions tracking banner"></div>
+Tracking the status of user transactions in a dApp is complex. Users are often left wondering if their transaction succeeded, failed, or is simply pending. The **TUWA Web3 Transaction Tracking Suite** solves this by providing a complete, end-to-end solution to monitor transactions in real-time and present beautiful, informative feedback to your users.
 
-Reliably track the lifecycle of web3 transactions with this intuitive package. Get real-time insights into on-chain processes with ease. Described in more detail [here](./packages/evm-transactions-tracking/README.md).
+This monorepo contains a collection of packages that work together to provide a seamless developer experience and a polished user interface out-of-the-box.
 
-### Installation
+## Key Features
 
-#### npm
-<code>npm i @tuwa/evm-transactions-tracking</code>
-#### yarn
-<code>yarn add @tuwa/evm-transactions-tracking</code>
-#### pnpm
-<code>pnpm add @tuwa/evm-transactions-tracking</code>
+* **End-to-End Solution:** A complete toolkit covering everything from a core state engine and EVM-specific logic to pre-built React UI components.
+* **Comprehensive Tracking:** Natively supports standard on-chain transactions, meta-transactions via **Gelato Network**, and multi-signature operations within a **Safe**.
+* **Beautiful Pre-built UI:** A suite of toast notifications and modals, styled with Tailwind CSS, to get you started in minutes.
+* **Highly Customizable:** Use our UI components out-of-the-box or provide your own custom components to match your dApp's branding.
+* **Developer-Friendly:** Built with TypeScript, Zustand, and a modular architecture for a clean and predictable developer experience.
 
-### Running docs project
-To run docs website locally:
+## Packages
+
+This project is a monorepo containing the following packages:
+
+| Package                                                                                  | Description                                                                                             | Version                                                                                                                              |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| [`@tuwa/web3-transactions-tracking-core`](./packages/web3-transactions-tracking-core)     | The framework-agnostic core with the Zustand store, types, and foundational logic.                     | [](https://www.npmjs.com/package/%40tuwa/web3-transactions-tracking-core)         |
+| [`@tuwa/evm-transactions-tracking`](./packages/evm-transactions-tracking)                 | The EVM implementation layer with specialized trackers for on-chain, Gelato, and Safe transactions.      | [](https://www.npmjs.com/package/%40tuwa/evm-transactions-tracking)             |
+| [`@tuwa/transactions-tracking-ui`](./packages/transactions-tracking-ui)                   | A set of pre-styled React components (toasts, modals) for a beautiful user experience out-of-the-box. | [](https://www.npmjs.com/package/%40tuwa/transactions-tracking-ui)                 |
+
+## Running the Docs Project
+
+To run the documentation and example website locally:
+
 ```bash
 pnpm --filter docs dev
 ```
 
 ## Copyright
+
 2025 TUWA
 
 ## License
+
 [Apache License 2.0](./LICENSE)
