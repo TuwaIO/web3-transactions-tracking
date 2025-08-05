@@ -1,11 +1,18 @@
+// стили для модалки что бы она сжималась как угодно
+// адаптивные стили
+// темный режим стили для всего проекта
+
 import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
 import { ReactNode, useEffect, useRef, useState } from 'react';
+import Modal from 'react-modal';
 import { toast, ToastContainer, ToastContainerProps, ToastContentProps, TypeOptions } from 'react-toastify';
 import { Chain } from 'viem';
 
 import { ToastTransaction } from '../components/ToastTransaction';
-import { WalletInfoModal, WalletInfoModalProps } from '../components/WalletInfoModal';
+import { WalletInfoModal, WalletInfoModalProps } from '../components/WalletInfoModal/WalletInfoModal';
+
+Modal.setAppElement('#tuwa-transactions-widget');
 
 const STATUS_TO_TOAST_TYPE: Record<string, TypeOptions> = {
   [TransactionStatus.Success]: 'success',
@@ -31,7 +38,6 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
   withoutWalletInfo,
   ...toastProps
 }: {
-  appChains: Chain[];
   withoutWalletInfo?: boolean;
   renderToast?: (props: CustomToastComponentProps<TR, T>) => ReactNode;
 } & WalletInfoModalProps<TR, T> &
@@ -84,7 +90,7 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
   }, [transactionsPool, appChains, renderToast]);
 
   return (
-    <>
+    <div id="tuwa-transactions-widget">
       <ToastContainer
         position="bottom-right"
         stacked
@@ -95,12 +101,13 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
       />
       {!withoutWalletInfo && (
         <WalletInfoModal
+          appChains={appChains}
           transactionsPool={transactionsPool}
           walletAddress={walletAddress}
           isOpen={isWalletInfoModalOpen}
           setIsOpen={setIsWalletInfoModalOpen}
         />
       )}
-    </>
+    </div>
   );
 }

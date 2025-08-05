@@ -1,56 +1,14 @@
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
 import { getChainName } from '@bgd-labs/react-web3-icons/dist/utils';
 import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
-import { TransactionStatus } from '@tuwa/web3-transactions-tracking-core/src/types';
 import { ReactNode } from 'react';
 import { ToastContainerProps, ToastContentProps } from 'react-toastify';
 import { Chain } from 'viem';
 
+import { StatusAwareText } from './StatusAwareText';
 import { ToastTransactionKey } from './ToastTransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';
 import { WalletInfoModalProps } from './WalletInfoModal';
-
-const STATUS_MAP = {
-  [TransactionStatus.Success]: { index: 1, colorClass: 'text-green-500' },
-  [TransactionStatus.Failed]: { index: 2, colorClass: 'text-red-500' },
-  [TransactionStatus.Reverted]: { index: 2, colorClass: 'text-red-500' },
-  [TransactionStatus.Replaced]: { index: 3, colorClass: '' },
-  default: { index: 0, colorClass: '' },
-};
-
-function StatusAwareText<TR, T extends Transaction<TR>>({
-  tx,
-  source,
-  fallback,
-  baseClasses,
-  applyColor = false,
-}: {
-  tx: T;
-  source?: string | string[];
-  fallback?: string;
-  baseClasses: string;
-  applyColor?: boolean;
-}) {
-  if (typeof source === 'string') {
-    return <div className={baseClasses}>{source}</div>;
-  }
-
-  if (Array.isArray(source)) {
-    const statusKey = tx.status || 'default';
-    const config = STATUS_MAP[statusKey] || STATUS_MAP['default'];
-
-    const text = source[config.index];
-    const color = applyColor ? config.colorClass : '';
-
-    return <div className={`${baseClasses} ${color}`}>{text}</div>;
-  }
-
-  if (fallback) {
-    return <div className={baseClasses}>{fallback}</div>;
-  }
-
-  return null;
-}
 
 export function ToastTransaction<TR, T extends Transaction<TR>>({
   openWalletInfoModal,
@@ -86,7 +44,7 @@ export function ToastTransaction<TR, T extends Transaction<TR>>({
       </div>
 
       <div>
-        <ToastTransactionKey transactionsPool={transactionsPool} appChains={appChains} tx={tx} />
+        <ToastTransactionKey transactionsPool={transactionsPool} appChains={appChains} tx={tx} variant="toast" />
 
         <div className="mt-3 flex items-center justify-between">
           <TransactionStatusBadge tx={tx} />

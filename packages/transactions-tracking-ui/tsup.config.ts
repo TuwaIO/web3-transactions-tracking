@@ -5,7 +5,12 @@ import { defineConfig } from 'tsup';
 export default defineConfig([
   {
     format: ['cjs', 'esm'],
-    entry: ['./src/components/**.tsx', './src/providers/TransactionsWidget.tsx', './src/utils/**.ts'],
+    entry: [
+      './src/components/**/**.tsx',
+      './src/providers/TransactionsWidget.tsx',
+      './src/utils/**.ts',
+      './src/hooks/useCopyToClipboard.ts',
+    ],
     treeshake: true,
     sourcemap: true,
     minify: true,
