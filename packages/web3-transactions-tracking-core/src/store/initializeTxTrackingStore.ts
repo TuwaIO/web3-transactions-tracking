@@ -38,6 +38,9 @@ export type IInitializeTxTrackingStore<TR, T extends Transaction<TR>> = {
   updateTxParams: (fields: UpdatedParamsFields<TR>, withTracked?: boolean) => void;
   updateTxParamsForTrackedTransaction: (fields: UpdatedParamsFields<TR>) => void;
   removeTxFromPool: (txKey: string) => void;
+
+  openTxTrackedModal: () => void;
+  closeTxTrackedModal: () => void;
 };
 
 export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
@@ -100,6 +103,35 @@ export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
       set((state) =>
         produce(state, (draft) => {
           delete draft.transactionsPool[txKey];
+        }),
+      );
+    },
+
+    openTxTrackedModal: () => {
+      set((state) =>
+        produce(state, (draft) => {
+          if (draft.trackedTransaction) {
+            draft.trackedTransaction = {
+              ...draft.trackedTransaction,
+              isTrackedModalOpen: true,
+            };
+          }
+        }),
+      );
+    },
+    closeTxTrackedModal: () => {
+      set((state) =>
+        produce(state, (draft) => {
+          if (draft.trackedTransaction) {
+            if (!draft.trackedTransaction.isProcessing) {
+              draft.trackedTransaction = undefined;
+            } else {
+              draft.trackedTransaction = {
+                ...draft.trackedTransaction,
+                isTrackedModalOpen: false,
+              };
+            }
+          }
         }),
       );
     },

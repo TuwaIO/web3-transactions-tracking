@@ -70,6 +70,7 @@ export type ITxTrackingStore<T extends Transaction<TransactionTracker>> = IIniti
       payload?: T['payload'];
       title?: T['title'];
       description?: T['description'];
+      withTrackedModal?: boolean;
     };
   }) => Promise<void>;
 };
@@ -106,7 +107,7 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
         },
 
         handleTransaction: async ({ actionFunction, params, config }) => {
-          const { desiredChainID, payload, type, title, description } = params;
+          const { desiredChainID, payload, type, title, description, withTrackedModal } = params;
           const activeWallet = getAccount(config);
           const chainId = Number(desiredChainID);
           const tracker = TransactionTracker.Ethereum;
@@ -136,6 +137,7 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
             isReplaced: false,
             isProcessing: !!activeWallet,
             error: !activeWallet ? 'Connect your wallet before making a transaction' : '',
+            isTrackedModalOpen: withTrackedModal,
             tx: txInitialParams,
           };
 
