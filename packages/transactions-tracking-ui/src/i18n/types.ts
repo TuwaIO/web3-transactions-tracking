@@ -31,6 +31,25 @@ export type TuwaLabels = {
     replaced: string;
     default: string;
   };
+  txInfo: {
+    started: string;
+    network: string;
+  };
+  txError: {
+    title: string;
+    copied: string;
+  };
+  trackingModal: {
+    title: string;
+    processing: string;
+    close: string;
+    walletInfo: string;
+    progressIndicator: {
+      created: string;
+      processing: string;
+      succeed: string;
+    };
+  };
   actions: {
     copy: string;
     viewOnExplorer: string;

@@ -21,6 +21,8 @@ export const COUNTER_ADDRESS = '0xAe7f46914De82028eCB7E2bF97Feb3D3dDCc2BAB';
 export const TransactionsBlock = () => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
   const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
+  const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
+  const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
 
   const initializeTransactionsPool = useTxTrackingStore((store) => store.initializeTransactionsPool);
   useInitializeTransactionsPool(initializeTransactionsPool);
@@ -74,7 +76,13 @@ export const TransactionsBlock = () => {
         </div>
       </div>
 
-      <TransactionsWidget appChains={appChains} transactionsPool={transactionsPool} walletAddress={account?.address} />
+      <TransactionsWidget
+        appChains={appChains}
+        transactionsPool={transactionsPool}
+        walletAddress={account?.address}
+        trackedTransaction={trackedTransaction}
+        closeTxTrackedModal={closeTxTrackedModal}
+      />
     </div>
   );
 };

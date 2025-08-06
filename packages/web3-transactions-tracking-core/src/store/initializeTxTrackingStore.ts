@@ -88,7 +88,7 @@ export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
             isReplaced: tx?.status === TransactionStatus.Replaced,
             error: tx?.errorMessage ?? '',
             isFailed: !!tx.errorMessage || tx.isError || false,
-            isProcessing: draft.trackedTransaction?.isProcessing || false,
+            isProcessing: (!tx.status && draft.trackedTransaction?.isProcessing) || false,
             tx: draft.trackedTransaction?.tx
               ? ({
                   ...draft.trackedTransaction?.tx,

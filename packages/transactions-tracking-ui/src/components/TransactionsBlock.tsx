@@ -44,6 +44,7 @@ export const TransactionsBlock = () => {
         payload: {
           value: currentCount,
         },
+        withTrackedModal: true,
       },
     });
   };
@@ -55,6 +56,7 @@ export const TransactionsBlock = () => {
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,
+        withTrackedModal: true,
         payload: {
           value: Number(
             await readContract(createViemClient(sepolia.id, appChains) as Client, {

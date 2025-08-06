@@ -210,8 +210,6 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
                       isReplaced: finalTx?.status === TransactionStatus.Replaced,
                       error: finalTx?.errorMessage ?? '',
                       isFailed: !!finalTx.errorMessage || finalTx.isError || false,
-                      initializedOnChain: true,
-                      isProcessing: false,
                       tx: finalTx as Draft<T>,
                     };
                   }),

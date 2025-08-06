@@ -31,7 +31,26 @@ export const defaultLabels: TuwaLabels = {
     safe: 'Safe Tx Hash',
     original: 'Original Tx Hash',
     replaced: 'Replaced Tx Hash',
-    default: 'Transaction Hash',
+    default: 'Tx Hash',
+  },
+  txInfo: {
+    started: 'Started',
+    network: 'Network',
+  },
+  txError: {
+    title: 'Error',
+    copied: 'Copied!',
+  },
+  trackingModal: {
+    title: 'Transaction Overview',
+    processing: 'Processing...',
+    close: 'Close',
+    walletInfo: 'Wallet Info',
+    progressIndicator: {
+      created: 'Created',
+      processing: 'Processing',
+      succeed: 'Succeed',
+    },
   },
   actions: {
     copy: 'Copy address',

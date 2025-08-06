@@ -7,6 +7,8 @@ import { TransactionsWidget } from './TransactionsWidget';
 
 export function Providers() {
   const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
+  const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
+  const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
 
   const [account, setAccount] = useState<GetAccountReturnType | undefined>(undefined);
 
@@ -17,6 +19,12 @@ export function Providers() {
   });
 
   return (
-    <TransactionsWidget appChains={appChains} transactionsPool={transactionsPool} walletAddress={account?.address} />
+    <TransactionsWidget
+      appChains={appChains}
+      transactionsPool={transactionsPool}
+      walletAddress={account?.address}
+      trackedTransaction={trackedTransaction}
+      closeTxTrackedModal={closeTxTrackedModal}
+    />
   );
 }
