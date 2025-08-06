@@ -7,7 +7,7 @@
   "description": "The source code for the official landing page for the TUWA Web3 Transaction Tracking Suite.",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "pnpm --filter \"@tuwa/*\"... build && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },

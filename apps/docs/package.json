@@ -7,7 +7,7 @@
   "description": "The source code for the official documentation website for the TUWA Web3 Transaction Tracking Suite.",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "pnpm --filter \"@tuwa/*\"... build && next build && pnpm postbuild",
+    "build": "next build && pnpm postbuild",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
