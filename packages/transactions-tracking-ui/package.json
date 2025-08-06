@@ -1,12 +1,46 @@
 {
   "name": "@tuwa/transactions-tracking-ui",
-  "description": "A suite of beautiful, pre-styled React components and a dedicated provider to simplify real-time transaction tracking in your dApp.",
   "version": "0.0.1",
+  "private": false,
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
-  "private": false,
+  "description": "A suite of beautiful, pre-styled React components and a dedicated provider to simplify real-time transaction tracking in your dApp.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsup && pnpm exec postcss ./src/styles/app.css -o ./dist/index.css",
+    "ci:publish": "pnpm build && pnpm publish --access=public",
+    "ci:publish:beta": "pnpm build && pnpm publish --tag beta --access=public"
+  },
+  "keywords": [
+    "react",
+    "web3",
+    "hooks",
+    "transaction",
+    "tracking",
+    "ui",
+    "components",
+    "tailwind",
+    "wagmi",
+    "viem"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git",
+    "directory": "packages/transactions-tracking-ui"
+  },
+  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking",
+  "bugs": {
+    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
   },
   "contributors": [
     {
@@ -14,77 +48,51 @@
       "url": "https://github.com/Argeare5"
     }
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git"
-  },
-  "bugs": {
-    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
-  },
-  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint . && prettier --write .",
-    "preview": "vite preview",
-    "tsup-start": "tsup src/index.ts --watch",
-    "tsup-build": "tsup && pnpm exec postcss ./src/styles/app.css -o ./dist/index.css",
-    "ci:publish": "npm run build && npm publish --access=public",
-    "ci:publish:beta": "npm run build && npm publish --tag beta --access=public"
-  },
-  "peerDependencies": {
-    "@bgd-labs/react-web3-icons": "^1.34.0",
-    "@heroicons/react": "^2.2.0",
-    "clsx": "^2.1.1",
-    "react": ">=19",
-    "react-dom": ">=19",
-    "tailwindcss": "^4.1.11",
-    "tailwind-merge": "^3.3.1",
-    "@wagmi/core": "^2.18.1",
-    "dayjs": "^1.11.13",
-    "viem": "^2.33.2",
-    "immer": "^10.1.1",
-    "zustand": "^5.0.7",
-    "react-modal": ">=3"
-  },
   "dependencies": {
     "@tuwa/evm-transactions-tracking": "workspace:^",
     "@tuwa/web3-transactions-tracking-core": "workspace:^",
-    "ethereum-blockies-base64": "^1.0.2",
-    "framer-motion": "^12.23.12",
-    "react-toastify": "^11.0.5"
+    "ethereum-blockies-base64": "^1.0.2"
+  },
+  "peerDependencies": {
+    "@bgd-labs/react-web3-icons": ">=1",
+    "@heroicons/react": ">=2",
+    "clsx": ">=2",
+    "dayjs": ">=1",
+    "framer-motion": ">=12",
+    "immer": ">=10",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "react-modal": ">=3",
+    "react-toastify": ">=11",
+    "tailwind-merge": ">=3",
+    "viem": ">=2",
+    "zustand": ">=5"
   },
   "devDependencies": {
     "@bgd-labs/react-web3-icons": "^1.34.0",
     "@heroicons/react": "^2.2.0",
-    "@gelatonetwork/relay-sdk": "^5.6.0",
-    "@rainbow-me/rainbowkit": "^2.2.8",
-    "@tanstack/react-query": "^5.84.1",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@types/react-modal": "^3.16.3",
-    "@tailwindcss/vite": "^4.1.11",
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.21",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
+    "framer-motion": "^12.23.12",
+    "immer": "^10.1.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-modal": "^3.16.3",
-    "typescript": "~5.9.2",
-    "tsup": "^8.5.0",
-    "vite": "^7.0.6",
-    "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1",
-    "superjson": "^2.2.2",
-    "wagmi": "^2.16.1",
-    "tailwindcss": "^4.1.11",
+    "react-toastify": "^11.0.5",
     "tailwind-merge": "^3.3.1",
-    "clsx": "^2.1.1",
-    "@wagmi/core": "^2.18.1",
-    "dayjs": "^1.11.13",
+    "tailwindcss": "^4.1.11",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.2",
     "viem": "^2.33.2",
-    "immer": "^10.1.1",
+    "vite": "^7.0.6",
     "zustand": "^5.0.7"
   }
 }

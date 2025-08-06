@@ -1,12 +1,43 @@
 {
   "name": "@tuwa/web3-transactions-tracking-core",
-  "description": "The core, framework-agnostic engine for real-time tracking of Web3 transaction lifecycles (pending, success, failed, replaced).",
   "version": "0.0.1",
+  "private": false,
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
-  "private": false,
+  "description": "The core, framework-agnostic engine for real-time tracking of Web3 transaction lifecycles (pending, success, failed, replaced).",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsup src/index.ts --watch",
+    "build": "tsup",
+    "ci:publish": "pnpm build && pnpm publish --access=public",
+    "ci:publish:beta": "pnpm build && pnpm publish --tag beta --access=public"
+  },
+  "keywords": [
+    "web3",
+    "transaction",
+    "tracking",
+    "zustand",
+    "immer",
+    "typescript",
+    "core",
+    "headless"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git",
+    "directory": "packages/web3-transactions-tracking-core"
+  },
+  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking",
+  "bugs": {
+    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
   },
   "contributors": [
     {
@@ -14,28 +45,14 @@
       "url": "https://github.com/Argeare5"
     }
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git"
-  },
-  "bugs": {
-    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
-  },
-  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking",
-  "scripts": {
-    "start": "tsup src/index.ts --watch",
-    "build": "tsup",
-    "ci:publish": "npm run build && npm publish --access=public",
-    "ci:publish:beta": "npm run build && npm publish --tag beta --access=public"
-  },
   "peerDependencies": {
     "immer": "^10.1.1",
     "zustand": "^5.0.7"
   },
   "devDependencies": {
     "immer": "^10.1.1",
-    "typescript": "^5.9.2",
     "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
     "zustand": "^5.0.7"
   }
 }
