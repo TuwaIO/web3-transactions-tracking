@@ -3,50 +3,96 @@ import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { ReactNode } from 'react';
 import { Chain } from 'viem';
 
+import { cn } from '../utils/cn';
 import { StatusAwareText } from './StatusAwareText';
 import { ToastTransactionKey } from './ToastTransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';
 
 dayjs.extend(relativeTime);
 
+type CustomIconProps = { chainId: number };
+type CustomStatusAwareTextProps<TR, T extends Transaction<TR>> = Parameters<typeof StatusAwareText<TR, T>>[0];
+type CustomTimestampProps = { timestamp?: number };
+type CustomStatusBadgeProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionStatusBadge<TR, T>>[0];
+type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof ToastTransactionKey<TR, T>>[0];
+
+export type TransactionHistoryItemCustomization<TR, T extends Transaction<TR>> = {
+  components?: {
+    icon?: (props: CustomIconProps) => ReactNode;
+    title?: (props: CustomStatusAwareTextProps<TR, T>) => ReactNode;
+    description?: (props: CustomStatusAwareTextProps<TR, T>) => ReactNode;
+    timestamp?: (props: CustomTimestampProps) => ReactNode;
+    statusBadge?: (props: CustomStatusBadgeProps<TR, T>) => ReactNode;
+    transactionKey?: (props: CustomTransactionKeyProps<TR, T>) => ReactNode;
+  };
+};
+
 export function TransactionHistoryItem<TR, T extends Transaction<TR>>({
   tx,
   appChains,
   transactionsPool,
+  className,
+  customization,
 }: {
   tx: T;
   appChains: Chain[];
   transactionsPool: TransactionPool<TR, T>;
+  className?: string;
+  customization?: TransactionHistoryItemCustomization<TR, T>;
 }) {
+  const C = customization?.components;
+
   return (
-    <div className="flex flex-col gap-2 border-b border-gray-100 p-3 transition-colors hover:bg-gray-50">
+    <div
+      className={cn(
+        'flex flex-col gap-2 border-b border-[var(--tuwa-border-secondary)] p-3 transition-colors hover:bg-[var(--tuwa-bg-secondary)]',
+        className,
+      )}
+    >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-4">
-          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gray-100">
-            <div className="h-8 w-8 text-gray-500">
-              <Web3Icon chainId={tx.chainId} />
-            </div>
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--tuwa-bg-muted)]">
+            {C?.icon ? (
+              C.icon({ chainId: tx.chainId })
+            ) : (
+              <div className="h-8 w-8 text-[var(--tuwa-text-secondary)]">
+                <Web3Icon chainId={tx.chainId} />
+              </div>
+            )}
           </div>
           <div>
-            <StatusAwareText
-              tx={tx}
-              source={tx.title}
-              fallback={tx.type}
-              baseClasses="text-sm font-semibold text-gray-900"
-              applyColor
-            />
-            <span className="block text-xs text-gray-500 mb-1">
-              {tx.localTimestamp ? dayjs.unix(tx.localTimestamp).fromNow() : '...'}
-            </span>
-            <StatusAwareText tx={tx} source={tx.description} baseClasses="mt-1 text-xs text-gray-500" />
+            {C?.title ? (
+              C.title({ tx, source: tx.title, fallback: tx.type, variant: 'title', applyColor: true })
+            ) : (
+              <StatusAwareText tx={tx} source={tx.title} fallback={tx.type} variant="title" applyColor />
+            )}
+
+            {C?.timestamp ? (
+              C.timestamp({ timestamp: tx.localTimestamp })
+            ) : (
+              <span className="mb-1 block text-xs text-[var(--tuwa-text-secondary)]">
+                {tx.localTimestamp ? dayjs.unix(tx.localTimestamp).fromNow() : '...'}
+              </span>
+            )}
+
+            {C?.description ? (
+              C.description({ tx, source: tx.description, variant: 'description' })
+            ) : (
+              <StatusAwareText tx={tx} source={tx.description} variant="description" />
+            )}
           </div>
         </div>
-        <TransactionStatusBadge tx={tx} />
+        {C?.statusBadge ? C.statusBadge({ tx }) : <TransactionStatusBadge tx={tx} />}
       </div>
 
-      <ToastTransactionKey tx={tx} appChains={appChains} transactionsPool={transactionsPool} variant="history" />
+      {C?.transactionKey ? (
+        C.transactionKey({ tx, appChains, transactionsPool, variant: 'history' })
+      ) : (
+        <ToastTransactionKey tx={tx} appChains={appChains} transactionsPool={transactionsPool} variant="history" />
+      )}
     </div>
   );
 }

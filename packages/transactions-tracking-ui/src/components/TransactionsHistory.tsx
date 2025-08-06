@@ -1,14 +1,30 @@
+import { selectAllTransactionsByActiveWallet } from '@tuwa/web3-transactions-tracking-core/dist/store/transactionsSelectors';
 import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
-import { selectAllTransactionsByActiveWallet } from '@tuwa/web3-transactions-tracking-core/src/store/transactionsSelectors';
+import { ReactNode } from 'react';
 
+import { useLabels } from '../providers/LabelsProvider'; // 1. Импортируем хук
+import { cn } from '../utils/cn';
 import { TransactionHistoryItem } from './TransactionHistoryItem';
 import { WalletInfoModalProps } from './WalletInfoModal/WalletInfoModal';
 
-function HistoryPlaceholder({ title, message }: { title: string; message: string }) {
+type CustomPlaceholderProps = { title: string; message: string };
+type CustomHistoryItemProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionHistoryItem<TR, T>>[0];
+
+export type TransactionsHistoryCustomization<TR, T extends Transaction<TR>> = {
+  classNames?: {
+    listWrapper?: string;
+  };
+  components?: {
+    placeholder?: (props: CustomPlaceholderProps) => ReactNode;
+    historyItem?: (props: CustomHistoryItemProps<TR, T>) => ReactNode;
+  };
+};
+
+function HistoryPlaceholder({ title, message, className }: { title: string; message: string; className?: string }) {
   return (
-    <div className="rounded-lg bg-gray-50 p-8 text-center">
-      <h4 className="font-semibold text-gray-800">{title}</h4>
-      <p className="mt-1 text-sm text-gray-500">{message}</p>
+    <div className={cn('rounded-lg bg-[var(--tuwa-bg-muted)] p-8 text-center', className)}>
+      <h4 className="font-semibold text-[var(--tuwa-text-primary)]">{title}</h4>
+      <p className="mt-1 text-sm text-[var(--tuwa-text-secondary)]">{message}</p>
     </div>
   );
 }
@@ -17,7 +33,16 @@ export function TransactionsHistory<TR, T extends Transaction<TR>>({
   walletAddress,
   transactionsPool,
   appChains,
-}: WalletInfoModalProps<TR, T>) {
+  className,
+  customization,
+}: WalletInfoModalProps<TR, T> & {
+  className?: string;
+  customization?: TransactionsHistoryCustomization<TR, T>;
+}) {
+  const labels = useLabels();
+
+  const C = customization?.components;
+
   const transactionsByWallet = walletAddress
     ? selectAllTransactionsByActiveWallet(transactionsPool, walletAddress)
     : [];
@@ -26,23 +51,47 @@ export function TransactionsHistory<TR, T extends Transaction<TR>>({
     (a, b) => (b.localTimestamp ?? 0) - (a.localTimestamp ?? 0),
   );
 
+  const renderPlaceholder = (title: string, message: string) => {
+    if (C?.placeholder) {
+      return C.placeholder({ title, message });
+    }
+    return <HistoryPlaceholder title={title} message={message} />;
+  };
+
   return (
-    <div className="flex flex-col gap-y-3">
-      <h3 className="text-lg font-bold text-gray-900">Transactions History</h3>
+    <div className={cn('flex flex-col gap-y-3', className)}>
+      <h3 className="text-lg font-bold text-[var(--tuwa-text-primary)]">{labels.walletModal.history.title}</h3>
 
       {!walletAddress ? (
-        <HistoryPlaceholder title="Connect Wallet" message="Please connect your wallet to see your past activity." />
+        renderPlaceholder(
+          labels.walletModal.history.connectWalletTitle,
+          labels.walletModal.history.connectWalletMessage,
+        )
       ) : sortedTransactions.length > 0 ? (
-        <div className="max-h-[400px] overflow-y-auto rounded-lg border border-gray-200 bg-white">
-          {sortedTransactions.map((tx) => (
-            <TransactionHistoryItem tx={tx} key={tx.txKey} transactionsPool={transactionsPool} appChains={appChains} />
-          ))}
+        <div
+          className={cn(
+            'max-h-[400px] overflow-y-auto rounded-lg border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)]',
+            customization?.classNames?.listWrapper,
+          )}
+        >
+          {sortedTransactions.map((tx) =>
+            C?.historyItem ? (
+              C.historyItem({ tx, transactionsPool, appChains })
+            ) : (
+              <TransactionHistoryItem
+                tx={tx}
+                key={tx.txKey}
+                transactionsPool={transactionsPool}
+                appChains={appChains}
+              />
+            ),
+          )}
         </div>
       ) : (
-        <HistoryPlaceholder
-          title="No Transactions Yet"
-          message="Once you interact with the app, your transaction history will appear here."
-        />
+        renderPlaceholder(
+          labels.walletModal.history.noTransactionsTitle,
+          labels.walletModal.history.noTransactionsMessage,
+        )
       )}
     </div>
   );

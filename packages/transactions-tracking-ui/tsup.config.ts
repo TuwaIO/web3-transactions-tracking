@@ -8,8 +8,10 @@ export default defineConfig([
     entry: [
       './src/components/**/**.tsx',
       './src/providers/TransactionsWidget.tsx',
+      './src/providers/LabelsProvider.tsx',
       './src/utils/**.ts',
       './src/hooks/useCopyToClipboard.ts',
+      './src/i18n/**.ts',
     ],
     treeshake: true,
     sourcemap: true,

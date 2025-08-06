@@ -1,14 +1,17 @@
-// темный режим стили для всего проекта
-
+import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/dist/store/initializeTxTrackingStore';
 import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
-import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { toast, ToastContainer, ToastContainerProps, ToastContentProps, TypeOptions } from 'react-toastify';
 import { Chain } from 'viem';
 
+import { ToastCloseButton } from '../components/ToastCloseButton';
 import { ToastTransaction } from '../components/ToastTransaction';
 import { WalletInfoModal, WalletInfoModalProps } from '../components/WalletInfoModal/WalletInfoModal';
+import { defaultLabels } from '../i18n/en';
+import { TuwaLabels } from '../i18n/types';
+import { deepMerge } from '../utils/deepMerge';
+import { LabelsProvider } from './LabelsProvider';
 
 if (typeof document !== 'undefined') {
   document.body.setAttribute('id', 'tuwa-transactions-widget');
@@ -37,14 +40,18 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
   appChains,
   renderToast,
   withoutWalletInfo,
+  labels,
   ...toastProps
 }: {
   withoutWalletInfo?: boolean;
   renderToast?: (props: CustomToastComponentProps<TR, T>) => ReactNode;
+  labels?: Partial<TuwaLabels>;
 } & WalletInfoModalProps<TR, T> &
   ToastContainerProps) {
   const prevTransactionsRef = useRef<TransactionPool<TR, T>>(transactionsPool);
   const [isWalletInfoModalOpen, setIsWalletInfoModalOpen] = useState(false);
+
+  const mergedLabels = deepMerge(defaultLabels, labels || {});
 
   useEffect(() => {
     const showOrUpdateToast = (tx: T, type: TypeOptions) => {
@@ -91,13 +98,15 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
   }, [transactionsPool, appChains, renderToast]);
 
   return (
-    <>
+    <LabelsProvider labels={mergedLabels}>
       <ToastContainer
         position="bottom-right"
         stacked
         autoClose={false}
         closeOnClick={false}
         icon={false}
+        closeButton={ToastCloseButton}
+        toastClassName="!p-0 !bg-transparent !shadow-none"
         {...toastProps}
       />
       {!withoutWalletInfo && (
@@ -109,6 +118,6 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
           setIsOpen={setIsWalletInfoModalOpen}
         />
       )}
-    </>
+    </LabelsProvider>
   );
 }
