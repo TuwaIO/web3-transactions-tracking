@@ -8,8 +8,8 @@
   "description": "Reliably track the lifecycle of web3 transactions with this intuitive package. Get real-time insights into on-chain processes with ease.",
   "scripts": {
     "build:packages": "pnpm --filter \"./packages/**\" build",
-    "build:docs": "pnpm build:packages && pnpm --filter @tuwa/web3-txs-tracking-docs build",
-    "build:main": "pnpm build:packages && pnpm --filter @tuwa/web3-txs-tracking-site build",
+    "build:docs": "pnpm build:packages && pnpm --filter @tuwa/web3-txs-tracking-docs build && ls -R",
+    "build:main": "pnpm build:packages && pnpm --filter @tuwa/web3-txs-tracking-site build && ls -R",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."
   },
