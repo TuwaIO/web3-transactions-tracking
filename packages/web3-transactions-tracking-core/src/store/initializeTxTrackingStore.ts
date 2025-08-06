@@ -23,6 +23,7 @@ export type IInitializeTxTrackingStore<TR, T extends Transaction<TR>> = {
 
   transactionsPool: TransactionPool<TR, T>;
 
+  lastAddedTxKey?: string;
   trackedTransaction?: {
     initializedOnChain: boolean;
     isFailed: boolean;
@@ -41,6 +42,7 @@ export type IInitializeTxTrackingStore<TR, T extends Transaction<TR>> = {
 
   openTxTrackedModal: () => void;
   closeTxTrackedModal: () => void;
+  getLastTxKey: () => string | undefined;
 };
 
 export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
@@ -61,6 +63,7 @@ export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
               ...tx,
               pending: true,
             } as Draft<T>;
+            draft.lastAddedTxKey = tx.txKey;
           }
         }),
       );
@@ -134,6 +137,9 @@ export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
           }
         }),
       );
+    },
+    getLastTxKey: () => {
+      return get().lastAddedTxKey;
     },
   });
 }

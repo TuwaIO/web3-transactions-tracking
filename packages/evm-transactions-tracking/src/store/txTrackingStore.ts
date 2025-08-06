@@ -103,7 +103,7 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
                 };
               }),
             );
-            console.error('TX error: ', errorMessage);
+            throw new Error(`TX error: ${errorMessage}`);
           };
 
           try {
@@ -148,6 +148,7 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
                   produce(state, (draft) => {
                     draft.trackedTransaction = {
                       ...trackingTxInitialParams,
+                      isTrackedModalOpen: draft.trackedTransaction?.isTrackedModalOpen ?? false,
                       isSucceed: finalTx?.status === TransactionStatus.Success,
                       isReplaced: finalTx?.status === TransactionStatus.Replaced,
                       error: finalTx?.errorMessage ?? '',

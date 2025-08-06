@@ -14,9 +14,12 @@ import { COUNTER_ADDRESS } from '../constants';
 import { useTxTrackingStore } from '../hooks/txTrackingHooks';
 import { TxAction, txActions } from '../transactions/actions';
 import { TxType } from '../transactions/onSucceedCallbacks';
+import { TxActionButton } from './TxActionButton';
 
 export const TransactionsBlock = () => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
+  const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
+  const getLastTxKey = useTxTrackingStore((state) => state.getLastTxKey);
 
   const handleIncrement = async () => {
     const currentCount = Number(
@@ -87,13 +90,16 @@ export const TransactionsBlock = () => {
       <div>
         <h2>Transactions</h2>
 
-        <button type="button" onClick={handleIncrement}>
+        <TxActionButton action={handleIncrement} trackedTransaction={trackedTransaction} getLastTxKey={getLastTxKey}>
           Increment TX
-        </button>
-
-        <button type="button" onClick={handleIncrementGelato}>
+        </TxActionButton>
+        <TxActionButton
+          action={handleIncrementGelato}
+          trackedTransaction={trackedTransaction}
+          getLastTxKey={getLastTxKey}
+        >
           Increment TX GELATO
-        </button>
+        </TxActionButton>
       </div>
     </div>
   );

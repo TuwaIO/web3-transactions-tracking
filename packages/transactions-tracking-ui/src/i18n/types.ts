@@ -51,6 +51,11 @@ export type TuwaLabels = {
       succeed: string;
     };
   };
+  trackedTxButton: {
+    loading: string;
+    succeed: string;
+    failed: string;
+  };
   actions: {
     copy: string;
     viewOnExplorer: string;

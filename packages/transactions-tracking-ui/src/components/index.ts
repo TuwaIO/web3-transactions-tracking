@@ -7,4 +7,5 @@ export * from './TrackingTxModal';
 export * from './TransactionHistoryItem';
 export * from './TransactionsHistory';
 export * from './TransactionStatusBadge';
+export * from './TxActionButton';
 export * from './WalletInfoModal';

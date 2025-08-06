@@ -53,6 +53,11 @@ export const defaultLabels: TuwaLabels = {
       succeed: 'Succeed',
     },
   },
+  trackedTxButton: {
+    loading: 'Processing...',
+    succeed: 'Success',
+    failed: 'Failed',
+  },
   actions: {
     copy: 'Copy address',
     viewOnExplorer: 'View on explorer',

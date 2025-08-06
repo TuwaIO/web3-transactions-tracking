@@ -4,6 +4,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/dist';
 import { createViemClient } from '@tuwa/evm-transactions-tracking/dist';
 import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers/TransactionsWidget';
+import { TxActionButton } from '@tuwa/transactions-tracking-ui/src/components';
 import { GetAccountReturnType, watchAccount } from '@wagmi/core';
 import { useEffect, useState } from 'react';
 import { Client } from 'viem';
@@ -24,6 +25,7 @@ export const TransactionsBlock = () => {
   const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
   const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
   const initializeTransactionsPool = useTxTrackingStore((store) => store.initializeTransactionsPool);
+  const getLastTxKey = useTxTrackingStore((store) => store.getLastTxKey);
 
   const [currentCount, setCurrentCount] = useState(0);
   const [account, setAccount] = useState<GetAccountReturnType | undefined>(undefined);
@@ -98,13 +100,16 @@ export const TransactionsBlock = () => {
         <div className="mt-4">Current count: {currentCount}</div>
 
         <div>
-          <button type="button" onClick={handleIncrement}>
+          <TxActionButton action={handleIncrement} getLastTxKey={getLastTxKey} trackedTransaction={trackedTransaction}>
             Increment TX
-          </button>
-
-          <button type="button" onClick={handleIncrementGelato}>
-            Increment TX GELATO
-          </button>
+          </TxActionButton>
+          <TxActionButton
+            action={handleIncrementGelato}
+            getLastTxKey={getLastTxKey}
+            trackedTransaction={trackedTransaction}
+          >
+            Increment TX via GELATO
+          </TxActionButton>
         </div>
       </div>
 

@@ -1,8 +1,8 @@
 # @tuwa/transactions-tracking-ui
 
-This package provides a suite of beautiful, pre-styled React components designed to work seamlessly with the TUWA Web3 transaction tracking ecosystem. Built with **Tailwind CSS** and **`react-toastify`**, these components offer a plug-and-play solution for providing users with real-time feedback on their transaction status.
+This package provides a suite of beautiful, pre-styled React components designed to work seamlessly with the TUWA Web3 transaction tracking ecosystem. Built with **Tailwind CSS**, this library offers a plug-and-play solution for providing users with real-time feedback on their transaction status.
 
-Simply wrap your application with our provider, and you'll get instant, informative toast notifications for all tracked user transactions.
+The suite includes automated toast notifications, a detailed wallet history modal, a real-time tracking modal for active transactions, and a smart button that handles transaction states automatically.
 
 *(A GIF demonstrating the toast notifications and modal window would look great here)*
 
@@ -36,70 +36,114 @@ bun add @tuwa/transactions-tracking-ui
 
 ### Peer Dependencies
 
-This package requires you to have the following packages installed in your project:
+This package requires you to have the following packages installed in your project: `react`, `react-dom`, `react-toastify`, `react-modal`, `framer-motion`, `tailwindcss`, and the other `@tuwa` core packages.
 
-* `react`
-* `react-dom`
-* `tailwindcss`
-* `react-toastify`
+## Key Features
 
-You must also have `@tuwa/web3-transactions-tracking-core` and `@tuwa/evm-transactions-tracking` installed and configured.
-
-## Key Components
-
-* **`TransactionsWidget`**: The main component that wraps your application. It orchestrates the tracking logic from the core packages and provides the context for all UI components.
-* **`ToastTransaction`**: The default component rendered inside `react-toastify` notifications, displaying transaction details, status, and actions.
-* **`WalletInfoModal`**: A modal window that displays detailed information about a wallet, including its address, ENS name, and transaction history.
+* **Automated UI:** The main `<TransactionsWidget />` component automatically handles the display of toast notifications and modals based on the state from the core store.
+* **Comprehensive Components:** Includes a `ToastTransaction` notification, a `TrackingTxModal` for in-progress transactions, and a `WalletInfoModal` with detailed history.
+* **Smart Action Button:** The `<TxActionButton />` is a stateful button that shows loading, success, and error states automatically when you pass it a transaction-triggering function.
+* **Theming & Dark Mode:** All components are styled with a theming system using CSS variables, with out-of-the-box support for dark mode.
+* **Full Customization:** A powerful `customization` prop allows you to override styles or completely replace any component with your own implementation ("slots").
+* **Localization:** All user-facing text can be easily changed or translated by passing a `labels` object.
 
 ## Getting Started
 
-To get started, wrap your root application component with the `TransactionsWidget`.
+Place the `<TransactionsWidget />` component in your main application layout. It is a self-contained component and does not wrap your app.
 
 ```jsx
-// In your _app.tsx or main layout file
+// In your main layout file, e.g., Providers.tsx
 
-import { TransactionsWidget } from '@tuwa/transactions-tracking-ui'; // Corrected import
-import { txTrackingStore } from '@tuwa/web3-transactions-tracking-core';
-import { mainnet, polygon } from 'viem/chains';
+import { TransactionsWidget } from '@tuwa/transactions-tracking-ui';
+import { useTxTrackingStore } from '../hooks/txTrackingHooks'; // Your app's hook
+import { txActions } from '../transactions/actions'; // Your app's action registry
+import { appChains, config } from '../configs/wagmiConfig';
 import { useAccount } from 'wagmi';
 
-// Assume you have initialized the EVM tracker elsewhere in your app
-
-function MyApp({ Component, pageProps }) {
-  // Get the live data from your store and wallet connection
-  const transactionsPool = txTrackingStore((state) => state.transactionsPool); // Using your version
+export function Providers({ children }) {
+  // 1. Get all necessary state and functions from your Zustand store
+  const {
+    transactionsPool,
+    trackedTransaction,
+    closeTxTrackedModal,
+    handleTransaction,
+  } = useTxTrackingStore((state) => ({
+    transactionsPool: state.transactionsPool,
+    trackedTransaction: state.trackedTransaction,
+    closeTxTrackedModal: state.closeTxTrackedModal,
+    handleTransaction: state.handleTransaction,
+  }));
+  
   const { address } = useAccount();
 
   return (
-    <TransactionsWidget
-      transactionsPool={transactionsPool}
-      walletAddress={address}
-      appChains={[mainnet, polygon]}
-    >
-      {/* Your application goes here */}
-      <Component {...pageProps} />
-    </TransactionsWidget>
+    <>
+      {children}
+      
+      {/* 2. Render the widget and pass all required props */}
+      <TransactionsWidget
+        transactionsPool={transactionsPool}
+        trackedTransaction={trackedTransaction}
+        closeTxTrackedModal={closeTxTrackedModal}
+        handleTransaction={handleTransaction}
+        actions={txActions}
+        walletAddress={address}
+        appChains={appChains}
+        config={config}
+      />
+    </>
   );
 }
-
-export default MyApp;
 ```
 
-Once the widget is in place, it will automatically listen for transaction updates from the core store and display notifications.
+## Advanced Customization
 
-## Customization
+The `<TransactionsWidget />` offers powerful customization through three main props: `features`, `labels`, and `customization`.
 
-For maximum flexibility, the `TransactionsWidget` accepts a `renderToast` prop. This allows you to completely replace the default notification component with your own custom React component to perfectly match your dApp's branding.
+### `features`
+
+Control which UI elements are enabled.
 
 ```jsx
-const MyCustomToast = ({ tx }) => <div>Custom view for {tx.txKey}</div>;
-
 <TransactionsWidget
-  // ...other props
-  renderToast={(props) => <MyCustomToast {...props} />}
->
-  <YourApp />
-</TransactionsWidget>
+  features={{
+    toasts: true,         // Show toast notifications
+    trackingTxModal: true, // Show the real-time tracking modal
+    walletInfoModal: true, // Enable the wallet info modal
+  }}
+  // ... other props
+/>
+```
+
+### `labels`
+
+Provide your own text for localization or branding.
+
+```jsx
+const myLabels = {
+  trackingModal: {
+    title: 'Transaction in Progress',
+    close: 'Done',
+  },
+};
+
+<TransactionsWidget labels={myLabels} /* ... */ />
+```
+
+### `customization`
+
+Replace default components with your own using render props ("slots").
+
+```jsx
+const myCustomizations = {
+  trackingTxModal: {
+    components: {
+      header: ({ tx }) => <div>Tracking: {tx.title}</div>,
+    },
+  },
+};
+
+<TransactionsWidget customization={myCustomizations} /* ... */ />
 ```
 
 ## Copyright
@@ -108,4 +152,4 @@ const MyCustomToast = ({ tx }) => <div>Custom view for {tx.txKey}</div>;
 
 ## License
 
-[Apache License 2.0](https://www.google.com/search?q=./LICENSE)
+[Apache License 2.0](./LICENSE)
