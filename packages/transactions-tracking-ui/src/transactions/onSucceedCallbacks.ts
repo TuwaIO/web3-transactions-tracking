@@ -1,5 +1,5 @@
-import { TransactionTracker } from '@tuwa/evm-transactions-tracking/dist/types';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { TransactionTracker } from '@tuwa/evm-transactions-tracking/dist';
+import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
 
 export enum TxType {
   increment = 'increment',

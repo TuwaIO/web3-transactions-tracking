@@ -1,20 +1,30 @@
 import {
   IInitializeTxTrackingStore,
+  Transaction,
   TransactionPool,
-} from '@tuwa/web3-transactions-tracking-core/dist/store/initializeTxTrackingStore';
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
+  TransactionStatus,
+} from '@tuwa/web3-transactions-tracking-core/dist';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import Modal from 'react-modal';
 import { toast, ToastContainer, ToastContainerProps, ToastContentProps, TypeOptions } from 'react-toastify';
-import { Chain } from 'viem';
 
 import { ToastCloseButton } from '../components/ToastCloseButton';
 import { ToastTransaction, ToastTransactionCustomization } from '../components/ToastTransaction';
-import { TrackingTxModal, TrackingTxModalCustomization } from '../components/TrackingTxModal/TrackingTxModal';
+import {
+  TrackingTxModal,
+  TrackingTxModalCustomization,
+  TrackingTxModalProps,
+} from '../components/TrackingTxModal/TrackingTxModal';
 import { WalletInfoModal, WalletInfoModalCustomization } from '../components/WalletInfoModal/WalletInfoModal';
 import { defaultLabels } from '../i18n/en';
 import { TuwaLabels } from '../i18n/types';
 import { deepMerge } from '../utils/deepMerge';
 import { LabelsProvider } from './LabelsProvider';
+
+if (typeof document !== 'undefined') {
+  document.body.setAttribute('id', 'tuwa-transactions-widget');
+  Modal.setAppElement('#tuwa-transactions-widget');
+}
 
 const STATUS_TO_TOAST_TYPE: Record<string, TypeOptions> = {
   [TransactionStatus.Success]: 'success',
@@ -32,9 +42,11 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
   features,
   customization,
   closeTxTrackedModal,
+  actions,
+  config,
+  handleTransaction,
   ...toastProps
 }: {
-  appChains: Chain[];
   labels?: Partial<TuwaLabels>;
   features?: {
     toasts?: boolean;
@@ -47,8 +59,9 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
     trackingTxModal?: TrackingTxModalCustomization<TR, T>;
   };
   walletAddress?: string;
-} & Pick<IInitializeTxTrackingStore<TR, T>, 'trackedTransaction' | 'transactionsPool' | 'closeTxTrackedModal'> &
-  ToastContainerProps) {
+} & Pick<IInitializeTxTrackingStore<TR, T>, 'transactionsPool' | 'closeTxTrackedModal'> &
+  ToastContainerProps &
+  Pick<TrackingTxModalProps<TR, T>, 'handleTransaction' | 'actions' | 'trackedTransaction' | 'config' | 'appChains'>) {
   const [isWalletInfoModalOpen, setIsWalletInfoModalOpen] = useState(false);
   const prevTransactionsRef = useRef<TransactionPool<TR, T>>(transactionsPool);
 
@@ -138,6 +151,9 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
           appChains={appChains}
           transactionsPool={transactionsPool}
           customization={customization?.trackingTxModal}
+          actions={actions}
+          config={config}
+          handleTransaction={handleTransaction}
         />
       )}
     </LabelsProvider>

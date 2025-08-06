@@ -1,8 +1,9 @@
 import {
-  IInitializeTxTrackingStore,
   initializeTxTrackingStore,
-} from '@tuwa/web3-transactions-tracking-core/dist/store/initializeTxTrackingStore';
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
+  ITxTrackingStore,
+  Transaction,
+  TransactionStatus,
+} from '@tuwa/web3-transactions-tracking-core/dist';
 import { Config, getAccount } from '@wagmi/core';
 import dayjs from 'dayjs';
 import { Draft, produce } from 'immer';
@@ -14,66 +15,6 @@ import { ActionTxKey, TransactionTracker } from '../types';
 import { checkAndInitializeTrackerInStore } from '../utils/checkAndInitializeTrackerInStore';
 import { checkChainForTx } from '../utils/checkChainForTx';
 import { checkTransactionsTracker } from '../utils/checkTransactionsTracker';
-
-/**
- * Represents a store interface for tracking transactions within a specific context utilizing the `Transaction` and `TransactionTracker` types.
- *
- * @template T - A type that extends `Transaction<TransactionTracker>`.
- *
- * @extends IInitializeTxTrackingStore
- *
- * @property {Function} initializeTransactionsPool - Initializes the transaction pool asynchronously, ensuring it is set up correctly.
- *
- * @property {Object} [trackedTransaction] - An optional object representing the currently tracked transaction with relevant metadata.
- * @property {boolean} trackedTransaction.initializedOnChain - Indicates whether the transaction has been initialized on the blockchain.
- * @property {boolean} trackedTransaction.isFailed - Indicates if the transaction has failed.
- * @property {boolean} trackedTransaction.isSucceed - Indicates if the transaction has succeeded.
- * @property {boolean} trackedTransaction.isReplaced - Indicates if the transaction has been replaced.
- * @property {boolean} trackedTransaction.isProcessing - Indicates if the transaction is currently being processed.
- * @property {string} trackedTransaction.error - Describes any error associated with the transaction.
- * @property {T} [trackedTransaction.tx] - The transaction object, if available.
- *
- * @property {Function} handleTransaction - Handles the execution of a specific transaction with provided parameters and configuration.
- * @param {Object} params - Parameters for handling the transaction.
- * @param {Config} params.config - Configuration object for the transaction.
- * @param {Function} params.actionFunction - Asynchronous action function responsible for performing the transaction and potentially returning a transaction key.
- * @param {Object} params.params - Details related to the transaction being handled.
- * @param {T['type']} params.params.type - The type of transaction being executed.
- * @param {number} params.params.desiredChainID - The desired blockchain chain ID for the transaction.
- * @param {T['payload']} [params.params.payload] - Optional payload associated with the transaction.
- * @param {T['title']} [params.params.title] - Optional title for the transaction.
- * @param {T['description']} [params.params.description] - Optional description for the transaction.
- *
- * @returns {Promise<void>} Resolves once the transaction handling completes.
- */
-export type ITxTrackingStore<T extends Transaction<TransactionTracker>> = IInitializeTxTrackingStore<
-  TransactionTracker,
-  T
-> & {
-  initializeTransactionsPool: () => Promise<void>;
-
-  trackedTransaction?: {
-    initializedOnChain: boolean;
-    isFailed: boolean;
-    isSucceed: boolean;
-    isReplaced: boolean;
-    isProcessing: boolean;
-    error: string;
-    tx?: T;
-  };
-  handleTransaction: (params: {
-    config: Config;
-    actionFunction: () => Promise<ActionTxKey | undefined>;
-    params: {
-      type: T['type'];
-      desiredChainID: number;
-      payload?: T['payload'];
-      title?: T['title'];
-      description?: T['description'];
-      withTrackedModal?: boolean;
-    };
-  }) => Promise<void>;
-};
 
 /**
  * Creates a transaction tracking store with provided configurations.
@@ -90,8 +31,8 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
 }: {
   appChains: Chain[];
   onSucceedCallbacks?(tx: unknown): Promise<void>;
-} & PersistOptions<ITxTrackingStore<T>>) {
-  return createStore<ITxTrackingStore<T>>()(
+} & PersistOptions<ITxTrackingStore<TransactionTracker, T, Config, ActionTxKey>>) {
+  return createStore<ITxTrackingStore<TransactionTracker, T, Config, ActionTxKey>>()(
     persist(
       (set, get) => ({
         ...initializeTxTrackingStore<TransactionTracker, T>({ onSucceedCallbacks })(set, get),
@@ -107,7 +48,7 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
         },
 
         handleTransaction: async ({ actionFunction, params, config }) => {
-          const { desiredChainID, payload, type, title, description, withTrackedModal } = params;
+          const { desiredChainID, payload, type, title, description, withTrackedModal, actionKey } = params;
           const activeWallet = getAccount(config);
           const chainId = Number(desiredChainID);
           const tracker = TransactionTracker.Ethereum;
@@ -128,6 +69,7 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
             pending: false,
             title,
             description,
+            actionKey,
           } as Draft<T>;
 
           const trackingTxInitialParams = {
@@ -210,6 +152,8 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
                       isReplaced: finalTx?.status === TransactionStatus.Replaced,
                       error: finalTx?.errorMessage ?? '',
                       isFailed: !!finalTx.errorMessage || finalTx.isError || false,
+                      initializedOnChain: !!finalTx?.status,
+                      isProcessing: !finalTx?.status,
                       tx: finalTx as Draft<T>,
                     };
                   }),

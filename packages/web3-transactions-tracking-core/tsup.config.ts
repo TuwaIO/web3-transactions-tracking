@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig([
   {
     format: ['cjs', 'esm'],
-    entry: ['./src/store/**.ts', './src/utils/**.ts', './src/types.ts'],
+    entry: ['./src/index.ts'],
     treeshake: true,
     sourcemap: true,
     minify: true,

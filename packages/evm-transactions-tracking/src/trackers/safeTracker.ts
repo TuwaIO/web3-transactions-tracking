@@ -1,13 +1,15 @@
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
 import {
   InitializePollingTracker,
   initializePollingTracker,
-} from '@tuwa/web3-transactions-tracking-core/dist/utils/initializePollingTracker';
+  ITxTrackingStore,
+  Transaction,
+  TransactionStatus,
+} from '@tuwa/web3-transactions-tracking-core/dist';
+import { Config } from '@wagmi/core';
 import dayjs from 'dayjs';
 import { Hex, isHex, zeroHash } from 'viem';
 
-import { ITxTrackingStore } from '../store/txTrackingStore';
-import { TransactionTracker } from '../types';
+import { ActionTxKey, TransactionTracker } from '../types';
 import { SafeTransactionServiceUrls } from '../utils/safeConstants';
 
 type InitialSafeTx = Pick<Transaction<TransactionTracker>, 'txKey' | 'chainId' | 'from'> & {
@@ -156,7 +158,10 @@ export async function safeTrackerForStore<T extends Transaction<TransactionTrack
   updateTxParams,
   onSucceedCallbacks,
   removeTxFromPool,
-}: Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks' | 'removeTxFromPool'> & {
+}: Pick<
+  ITxTrackingStore<TransactionTracker, T, Config, ActionTxKey>,
+  'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks' | 'removeTxFromPool'
+> & {
   tx: T;
 }) {
   return await safeTracker({

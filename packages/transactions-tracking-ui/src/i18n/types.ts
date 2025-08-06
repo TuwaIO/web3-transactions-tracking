@@ -44,6 +44,7 @@ export type TuwaLabels = {
     processing: string;
     close: string;
     walletInfo: string;
+    retry: string;
     progressIndicator: {
       created: string;
       processing: string;

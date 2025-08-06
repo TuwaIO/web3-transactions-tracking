@@ -29,20 +29,30 @@
     "ci:publish:beta": "npm run build && npm publish --tag beta --access=public",
     "test": "vitest"
   },
-  "dependencies": {
-    "@tuwa/web3-transactions-tracking-core": "workspace:^",
+  "peerDependencies": {
     "@wagmi/core": "^2.18.1",
     "dayjs": "^1.11.13",
-    "immer": "^10.1.1",
+    "react": ">=19",
+    "react-dom": ">=19",
     "viem": "^2.33.2",
+    "immer": "^10.1.1",
     "zustand": "^5.0.7"
+  },
+  "dependencies": {
+    "@tuwa/web3-transactions-tracking-core": "workspace:^"
   },
   "devDependencies": {
     "@types/react": "^19.1.9",
     "typescript": "^5.9.2",
     "tsup": "^8.5.0",
     "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "vitest": "^3.2.4",
-    "jsdom": "^26.1.0"
+    "jsdom": "^26.1.0",
+    "@wagmi/core": "^2.18.1",
+    "dayjs": "^1.11.13",
+    "viem": "^2.33.2",
+    "immer": "^10.1.1",
+    "zustand": "^5.0.7"
   }
 }

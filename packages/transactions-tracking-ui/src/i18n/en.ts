@@ -46,6 +46,7 @@ export const defaultLabels: TuwaLabels = {
     processing: 'Processing...',
     close: 'Close',
     walletInfo: 'Wallet Info',
+    retry: 'Retry',
     progressIndicator: {
       created: 'Created',
       processing: 'Processing',

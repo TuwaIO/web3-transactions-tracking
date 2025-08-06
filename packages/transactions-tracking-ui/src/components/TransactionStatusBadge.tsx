@@ -1,5 +1,5 @@
 import { ArrowPathIcon, CheckCircleIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/solid';
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist';
 
 import { useLabels } from '../providers/LabelsProvider';
 import { cn } from '../utils/cn';

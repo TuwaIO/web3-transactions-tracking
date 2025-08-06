@@ -1,8 +1,7 @@
-import { selectAllTransactionsByActiveWallet } from '@tuwa/web3-transactions-tracking-core/dist/store/transactionsSelectors';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { selectAllTransactionsByActiveWallet, Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
 import { ReactNode } from 'react';
 
-import { useLabels } from '../providers/LabelsProvider'; // 1. Импортируем хук
+import { useLabels } from '../providers/LabelsProvider';
 import { cn } from '../utils/cn';
 import { TransactionHistoryItem } from './TransactionHistoryItem';
 import { WalletInfoModalProps } from './WalletInfoModal/WalletInfoModal';

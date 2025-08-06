@@ -1,5 +1,7 @@
 import { StoreApi } from 'zustand';
 
+import { IInitializeTxTrackingStore } from './store/initializeTxTrackingStore';
+
 export type StoreSlice<T extends object, E extends object = T> = (
   set: StoreApi<E extends T ? E : E & T>['setState'],
   get: StoreApi<E extends T ? E : E & T>['getState'],
@@ -62,4 +64,32 @@ export type Transaction<T> = {
   nonce?: number;
   title?: string | [string, string, string, string];
   description?: string | [string, string, string, string];
+  actionKey?: string;
+};
+
+export type ITxTrackingStore<TR, T extends Transaction<TR>, C, A> = IInitializeTxTrackingStore<TR, T> & {
+  initializeTransactionsPool: () => Promise<void>;
+
+  trackedTransaction?: {
+    initializedOnChain: boolean;
+    isFailed: boolean;
+    isSucceed: boolean;
+    isReplaced: boolean;
+    isProcessing: boolean;
+    error: string;
+    tx?: T;
+  };
+  handleTransaction: (params: {
+    config: C;
+    actionFunction: () => Promise<A | undefined>;
+    params: {
+      type: T['type'];
+      desiredChainID: number;
+      payload?: T['payload'];
+      title?: T['title'];
+      description?: T['description'];
+      withTrackedModal?: boolean;
+      actionKey?: string;
+    };
+  }) => Promise<void>;
 };

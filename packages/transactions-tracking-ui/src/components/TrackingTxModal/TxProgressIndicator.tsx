@@ -75,7 +75,7 @@ export interface TxProgressIndicatorProps {
   isFailed?: boolean;
   isReplaced?: boolean;
   className?: string;
-  renderStep?: (props: StepProps & { key: number }) => ReactNode;
+  renderStep?: (props: StepProps) => ReactNode;
 }
 
 export function TxProgressIndicator({
@@ -108,8 +108,7 @@ export function TxProgressIndicator({
   if (isReplaced) finalStepLabel = labels.statuses.replaced;
 
   const renderStepComponent = (stepNum: number, isFirst = false, isLast = false) => {
-    const props: StepProps & { key: number } = {
-      key: stepNum,
+    const props: StepProps = {
       status: getStatus(stepNum),
       label:
         stepNum === 1
@@ -120,7 +119,7 @@ export function TxProgressIndicator({
       isFirst,
       isLast,
     };
-    return renderStep ? renderStep(props) : <Step {...props} />;
+    return renderStep ? renderStep(props) : <Step key={stepNum} {...props} />;
   };
 
   return (

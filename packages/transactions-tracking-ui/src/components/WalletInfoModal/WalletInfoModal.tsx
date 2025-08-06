@@ -1,6 +1,5 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/dist/store/initializeTxTrackingStore';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { Transaction, TransactionPool } from '@tuwa/web3-transactions-tracking-core/dist';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
 import { ReactNode } from 'react';
 import Modal from 'react-modal';
@@ -62,7 +61,12 @@ export function WalletInfoModal<TR, T extends Transaction<TR>>({
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          onRequestClose={() => setIsOpen(false)}
+          onRequestClose={() => {
+            setIsOpen(false);
+            if (typeof document !== 'undefined') {
+              document.body.classList.remove('tuwa-tx-tracking-wallet-info-modal-open');
+            }
+          }}
           overlayClassName="fixed inset-0 bg-black/45 flex items-center justify-center p-2 z-50"
           className="relative w-full max-w-2xl outline-none"
           shouldCloseOnOverlayClick

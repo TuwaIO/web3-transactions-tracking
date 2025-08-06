@@ -1,4 +1,5 @@
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { ITxTrackingStore, Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist';
+import { Config } from '@wagmi/core';
 import {
   Chain,
   Client,
@@ -11,8 +12,7 @@ import {
 } from 'viem';
 import { getBlock, getTransaction, waitForTransactionReceipt } from 'viem/actions';
 
-import { ITxTrackingStore } from '../store/txTrackingStore';
-import { TransactionTracker } from '../types';
+import { ActionTxKey, TransactionTracker } from '../types';
 import { createViemClient } from '../utils/createViemClient';
 
 export type EVMTrackerParams = {
@@ -111,7 +111,10 @@ export async function evmTrackerForStore<T extends Transaction<TransactionTracke
   updateTxParams,
   onSucceedCallbacks,
 }: Pick<EVMTrackerParams, 'chains'> &
-  Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks'> & {
+  Pick<
+    ITxTrackingStore<TransactionTracker, T, Config, ActionTxKey>,
+    'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks'
+  > & {
     tx: T;
   }) {
   return await evmTracker({

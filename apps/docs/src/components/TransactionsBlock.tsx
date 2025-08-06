@@ -1,9 +1,9 @@
 'use client';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { createViemClient } from '@tuwa/evm-transactions-tracking/dist/utils/createViemClient';
-import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool';
-import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/src/providers/TransactionsWidget';
+import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/dist';
+import { createViemClient } from '@tuwa/evm-transactions-tracking/dist';
+import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers/TransactionsWidget';
 import { GetAccountReturnType, watchAccount } from '@wagmi/core';
 import { useEffect, useState } from 'react';
 import { Client } from 'viem';
@@ -13,7 +13,7 @@ import { sepolia } from 'viem/chains';
 import { CounterAbi } from '@/abis/CounterAbi';
 import { appChains, config } from '@/configs/wagmiConfig';
 import { useTxTrackingStore } from '@/hooks/txTrackingHooks';
-import { increment } from '@/transactions/actions/increment';
+import { TxAction, txActions } from '@/transactions/actions';
 import { TxType } from '@/transactions/onSucceedCallbacks';
 
 export const COUNTER_ADDRESS = '0xAe7f46914De82028eCB7E2bF97Feb3D3dDCc2BAB';
@@ -23,9 +23,7 @@ export const TransactionsBlock = () => {
   const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
   const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
   const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
-
   const initializeTransactionsPool = useTxTrackingStore((store) => store.initializeTransactionsPool);
-  useInitializeTransactionsPool(initializeTransactionsPool);
 
   const [currentCount, setCurrentCount] = useState(0);
   const [account, setAccount] = useState<GetAccountReturnType | undefined>(undefined);
@@ -44,16 +42,50 @@ export const TransactionsBlock = () => {
     }).then((count) => setCurrentCount(Number(count)));
   }, []);
 
+  useInitializeTransactionsPool(initializeTransactionsPool);
+
   const handleIncrement = async () => {
     await handleTransaction({
       config,
-      actionFunction: () => increment({ wagmiConfig: config }),
+      actionFunction: txActions.increment,
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,
+        actionKey: TxAction.increment,
+        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
+        description: [
+          `Value after incrementing ${currentCount + 1}`,
+          `Successes. Current value is ${currentCount + 1}`,
+          'Something went wrong when increment.',
+          'Transaction replaced. Please take a look details in your wallet.',
+        ],
         payload: {
           value: currentCount,
         },
+        withTrackedModal: true,
+      },
+    });
+  };
+
+  const handleIncrementGelato = async () => {
+    await handleTransaction({
+      config,
+      actionFunction: txActions.incrementGelato,
+      params: {
+        type: TxType.increment,
+        desiredChainID: sepolia.id,
+        actionKey: TxAction.incrementGelato,
+        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
+        description: [
+          `Value after incrementing ${currentCount + 1}`,
+          `Successes. Current value is ${currentCount + 1}`,
+          'Something went wrong when increment.',
+          'Transaction replaced. Please take a look details in your wallet.',
+        ],
+        payload: {
+          value: currentCount,
+        },
+        withTrackedModal: true,
       },
     });
   };
@@ -65,13 +97,13 @@ export const TransactionsBlock = () => {
 
         <div className="mt-4">Current count: {currentCount}</div>
 
-        <div className="m-4">
-          <button
-            className="py-2.5 px-6 text-sm bg-indigo-500 text-white rounded-lg cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-700"
-            type="button"
-            onClick={handleIncrement}
-          >
-            Execute increment TX
+        <div>
+          <button type="button" onClick={handleIncrement}>
+            Increment TX
+          </button>
+
+          <button type="button" onClick={handleIncrementGelato}>
+            Increment TX GELATO
           </button>
         </div>
       </div>
@@ -82,6 +114,9 @@ export const TransactionsBlock = () => {
         walletAddress={account?.address}
         trackedTransaction={trackedTransaction}
         closeTxTrackedModal={closeTxTrackedModal}
+        config={config}
+        handleTransaction={handleTransaction}
+        actions={txActions}
       />
     </div>
   );

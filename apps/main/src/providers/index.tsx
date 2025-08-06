@@ -2,7 +2,7 @@
 
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool';
+import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/dist';
 import { ReactNode } from 'react';
 import { WagmiProvider } from 'wagmi';
 

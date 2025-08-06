@@ -1,11 +1,11 @@
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { ITxTrackingStore, Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
+import { Config } from '@wagmi/core';
 import { Chain } from 'viem';
 
-import { ITxTrackingStore } from '../store/txTrackingStore';
 import { evmTrackerForStore } from '../trackers/evmTracker';
 import { gelatoTrackerForStore } from '../trackers/gelatoTracker';
 import { safeTrackerForStore } from '../trackers/safeTracker';
-import { TransactionTracker } from '../types';
+import { ActionTxKey, TransactionTracker } from '../types';
 
 /**
  * Check and initialize a transaction tracker in the store based on the given parameters.
@@ -27,7 +27,10 @@ export async function checkAndInitializeTrackerInStore<T extends Transaction<Tra
   tx,
   chains,
   ...rest
-}: Pick<ITxTrackingStore<T>, 'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks' | 'removeTxFromPool'> & {
+}: Pick<
+  ITxTrackingStore<TransactionTracker, T, Config, ActionTxKey>,
+  'transactionsPool' | 'updateTxParams' | 'onSucceedCallbacks' | 'removeTxFromPool'
+> & {
   chains: Chain[];
   tx: T;
   tracker: TransactionTracker;

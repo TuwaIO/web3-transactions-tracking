@@ -3,7 +3,7 @@
 'use client';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { createViemClient } from '@tuwa/evm-transactions-tracking/dist/utils/createViemClient';
+import { createViemClient } from '@tuwa/evm-transactions-tracking/dist';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
@@ -12,8 +12,7 @@ import { CounterAbi } from '../abis/CounterAbi';
 import { appChains, config } from '../configs/wagmiConfig';
 import { COUNTER_ADDRESS } from '../constants';
 import { useTxTrackingStore } from '../hooks/txTrackingHooks';
-import { increment } from '../transactions/actions/increment';
-import { incrementGelato } from '../transactions/actions/incrementGelato';
+import { TxAction, txActions } from '../transactions/actions';
 import { TxType } from '../transactions/onSucceedCallbacks';
 
 export const TransactionsBlock = () => {
@@ -30,10 +29,11 @@ export const TransactionsBlock = () => {
 
     await handleTransaction({
       config,
-      actionFunction: () => increment({ wagmiConfig: config }),
+      actionFunction: txActions.increment,
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,
+        actionKey: TxAction.increment,
         title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
         description: [
           `Value after incrementing ${currentCount + 1}`,
@@ -50,22 +50,32 @@ export const TransactionsBlock = () => {
   };
 
   const handleIncrementGelato = async () => {
+    const currentCount = Number(
+      await readContract(createViemClient(sepolia.id, appChains) as Client, {
+        abi: CounterAbi,
+        address: COUNTER_ADDRESS,
+        functionName: 'getCurrentNumber',
+      }),
+    );
+
     await handleTransaction({
       config,
-      actionFunction: () => incrementGelato(),
+      actionFunction: txActions.incrementGelato,
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,
-        withTrackedModal: true,
+        actionKey: TxAction.incrementGelato,
+        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
+        description: [
+          `Value after incrementing ${currentCount + 1}`,
+          `Successes. Current value is ${currentCount + 1}`,
+          'Something went wrong when increment.',
+          'Transaction replaced. Please take a look details in your wallet.',
+        ],
         payload: {
-          value: Number(
-            await readContract(createViemClient(sepolia.id, appChains) as Client, {
-              abi: CounterAbi,
-              address: COUNTER_ADDRESS,
-              functionName: 'getCurrentNumber',
-            }),
-          ),
+          value: currentCount,
         },
+        withTrackedModal: true,
       },
     });
   };

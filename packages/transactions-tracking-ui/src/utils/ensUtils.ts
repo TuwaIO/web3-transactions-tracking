@@ -1,4 +1,4 @@
-import { createViemClient } from '@tuwa/evm-transactions-tracking/dist/utils/createViemClient';
+import { createViemClient } from '@tuwa/evm-transactions-tracking/dist';
 import makeBlockie from 'ethereum-blockies-base64';
 import { Address, Hex, isAddress } from 'viem';
 import { mainnet } from 'viem/chains';

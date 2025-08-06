@@ -1,6 +1,5 @@
-import { selectTxExplorerLink } from '@tuwa/evm-transactions-tracking/dist/store/transactionsSelectors';
-import { TransactionTracker } from '@tuwa/evm-transactions-tracking/dist/types';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { selectTxExplorerLink, TransactionTracker } from '@tuwa/evm-transactions-tracking/dist';
+import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
 import { ReactNode } from 'react';
 import { Chain, Hex } from 'viem';
 

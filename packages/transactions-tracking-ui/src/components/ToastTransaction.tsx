@@ -1,6 +1,6 @@
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
 import { getChainName } from '@bgd-labs/react-web3-icons/dist/utils';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
 import { ReactNode } from 'react';
 import { ToastContainerProps, ToastContentProps } from 'react-toastify';
 import { Chain } from 'viem';

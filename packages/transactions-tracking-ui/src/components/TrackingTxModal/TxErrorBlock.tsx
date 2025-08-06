@@ -25,7 +25,7 @@ export function TxErrorBlock({ error, className }: { error?: string; className?:
         <button
           onClick={() => copy(error)}
           title={labels.actions.copy}
-          className="text-[var(--tuwa-error-icon)]/50 transition-colors hover:text-[var(--tuwa-error-icon)]"
+          className="cursor-pointer text-[var(--tuwa-error-icon)]/50 transition-colors hover:text-[var(--tuwa-error-icon)]"
         >
           <DocumentDuplicateIcon className="h-5 w-5" />
         </button>
@@ -35,7 +35,16 @@ export function TxErrorBlock({ error, className }: { error?: string; className?:
         <p className="font-mono text-xs text-[var(--tuwa-error-text)] break-all">{error}</p>
       </div>
 
-      {isCopied && <p className="mt-1 text-right text-xs text-[var(--tuwa-success-icon)]">{labels.txError.copied}</p>}
+      <div className="mt-1 h-5 text-right">
+        <p
+          className={cn(
+            'text-xs text-[var(--tuwa-success-icon)] transition-opacity duration-300 ease-in-out',
+            isCopied ? 'opacity-100' : 'opacity-0',
+          )}
+        >
+          {labels.txError.copied}
+        </p>
+      </div>
     </div>
   );
 }

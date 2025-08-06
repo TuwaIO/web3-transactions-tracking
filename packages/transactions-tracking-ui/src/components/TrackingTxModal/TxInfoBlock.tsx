@@ -1,8 +1,7 @@
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
 import { getChainName } from '@bgd-labs/react-web3-icons/dist/utils';
-import { selectTxExplorerLink } from '@tuwa/evm-transactions-tracking/dist/store/transactionsSelectors';
-import { TransactionTracker } from '@tuwa/evm-transactions-tracking/dist/types';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { selectTxExplorerLink, TransactionTracker } from '@tuwa/evm-transactions-tracking/dist';
+import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
 import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
 import dayjs from 'dayjs';
 import { ReactNode } from 'react';
