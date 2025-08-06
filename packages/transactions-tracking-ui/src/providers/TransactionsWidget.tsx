@@ -8,14 +8,16 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { toast, ToastContainer, ToastContainerProps, ToastContentProps, TypeOptions } from 'react-toastify';
 
-import { ToastCloseButton } from '../components/ToastCloseButton';
-import { ToastTransaction, ToastTransactionCustomization } from '../components/ToastTransaction';
 import {
+  ToastCloseButton,
+  ToastTransaction,
+  ToastTransactionCustomization,
   TrackingTxModal,
   TrackingTxModalCustomization,
   TrackingTxModalProps,
-} from '../components/TrackingTxModal/TrackingTxModal';
-import { WalletInfoModal, WalletInfoModalCustomization } from '../components/WalletInfoModal/WalletInfoModal';
+  WalletInfoModal,
+  WalletInfoModalCustomization,
+} from '../components';
 import { defaultLabels } from '../i18n/en';
 import { TuwaLabels } from '../i18n/types';
 import { deepMerge } from '../utils/deepMerge';

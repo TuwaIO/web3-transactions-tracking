@@ -5,7 +5,6 @@ export * from './ToastTransaction';
 export * from './ToastTransactionKey';
 export * from './TrackingTxModal';
 export * from './TransactionHistoryItem';
-export * from './TransactionsBlock';
 export * from './TransactionsHistory';
 export * from './TransactionStatusBadge';
 export * from './WalletInfoModal';
