@@ -27,6 +27,7 @@ yarn add @tuwa/transactions-tracking-ui
 ```bash
 pnpm add @tuwa/transactions-tracking-ui
 ```
+
 **bun**
 
 ```bash
