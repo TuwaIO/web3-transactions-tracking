@@ -132,7 +132,7 @@ export async function evmTrackerForStore<T extends Transaction<TransactionTracke
       const timestamp = Number(txBlock.timestamp);
       updateTxParams({
         txKey: tx.txKey,
-        status: txn.status === 'success' ? TransactionStatus.Success : TransactionStatus.Reverted,
+        status: txn.status === 'success' ? TransactionStatus.Success : TransactionStatus.Failed,
         to: isHex(txn.to) ? txn.to : undefined,
         nonce: localTx.nonce,
         pending: false,

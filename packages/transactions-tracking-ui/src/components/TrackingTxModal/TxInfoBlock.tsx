@@ -37,7 +37,14 @@ export function TxInfoBlock<TR, T extends Transaction<TR>>({
   className,
   customization,
 }: {
-  tx: T;
+  tx: {
+    chainId: T['chainId'];
+    localTimestamp?: T['localTimestamp'];
+    tracker?: T['tracker'];
+    txKey?: T['txKey'];
+    hash?: T['hash'];
+    replacedTxHash?: T['replacedTxHash'];
+  };
   appChains: Chain[];
   transactionsPool: TransactionPool<TR, T>;
   className?: string;
@@ -78,8 +85,10 @@ export function TxInfoBlock<TR, T extends Transaction<TR>>({
           value: dayjs.unix(tx.localTimestamp).format('MMM D, HH:mm:ss'),
         })}
       {tx.tracker === TransactionTracker.Gelato &&
+        tx.txKey &&
         renderHashLink({ label: labels.hashLabels.gelato, hash: tx.txKey, variant: 'compact' })}
       {tx.tracker === TransactionTracker.Safe &&
+        tx.txKey &&
         renderHashLink({ label: labels.hashLabels.safe, hash: tx.txKey, variant: 'compact' })}
       {wasReplaced ? (
         <>

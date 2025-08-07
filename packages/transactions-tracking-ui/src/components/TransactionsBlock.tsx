@@ -18,7 +18,7 @@ import { TxActionButton } from './TxActionButton';
 
 export const TransactionsBlock = () => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
-  const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
+  const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
   const getLastTxKey = useTxTrackingStore((state) => state.getLastTxKey);
 
   const handleIncrement = async () => {
@@ -90,14 +90,22 @@ export const TransactionsBlock = () => {
       <div>
         <h2>Transactions</h2>
 
-        <TxActionButton action={handleIncrement} trackedTransaction={trackedTransaction} getLastTxKey={getLastTxKey}>
+        <TxActionButton action={handleIncrement} transactionsPool={transactionsPool} getLastTxKey={getLastTxKey}>
           Increment TX
         </TxActionButton>
-        <TxActionButton
-          action={handleIncrementGelato}
-          trackedTransaction={trackedTransaction}
-          getLastTxKey={getLastTxKey}
-        >
+        <TxActionButton action={handleIncrement} transactionsPool={transactionsPool} getLastTxKey={getLastTxKey}>
+          Increment TX
+        </TxActionButton>
+        <TxActionButton action={handleIncrement} transactionsPool={transactionsPool} getLastTxKey={getLastTxKey}>
+          Increment TX
+        </TxActionButton>
+        <TxActionButton action={handleIncrement} transactionsPool={transactionsPool} getLastTxKey={getLastTxKey}>
+          Increment TX
+        </TxActionButton>
+        <TxActionButton action={handleIncrement} transactionsPool={transactionsPool} getLastTxKey={getLastTxKey}>
+          Increment TX
+        </TxActionButton>
+        <TxActionButton action={handleIncrementGelato} transactionsPool={transactionsPool} getLastTxKey={getLastTxKey}>
           Increment TX GELATO
         </TxActionButton>
       </div>

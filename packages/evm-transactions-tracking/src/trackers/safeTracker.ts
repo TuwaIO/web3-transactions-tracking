@@ -188,23 +188,20 @@ export async function safeTrackerForStore<T extends Transaction<TransactionTrack
         } else if (response.replacedHash) {
           status = TransactionStatus.Replaced;
         } else {
-          status = TransactionStatus.Reverted;
+          status = TransactionStatus.Failed;
         }
       }
 
       const pending = !response.isExecuted && !response.replacedHash;
 
-      updateTxParams(
-        {
-          status,
-          pending,
-          txKey: tx.txKey,
-          hash: response.transactionHash as Hex,
-          finishedTimestamp: response.executionDate ? dayjs(response.executionDate).unix() : undefined,
-          isError: !pending && status === TransactionStatus.Reverted,
-        },
-        true,
-      );
+      updateTxParams({
+        status,
+        pending,
+        txKey: tx.txKey,
+        hash: response.transactionHash as Hex,
+        finishedTimestamp: response.executionDate ? dayjs(response.executionDate).unix() : undefined,
+        isError: !pending && status === TransactionStatus.Failed,
+      });
     },
     onFailed: (response) => {
       updateTxParams({

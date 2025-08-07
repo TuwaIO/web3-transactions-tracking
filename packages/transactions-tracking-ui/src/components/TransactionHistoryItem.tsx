@@ -14,7 +14,7 @@ import { TransactionStatusBadge } from './TransactionStatusBadge';
 dayjs.extend(relativeTime);
 
 type CustomIconProps = { chainId: number };
-type CustomStatusAwareTextProps<TR, T extends Transaction<TR>> = Parameters<typeof StatusAwareText<TR, T>>[0];
+type CustomStatusAwareTextProps = Parameters<typeof StatusAwareText>[0];
 type CustomTimestampProps = { timestamp?: number };
 type CustomStatusBadgeProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionStatusBadge<TR, T>>[0];
 type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof ToastTransactionKey<TR, T>>[0];
@@ -22,8 +22,8 @@ type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeo
 export type TransactionHistoryItemCustomization<TR, T extends Transaction<TR>> = {
   components?: {
     icon?: (props: CustomIconProps) => ReactNode;
-    title?: (props: CustomStatusAwareTextProps<TR, T>) => ReactNode;
-    description?: (props: CustomStatusAwareTextProps<TR, T>) => ReactNode;
+    title?: (props: CustomStatusAwareTextProps) => ReactNode;
+    description?: (props: CustomStatusAwareTextProps) => ReactNode;
     timestamp?: (props: CustomTimestampProps) => ReactNode;
     statusBadge?: (props: CustomStatusBadgeProps<TR, T>) => ReactNode;
     transactionKey?: (props: CustomTransactionKeyProps<TR, T>) => ReactNode;
@@ -65,9 +65,9 @@ export function TransactionHistoryItem<TR, T extends Transaction<TR>>({
           </div>
           <div>
             {C?.title ? (
-              C.title({ tx, source: tx.title, fallback: tx.type, variant: 'title', applyColor: true })
+              C.title({ txStatus: tx.status, source: tx.title, fallback: tx.type, variant: 'title', applyColor: true })
             ) : (
-              <StatusAwareText tx={tx} source={tx.title} fallback={tx.type} variant="title" applyColor />
+              <StatusAwareText txStatus={tx.status} source={tx.title} fallback={tx.type} variant="title" applyColor />
             )}
 
             {C?.timestamp ? (
@@ -79,9 +79,9 @@ export function TransactionHistoryItem<TR, T extends Transaction<TR>>({
             )}
 
             {C?.description ? (
-              C.description({ tx, source: tx.description, variant: 'description' })
+              C.description({ txStatus: tx.status, source: tx.description, variant: 'description' })
             ) : (
-              <StatusAwareText tx={tx} source={tx.description} variant="description" />
+              <StatusAwareText txStatus={tx.status} source={tx.description} variant="description" />
             )}
           </div>
         </div>

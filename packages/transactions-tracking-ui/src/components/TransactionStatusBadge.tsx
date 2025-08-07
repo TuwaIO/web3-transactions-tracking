@@ -32,12 +32,6 @@ export function TransactionStatusBadge<TR, T extends Transaction<TR>>({
       badgeClasses: 'bg-[var(--tuwa-error-bg)] text-[var(--tuwa-error-text)]',
       iconClasses: 'text-[var(--tuwa-error-icon)]',
     },
-    [TransactionStatus.Reverted]: {
-      label: labels.statuses.reverted,
-      Icon: XCircleIcon,
-      badgeClasses: 'bg-[var(--tu-error-bg)] text-[var(--tuwa-error-text)]',
-      iconClasses: 'text-[var(--tuwa-error-icon)]',
-    },
     [TransactionStatus.Replaced]: {
       label: labels.statuses.replaced,
       Icon: ArrowPathIcon,

@@ -178,23 +178,18 @@ export async function gelatoTrackerForStore<T extends Transaction<TransactionTra
           ? TransactionStatus.Success
           : pending
             ? undefined
-            : TransactionStatus.Reverted;
+            : TransactionStatus.Failed;
 
-      updateTxParams(
-        {
-          status,
-          pending,
-          txKey: tx.txKey,
-          hash: response.task.transactionHash,
-          finishedTimestamp: response.task.executionDate ? dayjs(response.task.executionDate).unix() : undefined,
-          errorMessage:
-            response.task.taskState > GelatoTaskState.WaitingForConfirmation
-              ? response.task.lastCheckMessage
-              : undefined,
-          isError: !pending && status !== TransactionStatus.Success,
-        },
-        true,
-      );
+      updateTxParams({
+        status,
+        pending,
+        txKey: tx.txKey,
+        hash: response.task.transactionHash,
+        finishedTimestamp: response.task.executionDate ? dayjs(response.task.executionDate).unix() : undefined,
+        errorMessage:
+          response.task.taskState > GelatoTaskState.WaitingForConfirmation ? response.task.lastCheckMessage : undefined,
+        isError: !pending && status !== TransactionStatus.Success,
+      });
     },
     onFailed: (response) => {
       updateTxParams({

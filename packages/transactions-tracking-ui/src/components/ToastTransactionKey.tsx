@@ -6,7 +6,7 @@ import { Chain, Hex } from 'viem';
 import { useLabels } from '../providers/LabelsProvider';
 import { cn } from '../utils/cn';
 import { HashLink } from './HashLink';
-import { WalletInfoModalProps } from './WalletInfoModal/WalletInfoModal';
+import { WalletInfoModalProps } from './WalletInfoModal';
 
 type CustomHashLinkProps = Parameters<typeof HashLink>[0];
 

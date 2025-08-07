@@ -10,16 +10,16 @@ import { cn } from '../utils/cn';
 import { StatusAwareText } from './StatusAwareText';
 import { ToastTransactionKey } from './ToastTransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';
-import { WalletInfoModalProps } from './WalletInfoModal/WalletInfoModal';
+import { WalletInfoModalProps } from './WalletInfoModal';
 
-type CustomStatusAwareTextProps<TR, T extends Transaction<TR>> = Parameters<typeof StatusAwareText<TR, T>>[0];
+type CustomStatusAwareTextProps = Parameters<typeof StatusAwareText>[0];
 type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof ToastTransactionKey<TR, T>>[0];
 type CustomStatusBadgeProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionStatusBadge<TR, T>>[0];
 type CustomWalletInfoButtonProps = { onClick: () => void };
 
 export type ToastTransactionCustomization<TR, T extends Transaction<TR>> = {
   components?: {
-    statusAwareText?: (props: CustomStatusAwareTextProps<TR, T>) => ReactNode;
+    statusAwareText?: (props: CustomStatusAwareTextProps) => ReactNode;
     transactionKey?: (props: CustomTransactionKeyProps<TR, T>) => ReactNode;
     statusBadge?: (props: CustomStatusBadgeProps<TR, T>) => ReactNode;
     walletInfoButton?: (props: CustomWalletInfoButtonProps) => ReactNode;
@@ -57,15 +57,21 @@ export function ToastTransaction<TR, T extends Transaction<TR>>({
 
         <div className="flex-1">
           {C?.statusAwareText ? (
-            C.statusAwareText({ tx, source: tx.title, fallback: tx.type, variant: 'title', applyColor: true })
+            C.statusAwareText({
+              txStatus: tx.status,
+              source: tx.title,
+              fallback: tx.type,
+              variant: 'title',
+              applyColor: true,
+            })
           ) : (
-            <StatusAwareText tx={tx} source={tx.title} fallback={tx.type} variant="title" applyColor />
+            <StatusAwareText txStatus={tx.status} source={tx.title} fallback={tx.type} variant="title" applyColor />
           )}
 
           {C?.statusAwareText ? (
-            C.statusAwareText({ tx, source: tx.description, variant: 'description' })
+            C.statusAwareText({ txStatus: tx.status, source: tx.description, variant: 'description' })
           ) : (
-            <StatusAwareText tx={tx} source={tx.description} variant="description" />
+            <StatusAwareText txStatus={tx.status} source={tx.description} variant="description" />
           )}
         </div>
       </div>

@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { useLabels } from '../providers/LabelsProvider';
 import { cn } from '../utils/cn';
 import { TransactionHistoryItem } from './TransactionHistoryItem';
-import { WalletInfoModalProps } from './WalletInfoModal/WalletInfoModal';
+import { WalletInfoModalProps } from './WalletInfoModal';
 
 type CustomPlaceholderProps = { title: string; message: string };
 type CustomHistoryItemProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionHistoryItem<TR, T>>[0];

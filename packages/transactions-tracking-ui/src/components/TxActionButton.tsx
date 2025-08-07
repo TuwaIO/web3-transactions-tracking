@@ -1,5 +1,5 @@
 import { ArrowPathIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
-import { IInitializeTxTrackingStore, Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
+import { IInitializeTxTrackingStore, Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist';
 import { ButtonHTMLAttributes, ReactNode, useEffect, useState } from 'react';
 
 import { useLabels } from '../providers/LabelsProvider';
@@ -9,7 +9,7 @@ type ButtonStatus = 'idle' | 'loading' | 'succeed' | 'failed';
 
 export interface TxActionButtonProps<TR, T extends Transaction<TR>>
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    Pick<IInitializeTxTrackingStore<TR, T>, 'trackedTransaction'> {
+    Pick<IInitializeTxTrackingStore<TR, T>, 'transactionsPool'> {
   children: ReactNode;
   action: () => Promise<void>;
   getLastTxKey: () => string | undefined;
@@ -20,7 +20,6 @@ export interface TxActionButtonProps<TR, T extends Transaction<TR>>
 }
 
 export function TxActionButton<TR, T extends Transaction<TR>>({
-  trackedTransaction,
   children,
   action,
   getLastTxKey,
@@ -28,6 +27,7 @@ export function TxActionButton<TR, T extends Transaction<TR>>({
   succeedContent,
   failedContent,
   resetTimeout = 2500,
+  transactionsPool,
   ...props
 }: TxActionButtonProps<TR, T>) {
   const labels = useLabels();
@@ -35,14 +35,17 @@ export function TxActionButton<TR, T extends Transaction<TR>>({
   const [trackedTxKey, setTrackedTxKey] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (trackedTxKey && trackedTransaction?.tx?.txKey === trackedTxKey) {
-      if (trackedTransaction.isSucceed) {
-        setStatus('succeed');
-      } else if (trackedTransaction.isFailed) {
-        setStatus('failed');
+    if (trackedTxKey) {
+      const trackedTransaction = transactionsPool[trackedTxKey];
+      if (trackedTransaction) {
+        if (trackedTransaction.status === TransactionStatus.Success) {
+          setStatus('succeed');
+        } else if (trackedTransaction.status === TransactionStatus.Failed) {
+          setStatus('failed');
+        }
       }
     }
-  }, [trackedTransaction, trackedTxKey]);
+  }, [transactionsPool, trackedTxKey]);
 
   useEffect(() => {
     if (status === 'succeed' || status === 'failed') {
@@ -59,8 +62,7 @@ export function TxActionButton<TR, T extends Transaction<TR>>({
     setStatus('loading');
     try {
       await action();
-      const newKey = getLastTxKey();
-      setTrackedTxKey(newKey);
+      setTrackedTxKey(getLastTxKey());
     } catch (error) {
       console.error('Transaction initiation failed', error);
       setStatus('failed');

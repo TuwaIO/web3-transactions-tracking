@@ -1,6 +1,6 @@
 import { Draft, produce } from 'immer';
 
-import { StoreSlice, Transaction, TransactionStatus } from '../types';
+import { InitialTransaction, StoreSlice, Transaction } from '../types';
 
 export type TransactionPool<TR, T extends Transaction<TR>> = Record<string, T>;
 
@@ -22,26 +22,14 @@ export type IInitializeTxTrackingStore<TR, T extends Transaction<TR>> = {
   onSucceedCallbacks?: (tx: T) => void;
 
   transactionsPool: TransactionPool<TR, T>;
-
   lastAddedTxKey?: string;
-  trackedTransaction?: {
-    initializedOnChain: boolean;
-    isFailed: boolean;
-    isSucceed: boolean;
-    isReplaced: boolean;
-    isProcessing: boolean;
-    error: string;
-    tx?: T;
-    isTrackedModalOpen?: boolean;
-  };
+  initialTx?: InitialTransaction;
 
   addTxToPool: ({ tx }: { tx: T }) => void;
-  updateTxParams: (fields: UpdatedParamsFields<TR>, withTracked?: boolean) => void;
-  updateTxParamsForTrackedTransaction: (fields: UpdatedParamsFields<TR>) => void;
+  updateTxParams: (fields: UpdatedParamsFields<TR>) => void;
   removeTxFromPool: (txKey: string) => void;
 
-  openTxTrackedModal: () => void;
-  closeTxTrackedModal: () => void;
+  closeTxTrackedModal: (txKey?: string) => void;
   getLastTxKey: () => string | undefined;
 };
 
@@ -56,6 +44,7 @@ export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
     transactionsPool: {},
 
     addTxToPool: ({ tx }) => {
+      set({ lastAddedTxKey: tx.txKey });
       set((state) =>
         produce(state, (draft) => {
           if (tx.txKey) {
@@ -63,41 +52,16 @@ export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
               ...tx,
               pending: true,
             } as Draft<T>;
-            draft.lastAddedTxKey = tx.txKey;
           }
         }),
       );
     },
-    updateTxParams: (tx, withTracked) => {
+    updateTxParams: (tx) => {
       set((state) =>
         produce(state, (draft) => {
           draft.transactionsPool[tx.txKey] = {
             ...draft.transactionsPool[tx.txKey],
             ...tx,
-          };
-        }),
-      );
-      if (withTracked) {
-        get().updateTxParamsForTrackedTransaction(tx);
-      }
-    },
-    updateTxParamsForTrackedTransaction: (tx) => {
-      set((state) =>
-        produce(state, (draft) => {
-          draft.trackedTransaction = {
-            ...draft.trackedTransaction,
-            initializedOnChain: draft.trackedTransaction?.initializedOnChain || false,
-            isSucceed: tx?.status === TransactionStatus.Success,
-            isReplaced: tx?.status === TransactionStatus.Replaced,
-            error: tx?.errorMessage ?? '',
-            isFailed: !!tx.errorMessage || tx.isError || false,
-            isProcessing: (!tx.status && draft.trackedTransaction?.isProcessing) || false,
-            tx: draft.trackedTransaction?.tx
-              ? ({
-                  ...draft.trackedTransaction?.tx,
-                  ...tx,
-                } as Draft<T>)
-              : undefined,
           };
         }),
       );
@@ -110,33 +74,18 @@ export function initializeTxTrackingStore<TR, T extends Transaction<TR>>({
       );
     },
 
-    openTxTrackedModal: () => {
-      set((state) =>
-        produce(state, (draft) => {
-          if (draft.trackedTransaction) {
-            draft.trackedTransaction = {
-              ...draft.trackedTransaction,
-              isTrackedModalOpen: true,
+    closeTxTrackedModal: (txKey) => {
+      if (txKey) {
+        set((state) =>
+          produce(state, (draft) => {
+            draft.transactionsPool[txKey] = {
+              ...draft.transactionsPool[txKey],
+              isTackingModalOpen: false,
             };
-          }
-        }),
-      );
-    },
-    closeTxTrackedModal: () => {
-      set((state) =>
-        produce(state, (draft) => {
-          if (draft.trackedTransaction) {
-            if (!draft.trackedTransaction.isProcessing) {
-              draft.trackedTransaction = undefined;
-            } else {
-              draft.trackedTransaction = {
-                ...draft.trackedTransaction,
-                isTrackedModalOpen: false,
-              };
-            }
-          }
-        }),
-      );
+          }),
+        );
+      }
+      set({ initialTx: undefined });
     },
     getLastTxKey: () => {
       return get().lastAddedTxKey;

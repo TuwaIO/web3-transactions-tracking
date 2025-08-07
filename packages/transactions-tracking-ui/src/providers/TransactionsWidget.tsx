@@ -31,13 +31,11 @@ if (typeof document !== 'undefined') {
 const STATUS_TO_TOAST_TYPE: Record<string, TypeOptions> = {
   [TransactionStatus.Success]: 'success',
   [TransactionStatus.Failed]: 'error',
-  [TransactionStatus.Reverted]: 'error',
   [TransactionStatus.Replaced]: 'info',
 };
 
 export function TransactionsWidget<TR, T extends Transaction<TR>>({
   transactionsPool,
-  trackedTransaction,
   walletAddress,
   appChains,
   labels,
@@ -47,6 +45,7 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
   actions,
   config,
   handleTransaction,
+  initialTx,
   ...toastProps
 }: {
   labels?: Partial<TuwaLabels>;
@@ -61,9 +60,12 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
     trackingTxModal?: TrackingTxModalCustomization<TR, T>;
   };
   walletAddress?: string;
-} & Pick<IInitializeTxTrackingStore<TR, T>, 'transactionsPool' | 'closeTxTrackedModal'> &
+} & Pick<IInitializeTxTrackingStore<TR, T>, 'closeTxTrackedModal'> &
   ToastContainerProps &
-  Pick<TrackingTxModalProps<TR, T>, 'handleTransaction' | 'actions' | 'trackedTransaction' | 'config' | 'appChains'>) {
+  Pick<
+    TrackingTxModalProps<TR, T>,
+    'handleTransaction' | 'actions' | 'config' | 'appChains' | 'transactionsPool' | 'initialTx'
+  >) {
   const [isWalletInfoModalOpen, setIsWalletInfoModalOpen] = useState(false);
   const prevTransactionsRef = useRef<TransactionPool<TR, T>>(transactionsPool);
 
@@ -125,7 +127,8 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
         <ToastContainer
           position="bottom-right"
           stacked
-          autoClose={false}
+          autoClose={300000}
+          hideProgressBar
           closeOnClick={false}
           icon={false}
           closeButton={ToastCloseButton}
@@ -147,7 +150,7 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
 
       {enabledFeatures.trackingTxModal && (
         <TrackingTxModal
-          trackedTransaction={trackedTransaction}
+          initialTx={initialTx}
           onClose={closeTxTrackedModal}
           onOpenWalletInfo={() => setIsWalletInfoModalOpen(true)}
           appChains={appChains}

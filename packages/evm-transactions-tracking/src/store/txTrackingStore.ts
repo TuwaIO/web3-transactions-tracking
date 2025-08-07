@@ -1,8 +1,8 @@
 import {
   initializeTxTrackingStore,
+  InitialTransaction,
   ITxTrackingStore,
   Transaction,
-  TransactionStatus,
 } from '@tuwa/web3-transactions-tracking-core/dist';
 import { Config, getAccount } from '@wagmi/core';
 import dayjs from 'dayjs';
@@ -48,7 +48,8 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
         },
 
         handleTransaction: async ({ actionFunction, params, config }) => {
-          const { desiredChainID, payload, type, title, description, withTrackedModal, actionKey } = params;
+          set({ initialTx: undefined });
+          const { desiredChainID, payload, type, title, description, actionKey, withTrackedModal } = params;
           const activeWallet = getAccount(config);
           const chainId = Number(desiredChainID);
           const tracker = TransactionTracker.Ethereum;
@@ -70,46 +71,43 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
             title,
             description,
             actionKey,
+            isTackingModalOpen: withTrackedModal,
           } as Draft<T>;
 
-          const trackingTxInitialParams = {
-            initializedOnChain: false,
-            isFailed: !activeWallet,
-            isSucceed: false,
-            isReplaced: false,
-            isProcessing: !!activeWallet,
-            error: !activeWallet ? 'Connect your wallet before making a transaction' : '',
-            isTrackedModalOpen: withTrackedModal,
-            tx: txInitialParams,
-          };
-
-          set((state) =>
-            produce(state, (draft) => {
-              draft.trackedTransaction = trackingTxInitialParams;
-            }),
-          );
-
-          const handleError = (e: unknown, params: typeof trackingTxInitialParams, errorTx?: T) => {
+          const handleError = (e: unknown) => {
             const errorMessage = e instanceof Error ? e.message : String(e);
             set((state) =>
               produce(state, (draft) => {
-                draft.trackedTransaction = {
-                  ...params,
-                  error: errorMessage,
-                  isFailed: true,
-                  initializedOnChain: true,
-                  isProcessing: false,
-                  tx: (errorTx ?? params.tx) as Draft<T>,
-                };
+                draft.initialTx = {
+                  ...draft.initialTx,
+                  isInitializing: false,
+                  errorMessage,
+                } as Draft<InitialTransaction>;
               }),
             );
             throw new Error(`TX error: ${errorMessage}`);
           };
 
+          set({
+            initialTx: {
+              type,
+              payload,
+              title,
+              description,
+              actionKey,
+              chainId: txInitialParams.chainId,
+              localTimestamp,
+              isTackingModalOpen: withTrackedModal,
+              isInitializing: true,
+              errorMessage: undefined,
+              lastTxKey: undefined,
+            },
+          });
+
           try {
             await checkChainForTx(params.desiredChainID, config);
           } catch (e) {
-            handleError(e, trackingTxInitialParams);
+            handleError(e);
           }
 
           try {
@@ -129,43 +127,25 @@ export function createTxTrackingStore<T extends Transaction<TransactionTracker>>
                 } as T,
               });
 
-              const tx = get().transactionsPool[finalTxKey];
-
               set((state) =>
                 produce(state, (draft) => {
-                  draft.trackedTransaction = {
-                    ...trackingTxInitialParams,
-                    initializedOnChain: true,
-                    tx: tx as Draft<T>,
-                  };
+                  draft.initialTx = {
+                    ...draft.initialTx,
+                    isInitializing: false,
+                    lastTxKey: finalTxKey,
+                  } as Draft<InitialTransaction>;
                 }),
               );
 
               try {
+                const tx = get().transactionsPool[finalTxKey];
                 await checkAndInitializeTrackerInStore({ tracker: updatedTracker, tx, chains: appChains, ...get() });
-                const finalTx = get().transactionsPool[finalTxKey];
-                set((state) =>
-                  produce(state, (draft) => {
-                    draft.trackedTransaction = {
-                      ...trackingTxInitialParams,
-                      isTrackedModalOpen: draft.trackedTransaction?.isTrackedModalOpen ?? false,
-                      isSucceed: finalTx?.status === TransactionStatus.Success,
-                      isReplaced: finalTx?.status === TransactionStatus.Replaced,
-                      error: finalTx?.errorMessage ?? '',
-                      isFailed: !!finalTx.errorMessage || finalTx.isError || false,
-                      initializedOnChain: !!finalTx?.status,
-                      isProcessing: !finalTx?.status,
-                      tx: finalTx as Draft<T>,
-                    };
-                  }),
-                );
               } catch (e) {
-                const errorTx = get().transactionsPool[finalTxKey];
-                handleError(e, trackingTxInitialParams, errorTx);
+                handleError(e);
               }
             }
           } catch (e) {
-            handleError(e, trackingTxInitialParams);
+            handleError(e);
           }
         },
       }),
