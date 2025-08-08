@@ -3,7 +3,7 @@
 'use client';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { createViemClient } from '@tuwa/evm-transactions-tracking/dist';
+import { createViemClient } from '@tuwa/evm-transactions-tracking';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';

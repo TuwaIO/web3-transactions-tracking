@@ -3,13 +3,13 @@
  */
 
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import { Transaction, TransactionPool } from '@tuwa/web3-transactions-tracking-core/dist';
+import { Transaction, TransactionPool } from '@tuwa/web3-transactions-tracking-core';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
 import { JSX, ReactNode } from 'react';
 import Modal from 'react-modal';
 import { Address, Chain } from 'viem';
 
-import { useLabels } from '../../providers/LabelsProvider';
+import { useLabels } from '../../providers';
 import { cn } from '../../utils';
 import { TransactionsHistory, TransactionsHistoryCustomization } from '../TransactionsHistory';
 import { WalletHeader } from './WalletHeader';

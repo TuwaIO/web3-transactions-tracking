@@ -3,7 +3,7 @@
  * It combines the core store logic with EVM-specific functionalities like handling wagmi config and transaction submission.
  */
 
-import { initializeTxTrackingStore, ITxTrackingStore, Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
+import { initializeTxTrackingStore, ITxTrackingStore, Transaction } from '@tuwa/web3-transactions-tracking-core';
 import { Config, getAccount } from '@wagmi/core';
 import dayjs from 'dayjs';
 import { Draft, produce } from 'immer';

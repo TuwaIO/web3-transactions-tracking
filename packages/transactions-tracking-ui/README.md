@@ -55,26 +55,22 @@ Place the `<TransactionsWidget />` component in your main application layout. It
 // In your main layout file, e.g., Providers.tsx
 
 import { TransactionsWidget } from '@tuwa/transactions-tracking-ui';
+import { useAccount } from 'wagmi';
 import { useTxTrackingStore } from '../hooks/txTrackingHooks'; // Your app's hook
 import { txActions } from '../transactions/actions'; // Your app's action registry
 import { appChains, config } from '../configs/wagmiConfig';
-import { useAccount } from 'wagmi';
 
 export function Providers({ children }) {
   // 1. Get all necessary state and functions from your Zustand store
-  const {
-    transactionsPool,
-    trackedTransaction,
-    closeTxTrackedModal,
-    handleTransaction,
-  } = useTxTrackingStore((state) => ({
-    transactionsPool: state.transactionsPool,
-    trackedTransaction: state.trackedTransaction,
-    closeTxTrackedModal: state.closeTxTrackedModal,
-    handleTransaction: state.handleTransaction,
-  }));
-  
-  const { address } = useAccount();
+  const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
+  const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
+  const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
+  const initializeTransactionsPool = useTxTrackingStore((state) => state.initializeTransactionsPool);
+  const initialTx = useTxTrackingStore((state) => state.initialTx);
+
+  useInitializeTransactionsPool(initializeTransactionsPool);
+
+  const { address, chain } = useAccount();
 
   return (
     <>
@@ -82,14 +78,15 @@ export function Providers({ children }) {
       
       {/* 2. Render the widget and pass all required props */}
       <TransactionsWidget
+        appChains={appChains}
         transactionsPool={transactionsPool}
-        trackedTransaction={trackedTransaction}
         closeTxTrackedModal={closeTxTrackedModal}
+        config={config}
         handleTransaction={handleTransaction}
         actions={txActions}
+        initialTx={initialTx}
         walletAddress={address}
-        appChains={appChains}
-        config={config}
+        chain={chain}
       />
     </>
   );

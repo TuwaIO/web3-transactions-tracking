@@ -5,7 +5,7 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { JSX } from 'react';
 
-import { useLabels } from '../providers/LabelsProvider';
+import { useLabels } from '../providers';
 
 type ToastCloseButtonProps = {
   /**

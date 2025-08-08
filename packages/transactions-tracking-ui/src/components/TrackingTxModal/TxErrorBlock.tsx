@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * @file This file contains the `TxErrorBlock` component for displaying transaction error messages.
  */
@@ -6,7 +8,7 @@ import { DocumentDuplicateIcon, ExclamationTriangleIcon } from '@heroicons/react
 import { JSX } from 'react';
 
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
-import { useLabels } from '../../providers/LabelsProvider';
+import { useLabels } from '../../providers';
 import { cn } from '../../utils';
 
 export type TxErrorBlockProps = {

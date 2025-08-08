@@ -4,11 +4,13 @@ import { CodeBlock } from '@/components/CodeBlock';
 import { CodeHighlighter } from '@/components/CodeHighlighter';
 
 const codeBlock = `import { Config, writeContract } from '@wagmi/core';
+import { sepolia } from 'viem/chains';
+import { CounterAbi, COUNTER_ADDRESS } from './';
 
 export async function increment({ wagmiConfig }: { wagmiConfig?: Config }) {
   if (wagmiConfig) {
     return writeContract(wagmiConfig, {
-      abi: CounterAbi, // ABI from previus step
+      abi: CounterAbi, // ABI from previous step
       address: COUNTER_ADDRESS, // Contract address
       functionName: 'increment',
       args: [],
@@ -22,12 +24,12 @@ export async function increment({ wagmiConfig }: { wagmiConfig?: Config }) {
 export function ActionStep() {
   return (
     <div className="mt-4">
-      <h3 className="text-[18px] font-bold mb-2">Step 3: Action from contract</h3>
-      <p className="mb-2">
-        We'll select a contract function and wrap it in a reusable 'action'. This makes the function compatible with our
-        transaction tracking library. While this step is optional, it's an excellent pattern for reducing code
-        duplication in real-world projects. As an example, we'll take the increment function. The corresponding 'action'
-        for it would look like this:
+      <h3 className="mb-2 text-lg font-bold text-[var(--tuwa-text-primary)]">Step 3: Create a Contract Action</h3>
+      <p className="mb-2 text-[var(--tuwa-text-secondary)]">
+        Next, we'll wrap a smart contract function into a reusable 'action'. This makes the function compatible with our
+        transaction tracking library. While this step isn't strictly necessary, creating actions is a powerful pattern
+        for simplifying your code and avoiding repetition, especially in larger applications. For this example, we'll
+        create an action for the `increment` function:
       </p>
       <CodeBlock title="increment.ts" titleIcons={<DocumentTextIcon />} textToCopy={codeBlock}>
         <CodeHighlighter children={codeBlock} language="ts" />

@@ -1,3 +1,5 @@
+'use client';
+
 import { CommandLineIcon } from '@heroicons/react/24/outline';
 import { Tabs } from 'nextra/components';
 
@@ -11,33 +13,35 @@ export interface PackageInstallationTabsProps {
 const tabsItems = [
   {
     title: 'npm',
-    install: 'npm install',
+    command: 'npm install',
   },
   {
     title: 'yarn',
-    install: 'yarn add',
+    command: 'yarn add',
   },
   {
     title: 'pnpm',
-    install: 'pnpm install',
+    command: 'pnpm add',
+  },
+  {
+    title: 'bun',
+    command: 'bun add',
   },
 ];
 
 export function PackageInstallationTabs({ trackingPackageName }: PackageInstallationTabsProps) {
-  const packageName = `@tuwa/web3-transactions-tracking-core && @tuwa/${trackingPackageName}`;
+  const packages = `@tuwa/web3-transactions-tracking-core @tuwa/${trackingPackageName}`;
 
   return (
     <div className="my-4">
       <Tabs items={tabsItems.map((tab) => tab.title)}>
-        {tabsItems.map((tab) => {
-          return (
-            <Tabs.Tab key={tab.title}>
-              <CodeBlock title="Terminal" titleIcons={<CommandLineIcon />} textToCopy={`${tab.install} ${packageName}`}>
-                <CodeHighlighter children={`${tab.install} ${packageName}`} />
-              </CodeBlock>
-            </Tabs.Tab>
-          );
-        })}
+        {tabsItems.map((tab) => (
+          <Tabs.Tab key={tab.title}>
+            <CodeBlock title="Terminal" titleIcons={<CommandLineIcon />} textToCopy={`${tab.command} ${packages}`}>
+              <CodeHighlighter language="bash">{`${tab.command} ${packages}`}</CodeHighlighter>
+            </CodeBlock>
+          </Tabs.Tab>
+        ))}
       </Tabs>
     </div>
   );

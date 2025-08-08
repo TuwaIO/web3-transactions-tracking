@@ -4,13 +4,13 @@
 
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
 import { getChainName } from '@bgd-labs/react-web3-icons/dist/utils';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
+import { Transaction } from '@tuwa/web3-transactions-tracking-core';
 import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
 import dayjs from 'dayjs';
 import { JSX, ReactNode } from 'react';
 import { Chain } from 'viem';
 
-import { useLabels } from '../../providers/LabelsProvider';
+import { useLabels } from '../../providers';
 import { cn } from '../../utils';
 import { ToastTransactionKey, ToastTransactionKeyProps } from '../ToastTransactionKey';
 

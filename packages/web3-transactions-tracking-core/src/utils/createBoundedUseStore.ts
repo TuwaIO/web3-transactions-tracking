@@ -20,18 +20,11 @@ type ExtractState<S> = S extends { getState: () => infer X } ? X : never;
  * @template S The type of the Zustand store (`StoreApi`).
  * @param {S} store - The vanilla Zustand store instance.
  * @returns {function} A hook that can be called with an optional selector function.
- * - When called without a selector (`useBoundedStore()`), it returns the entire state object.
  * - When called with a selector (`useBoundedStore(state => state.someValue)`), it returns the selected slice of the state.
  */
-export const createBoundedUseStore = (<S extends StoreApi<unknown>>(store: S) => {
-  // This is an overloaded function definition.
-  // 1. Overload for no selector: `()` => `ExtractState<S>`
-  // 2. Overload with selector: `<T>(selector: (state: ExtractState<S>) => T) => T`
-  const useBoundedStore = <T>(selector?: (state: ExtractState<S>) => T) => {
-    return useStore(store, selector!);
-  };
-  return useBoundedStore;
-}) as <S extends StoreApi<unknown>>(
+export const createBoundedUseStore = ((store) => (selector) => useStore(store, selector)) as <
+  S extends StoreApi<unknown>,
+>(
   store: S,
 ) => {
   (): ExtractState<S>;

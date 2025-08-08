@@ -4,7 +4,7 @@
  * @vitest-environment jsdom
  */
 
-import { initializePollingTracker } from '@tuwa/web3-transactions-tracking-core/dist';
+import { initializePollingTracker } from '@tuwa/web3-transactions-tracking-core';
 import dayjs from 'dayjs';
 import { zeroAddress, zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';

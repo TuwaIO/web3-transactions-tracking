@@ -3,7 +3,7 @@ import { encodeFunctionData } from 'viem';
 import { sepolia } from 'viem/chains';
 
 import { CounterAbi } from '@/abis/CounterAbi';
-import { COUNTER_ADDRESS } from '@/components/TransactionsBlock';
+import { COUNTER_ADDRESS } from '@/constants';
 
 export async function incrementGelato() {
   const relay = new GelatoRelay();

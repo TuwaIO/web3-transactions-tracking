@@ -6,7 +6,7 @@ import { CodeHighlighter } from '@/components/CodeHighlighter';
 const codeBlock = `'use client';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool';
+import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking';
 import { sepolia } from 'viem/chains';
 
 import { config } from '@/configs/wagmiConfig';
@@ -15,11 +15,9 @@ import { increment } from '@/transactions/actions/increment';
 import { TxType } from '@/transactions/onSucceedCallbacks';
 
 export const Increment = () => {
-  const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
-  const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
-  
-  const initializeTransactionsPool = useTxTrackingStore((store) => store.initializeTransactionsPool);
-  useInitializeTransactionsPool(initializeTransactionsPool); // required for continue tracking after page reload
+  const { handleTransaction, initializeTransactionsPool } = useTxTrackingStore();
+  // This hook ensures that transaction tracking continues even after a page reload.
+  useInitializeTransactionsPool(initializeTransactionsPool);
 
   const handleIncrement = async () => {
     await handleTransaction({
@@ -28,6 +26,7 @@ export const Increment = () => {
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,
+        // The payload would typically contain dynamic data relevant to the transaction.
         payload: {
           value: 0,
         },
@@ -35,16 +34,14 @@ export const Increment = () => {
     });
   };
 
-  console.log(trackedTransaction);
-
   return (
-    <div>
+    <div className="flex flex-col items-start">
       <ConnectButton />
-
-      <div className="m-4">
+      <div className="mt-4">
         <button
           type="button"
           onClick={handleIncrement}
+          className="rounded-md bg-[var(--tuwa-bg-accent)] px-4 py-2 font-semibold text-white hover:bg-[var(--tuwa-bg-accent-hover)]"
         >
           Increment
         </button>
@@ -57,12 +54,11 @@ export const Increment = () => {
 export function TxBlockStep() {
   return (
     <div className="mt-4">
-      <h3 className="text-[18px] font-bold mb-2">Step 6: Transaction component</h3>
-      <p className="mb-2">
-        We'll add a component that includes a wallet connection button and another button to initiate a transaction.
-        Once initiated, this transaction will immediately have its status tracked and be added to the transaction pool.
-        From that point on, the process may vary depending on the transaction's complexity, but TUWA's package's will
-        handle all the status tracking for you.
+      <h3 className="mb-2 text-lg font-bold text-[var(--tuwa-text-primary)]">Step 5: Trigger the Transaction</h3>
+      <p className="mb-2 text-[var(--tuwa-text-secondary)]">
+        Finally, let's create a component with a wallet connection button and a button to trigger the transaction. When
+        a user clicks 'Increment', the transaction is sent and immediately tracked in the transaction pool. From here,
+        our library automatically handles all status updates for you.
       </p>
       <CodeBlock title="Increment.tsx" titleIcons={<DocumentTextIcon />} textToCopy={codeBlock}>
         <CodeHighlighter children={codeBlock} language="tsx" />

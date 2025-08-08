@@ -5,7 +5,7 @@
 import { ArrowTopRightOnSquareIcon, CheckIcon, ClipboardIcon } from '@heroicons/react/24/solid';
 
 import { useCopyToClipboard } from '../hooks/useCopyToClipboard';
-import { useLabels } from '../providers/LabelsProvider';
+import { useLabels } from '../providers';
 import { cn, textCenterEllipsis } from '../utils';
 
 /**

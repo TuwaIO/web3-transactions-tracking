@@ -3,10 +3,10 @@
  */
 
 import { ArrowPathIcon, CheckCircleIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/solid';
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist';
+import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
 import { JSX } from 'react';
 
-import { useLabels } from '../providers/LabelsProvider';
+import { useLabels } from '../providers';
 import { cn } from '../utils';
 
 type TransactionStatusBadgeProps<TR, T extends Transaction<TR>> = {

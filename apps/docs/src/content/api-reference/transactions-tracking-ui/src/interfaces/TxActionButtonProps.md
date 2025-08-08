@@ -6,7 +6,7 @@
 
 # TxActionButtonProps\<TR, T\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:15](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L15)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:15](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L15)
 
 ## Extends
 
@@ -52,7 +52,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > **action**: () => `Promise`\<`void`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:21](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L21)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:21](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L21)
 
 The async function to execute on click, which should initiate the transaction.
 
@@ -353,7 +353,7 @@ Indicates that the element is perceivable but disabled, so it is not editable or
 
 ### ~~aria-dropeffect?~~
 
-> `optional` **aria-dropeffect**: `"link"` \| `"none"` \| `"copy"` \| `"execute"` \| `"move"` \| `"popup"`
+> `optional` **aria-dropeffect**: `"link"` \| `"copy"` \| `"none"` \| `"execute"` \| `"move"` \| `"popup"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2473
 
@@ -437,7 +437,7 @@ in ARIA 1.1
 
 ### aria-haspopup?
 
-> `optional` **aria-haspopup**: `boolean` \| `"true"` \| `"false"` \| `"dialog"` \| `"grid"` \| `"listbox"` \| `"menu"` \| `"tree"`
+> `optional` **aria-haspopup**: `boolean` \| `"true"` \| `"false"` \| `"dialog"` \| `"menu"` \| `"grid"` \| `"listbox"` \| `"tree"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2492
 
@@ -991,7 +991,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > **children**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L19)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L19)
 
 The default content of the button when in the 'idle' state.
 
@@ -1039,7 +1039,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 ### contentEditable?
 
-> `optional` **contentEditable**: `Booleanish` \| `"inherit"` \| `"plaintext-only"`
+> `optional` **contentEditable**: `"inherit"` \| `Booleanish` \| `"plaintext-only"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2703
 
@@ -1181,7 +1181,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > `optional` **failedContent**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L29)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L29)
 
 Optional custom content to display in the 'failed' state.
 
@@ -1263,7 +1263,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > **getLastTxKey**: () => `undefined` \| `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L23)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L23)
 
 A function that returns the key of the most recently initiated transaction.
 
@@ -1327,7 +1327,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 ### inputMode?
 
-> `optional` **inputMode**: `"search"` \| `"url"` \| `"none"` \| `"text"` \| `"tel"` \| `"email"` \| `"numeric"` \| `"decimal"`
+> `optional` **inputMode**: `"search"` \| `"url"` \| `"text"` \| `"none"` \| `"tel"` \| `"email"` \| `"numeric"` \| `"decimal"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2765
 
@@ -1437,7 +1437,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > `optional` **loadingContent**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:25](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L25)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:25](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L25)
 
 Optional custom content to display in the 'loading' state.
 
@@ -3583,7 +3583,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > `optional` **resetTimeout**: `number`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L31)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L31)
 
 The duration (in ms) to display the succeed/failed state before resetting to idle. Defaults to 2500.
 
@@ -3689,7 +3689,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > `optional` **succeedContent**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:27](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L27)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:27](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L27)
 
 Optional custom content to display in the 'succeed' state.
 
@@ -3771,7 +3771,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 ### type?
 
-> `optional` **type**: `"submit"` \| `"reset"` \| `"button"`
+> `optional` **type**: `"button"` \| `"submit"` \| `"reset"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2973
 

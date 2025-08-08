@@ -37,8 +37,12 @@ const codeBlock = `export const CounterAbi = [
 export function ABIStep() {
   return (
     <div>
-      <h3 className="text-[18px] font-bold mb-2">Step 2: Contract ABI</h3>
-      <p className="mb-2">Choose the contract for the interaction. In this guide, we'll use a standard Counter ABI.</p>
+      <h3 className="mb-2 text-lg font-bold text-[var(--tuwa-text-primary)]">Step 2: Contract ABI</h3>
+      <p className="mb-2 text-[var(--tuwa-text-secondary)]">
+        You'll need the Application Binary Interface (ABI) for the smart contract you wish to interact with. The ABI
+        defines the contract's methods and structures. For this demonstration, we will use the ABI from a standard
+        Counter contract.
+      </p>
       <CodeBlock title="CounterAbi.ts" titleIcons={<DocumentTextIcon />} textToCopy={codeBlock}>
         <CodeHighlighter children={codeBlock} language="ts" />
       </CodeBlock>

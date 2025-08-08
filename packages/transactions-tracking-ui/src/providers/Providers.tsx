@@ -11,7 +11,7 @@ export function Providers() {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
   const initialTx = useTxTrackingStore((state) => state.initialTx);
 
-  const { address: walletAddress, chain } = useAccount();
+  const { address, chain } = useAccount();
 
   return (
     <TransactionsWidget
@@ -22,7 +22,7 @@ export function Providers() {
       handleTransaction={handleTransaction}
       actions={txActions}
       initialTx={initialTx}
-      walletAddress={walletAddress}
+      walletAddress={address}
       chain={chain}
     />
   );

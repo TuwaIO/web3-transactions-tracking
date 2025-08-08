@@ -7,7 +7,9 @@ import { TxTrackingStoreStep } from '@/components/started-steps/TxTrackingStoreS
 export function CombineSteps({ trackingPackageName }: PackageInstallationTabsProps) {
   return (
     <>
-      <p className="my-2">Second, add the package's from TUWA, for transactions tracking and store.</p>
+      <p className="my-2 text-[var(--tuwa-text-secondary)]">
+        First, install the necessary TUWA packages for transaction tracking and state management.
+      </p>
       <PackageInstallationTabs trackingPackageName={trackingPackageName} />
       <ABIStep />
       <ActionStep />

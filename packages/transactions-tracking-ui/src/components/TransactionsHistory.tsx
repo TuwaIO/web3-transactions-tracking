@@ -2,10 +2,10 @@
  * @file This file contains the `TransactionsHistory` component, which displays a list of past and pending transactions.
  */
 
-import { selectAllTransactionsByActiveWallet, Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
+import { selectAllTransactionsByActiveWallet, Transaction } from '@tuwa/web3-transactions-tracking-core';
 import { ComponentType, JSX, ReactNode } from 'react';
 
-import { useLabels } from '../providers/LabelsProvider';
+import { useLabels } from '../providers';
 import { cn } from '../utils';
 import { TransactionHistoryItem, TransactionHistoryItemProps } from './TransactionHistoryItem';
 import { WalletInfoModalProps } from './WalletInfoModal';

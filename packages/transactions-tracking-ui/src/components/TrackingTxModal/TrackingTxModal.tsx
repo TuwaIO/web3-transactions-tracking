@@ -3,7 +3,7 @@
  */
 
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import { ActionTxKey } from '@tuwa/evm-transactions-tracking/dist';
+import { ActionTxKey } from '@tuwa/evm-transactions-tracking';
 import {
   InitialTransactionParams,
   ITxTrackingStore,
@@ -17,8 +17,8 @@ import { JSX, ReactNode, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { Chain } from 'viem';
 
-import { useLabels } from '../../providers/LabelsProvider';
-import { cn } from '../../utils/cn';
+import { useLabels } from '../../providers';
+import { cn } from '../../utils';
 import { StatusAwareText } from '../StatusAwareText';
 import { TxErrorBlock, TxErrorBlockProps } from './TxErrorBlock';
 import { TxInfoBlock, TxInfoBlockProps } from './TxInfoBlock';

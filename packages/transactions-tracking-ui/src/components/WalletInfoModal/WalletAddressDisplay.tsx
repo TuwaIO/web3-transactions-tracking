@@ -7,7 +7,7 @@ import { JSX } from 'react';
 import { Chain } from 'viem';
 
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
-import { useLabels } from '../../providers/LabelsProvider';
+import { useLabels } from '../../providers';
 import { cn, textCenterEllipsis } from '../../utils';
 
 export type WalletAddressDisplayProps = {

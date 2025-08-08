@@ -1,57 +1,52 @@
 'use client';
 
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WagmiProvider } from 'wagmi';
+import { cn } from '@tuwa/transactions-tracking-ui';
+import { ReactNode } from 'react';
 
 import { PackageInstallationTabsProps } from '@/components/PackageInstallationTabs';
+import { RainbowKitTransactionsBlock } from '@/components/RainbowKitTransactionsBlock';
 import { CombineSteps } from '@/components/started-steps/CombineSteps';
 import { TxBlockStep } from '@/components/started-steps/TxBlockStep';
-import { TransactionsBlock } from '@/components/TransactionsBlock';
-import { config } from '@/configs/wagmiConfig';
 
-const queryClient = new QueryClient();
+function StyledLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      className={cn('font-medium text-[var(--tuwa-text-accent)]', 'transition-all hover:underline underline-offset-4')}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  );
+}
 
 export function RainbowKit({ trackingPackageName }: PackageInstallationTabsProps) {
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
-          <div>
-            <div>
-              <h3 className="text-[18px] font-bold mb-2">Step 1: Installation</h3>
-              <p>
-                First, add the RainbowKit to your project, for wallet connection logic:{' '}
-                <a
-                  className="text-blue-600 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-blue-600 hover:after:bg-blue-800 after:transition"
-                  href="https://rainbowkit.com/docs/installation"
-                  target="_blank"
-                >
-                  RainbowKit documentation
-                </a>
-                .
-              </p>
-            </div>
-            <CombineSteps trackingPackageName={trackingPackageName} />
-            <TxBlockStep />
+    <RainbowKitProvider>
+      <div className="flex flex-col gap-8">
+        <div>
+          <h3 className="mb-2 text-xl font-semibold text-[var(--tuwa-text-primary)]">Step 1: Wallet Connector Setup</h3>
+          <p className="text-[var(--tuwa-text-secondary)]">
+            Our library works with any wagmi-based setup. This guide uses{' '}
+            <StyledLink href="https://rainbowkit.com/docs/installation">RainbowKit</StyledLink> as an example.
+          </p>
+        </div>
 
-            <div>
-              <h4 className="font-bold text-[18px] my-4">
-                Try it out (
-                <a
-                  className="text-blue-600 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-blue-600 hover:after:bg-blue-800 after:transition"
-                  href="https://cloud.google.com/application/web3/faucet"
-                  target="_blank"
-                >
-                  sepolia faucet
-                </a>
-                ):
-              </h4>
-              <TransactionsBlock />
-            </div>
-          </div>
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+        <CombineSteps trackingPackageName={trackingPackageName} />
+        <TxBlockStep />
+
+        <div>
+          <h4 className="mb-4 text-xl font-semibold text-[var(--tuwa-text-primary)]">
+            Live Demo{' '}
+            <span className="text-base font-normal text-[var(--tuwa-text-secondary)]">
+              (<StyledLink href="https://www.sepoliafaucet.io/">Sepolia Faucet</StyledLink>)
+            </span>
+          </h4>
+          <RainbowKitTransactionsBlock />
+        </div>
+      </div>
+    </RainbowKitProvider>
   );
 }

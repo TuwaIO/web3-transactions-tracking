@@ -5,7 +5,7 @@
 import makeBlockie from 'ethereum-blockies-base64';
 import { JSX } from 'react';
 
-import { useLabels } from '../../providers/LabelsProvider';
+import { useLabels } from '../../providers';
 import { cn } from '../../utils';
 
 export type WalletAvatarProps = {
