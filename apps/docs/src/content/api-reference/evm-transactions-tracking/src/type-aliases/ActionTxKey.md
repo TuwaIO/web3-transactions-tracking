@@ -8,7 +8,7 @@
 
 > **ActionTxKey** = `Hex` \| [`GelatoTxKey`](GelatoTxKey.md)
 
-Defined in: [packages/evm-transactions-tracking/src/types.ts:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/evm-transactions-tracking/src/types.ts#L28)
+Defined in: [packages/evm-transactions-tracking/src/types.ts:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/evm-transactions-tracking/src/types.ts#L28)
 
 Represents the unique identifier returned by an action function after a transaction is submitted.
 This key is used to determine which tracker should monitor the transaction.

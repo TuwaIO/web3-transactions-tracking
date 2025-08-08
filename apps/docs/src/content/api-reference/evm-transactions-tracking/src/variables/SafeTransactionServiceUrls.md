@@ -8,7 +8,7 @@
 
 > `const` **SafeTransactionServiceUrls**: `Record`\<`number`, `string`\>
 
-Defined in: [packages/evm-transactions-tracking/src/utils/safeConstants.ts:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/evm-transactions-tracking/src/utils/safeConstants.ts#L42)
+Defined in: [packages/evm-transactions-tracking/src/utils/safeConstants.ts:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/evm-transactions-tracking/src/utils/safeConstants.ts#L42)
 
 A mapping of chain IDs to their corresponding Safe Transaction Service API endpoints.
 This is used by the `safeTracker` to fetch the status of multisig transactions.

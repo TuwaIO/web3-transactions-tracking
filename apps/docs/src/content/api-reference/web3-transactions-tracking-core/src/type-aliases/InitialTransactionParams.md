@@ -8,7 +8,7 @@
 
 > **InitialTransactionParams** = `object`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:85](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/web3-transactions-tracking-core/src/types.ts#L85)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:85](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/types.ts#L85)
 
 Represents the parameters required to initiate a new transaction via the `handleTransaction` method.
 
@@ -18,7 +18,7 @@ Represents the parameters required to initiate a new transaction via the `handle
 
 > `optional` **actionKey**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:91](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/web3-transactions-tracking-core/src/types.ts#L91)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:91](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/types.ts#L91)
 
 A key identifying the retry logic from the actions registry.
 
@@ -28,7 +28,7 @@ A key identifying the retry logic from the actions registry.
 
 > `optional` **description**: `string` \| \[`string`, `string`, `string`, `string`\]
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:97](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/web3-transactions-tracking-core/src/types.ts#L97)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:97](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/types.ts#L97)
 
 A description for the transaction, with the same structure as the title.
 
@@ -38,7 +38,7 @@ A description for the transaction, with the same structure as the title.
 
 > **desiredChainID**: `number`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:89](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/web3-transactions-tracking-core/src/types.ts#L89)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:89](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/types.ts#L89)
 
 The ID of the desired blockchain network.
 
@@ -48,7 +48,7 @@ The ID of the desired blockchain network.
 
 > `optional` **payload**: `object`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:93](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/web3-transactions-tracking-core/src/types.ts#L93)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:93](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/types.ts#L93)
 
 Any additional data to be associated with the transaction.
 
@@ -58,7 +58,7 @@ Any additional data to be associated with the transaction.
 
 > `optional` **title**: `string` \| \[`string`, `string`, `string`, `string`\]
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:95](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/web3-transactions-tracking-core/src/types.ts#L95)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:95](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/types.ts#L95)
 
 A title for the transaction, can be a single string or an array for different states.
 
@@ -68,7 +68,7 @@ A title for the transaction, can be a single string or an array for different st
 
 > **type**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:87](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/web3-transactions-tracking-core/src/types.ts#L87)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:87](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/types.ts#L87)
 
 The type or category of the transaction (e.g., 'increment', 'approve').
 
@@ -78,6 +78,6 @@ The type or category of the transaction (e.g., 'increment', 'approve').
 
 > `optional` **withTrackedModal**: `boolean`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:99](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/web3-transactions-tracking-core/src/types.ts#L99)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:99](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/types.ts#L99)
 
 If true, the detailed tracking modal will open automatically for this transaction.

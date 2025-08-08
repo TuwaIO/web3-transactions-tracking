@@ -8,7 +8,7 @@
 
 > **getAvatar**(`name`, `address`): `Promise`\<`undefined` \| `string`\>
 
-Defined in: [packages/transactions-tracking-ui/src/utils/ensUtils.ts:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/utils/ensUtils.ts#L43)
+Defined in: [packages/transactions-tracking-ui/src/utils/ensUtils.ts:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/utils/ensUtils.ts#L43)
 
 Fetches the avatar for a given ENS name.
 If no ENS avatar is set, it generates a unique "blockie" image as a fallback.

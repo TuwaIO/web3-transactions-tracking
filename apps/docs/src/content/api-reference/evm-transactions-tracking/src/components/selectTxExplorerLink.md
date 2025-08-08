@@ -8,7 +8,7 @@
 
 > **selectTxExplorerLink**\<`TR`, `T`\>(`transactionsPool`, `chains`, `txHash`, `replacedTxHash?`): `string`
 
-Defined in: [packages/evm-transactions-tracking/src/store/transactionsSelectors.ts:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/evm-transactions-tracking/src/store/transactionsSelectors.ts#L24)
+Defined in: [packages/evm-transactions-tracking/src/store/transactionsSelectors.ts:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/evm-transactions-tracking/src/store/transactionsSelectors.ts#L24)
 
 Generates a URL to a block explorer for a given transaction.
 It handles different URL structures for standard EVM transactions and Safe transactions.

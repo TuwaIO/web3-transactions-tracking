@@ -6,7 +6,7 @@
 
 # ToastTransactionKeyProps\<TR, T\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L19)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L19)
 
 ## Extends
 
@@ -28,7 +28,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKe
 
 > **appChains**: `Chain`[]
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L24)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L24)
 
 An array of supported chain objects, used for generating explorer links.
 
@@ -38,7 +38,7 @@ An array of supported chain objects, used for generating explorer links.
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L28)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L28)
 
 Optional additional CSS classes for the container.
 
@@ -48,7 +48,7 @@ Optional additional CSS classes for the container.
 
 > `optional` **renderHashLink**: (`props`) => `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L33)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L33)
 
 An optional render prop to allow for complete customization of how the hash link is rendered.
 If not provided, the default `HashLink` component will be used.
@@ -87,7 +87,7 @@ If not provided, the default `HashLink` component will be used.
 
 > **transactionsPool**: `TransactionPool`\<`TR`, `T`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L55)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L55)
 
 The entire pool of transactions from the store.
 
@@ -101,7 +101,7 @@ The entire pool of transactions from the store.
 
 > **tx**: `T`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:22](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L22)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:22](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L22)
 
 The transaction object to display identifiers for.
 
@@ -111,6 +111,6 @@ The transaction object to display identifiers for.
 
 > `optional` **variant**: `"history"` \| `"toast"`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L26)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L26)
 
 The visual variant, which applies different container styles.

@@ -8,7 +8,7 @@
 
 > **TransactionsWidget**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx:79](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx#L79)
+Defined in: [packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx:79](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx#L79)
 
 The main entry point component for the transaction tracking UI.
 It orchestrates toasts, modals, and providers.
