@@ -1,120 +1,146 @@
 /**
+ * @file Unit tests for the Gelato transaction tracker.
+ * This file tests both the low-level fetcher (`fetchTxFromGelatoAPI`) and the high-level tracker functions.
  * @vitest-environment jsdom
  */
 
-import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist/types';
+import { initializePollingTracker } from '@tuwa/web3-transactions-tracking-core/dist';
 import dayjs from 'dayjs';
 import { zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { TransactionTracker } from '../types';
-import { GelatoTaskState, GelatoTaskStatusResponse, gelatoTracker, GelatoTrackerParams } from './gelatoTracker';
+import {
+  fetchTxFromGelatoAPI,
+  GelatoTaskState,
+  GelatoTaskStatusResponse,
+  gelatoTracker,
+  GelatoTrackerParams,
+} from './gelatoTracker';
 
-const createMockResponse = ({
-  taskId,
-  status,
-  executionDate,
-  lastCheckMessage,
-}: {
-  taskId: string;
-  status: GelatoTaskState;
-  executionDate?: string;
-  lastCheckMessage?: string;
-}): GelatoTaskStatusResponse => {
-  return {
-    task: {
-      chainId: sepolia.id,
-      taskId,
-      taskState: status,
-      creationDate: dayjs().unix().toString(),
-      executionDate: executionDate ? executionDate : dayjs().add(5, 'm').unix().toString(),
-      transactionHash: zeroHash,
-      lastCheckMessage,
-    },
-  };
-};
+// Mock the core polling utility to isolate the gelatoTracker logic.
+vi.mock('@tuwa/web3-transactions-tracking-core/dist', () => ({
+  initializePollingTracker: vi.fn(),
+}));
 
-const createMockTransaction = (
-  txKey?: string,
-  pending?: boolean,
-): Pick<Transaction<TransactionTracker>, 'txKey'> & { pending?: boolean } => {
-  return { txKey: txKey ?? '0x8c1f0b04fb55c528a46c1497b80121644819a0ca6622faba1aa3b942415d3122', pending };
-};
-
-const mockParams: Omit<GelatoTrackerParams, 'tx'> = {
-  onSucceed: vi.fn(),
-  onFailed: vi.fn(),
-  onIntervalTick: vi.fn(),
-  removeTxFromPool: vi.fn(),
-  onInitialize: vi.fn(),
-};
+// Helper to create a mock API response from Gelato.
+const createMockResponse = (status: GelatoTaskState, creationDate?: string): GelatoTaskStatusResponse => ({
+  task: {
+    chainId: sepolia.id,
+    taskId: '0x123',
+    taskState: status,
+    creationDate: creationDate || dayjs().toISOString(),
+    executionDate: dayjs().add(5, 'm').toISOString(),
+    transactionHash: zeroHash,
+  },
+});
 
 describe('gelatoTracker', () => {
-  it('calls onInitialize when called', async () => {
-    await gelatoTracker({
-      tx: createMockTransaction(undefined, true),
-      ...mockParams,
-    });
-    expect(mockParams.onInitialize).toBeCalledTimes(1);
+  it('should call initializePollingTracker with the correct fetcher and parameters', async () => {
+    const mockTx = { txKey: '0x123', pending: true };
+    const mockParams: GelatoTrackerParams = {
+      tx: mockTx,
+      onSucceed: vi.fn(),
+      onFailed: vi.fn(),
+    };
+
+    await gelatoTracker(mockParams);
+
+    // Verify that the main polling function is called.
+    expect(initializePollingTracker).toHaveBeenCalledOnce();
+    // Verify that it's configured with the correct fetcher function and passes other params through.
+    expect(vi.mocked(initializePollingTracker).mock.calls[0][0]).toEqual(
+      expect.objectContaining({
+        ...mockParams,
+        fetcher: fetchTxFromGelatoAPI,
+      }),
+    );
+  });
+});
+
+describe('fetchTxFromGelatoAPI', () => {
+  const mockFetcherParams = {
+    tx: { txKey: '0x123' },
+    onSucceed: vi.fn(),
+    onFailed: vi.fn(),
+    onIntervalTick: vi.fn(),
+    clearWatch: vi.fn(),
+  };
+
+  beforeEach(() => {
+    // Mock the global fetch function before each test.
+    global.fetch = vi.fn();
   });
 
-  it('handles onSuccess events', async () => {
-    const tx = createMockTransaction(undefined, true);
-    await gelatoTracker({
-      tx,
-      ...mockParams,
-    });
-    const mockResponse = createMockResponse({
-      taskId: tx.txKey,
-      status: GelatoTaskState.ExecSuccess,
-    });
-    mockParams.onSucceed(mockResponse);
-    expect(mockParams.onSucceed).toBeCalledWith(mockResponse);
+  afterEach(() => {
+    // Clear all mocks after each test.
+    vi.clearAllMocks();
   });
 
-  it('handles onFailed events', async () => {
-    const taskId = '0xb5d6aca947112f1a377838fa061a1f148442d9ecc73106f72e1cf37f15bd4a9e';
+  it('should call onSucceed and clearWatch when task state is ExecSuccess', async () => {
+    const mockResponse = createMockResponse(GelatoTaskState.ExecSuccess);
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockResponse,
+    } as Response);
 
-    await gelatoTracker({
-      tx: createMockTransaction(taskId, true),
-      ...mockParams,
-    });
-    const mockResponse = createMockResponse({
-      taskId: taskId,
-      status: GelatoTaskState.ExecReverted,
-    });
-    mockParams.onFailed(mockResponse);
-    expect(mockParams.onFailed).toBeCalledWith(mockResponse);
+    await fetchTxFromGelatoAPI(mockFetcherParams);
+
+    expect(mockFetcherParams.onSucceed).toHaveBeenCalledWith(mockResponse);
+    expect(mockFetcherParams.clearWatch).toHaveBeenCalledWith(true);
+    expect(mockFetcherParams.onFailed).not.toHaveBeenCalled();
   });
 
-  it('handles onIntervalTick events', async () => {
-    const tx = createMockTransaction(undefined, true);
+  it('should call onFailed and clearWatch when task state is ExecReverted', async () => {
+    const mockResponse = createMockResponse(GelatoTaskState.ExecReverted);
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockResponse,
+    } as Response);
 
-    await gelatoTracker({
-      tx,
-      ...mockParams,
-    });
-    const mockResponse = createMockResponse({
-      taskId: tx.txKey,
-      status: GelatoTaskState.ExecSuccess,
-    });
-    if (mockParams.onIntervalTick) {
-      mockParams.onIntervalTick(mockResponse);
-      expect(mockParams.onIntervalTick).toBeCalledWith(mockResponse);
-    }
+    await fetchTxFromGelatoAPI(mockFetcherParams);
+
+    expect(mockFetcherParams.onFailed).toHaveBeenCalledWith(mockResponse);
+    expect(mockFetcherParams.clearWatch).toHaveBeenCalledWith(true);
+    expect(mockFetcherParams.onSucceed).not.toHaveBeenCalled();
   });
 
-  it('calls removeTxFromPool when event occurs', async () => {
-    const tx = createMockTransaction(undefined, true);
+  it('should only call onIntervalTick for pending states', async () => {
+    const mockResponse = createMockResponse(GelatoTaskState.ExecPending);
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockResponse,
+    } as Response);
 
-    await gelatoTracker({
-      tx,
-      ...mockParams,
-    });
-    if (mockParams.removeTxFromPool) {
-      mockParams.removeTxFromPool(tx.txKey);
-      expect(mockParams.removeTxFromPool).toBeCalledWith(tx.txKey);
-    }
+    await fetchTxFromGelatoAPI(mockFetcherParams);
+
+    expect(mockFetcherParams.onIntervalTick).toHaveBeenCalledWith(mockResponse);
+    expect(mockFetcherParams.clearWatch).not.toHaveBeenCalled();
+    expect(mockFetcherParams.onSucceed).not.toHaveBeenCalled();
+    expect(mockFetcherParams.onFailed).not.toHaveBeenCalled();
+  });
+
+  it('should call clearWatch if a task has been pending for more than a day', async () => {
+    const oldCreationDate = dayjs().subtract(2, 'day').toISOString();
+    const mockResponse = createMockResponse(GelatoTaskState.ExecPending, oldCreationDate);
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockResponse,
+    } as Response);
+
+    await fetchTxFromGelatoAPI(mockFetcherParams);
+
+    expect(mockFetcherParams.clearWatch).toHaveBeenCalledWith(); // Called without `true` to remove from pool
+  });
+
+  it('should not call any callbacks if the fetch response is not ok', async () => {
+    vi.mocked(fetch).mockResolvedValue({ ok: false } as Response);
+
+    await fetchTxFromGelatoAPI(mockFetcherParams);
+
+    expect(mockFetcherParams.onIntervalTick).not.toHaveBeenCalled();
+    expect(mockFetcherParams.onSucceed).not.toHaveBeenCalled();
+    expect(mockFetcherParams.onFailed).not.toHaveBeenCalled();
+    expect(mockFetcherParams.clearWatch).not.toHaveBeenCalled();
   });
 });

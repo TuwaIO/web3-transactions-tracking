@@ -5,11 +5,11 @@ import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/d
 import { createViemClient } from '@tuwa/evm-transactions-tracking/dist';
 import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers/TransactionsWidget';
 import { TxActionButton } from '@tuwa/transactions-tracking-ui/src/components';
-import { GetAccountReturnType, watchAccount } from '@wagmi/core';
 import { useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
+import { useAccount } from 'wagmi';
 
 import { CounterAbi } from '@/abis/CounterAbi';
 import { appChains, config } from '@/configs/wagmiConfig';
@@ -22,19 +22,14 @@ export const COUNTER_ADDRESS = '0xAe7f46914De82028eCB7E2bF97Feb3D3dDCc2BAB';
 export const TransactionsBlock = () => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
   const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
-  const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
   const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
   const initializeTransactionsPool = useTxTrackingStore((store) => store.initializeTransactionsPool);
   const getLastTxKey = useTxTrackingStore((store) => store.getLastTxKey);
+  const initialTx = useTxTrackingStore((state) => state.initialTx);
+
+  const { address: walletAddress, chain } = useAccount();
 
   const [currentCount, setCurrentCount] = useState(0);
-  const [account, setAccount] = useState<GetAccountReturnType | undefined>(undefined);
-
-  watchAccount(config, {
-    onChange(account) {
-      setAccount(account);
-    },
-  });
 
   useEffect(() => {
     readContract(createViemClient(sepolia.id, appChains) as Client, {
@@ -100,15 +95,15 @@ export const TransactionsBlock = () => {
         <div className="mt-4">Current count: {currentCount}</div>
 
         <div>
-          <TxActionButton action={handleIncrement} getLastTxKey={getLastTxKey} trackedTransaction={trackedTransaction}>
+          <TxActionButton action={handleIncrement} transactionsPool={transactionsPool} getLastTxKey={getLastTxKey}>
             Increment TX
           </TxActionButton>
           <TxActionButton
             action={handleIncrementGelato}
+            transactionsPool={transactionsPool}
             getLastTxKey={getLastTxKey}
-            trackedTransaction={trackedTransaction}
           >
-            Increment TX via GELATO
+            Increment TX GELATO
           </TxActionButton>
         </div>
       </div>
@@ -116,12 +111,13 @@ export const TransactionsBlock = () => {
       <TransactionsWidget
         appChains={appChains}
         transactionsPool={transactionsPool}
-        walletAddress={account?.address}
-        trackedTransaction={trackedTransaction}
+        initialTx={initialTx}
         closeTxTrackedModal={closeTxTrackedModal}
         config={config}
         handleTransaction={handleTransaction}
         actions={txActions}
+        walletAddress={walletAddress}
+        chain={chain}
       />
     </div>
   );

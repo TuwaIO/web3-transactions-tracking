@@ -1,14 +1,42 @@
+/**
+ * @file This file contains the `WalletAddressDisplay` component, a UI element for showing a wallet address.
+ */
+
 import { ArrowTopRightOnSquareIcon, CheckIcon, ClipboardIcon } from '@heroicons/react/24/solid';
+import { JSX } from 'react';
+import { Chain } from 'viem';
 
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
 import { useLabels } from '../../providers/LabelsProvider';
 import { cn } from '../../utils/cn';
 import { textCenterEllipsis } from '../../utils/textCenterEllipsis';
 
-export function WalletAddressDisplay({ address, className }: { address: string; className?: string }) {
+export type WalletAddressDisplayProps = {
+  /** The wallet address to display. */
+  address: string;
+  /**
+   * The viem `Chain` object for the network the address belongs to.
+   * This is used to generate the correct block explorer link.
+   */
+  chain?: Chain;
+  /** Optional additional CSS classes for the container. */
+  className?: string;
+};
+
+/**
+ * A component that renders a wallet address in a styled "pill" format,
+ * including a copy button and a link to the appropriate block explorer.
+ *
+ * @param {WalletAddressDisplayProps} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ */
+export function WalletAddressDisplay({ address, chain, className }: WalletAddressDisplayProps): JSX.Element {
   const { isCopied, copy } = useCopyToClipboard();
   const labels = useLabels();
-  const explorerLink = `https://etherscan.io/address/${address}`;
+
+  // Dynamically generate the explorer link based on the provided chain.
+  const explorerUrl = chain?.blockExplorers?.default.url;
+  const explorerLink = explorerUrl ? `${explorerUrl}/address/${address}` : undefined;
 
   return (
     <div
@@ -19,7 +47,9 @@ export function WalletAddressDisplay({ address, className }: { address: string; 
     >
       <span>{textCenterEllipsis(address, 6, 6)}</span>
       <button
-        title={labels.actions.copy}
+        type="button"
+        title={isCopied ? labels.txError.copied : labels.actions.copy}
+        aria-label={isCopied ? labels.txError.copied : labels.actions.copy}
         onClick={() => copy(address)}
         className="cursor-pointer transition-colors hover:text-[var(--tuwa-text-primary)]"
       >
@@ -29,15 +59,20 @@ export function WalletAddressDisplay({ address, className }: { address: string; 
           <ClipboardIcon className="h-4 w-4" />
         )}
       </button>
-      <a
-        href={explorerLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="transition-colors hover:text-[var(--tuwa-text-accent)]"
-        title={labels.actions.viewOnExplorer}
-      >
-        <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-      </a>
+
+      {/* Only render the explorer link if a URL could be generated */}
+      {explorerLink && (
+        <a
+          href={explorerLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition-colors hover:text-[var(--tuwa-text-accent)]"
+          title={labels.actions.viewOnExplorer}
+          aria-label={labels.actions.viewOnExplorer}
+        >
+          <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+        </a>
+      )}
     </div>
   );
 }

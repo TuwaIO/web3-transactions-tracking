@@ -1,7 +1,11 @@
+/**
+ * @file This file contains the `ToastTransaction` component, which serves as the main body for a transaction notification toast.
+ */
+
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
 import { getChainName } from '@bgd-labs/react-web3-icons/dist/utils';
 import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import { ToastContainerProps, ToastContentProps } from 'react-toastify';
 import { Chain } from 'viem';
 
@@ -12,20 +16,55 @@ import { ToastTransactionKey } from './ToastTransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';
 import { WalletInfoModalProps } from './WalletInfoModal';
 
+// --- Prop Types for Customization ---
 type CustomStatusAwareTextProps = Parameters<typeof StatusAwareText>[0];
 type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof ToastTransactionKey<TR, T>>[0];
 type CustomStatusBadgeProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionStatusBadge<TR, T>>[0];
 type CustomWalletInfoButtonProps = { onClick: () => void };
 
+/**
+ * Defines the structure for the `customization` prop, allowing users to override
+ * default sub-components with their own implementations.
+ */
 export type ToastTransactionCustomization<TR, T extends Transaction<TR>> = {
   components?: {
+    /** Override the default title/description component. */
     statusAwareText?: (props: CustomStatusAwareTextProps) => ReactNode;
+    /** Override the default component for displaying transaction keys/hashes. */
     transactionKey?: (props: CustomTransactionKeyProps<TR, T>) => ReactNode;
+    /** Override the default status badge component. */
     statusBadge?: (props: CustomStatusBadgeProps<TR, T>) => ReactNode;
+    /** Override the default "Open wallet info" button. */
     walletInfoButton?: (props: CustomWalletInfoButtonProps) => ReactNode;
   };
 };
 
+export type ToastTransactionProps<TR, T extends Transaction<TR>> = {
+  /** The transaction object to display in the toast. */
+  tx: T;
+  /** A function to open the main wallet info modal. */
+  openWalletInfoModal?: (value: boolean) => void;
+  /** An array of supported chain objects. */
+  appChains: Chain[];
+  /** An optional custom icon to display instead of the default chain icon. */
+  icon?: ReactNode;
+  /** Optional additional CSS classes for the toast container. */
+  className?: string;
+  /** An object to customize and override the default internal components. */
+  customization?: ToastTransactionCustomization<TR, T>;
+
+  closeToast?: ToastContentProps['closeToast'];
+  toastProps?: ToastContainerProps;
+} & Pick<WalletInfoModalProps<TR, T>, 'transactionsPool'>;
+
+/**
+ * A composite component that renders the content for a transaction toast notification.
+ * It is highly customizable via the `customization` prop, which allows for overriding
+ * its internal components.
+ *
+ * @param {ToastTransactionProps<TR, T>} props - The component props.
+ * @returns {JSX.Element} The rendered toast body.
+ */
 export function ToastTransaction<TR, T extends Transaction<TR>>({
   openWalletInfoModal,
   tx,
@@ -34,27 +73,17 @@ export function ToastTransaction<TR, T extends Transaction<TR>>({
   icon,
   className,
   customization,
-}: {
-  closeToast?: ToastContentProps['closeToast'];
-  toastProps?: ToastContainerProps;
-  tx: T;
-  openWalletInfoModal?: (value: boolean) => void;
-  appChains: Chain[];
-  icon?: ReactNode;
-  className?: string;
-  customization?: ToastTransactionCustomization<TR, T>;
-} & Pick<WalletInfoModalProps<TR, T>, 'transactionsPool'>) {
+}: ToastTransactionProps<TR, T>): JSX.Element {
   const labels = useLabels();
-
-  const C = customization?.components;
+  const C = customization?.components; // Shortcut for customization components
 
   return (
     <div className={cn('flex w-full flex-col gap-3 rounded-lg bg-[var(--tuwa-bg-primary)] p-4 shadow-md', className)}>
+      {/* --- Header: Icon + Title/Description --- */}
       <div className="flex items-start gap-3">
         <div className="w-[40px] flex-shrink-0" title={getChainName(tx.chainId)}>
           {icon ?? <Web3Icon chainId={tx.chainId} />}
         </div>
-
         <div className="flex-1">
           {C?.statusAwareText ? (
             C.statusAwareText({
@@ -76,6 +105,7 @@ export function ToastTransaction<TR, T extends Transaction<TR>>({
         </div>
       </div>
 
+      {/* --- Body: Hashes + Status/Actions --- */}
       <div>
         {C?.transactionKey ? (
           C.transactionKey({ transactionsPool, appChains, tx, variant: 'toast' })

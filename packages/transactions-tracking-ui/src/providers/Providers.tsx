@@ -1,5 +1,4 @@
-import { GetAccountReturnType, watchAccount } from '@wagmi/core';
-import { useState } from 'react';
+import { useAccount } from 'wagmi';
 
 import { appChains, config } from '../configs/wagmiConfig';
 import { useTxTrackingStore } from '../hooks/txTrackingHooks';
@@ -12,24 +11,19 @@ export function Providers() {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
   const initialTx = useTxTrackingStore((state) => state.initialTx);
 
-  const [account, setAccount] = useState<GetAccountReturnType | undefined>(undefined);
-
-  watchAccount(config, {
-    onChange(account) {
-      setAccount(account);
-    },
-  });
+  const { address: walletAddress, chain } = useAccount();
 
   return (
     <TransactionsWidget
       appChains={appChains}
       transactionsPool={transactionsPool}
-      walletAddress={account?.address}
       closeTxTrackedModal={closeTxTrackedModal}
       config={config}
       handleTransaction={handleTransaction}
       actions={txActions}
       initialTx={initialTx}
+      walletAddress={walletAddress}
+      chain={chain}
     />
   );
 }

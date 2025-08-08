@@ -1,12 +1,17 @@
+/**
+ * @file This file contains the main `TransactionsWidget` component, the primary entry point for the UI library.
+ */
+
 import {
   IInitializeTxTrackingStore,
   Transaction,
   TransactionPool,
   TransactionStatus,
 } from '@tuwa/web3-transactions-tracking-core/dist';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { JSX, useEffect, useMemo, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { toast, ToastContainer, ToastContainerProps, ToastContentProps, TypeOptions } from 'react-toastify';
+import { Address, Chain } from 'viem';
 
 import {
   ToastCloseButton,
@@ -23,9 +28,15 @@ import { TuwaLabels } from '../i18n/types';
 import { deepMerge } from '../utils/deepMerge';
 import { LabelsProvider } from './LabelsProvider';
 
+// Set the app element for react-modal for accessibility.
 if (typeof document !== 'undefined') {
-  document.body.setAttribute('id', 'tuwa-transactions-widget');
-  Modal.setAppElement('#tuwa-transactions-widget');
+  let appRoot = document.getElementById('root');
+  if (!appRoot) {
+    appRoot = document.createElement('div');
+    appRoot.setAttribute('id', 'root');
+    document.body.appendChild(appRoot);
+  }
+  Modal.setAppElement('#root');
 }
 
 const STATUS_TO_TOAST_TYPE: Record<string, TypeOptions> = {
@@ -34,10 +45,38 @@ const STATUS_TO_TOAST_TYPE: Record<string, TypeOptions> = {
   [TransactionStatus.Replaced]: 'info',
 };
 
+export type TransactionsWidgetProps<TR, T extends Transaction<TR>> = {
+  /** A partial object of labels to override the default English text. */
+  labels?: Partial<TuwaLabels>;
+  /** An object to enable or disable major UI features. All are enabled by default. */
+  features?: {
+    toasts?: boolean;
+    walletInfoModal?: boolean;
+    trackingTxModal?: boolean;
+  };
+  /** A single object to pass down deep customization options to all child components. */
+  customization?: {
+    toast?: ToastTransactionCustomization<TR, T>;
+    walletInfoModal?: WalletInfoModalCustomization<TR, T>;
+    trackingTxModal?: TrackingTxModalCustomization<TR, T>;
+  };
+  chain?: Chain;
+  walletAddress?: string;
+} & Pick<IInitializeTxTrackingStore<TR, T>, 'closeTxTrackedModal'> &
+  ToastContainerProps &
+  Pick<
+    TrackingTxModalProps<TR, T>,
+    'handleTransaction' | 'actions' | 'config' | 'appChains' | 'transactionsPool' | 'initialTx'
+  >;
+
+/**
+ * The main entry point component for the transaction tracking UI.
+ * It orchestrates toasts, modals, and providers.
+ *
+ * @param {TransactionsWidgetProps<TR, T>} props - The component props.
+ * @returns {JSX.Element} The rendered widget.
+ */
 export function TransactionsWidget<TR, T extends Transaction<TR>>({
-  transactionsPool,
-  walletAddress,
-  appChains,
   labels,
   features,
   customization,
@@ -46,29 +85,16 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
   config,
   handleTransaction,
   initialTx,
+  appChains,
+  transactionsPool,
+  walletAddress,
+  chain,
   ...toastProps
-}: {
-  labels?: Partial<TuwaLabels>;
-  features?: {
-    toasts?: boolean;
-    walletInfoModal?: boolean;
-    trackingTxModal?: boolean;
-  };
-  customization?: {
-    toast?: ToastTransactionCustomization<TR, T>;
-    walletInfoModal?: WalletInfoModalCustomization<TR, T>;
-    trackingTxModal?: TrackingTxModalCustomization<TR, T>;
-  };
-  walletAddress?: string;
-} & Pick<IInitializeTxTrackingStore<TR, T>, 'closeTxTrackedModal'> &
-  ToastContainerProps &
-  Pick<
-    TrackingTxModalProps<TR, T>,
-    'handleTransaction' | 'actions' | 'config' | 'appChains' | 'transactionsPool' | 'initialTx'
-  >) {
+}: TransactionsWidgetProps<TR, T>): JSX.Element {
   const [isWalletInfoModalOpen, setIsWalletInfoModalOpen] = useState(false);
   const prevTransactionsRef = useRef<TransactionPool<TR, T>>(transactionsPool);
 
+  // Memoize feature flags for stability.
   const enabledFeatures = useMemo(
     () => ({
       toasts: features?.toasts ?? true,
@@ -78,16 +104,17 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
     [features],
   );
 
+  // Merge default and custom labels.
   const mergedLabels = useMemo(() => deepMerge(defaultLabels, labels || {}), [labels]);
 
+  // Effect to handle automatic toast notifications.
   useEffect(() => {
     if (!enabledFeatures.toasts) return;
 
     const showOrUpdateToast = (tx: T, type: TypeOptions) => {
-      const content = ({ closeToast, toastProps: containerProps }: ToastContentProps) => (
+      const content = (props: ToastContentProps) => (
         <ToastTransaction
-          closeToast={closeToast}
-          toastProps={containerProps}
+          {...props}
           tx={tx}
           transactionsPool={transactionsPool}
           appChains={appChains}
@@ -99,27 +126,31 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
       if (toast.isActive(tx.txKey)) {
         toast.update(tx.txKey, { render: content, type });
       } else {
-        toast(content, { toastId: tx.txKey, type });
+        toast(content, { toastId: tx.txKey, type, closeOnClick: false });
       }
     };
 
     const prevPool = prevTransactionsRef.current;
 
+    // Compare current pool with the previous one to detect changes.
     Object.values(transactionsPool).forEach((currentTx) => {
       const prevTx = prevPool[currentTx.txKey];
+      const statusChanged = prevTx && prevTx.status !== currentTx.status;
+      const hashAppeared = prevTx && !prevTx.hash && currentTx.hash;
+
+      // Show toast for new pending transactions.
       if (!prevTx && currentTx.pending) {
         showOrUpdateToast(currentTx, 'info');
-      } else if (prevTx && prevTx.status !== currentTx.status) {
-        const toastType = STATUS_TO_TOAST_TYPE[currentTx.status ?? TransactionStatus.Success] || 'info';
-        showOrUpdateToast(currentTx, toastType);
-      } else if (prevTx && prevTx.hash !== currentTx.hash) {
-        const toastType = STATUS_TO_TOAST_TYPE[currentTx.status ?? TransactionStatus.Success] || 'info';
+      }
+      // Update toast when a final status is reached or a hash appears.
+      else if (statusChanged || hashAppeared) {
+        const toastType = STATUS_TO_TOAST_TYPE[currentTx.status!] ?? 'info';
         showOrUpdateToast(currentTx, toastType);
       }
     });
 
     prevTransactionsRef.current = transactionsPool;
-  }, [transactionsPool, appChains, customization?.toast, mergedLabels, enabledFeatures]);
+  }, [transactionsPool, appChains, customization?.toast, enabledFeatures]);
 
   return (
     <LabelsProvider labels={mergedLabels}>
@@ -127,12 +158,12 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
         <ToastContainer
           position="bottom-right"
           stacked
-          autoClose={300000}
+          autoClose={false}
           hideProgressBar
           closeOnClick={false}
           icon={false}
           closeButton={ToastCloseButton}
-          toastClassName="!p-0 !bg-transparent !shadow-none"
+          toastClassName="!p-0 !bg-transparent !shadow-none !min-h-0"
           {...toastProps}
         />
       )}
@@ -140,7 +171,8 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
       {enabledFeatures.walletInfoModal && (
         <WalletInfoModal
           transactionsPool={transactionsPool}
-          walletAddress={walletAddress}
+          walletAddress={walletAddress as Address}
+          chain={chain}
           isOpen={isWalletInfoModalOpen}
           setIsOpen={setIsWalletInfoModalOpen}
           appChains={appChains}

@@ -1,26 +1,38 @@
+/**
+ * @file This file contains the `TxInfoBlock` component, which displays key details about a transaction.
+ */
+
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
 import { getChainName } from '@bgd-labs/react-web3-icons/dist/utils';
-import { selectTxExplorerLink, TransactionTracker } from '@tuwa/evm-transactions-tracking/dist';
 import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
 import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
 import dayjs from 'dayjs';
-import { ReactNode } from 'react';
-import { Chain, Hex } from 'viem';
+import { JSX, ReactNode } from 'react';
+import { Chain } from 'viem';
 
 import { useLabels } from '../../providers/LabelsProvider';
 import { cn } from '../../utils/cn';
-import { HashLink } from '../HashLink';
+import { ToastTransactionKey, ToastTransactionKeyProps } from '../ToastTransactionKey';
 
+// --- Prop Types for Customization ---
 type CustomInfoRowProps = { label: ReactNode; value: ReactNode };
-type CustomHashLinkProps = Parameters<typeof HashLink>[0];
 
-export type TxInfoBlockCustomization = {
+/**
+ * Defines the customization options for the `TxInfoBlock` component.
+ */
+export type TxInfoBlockCustomization<TR, T extends Transaction<TR>> = {
   components?: {
+    /** A render prop to replace the default label-value row component. */
     infoRow?: (props: CustomInfoRowProps) => ReactNode;
-    hashLink?: (props: CustomHashLinkProps) => ReactNode;
+    /**
+     * A render prop to customize the rendering of the transaction keys/hashes.
+     * This is passed down to the underlying `ToastTransactionKey` component.
+     */
+    transactionKey?: ToastTransactionKeyProps<TR, T>['renderHashLink'];
   };
 };
 
+// A local component for displaying a label-value pair.
 function InfoRow({ label, value }: { label: ReactNode; value: ReactNode }) {
   return (
     <div className="flex items-center justify-between text-sm">
@@ -30,52 +42,52 @@ function InfoRow({ label, value }: { label: ReactNode; value: ReactNode }) {
   );
 }
 
+export type TxInfoBlockProps<TR, T extends Transaction<TR>> = {
+  tx: T & {
+    desiredChainID?: number;
+  };
+  appChains: Chain[];
+  transactionsPool: TransactionPool<TR, T>;
+  className?: string;
+  customization?: TxInfoBlockCustomization<TR, T>;
+};
+
+/**
+ * A component that displays a block of essential transaction details,
+ * such as network, start time, and relevant hashes/keys.
+ *
+ * @param {object} props - The component props.
+ * @returns {JSX.Element} The rendered info block.
+ */
 export function TxInfoBlock<TR, T extends Transaction<TR>>({
   tx,
   appChains,
   transactionsPool,
   className,
   customization,
-}: {
-  tx: {
-    chainId: T['chainId'];
-    localTimestamp?: T['localTimestamp'];
-    tracker?: T['tracker'];
-    txKey?: T['txKey'];
-    hash?: T['hash'];
-    replacedTxHash?: T['replacedTxHash'];
-  };
-  appChains: Chain[];
-  transactionsPool: TransactionPool<TR, T>;
-  className?: string;
-  customization?: TxInfoBlockCustomization;
-}) {
+}: TxInfoBlockProps<TR, T>): JSX.Element {
   const labels = useLabels();
-  const wasReplaced = !!tx.replacedTxHash;
 
   const renderInfoRow = (props: CustomInfoRowProps) => {
     return customization?.components?.infoRow ? customization.components.infoRow(props) : <InfoRow {...props} />;
   };
 
-  const renderHashLink = (props: CustomHashLinkProps) => {
-    return customization?.components?.hashLink ? customization.components.hashLink(props) : <HashLink {...props} />;
-  };
-
   return (
     <div
       className={cn(
-        'flex flex-col gap-2 rounded-lg border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)] p-3',
+        'flex flex-col gap-3 rounded-lg border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)] p-3',
         className,
       )}
     >
+      {/* --- Network and Timestamp Info --- */}
       {renderInfoRow({
         label: labels.txInfo.network,
         value: (
           <div className="flex items-center justify-end gap-2">
             <div className="h-4 w-4">
-              <Web3Icon chainId={tx.chainId} />
+              <Web3Icon chainId={tx.chainId ?? tx?.desiredChainID ?? 1} />
             </div>
-            <span>{getChainName(tx.chainId)}</span>
+            <span>{getChainName(tx.chainId ?? tx?.desiredChainID ?? 1)}</span>
           </div>
         ),
       })}
@@ -84,29 +96,18 @@ export function TxInfoBlock<TR, T extends Transaction<TR>>({
           label: labels.txInfo.started,
           value: dayjs.unix(tx.localTimestamp).format('MMM D, HH:mm:ss'),
         })}
-      {tx.tracker === TransactionTracker.Gelato &&
-        tx.txKey &&
-        renderHashLink({ label: labels.hashLabels.gelato, hash: tx.txKey, variant: 'compact' })}
-      {tx.tracker === TransactionTracker.Safe &&
-        tx.txKey &&
-        renderHashLink({ label: labels.hashLabels.safe, hash: tx.txKey, variant: 'compact' })}
-      {wasReplaced ? (
-        <>
-          {tx.hash && renderHashLink({ label: labels.hashLabels.original, hash: tx.hash, variant: 'compact' })}
-          {renderHashLink({
-            label: labels.hashLabels.replaced,
-            hash: tx.replacedTxHash as Hex,
-            explorerUrl: selectTxExplorerLink(transactionsPool, appChains, tx.replacedTxHash as Hex),
-          })}
-        </>
-      ) : (
-        tx.hash &&
-        renderHashLink({
-          label: labels.hashLabels.default,
-          hash: tx.hash as Hex,
-          explorerUrl: selectTxExplorerLink(transactionsPool, appChains, tx.hash as Hex),
-        })
-      )}
+
+      {/* --- Transaction Hashes/Keys --- */}
+      {/* Reusing the ToastTransactionKey component to avoid code duplication. */}
+      <div className="border-t border-[var(--tuwa-border-primary)] pt-3">
+        <ToastTransactionKey
+          tx={tx}
+          appChains={appChains}
+          transactionsPool={transactionsPool}
+          variant="history" // 'history' variant has suitable styling for this block
+          renderHashLink={customization?.components?.transactionKey}
+        />
+      </div>
     </div>
   );
 }

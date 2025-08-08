@@ -17,7 +17,6 @@ export const COUNTER_ADDRESS = '0xAe7f46914De82028eCB7E2bF97Feb3D3dDCc2BAB';
 export const TransactionsBlock = () => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
   const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
-  const trackedTransaction = useTxTrackingStore((state) => state.trackedTransaction);
 
   const handleIncrement = async () => {
     await handleTransaction({
@@ -38,8 +37,6 @@ export const TransactionsBlock = () => {
       },
     });
   };
-
-  console.log(trackedTransaction);
 
   return (
     <div>

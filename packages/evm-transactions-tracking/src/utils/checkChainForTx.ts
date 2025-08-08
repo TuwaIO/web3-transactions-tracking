@@ -1,24 +1,32 @@
-import { Config, switchChain } from '@wagmi/core';
+/**
+ * @file This file contains a utility to ensure the user's wallet is connected to the correct chain before proceeding.
+ */
 
-import { getActiveWalletAndClient } from './getActiveWalletAndClient';
+import { Config, switchChain } from '@wagmi/core';
+import { getAccount } from '@wagmi/core';
 
 /**
- * Check if the current active wallet is connected to the specified chain.
- * If not, switch the wallet's connection to the specified chain.
+ * Checks if the user's wallet is connected to the specified chain. If not, it prompts
+ * the user to switch to the correct chain and waits for the operation to complete.
  *
- * @param {number} chainId - The ID of the chain to be checked and potentially switched to.
- * @param {Config} config - The configuration object containing wallet and connection information.
- *
- * @return {Promise<void>} - A Promise that resolves once the chain check and potential switch is complete.
+ * @param {number} chainId - The ID of the desired blockchain network.
+ * @param {Config} config - The wagmi configuration object.
+ * @returns {Promise<void>} A promise that resolves when the wallet is on the correct chain,
+ * or rejects if the user cancels the switch or an error occurs.
+ * @throws {Error} Throws an error if the user rejects the chain switch or if the switch fails.
  */
 export async function checkChainForTx(chainId: number, config: Config): Promise<void> {
-  const { activeWallet } = getActiveWalletAndClient(config);
-  if (activeWallet.connector && activeWallet.chainId !== chainId) {
+  const { connector, chainId: activeChainId } = getAccount(config);
+
+  // Proceed only if a wallet is connected and it's on the wrong chain.
+  if (connector && activeChainId !== chainId) {
     try {
-      setTimeout(async () => await switchChain(config, { chainId }), 100);
+      // Directly await the switchChain call. This pauses execution until the user responds.
+      await switchChain(config, { chainId });
     } catch (e) {
-      console.error(e);
-      throw new Error('Error occured when switching chain.');
+      // The user rejected the request or an error occurred.
+      console.error('Failed to switch chain:', e);
+      throw new Error('User rejected chain switch or an error occurred.');
     }
   }
 }

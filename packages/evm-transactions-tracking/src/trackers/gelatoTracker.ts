@@ -1,3 +1,8 @@
+/**
+ * @file This file implements the transaction tracking logic for meta-transactions relayed via the Gelato Network.
+ * It uses a polling mechanism to check the status of a Gelato Task ID from the Gelato API.
+ */
+
 import {
   InitializePollingTracker,
   initializePollingTracker,
@@ -11,14 +16,26 @@ import { Hex } from 'viem';
 
 import { ActionTxKey, TransactionTracker } from '../types';
 
+/**
+ * Defines the shape of the identifier for a Gelato transaction task.
+ */
 export type GelatoTxKey = {
   taskId: string;
 };
 
+/**
+ * A type guard to determine if an ActionTxKey is a GelatoTxKey.
+ * @param {ActionTxKey} txKey - The transaction key to check.
+ * @returns {boolean} True if the key is for a Gelato transaction.
+ */
 export function isGelatoTxKey(txKey: ActionTxKey): txKey is GelatoTxKey {
   return (txKey as GelatoTxKey).taskId !== undefined;
 }
 
+/**
+ * Enum representing the possible states of a Gelato task.
+ * @see https://docs.gelato.network/developer-services/relay/api/get-task-status
+ */
 export enum GelatoTaskState {
   CheckPending = 'CheckPending',
   ExecPending = 'ExecPending',
@@ -28,6 +45,9 @@ export enum GelatoTaskState {
   Cancelled = 'Cancelled',
 }
 
+/**
+ * Defines the shape of the response from the Gelato `getTaskStatus` API endpoint.
+ */
 export type GelatoTaskStatusResponse = {
   task: {
     chainId: number;
@@ -41,10 +61,16 @@ export type GelatoTaskStatusResponse = {
   };
 };
 
+/**
+ * A utility type for the initial Gelato transaction object passed to the tracker.
+ */
 type InitialGelatoTx = Pick<Transaction<TransactionTracker>, 'txKey'> & {
   pending?: boolean;
 };
 
+/**
+ * Defines the parameters required for the low-level `gelatoTracker` function.
+ */
 export type GelatoTrackerParams = Pick<
   InitializePollingTracker<GelatoTaskStatusResponse, InitialGelatoTx, TransactionTracker>,
   | 'tx'
@@ -57,15 +83,31 @@ export type GelatoTrackerParams = Pick<
   | 'retryCount'
 >;
 
-function isGelatoTxPending(gelatoStatus?: GelatoTaskState) {
-  return (
-    gelatoStatus === undefined ||
-    gelatoStatus === GelatoTaskState.CheckPending ||
-    gelatoStatus === GelatoTaskState.ExecPending ||
-    gelatoStatus === GelatoTaskState.WaitingForConfirmation
-  );
+/**
+ * Checks if a Gelato task state is considered pending.
+ * @param {GelatoTaskState} [gelatoStatus] - The current status of the Gelato task.
+ * @returns {boolean} True if the status is pending.
+ */
+function isGelatoTxPending(gelatoStatus?: GelatoTaskState): boolean {
+  if (!gelatoStatus) return true;
+  const pendingStates = [
+    GelatoTaskState.CheckPending,
+    GelatoTaskState.ExecPending,
+    GelatoTaskState.WaitingForConfirmation,
+  ];
+  return pendingStates.includes(gelatoStatus);
 }
 
+/**
+ * A set of terminal states that indicate a transaction has failed or been cancelled.
+ */
+const GELATO_TERMINAL_FAILURE_STATES = [GelatoTaskState.ExecReverted, GelatoTaskState.Cancelled];
+
+/**
+ * The fetcher function passed to `initializePollingTracker` to get the status of a Gelato task.
+ * @param {object} params - The parameters for fetching the transaction status.
+ * @returns {Promise<Response>} The raw response from the fetch call.
+ */
 export async function fetchTxFromGelatoAPI({
   tx,
   onSucceed,
@@ -74,32 +116,29 @@ export async function fetchTxFromGelatoAPI({
   clearWatch,
 }: {
   clearWatch: (withoutRemoving?: boolean) => void;
-} & Pick<GelatoTrackerParams, 'onIntervalTick' | 'onSucceed' | 'onFailed' | 'tx'>) {
+} & Pick<GelatoTrackerParams, 'onIntervalTick' | 'onSucceed' | 'onFailed' | 'tx'>): Promise<Response> {
   const response = await fetch(`https://api.gelato.digital/tasks/status/${tx.txKey}/`);
 
   if (response.ok) {
     const gelatoStatus = (await response.json()) as GelatoTaskStatusResponse;
     const isPending = isGelatoTxPending(gelatoStatus.task.taskState);
 
+    // Safeguard: Stop polling for transactions that have been pending for over a day.
     if (gelatoStatus.task.creationDate) {
-      const gelatoCreatedData = dayjs(gelatoStatus.task.creationDate);
-      const currentTime = dayjs();
-      const daysPassed = currentTime.diff(gelatoCreatedData, 'day');
-      if (daysPassed >= 1 && isPending) {
-        clearWatch();
+      const gelatoCreatedDate = dayjs(gelatoStatus.task.creationDate);
+      if (dayjs().diff(gelatoCreatedDate, 'day') >= 1 && isPending) {
+        clearWatch(); // Stop polling but don't remove from pool
         return response;
       }
     }
 
-    if (onIntervalTick) {
-      onIntervalTick(gelatoStatus);
-    }
+    onIntervalTick?.(gelatoStatus);
 
     if (!isPending) {
-      clearWatch(true);
-      if (gelatoStatus.task.taskState === 'ExecSuccess') {
+      clearWatch(true); // Stop polling but keep the transaction for UI feedback
+      if (gelatoStatus.task.taskState === GelatoTaskState.ExecSuccess) {
         onSucceed(gelatoStatus);
-      } else if (gelatoStatus.task.taskState > GelatoTaskState.WaitingForConfirmation) {
+      } else if (GELATO_TERMINAL_FAILURE_STATES.includes(gelatoStatus.task.taskState)) {
         onFailed(gelatoStatus);
       }
     }
@@ -109,40 +148,25 @@ export async function fetchTxFromGelatoAPI({
 }
 
 /**
- * Tracks the progress of a Gelato (https://www.gelato.network/) transaction.
+ * A low-level tracker for monitoring Gelato transactions. It wraps the generic polling
+ * tracker with the Gelato-specific fetcher logic.
  *
- * @param {Object} params - The parameters for the Gelato tracker.
- * @param {Function} params.onInitialize - Callback function to execute on initialization.
- * @param {Function} params.onSucceed - Callback function to execute when the transaction succeeds.
- * @param {Function} params.onFailed - Callback function to execute when the transaction fails.
- * @param {Function} params.onIntervalTick - Callback function to execute on each interval tick.
- * @param {Function} params.removeTxFromPool - Function to remove transaction from the pool.
- * @param {Object} params.tx - The transaction to track.
- * @param {Object} [params.rest] - Extra parameters to pass to the tracker.
- *
- * @return {Promise} - A promise that resolves when the tracking is complete.
+ * @param {GelatoTrackerParams} params - The configuration object for the tracker.
+ * @returns {Promise<void>}
  */
-export async function gelatoTracker({
-  onInitialize,
-  onSucceed,
-  onFailed,
-  onIntervalTick,
-  removeTxFromPool,
-  tx,
-  ...rest
-}: GelatoTrackerParams) {
+export async function gelatoTracker(params: GelatoTrackerParams): Promise<void> {
   await initializePollingTracker({
-    onInitialize,
-    onSucceed,
-    onFailed,
-    onIntervalTick,
-    removeTxFromPool,
-    tx,
+    ...params,
     fetcher: fetchTxFromGelatoAPI,
-    ...rest,
   });
 }
 
+/**
+ * A higher-level wrapper for `gelatoTracker` that integrates directly with the Zustand store.
+ * It provides the necessary callbacks to update the transaction's state in the store.
+ *
+ * @template T - The application-specific transaction union type.
+ */
 export async function gelatoTrackerForStore<T extends Transaction<TransactionTracker>>({
   tx,
   transactionsPool,
@@ -166,29 +190,26 @@ export async function gelatoTrackerForStore<T extends Transaction<TransactionTra
         hash: response.task.transactionHash,
         finishedTimestamp: response.task.executionDate ? dayjs(response.task.executionDate).unix() : undefined,
       });
-      const updatedTX = transactionsPool[tx.txKey];
-      if (onSucceedCallbacks) {
-        onSucceedCallbacks(updatedTX);
+
+      const updatedTx = transactionsPool[tx.txKey];
+      if (onSucceedCallbacks && updatedTx) {
+        onSucceedCallbacks(updatedTx);
       }
     },
     onIntervalTick: async (response) => {
-      const pending = isGelatoTxPending(response.task.taskState);
-      const status =
-        response.task.taskState === 'ExecSuccess'
-          ? TransactionStatus.Success
-          : pending
-            ? undefined
-            : TransactionStatus.Failed;
+      const isPending = isGelatoTxPending(response.task.taskState);
+      const isSuccess = response.task.taskState === GelatoTaskState.ExecSuccess;
 
       updateTxParams({
-        status,
-        pending,
         txKey: tx.txKey,
+        pending: isPending,
+        status: isSuccess ? TransactionStatus.Success : isPending ? undefined : TransactionStatus.Failed,
         hash: response.task.transactionHash,
         finishedTimestamp: response.task.executionDate ? dayjs(response.task.executionDate).unix() : undefined,
-        errorMessage:
-          response.task.taskState > GelatoTaskState.WaitingForConfirmation ? response.task.lastCheckMessage : undefined,
-        isError: !pending && status !== TransactionStatus.Success,
+        errorMessage: GELATO_TERMINAL_FAILURE_STATES.includes(response.task.taskState)
+          ? response.task.lastCheckMessage
+          : undefined,
+        isError: !isPending && !isSuccess,
       });
     },
     onFailed: (response) => {

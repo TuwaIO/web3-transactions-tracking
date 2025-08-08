@@ -1,40 +1,69 @@
+/**
+ * @file This file contains the main `WalletInfoModal` component, which serves as the primary UI for viewing wallet details and transaction history.
+ */
+
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { Transaction, TransactionPool } from '@tuwa/web3-transactions-tracking-core/dist';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import Modal from 'react-modal';
-import { Chain } from 'viem';
+import { Address, Chain } from 'viem';
 
 import { useLabels } from '../../providers/LabelsProvider';
 import { cn } from '../../utils/cn';
-import { TransactionsHistory } from '../TransactionsHistory';
-import { WalletHeader, WalletHeaderProps } from './WalletHeader';
+import { TransactionsHistory, TransactionsHistoryCustomization } from '../TransactionsHistory';
+import { WalletHeader } from './WalletHeader';
 
+// --- Prop Types for Customization ---
 type CustomHeaderProps = { closeModal: () => void };
-type CustomWalletInfoProps<TR, T extends Transaction<TR>> = WalletInfoModalProps<TR, T> & {
-  WalletHeaderComponent?: (props: WalletHeaderProps) => ReactNode;
+type CustomWalletInfoProps<TR, T extends Transaction<TR>> = WalletInfoModalProps<TR, T>;
+type CustomHistoryProps<TR, T extends Transaction<TR>> = WalletInfoModalProps<TR, T> & {
+  customization?: TransactionsHistoryCustomization<TR, T>;
 };
-type CustomHistoryProps<TR, T extends Transaction<TR>> = WalletInfoModalProps<TR, T>;
 
+/**
+ * Defines the customization options for the WalletInfoModal.
+ */
 export type WalletInfoModalCustomization<TR, T extends Transaction<TR>> = {
+  /** Props to pass directly to the underlying `react-modal` component. */
   modalProps?: Partial<Modal.Props>;
+  /** Props to pass to the `framer-motion` component for custom animations. */
   motionProps?: MotionProps;
   classNames?: {
+    /** CSS classes for the main content wrapper div. */
     contentWrapper?: string;
   };
   components?: {
+    /** A render prop to replace the entire modal header. */
     header?: (props: CustomHeaderProps) => ReactNode;
+    /** A render prop to replace the `WalletHeader` component. */
     walletInfo?: (props: CustomWalletInfoProps<TR, T>) => ReactNode;
+    /** A render prop to replace the `TransactionsHistory` component. */
     history?: (props: CustomHistoryProps<TR, T>) => ReactNode;
   };
 };
 
+/**
+ * Defines the core props for the WalletInfoModal and its children.
+ */
 export interface WalletInfoModalProps<TR, T extends Transaction<TR>> {
-  walletAddress?: string;
+  /** The connected wallet's address. */
+  walletAddress?: Address;
+  /** The viem `Chain` object for the currently connected network. */
+  chain?: Chain;
+  /** The entire pool of transactions from the store. */
   transactionsPool: TransactionPool<TR, T>;
+  /** An array of all chains supported by the application. */
   appChains: Chain[];
 }
 
+/**
+ * The main modal component for displaying wallet information and transaction history.
+ * It is highly customizable through the `customization` prop.
+ *
+ * @param {WalletInfoModalProps<TR, T> & { ... }} props - The component props.
+ * @returns {JSX.Element | null} The rendered modal or null if not open.
+ */
 export function WalletInfoModal<TR, T extends Transaction<TR>>({
   isOpen,
   setIsOpen,
@@ -44,33 +73,32 @@ export function WalletInfoModal<TR, T extends Transaction<TR>>({
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   customization?: WalletInfoModalCustomization<TR, T>;
-}) {
+}): JSX.Element | null {
   const labels = useLabels();
 
+  // Default animation properties for framer-motion.
   const defaultMotionProps: MotionProps = {
-    initial: { opacity: 0, scale: 0.8, x: '45%', y: '45%' },
-    animate: { opacity: 1, scale: 1, x: 0, y: 0 },
-    exit: { opacity: 0, scale: 0.8, x: '45%', y: '45%' },
-    transition: { duration: 0.3, ease: 'easeInOut' },
+    initial: { opacity: 0, scale: 0.95 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.95 },
+    transition: { duration: 0.2, ease: 'easeOut' },
   };
 
+  // Merge default and custom motion props.
   const motionProps = { ...defaultMotionProps, ...customization?.motionProps };
+
+  const closeModal = () => setIsOpen(false);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          onRequestClose={() => {
-            setIsOpen(false);
-            if (typeof document !== 'undefined') {
-              document.body.classList.remove('tuwa-tx-tracking-wallet-info-modal-open');
-            }
-          }}
+          onRequestClose={closeModal}
           overlayClassName="fixed inset-0 bg-black/45 flex items-center justify-center p-2 z-50"
           className="relative w-full max-w-2xl outline-none"
-          shouldCloseOnOverlayClick
-          shouldCloseOnEsc
+          shouldCloseOnOverlayClick={true}
+          shouldCloseOnEsc={true}
           bodyOpenClassName="tuwa-tx-tracking-wallet-info-modal-open"
           {...customization?.modalProps}
         >
@@ -81,13 +109,15 @@ export function WalletInfoModal<TR, T extends Transaction<TR>>({
                 customization?.classNames?.contentWrapper,
               )}
             >
+              {/* --- Modal Header --- */}
               {customization?.components?.header ? (
-                customization.components.header({ closeModal: () => setIsOpen(false) })
+                customization.components.header({ closeModal })
               ) : (
-                <div className="flex items-center justify-between border-b border-[var(--tuwa-border-primary)] p-4 sticky top-0 left-0 w-full bg-[var(--tuwa-bg-secondary)]">
+                <div className="flex items-center justify-between border-b border-[var(--tuwa-border-primary)] p-4 sticky top-0 left-0 w-full bg-[var(--tuwa-bg-secondary)] z-10">
                   <h1 className="text-lg font-bold text-[var(--tuwa-text-primary)]">{labels.walletModal.title}</h1>
                   <button
-                    onClick={() => setIsOpen(false)}
+                    type="button"
+                    onClick={closeModal}
                     aria-label={labels.actions.close}
                     className="cursor-pointer rounded-full p-1 text-[var(--tuwa-text-tertiary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
                   >
@@ -96,11 +126,12 @@ export function WalletInfoModal<TR, T extends Transaction<TR>>({
                 </div>
               )}
 
+              {/* --- Modal Body --- */}
               <div className="flex flex-col gap-4 p-4 sm:p-6 sm:gap-6">
                 {customization?.components?.walletInfo ? (
                   customization.components.walletInfo(props)
                 ) : (
-                  <WalletHeader walletAddress={props.walletAddress} />
+                  <WalletHeader walletAddress={props.walletAddress} chain={props.chain} />
                 )}
 
                 {customization?.components?.history ? (

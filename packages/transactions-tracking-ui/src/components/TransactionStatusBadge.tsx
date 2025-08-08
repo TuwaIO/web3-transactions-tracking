@@ -1,18 +1,35 @@
+/**
+ * @file This file contains the `TransactionStatusBadge` component for visually displaying a transaction's status.
+ */
+
 import { ArrowPathIcon, CheckCircleIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist';
+import { JSX } from 'react';
 
 import { useLabels } from '../providers/LabelsProvider';
 import { cn } from '../utils/cn';
 
+type TransactionStatusBadgeProps<TR, T extends Transaction<TR>> = {
+  /** The transaction object whose status will be displayed. */
+  tx: T;
+  /** Optional additional CSS classes to apply to the badge container. */
+  className?: string;
+};
+
+/**
+ * A component that displays a transaction's status as a styled badge
+ * with a corresponding icon, color, and label.
+ *
+ * @param {TransactionStatusBadgeProps<TR, T>} props - The component props.
+ * @returns {JSX.Element} The rendered status badge.
+ */
 export function TransactionStatusBadge<TR, T extends Transaction<TR>>({
   tx,
   className,
-}: {
-  tx: T;
-  className?: string;
-}) {
+}: TransactionStatusBadgeProps<TR, T>): JSX.Element {
   const labels = useLabels();
 
+  // A configuration map that links a status to its visual representation.
   const STATUS_CONFIG = {
     Pending: {
       label: labels.statuses.pending,
@@ -42,9 +59,11 @@ export function TransactionStatusBadge<TR, T extends Transaction<TR>>({
 
   const baseClasses = 'inline-flex items-center gap-x-1.5 rounded-full px-2 py-1 text-xs font-medium';
 
+  // Determine the status key: 'Pending' takes precedence, otherwise use the final status.
   const statusKey = tx.pending ? 'Pending' : tx.status;
-  const config = statusKey ? STATUS_CONFIG[statusKey] : null;
+  const config = statusKey ? STATUS_CONFIG[statusKey as keyof typeof STATUS_CONFIG] : null;
 
+  // Fallback for unknown or missing statuses.
   if (!config) {
     return (
       <div className={cn(baseClasses, 'bg-[var(--tuwa-info-bg)] text-[var(--tuwa-info-text)]', className)}>

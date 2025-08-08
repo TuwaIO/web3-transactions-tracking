@@ -1,53 +1,62 @@
+/**
+ * @file This file contains a generic utility for creating a polling mechanism to track asynchronous tasks,
+ * such as API-based transaction status checks (e.g., for Gelato or Safe).
+ */
+
 import { Transaction } from '../types';
 
+/**
+ * Defines the configuration object for the `initializePollingTracker` function.
+ * @template R The expected type of the successful API response from the fetcher.
+ * @template T The type of the transaction object being tracked.
+ * @template TR The type of the tracker identifier used in the `Transaction` type.
+ */
 export type InitializePollingTracker<R, T, TR> = {
-  removeTxFromPool?: (taskId: string) => void;
-  onSucceed: (response: R) => void;
-  onFailed: (response: R) => void;
-  onIntervalTick?: (response: R) => void;
-  onReplaced?: (response: R) => void;
-  fetcher: ({
-    tx,
-    onSucceed,
-    onFailed,
-    onIntervalTick,
-    clearWatch,
-    onReplaced,
-  }: {
-    clearWatch: (withoutRemoving?: boolean) => void;
-    onSucceed: (response: R) => void;
-    onFailed: (response: R) => void;
-    onIntervalTick?: (response: R) => void;
-    onReplaced?: (response: R) => void;
-  } & {
+  /** The transaction object to be tracked. It must include `txKey` and an optional `pending` status. */
+  tx: T & Pick<Transaction<TR>, 'txKey'> & { pending?: boolean };
+  /** The function that performs the actual data fetching (e.g., an API call). */
+  fetcher: (params: {
+    /** The transaction object being tracked. */
     tx: T;
+    /** A callback to stop the polling mechanism, typically called on success or terminal failure. */
+    clearWatch: (withoutRemoving?: boolean) => void;
+    /** Callback to be invoked when the fetcher determines the transaction has succeeded. */
+    onSucceed: (response: R) => void;
+    /** Callback to be invoked when the fetcher determines the transaction has failed. */
+    onFailed: (response: R) => void;
+    /** Optional callback for each successful poll, useful for updating UI with intermediate states. */
+    onIntervalTick?: (response: R) => void;
+    /** Optional callback for when a transaction is replaced by another. */
+    onReplaced?: (response: R) => void;
   }) => Promise<Response>;
-} & {
+
+  /** Optional callback executed once when the tracker is initialized. */
   onInitialize?: () => void;
-  tx: T &
-    Pick<Transaction<TR>, 'txKey'> & {
-      pending?: boolean;
-    };
+  /** Callback to be invoked when the transaction has succeeded. */
+  onSucceed: (response: R) => void;
+  /** Callback to be invoked when the transaction has failed. */
+  onFailed: (response: R) => void;
+  /** Optional callback for each successful poll. */
+  onIntervalTick?: (response: R) => void;
+  /** Optional callback for when a transaction is replaced. */
+  onReplaced?: (response: R) => void;
+  /** Optional function to remove the transaction from the main pool, typically after polling stops. */
+  removeTxFromPool?: (taskId: string) => void;
+  /** The interval (in milliseconds) between polling attempts. Defaults to 5000ms. */
   pollingInterval?: number;
+  /** The number of consecutive failed fetches before stopping the tracker. Defaults to 10. */
   retryCount?: number;
 };
 
 /**
- * Initializes a polling tracker to monitor the status of a transaction.
+ * Initializes a generic polling tracker that repeatedly calls a fetcher function
+ * to monitor the status of a transaction or any asynchronous task.
  *
- * @param {Object} params - The parameters for initializing the polling tracker.
- * @param {Function} [params.onInitialize] - A callback function to execute when tracker is initialized.
- * @param {Object} params.tx - The transaction object to monitor.
- * @param {Function} [params.removeTxFromPool] - A function to remove transaction from pool.
- * @param {Function} params.fetcher - The function used for fetching transaction status.
- * @param {Function} params.onFailed - A callback function to execute on failed transaction.
- * @param {Function} params.onIntervalTick - A callback function to execute on each polling interval.
- * @param {Function} params.onSucceed - A callback function to execute on successful transaction.
- * @param {number} [params.pollingInterval] - The time interval (in milliseconds) to poll for transaction status.
- * @param {number} [params.retryCount] - The number of times to retry fetching transaction status if transactions not found initially.
- * @param {Function} [params.onReplaced] - A callback function to execute when transaction is replaced.
- *
- * @return {Promise<void>} - A promise that resolves once the polling tracker is initialized.
+ * @template R The expected type of the successful API response.
+ * @template T The type of the transaction object.
+ * @template TR The type of the tracker identifier.
+ * @param {InitializePollingTracker<R, T, TR>} params - The configuration object for the tracker.
+ * @returns {Promise<void>} A promise that resolves when the tracker is set up (note: polling happens asynchronously).
  */
 export async function initializePollingTracker<R, T, TR>({
   onInitialize,
@@ -65,23 +74,33 @@ export async function initializePollingTracker<R, T, TR>({
     onInitialize();
   }
 
-  let PI: number | undefined = undefined;
-  const isPending = !!tx?.pending;
-  if (!isPending) {
+  // Early exit if the transaction is not pending
+  if (!tx?.pending) {
     return;
   }
-  clearInterval(PI);
 
+  let pollingIntervalId: number | undefined;
+
+  /**
+   * Stops the polling interval and optionally removes the transaction from the pool.
+   * @param {boolean} [withoutRemoving=false] - If true, the transaction will not be removed from the pool.
+   */
   const clearWatch = (withoutRemoving?: boolean) => {
-    clearInterval(PI);
+    clearInterval(pollingIntervalId);
     if (removeTxFromPool && !withoutRemoving) {
       removeTxFromPool(tx.txKey);
     }
   };
 
-  let rc = retryCount ?? 10;
-  PI = window.setInterval(async () => {
-    if (rc > 0) {
+  let retriesLeft = retryCount ?? 10;
+
+  pollingIntervalId = window.setInterval(async () => {
+    if (retriesLeft <= 0) {
+      clearWatch();
+      return;
+    }
+
+    try {
       const response = await fetcher({
         tx,
         onSucceed,
@@ -90,12 +109,15 @@ export async function initializePollingTracker<R, T, TR>({
         onReplaced,
         clearWatch,
       });
+
+      // If the API call fails (e.g., 404 Not Found), decrement the retry counter.
+      // The fetcher itself is responsible for calling `clearWatch` on terminal statuses.
       if (!response.ok) {
-        rc--;
+        retriesLeft--;
       }
-    } else {
-      clearWatch();
-      return;
+    } catch (error) {
+      console.error('Polling fetcher function threw an error:', error);
+      retriesLeft--;
     }
   }, pollingInterval ?? 5000);
 }

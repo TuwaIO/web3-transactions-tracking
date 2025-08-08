@@ -1,9 +1,14 @@
+/**
+ * @file This file contains the `TransactionHistoryItem` component, which renders a single transaction
+ * in a list format for the transaction history view.
+ */
+
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
 import { Transaction } from '@tuwa/web3-transactions-tracking-core/dist';
 import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import { Chain } from 'viem';
 
 import { cn } from '../utils/cn';
@@ -11,39 +16,65 @@ import { StatusAwareText } from './StatusAwareText';
 import { ToastTransactionKey } from './ToastTransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';
 
+// Extend dayjs with the relativeTime plugin to format timestamps as "a few seconds ago".
 dayjs.extend(relativeTime);
 
+// --- Prop Types for Customization ---
 type CustomIconProps = { chainId: number };
 type CustomStatusAwareTextProps = Parameters<typeof StatusAwareText>[0];
 type CustomTimestampProps = { timestamp?: number };
 type CustomStatusBadgeProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionStatusBadge<TR, T>>[0];
 type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof ToastTransactionKey<TR, T>>[0];
 
+/**
+ * Defines the structure for the `customization` prop, allowing users to override
+ * default sub-components with their own implementations for a history item.
+ */
 export type TransactionHistoryItemCustomization<TR, T extends Transaction<TR>> = {
   components?: {
+    /** Override the default chain icon. */
     icon?: (props: CustomIconProps) => ReactNode;
+    /** Override the default title component. */
     title?: (props: CustomStatusAwareTextProps) => ReactNode;
+    /** Override the default description component. */
     description?: (props: CustomStatusAwareTextProps) => ReactNode;
+    /** Override the default timestamp component. */
     timestamp?: (props: CustomTimestampProps) => ReactNode;
+    /** Override the default status badge component. */
     statusBadge?: (props: CustomStatusBadgeProps<TR, T>) => ReactNode;
+    /** Override the default component for displaying transaction keys/hashes. */
     transactionKey?: (props: CustomTransactionKeyProps<TR, T>) => ReactNode;
   };
 };
 
+export type TransactionHistoryItemProps<TR, T extends Transaction<TR>> = {
+  /** The transaction object to display. */
+  tx: T;
+  /** An array of supported chain objects. */
+  appChains: Chain[];
+  /** The entire pool of transactions. */
+  transactionsPool: TransactionPool<TR, T>;
+  /** Optional additional CSS classes for the container. */
+  className?: string;
+  /** An object to customize and override the default internal components. */
+  customization?: TransactionHistoryItemCustomization<TR, T>;
+};
+
+/**
+ * A component that renders a single row in the transaction history list.
+ * It is highly customizable via the `customization` prop.
+ *
+ * @param {TransactionHistoryItemProps<TR, T>} props - The component props.
+ * @returns {JSX.Element} The rendered history item.
+ */
 export function TransactionHistoryItem<TR, T extends Transaction<TR>>({
   tx,
   appChains,
   transactionsPool,
   className,
   customization,
-}: {
-  tx: T;
-  appChains: Chain[];
-  transactionsPool: TransactionPool<TR, T>;
-  className?: string;
-  customization?: TransactionHistoryItemCustomization<TR, T>;
-}) {
-  const C = customization?.components;
+}: TransactionHistoryItemProps<TR, T>): JSX.Element {
+  const C = customization?.components; // Shortcut for customization components
 
   return (
     <div
@@ -53,6 +84,7 @@ export function TransactionHistoryItem<TR, T extends Transaction<TR>>({
       )}
     >
       <div className="flex items-start justify-between">
+        {/* --- Main Info: Icon, Title, Timestamp, Description --- */}
         <div className="flex items-center gap-4">
           <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--tuwa-bg-muted)]">
             {C?.icon ? (
@@ -85,9 +117,12 @@ export function TransactionHistoryItem<TR, T extends Transaction<TR>>({
             )}
           </div>
         </div>
+
+        {/* --- Status Badge --- */}
         {C?.statusBadge ? C.statusBadge({ tx }) : <TransactionStatusBadge tx={tx} />}
       </div>
 
+      {/* --- Transaction Keys/Hashes --- */}
       {C?.transactionKey ? (
         C.transactionKey({ tx, appChains, transactionsPool, variant: 'history' })
       ) : (

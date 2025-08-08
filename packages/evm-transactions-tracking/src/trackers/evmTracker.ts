@@ -1,3 +1,9 @@
+/**
+ * @file This file contains the tracker implementation for standard EVM transactions.
+ * It uses viem's public actions (`getTransaction`, `waitForTransactionReceipt`) to monitor
+ * a transaction's lifecycle from submission to finality.
+ */
+
 import { ITxTrackingStore, Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist';
 import { Config } from '@wagmi/core';
 import {
@@ -15,33 +21,36 @@ import { getBlock, getTransaction, waitForTransactionReceipt } from 'viem/action
 import { ActionTxKey, TransactionTracker } from '../types';
 import { createViemClient } from '../utils/createViemClient';
 
+/**
+ * Defines the parameters for the low-level EVM transaction tracker.
+ */
 export type EVMTrackerParams = {
-  onFinished: (localTx: GetTransactionReturnType, txn: TransactionReceipt, client: Client) => Promise<void>;
-  onReplaced: (replacement: ReplacementReturnType) => void;
-  chains: Chain[];
-  onFailed: (e?: unknown) => void;
-  onInitialize?: () => void;
+  /** The transaction object to track, requiring at least `chainId` and `txKey` (the transaction hash). */
   tx: Pick<Transaction<TransactionTracker>, 'chainId' | 'txKey'>;
+  /** An array of `viem` chain objects supported by the application. */
+  chains: Chain[];
+  /** Callback executed when the transaction is successfully mined and included in a block. */
+  onFinished: (localTx: GetTransactionReturnType, receipt: TransactionReceipt, client: Client) => Promise<void>;
+  /** Callback executed when the transaction is replaced (e.g., sped up or cancelled). */
+  onReplaced: (replacement: ReplacementReturnType) => void;
+  /** Callback executed if an error occurs during tracking or if the transaction fails. */
+  onFailed: (error?: unknown) => void;
+  /** Optional callback executed once when the tracker starts. */
+  onInitialize?: () => void;
+  /** The number of times to retry fetching the transaction if it's not found initially. Defaults to 10. */
   retryCount?: number;
+  /** The delay (in milliseconds) between retry attempts. Defaults to 3000ms. */
   retryTimeout?: number;
-  waitForTransactionReceiptParams?: WaitForTransactionReceiptParameters; // https://viem.sh/docs/actions/public/waitForTransactionReceipt#parameters
+  /** Optional parameters to pass to viem's `waitForTransactionReceipt` function. */
+  waitForTransactionReceiptParams?: WaitForTransactionReceiptParameters;
 };
 
 /**
- * Tracker method to track a transaction on the all viem (https://viem.sh/) supported chains
+ * A low-level tracker for monitoring a standard EVM transaction by its hash.
+ * It retries fetching the transaction and then waits for its receipt.
  *
- * @param {Object} params - The parameters object containing various callback functions and configuration options.
- * @param {Function} params.onInitialize - Callback function to be executed when the tracking process initializes.
- * @param {Function} params.onFinished - Callback function to be executed when the transaction is successfully tracked.
- * @param {Function} params.onFailed - Callback function to be executed when an error occurs during tracking.
- * @param {Function} params.onReplaced - Callback function to be executed when the transaction is replaced.
- * @param {Object} params.tx - Transaction details object.
- * @param {Array} params.chains - Array of chain details.
- * @param {number} params.retryCount - Number of times to retry tracking the transaction.
- * @param {number} params.retryTimeout - Timeout value in milliseconds between retry attempts.
- * @param {Object} params.waitForTransactionReceiptParams - Additional parameters for waiting for transaction receipt.
- *
- * @return {Promise<void>} A Promise that resolves once the tracking process is completed.
+ * @param {EVMTrackerParams} params - The configuration object for the tracker.
+ * @returns {Promise<void>} A promise that resolves when the tracking process is complete (or has terminally failed).
  */
 export async function evmTracker({
   onInitialize,
@@ -54,56 +63,74 @@ export async function evmTracker({
   retryTimeout,
   waitForTransactionReceiptParams,
 }: EVMTrackerParams): Promise<void> {
-  const rc = retryCount ?? 10;
+  const maxRetries = retryCount ?? 10;
   const client = createViemClient(tx.chainId, chains);
 
   if (onInitialize) {
     onInitialize();
   }
 
-  if (client) {
-    for (let i = 0; i < rc; i++) {
+  if (!client) {
+    const error = new Error(`Could not create a viem client for chainId: ${tx.chainId}`);
+    onFailed(error);
+    console.error(error.message);
+    return;
+  }
+
+  // Retry loop to handle cases where the transaction is not immediately available on the RPC node.
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      // 1. Attempt to fetch the transaction details.
+      const localTx = await getTransaction(client, { hash: tx.txKey as Hex });
+
+      let txWasReplaced = false;
+
       try {
-        const localTx = await getTransaction(client, { hash: tx.txKey as Hex });
+        // 2. Wait for the transaction to be mined.
+        const receipt = await waitForTransactionReceipt(client, {
+          hash: localTx.hash,
+          onReplaced: (replacement: ReplacementReturnType) => {
+            txWasReplaced = true;
+            onReplaced(replacement);
+          },
+          ...waitForTransactionReceiptParams,
+          pollingInterval: waitForTransactionReceiptParams?.pollingInterval ?? 10_000,
+        });
 
-        let txWasReplaced = false;
-        const hash = localTx.hash as Hex;
-
-        try {
-          const txn = await waitForTransactionReceipt(client, {
-            hash,
-            onReplaced: (replacement: ReplacementReturnType) => {
-              onReplaced(replacement);
-              txWasReplaced = true;
-            },
-            ...waitForTransactionReceiptParams,
-            pollingInterval: waitForTransactionReceiptParams?.pollingInterval ?? 10_000,
-          });
-
-          if (txWasReplaced) {
-            return;
-          }
-
-          await onFinished(localTx, txn, client);
-        } catch (e) {
-          onFailed(e);
-          console.error('Error when check TX receipt:', e);
-        }
-
-        return;
-      } catch (e) {
-        if (i === rc - 1) {
-          onFailed(e);
-          console.error('Error when tracking ETH TX:', e);
+        // If onReplaced was called, the promise resolves but we should not proceed.
+        if (txWasReplaced) {
           return;
         }
+
+        // 3. Transaction is mined, call the onFinished callback.
+        await onFinished(localTx, receipt, client);
+      } catch (e) {
+        // Error occurred while waiting for the receipt (e.g., timeout, reverted).
+        onFailed(e);
+        console.error('Error waiting for transaction receipt:', e);
       }
 
-      await new Promise((resolve) => setTimeout(resolve, retryTimeout ?? 3000));
+      // Exit the retry loop once the transaction is found and processed.
+      return;
+    } catch (e) {
+      // Error occurred while fetching the initial transaction details.
+      if (i === maxRetries - 1) {
+        onFailed(e);
+        console.error(`Error tracking EVM transaction after ${maxRetries} retries:`, e);
+        return;
+      }
     }
+    // Wait before the next retry.
+    await new Promise((resolve) => setTimeout(resolve, retryTimeout ?? 3000));
   }
 }
 
+/**
+ * A higher-level wrapper for `evmTracker` that integrates directly with the Zustand store.
+ * It provides the necessary callbacks to update the transaction's state in the store.
+ *
+ * @template T - The application-specific transaction union type.
+ */
 export async function evmTrackerForStore<T extends Transaction<TransactionTracker>>({
   tx,
   chains,
@@ -127,21 +154,25 @@ export async function evmTrackerForStore<T extends Transaction<TransactionTracke
         pending: tx.pending,
       });
     },
-    onFinished: async (localTx, txn, client) => {
-      const txBlock = await getBlock(client, { blockNumber: txn.blockNumber });
+    onFinished: async (localTx, receipt, client) => {
+      const txBlock = await getBlock(client, { blockNumber: receipt.blockNumber });
       const timestamp = Number(txBlock.timestamp);
+      const isSuccess = receipt.status === 'success';
+
       updateTxParams({
         txKey: tx.txKey,
-        status: txn.status === 'success' ? TransactionStatus.Success : TransactionStatus.Failed,
-        to: isHex(txn.to) ? txn.to : undefined,
+        status: isSuccess ? TransactionStatus.Success : TransactionStatus.Failed,
+        to: isHex(receipt.to) ? receipt.to : undefined,
         nonce: localTx.nonce,
         pending: false,
-        isError: txn.status !== 'success',
+        isError: !isSuccess,
         hash: localTx.hash,
         finishedTimestamp: timestamp,
       });
+
+      // After updating the state, retrieve the latest version of the transaction.
       const updatedTX = transactionsPool[tx.txKey];
-      if (onSucceedCallbacks) {
+      if (isSuccess && onSucceedCallbacks && updatedTX) {
         onSucceedCallbacks(updatedTX);
       }
     },
@@ -153,12 +184,13 @@ export async function evmTrackerForStore<T extends Transaction<TransactionTracke
         pending: false,
       });
     },
-    onFailed: () => {
+    onFailed: (error?: unknown) => {
       updateTxParams({
         txKey: tx.txKey,
         status: TransactionStatus.Failed,
         pending: false,
         isError: true,
+        errorMessage: error instanceof Error ? error.message : 'Transaction failed or could not be tracked.',
       });
     },
   });
