@@ -8,7 +8,7 @@
 
 > **WalletAvatar**(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L29)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L29)
 
 A component that displays a user's avatar.
 It prioritizes showing the provided `ensAvatar`. If unavailable, it falls back

@@ -36,7 +36,7 @@ bun add @tuwa/transactions-tracking-ui
 
 ### Peer Dependencies
 
-This package requires you to have the following packages installed in your project: `react`, `react-dom`, `react-toastify`, `react-modal`, `framer-motion`, `tailwindcss`, and the other `@tuwa` core packages.
+This package requires you to have the following packages installed in your project: `react`, `react-dom`, `react-toastify`, `@radix-ui/react-dialog`, `framer-motion`, `tailwindcss`, and the other `@tuwa` core packages.
 
 ## Key Features
 

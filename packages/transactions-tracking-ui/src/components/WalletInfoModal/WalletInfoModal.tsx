@@ -3,10 +3,10 @@
  */
 
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import * as Dialog from '@radix-ui/react-dialog';
 import { Transaction, TransactionPool } from '@tuwa/web3-transactions-tracking-core';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
-import { JSX, ReactNode } from 'react';
-import Modal from 'react-modal';
+import { ComponentPropsWithoutRef, JSX, ReactNode } from 'react';
 import { Address, Chain } from 'viem';
 
 import { useLabels } from '../../providers';
@@ -23,16 +23,18 @@ type CustomHistoryProps<TR, T extends Transaction<TR>> = WalletInfoModalProps<TR
 
 /**
  * Defines the customization options for the WalletInfoModal.
+ * Allows customization of modal behavior, animations, and individual UI components.
  */
 export type WalletInfoModalCustomization<TR, T extends Transaction<TR>> = {
-  /** Props to pass directly to the underlying `react-modal` component. */
-  modalProps?: Partial<Modal.Props>;
-  /** Props to pass to the `framer-motion` component for custom animations. */
+  /** Custom props to pass to the underlying Radix UI Dialog.Content component */
+  modalProps?: Partial<ComponentPropsWithoutRef<typeof Dialog.Content>>;
+  /** Custom Framer Motion animation properties */
   motionProps?: MotionProps;
   classNames?: {
     /** CSS classes for the main content wrapper div. */
     contentWrapper?: string;
   };
+  /** Custom component overrides for different parts of the modal */
   components?: {
     /** A render prop to replace the entire modal header. */
     header?: (props: CustomHeaderProps) => ReactNode;
@@ -59,7 +61,7 @@ export interface WalletInfoModalProps<TR, T extends Transaction<TR>> {
 
 /**
  * The main modal component for displaying wallet information and transaction history.
- * It is highly customizable through the `customization` prop.
+ * It is highly customizable through the `customization` prop and supports full Radix UI Dialog customization.
  *
  * @param {WalletInfoModalProps<TR, T> & { ... }} props - The component props.
  * @returns {JSX.Element | null} The rendered modal or null if not open.
@@ -92,57 +94,57 @@ export function WalletInfoModal<TR, T extends Transaction<TR>>({
   return (
     <AnimatePresence>
       {isOpen && (
-        <Modal
-          isOpen={isOpen}
-          onRequestClose={closeModal}
-          overlayClassName="fixed inset-0 bg-black/45 flex items-center justify-center p-2 z-50"
-          className="relative w-full max-w-2xl outline-none"
-          shouldCloseOnOverlayClick={true}
-          shouldCloseOnEsc={true}
-          bodyOpenClassName="tuwa-tx-tracking-wallet-info-modal-open"
-          {...customization?.modalProps}
-        >
-          <motion.div {...motionProps}>
-            <div
-              className={cn(
-                'relative w-full max-w-2xl outline-none rounded-2xl bg-[var(--tuwa-bg-secondary)] shadow-xl max-h-[98dvh] overflow-y-auto',
-                customization?.classNames?.contentWrapper,
-              )}
-            >
-              {/* --- Modal Header --- */}
-              {customization?.components?.header ? (
-                customization.components.header({ closeModal })
-              ) : (
-                <div className="flex items-center justify-between border-b border-[var(--tuwa-border-primary)] p-4 sticky top-0 left-0 w-full bg-[var(--tuwa-bg-secondary)] z-10">
-                  <h1 className="text-lg font-bold text-[var(--tuwa-text-primary)]">{labels.walletModal.title}</h1>
-                  <button
-                    type="button"
-                    onClick={closeModal}
-                    aria-label={labels.actions.close}
-                    className="cursor-pointer rounded-full p-1 text-[var(--tuwa-text-tertiary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
-                  >
-                    <XMarkIcon className="h-6 w-6" />
-                  </button>
+        <Dialog.Root open={isOpen} onOpenChange={(open) => !open && closeModal()}>
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 bg-black/45 flex items-center justify-center p-2 z-50" />
+            <Dialog.Content className="relative w-full max-w-2xl outline-none" {...customization?.modalProps}>
+              <motion.div {...motionProps}>
+                <div
+                  className={cn(
+                    'relative w-full max-w-2xl outline-none rounded-2xl bg-[var(--tuwa-bg-secondary)] shadow-xl max-h-[98dvh] overflow-y-auto',
+                    customization?.classNames?.contentWrapper,
+                  )}
+                >
+                  {/* --- Modal Header --- */}
+                  {customization?.components?.header ? (
+                    customization.components.header({ closeModal })
+                  ) : (
+                    <div className="flex items-center justify-between border-b border-[var(--tuwa-border-primary)] p-4 sticky top-0 left-0 w-full bg-[var(--tuwa-bg-secondary)] z-10">
+                      <Dialog.Title className="text-lg font-bold text-[var(--tuwa-text-primary)]">
+                        {labels.walletModal.title}
+                      </Dialog.Title>
+                      <Dialog.Close asChild>
+                        <button
+                          type="button"
+                          onClick={closeModal}
+                          aria-label={labels.actions.close}
+                          className="cursor-pointer rounded-full p-1 text-[var(--tuwa-text-tertiary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
+                        >
+                          <XMarkIcon className="h-6 w-6" />
+                        </button>
+                      </Dialog.Close>
+                    </div>
+                  )}
+
+                  {/* --- Modal Body --- */}
+                  <div className="flex flex-col gap-4 p-4 sm:p-6 sm:gap-6">
+                    {customization?.components?.walletInfo ? (
+                      customization.components.walletInfo(props)
+                    ) : (
+                      <WalletHeader walletAddress={props.walletAddress} chain={props.chain} />
+                    )}
+
+                    {customization?.components?.history ? (
+                      customization.components.history(props)
+                    ) : (
+                      <TransactionsHistory {...props} />
+                    )}
+                  </div>
                 </div>
-              )}
-
-              {/* --- Modal Body --- */}
-              <div className="flex flex-col gap-4 p-4 sm:p-6 sm:gap-6">
-                {customization?.components?.walletInfo ? (
-                  customization.components.walletInfo(props)
-                ) : (
-                  <WalletHeader walletAddress={props.walletAddress} chain={props.chain} />
-                )}
-
-                {customization?.components?.history ? (
-                  customization.components.history(props)
-                ) : (
-                  <TransactionsHistory {...props} />
-                )}
-              </div>
-            </div>
-          </motion.div>
-        </Modal>
+              </motion.div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
       )}
     </AnimatePresence>
   );

@@ -8,7 +8,7 @@
 
 > **fetchTxFromSafeAPI**(`__namedParameters`): `Promise`\<`Response`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:70](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L70)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:70](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L70)
 
 The fetcher function passed to `initializePollingTracker` to get the status of a Safe transaction.
 

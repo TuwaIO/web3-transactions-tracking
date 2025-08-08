@@ -8,9 +8,10 @@
 
 > **WalletInfoModalCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:27](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L27)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L28)
 
 Defines the customization options for the WalletInfoModal.
+Allows customization of modal behavior, animations, and individual UI components.
 
 ## Type Parameters
 
@@ -28,7 +29,7 @@ Defines the customization options for the WalletInfoModal.
 
 > `optional` **classNames**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L32)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L33)
 
 #### contentWrapper?
 
@@ -42,7 +43,9 @@ CSS classes for the main content wrapper div.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L36)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L38)
+
+Custom component overrides for different parts of the modal
 
 #### header()?
 
@@ -96,11 +99,11 @@ A render prop to replace the `WalletHeader` component.
 
 ### modalProps?
 
-> `optional` **modalProps**: `Partial`\<`Modal.Props`\>
+> `optional` **modalProps**: `Partial`\<`ComponentPropsWithoutRef`\<*typeof* `Dialog.Content`\>\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L29)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L30)
 
-Props to pass directly to the underlying `react-modal` component.
+Custom props to pass to the underlying Radix UI Dialog.Content component
 
 ***
 
@@ -108,6 +111,6 @@ Props to pass directly to the underlying `react-modal` component.
 
 > `optional` **motionProps**: `MotionProps`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L31)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L32)
 
-Props to pass to the `framer-motion` component for custom animations.
+Custom Framer Motion animation properties

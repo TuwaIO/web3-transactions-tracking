@@ -8,7 +8,7 @@
 
 > **ToastTransactionCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L29)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L29)
 
 Defines the structure for the `customization` prop, allowing users to override
 default sub-components with their own implementations.
@@ -29,7 +29,7 @@ default sub-components with their own implementations.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L30)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L30)
 
 #### statusAwareText()?
 

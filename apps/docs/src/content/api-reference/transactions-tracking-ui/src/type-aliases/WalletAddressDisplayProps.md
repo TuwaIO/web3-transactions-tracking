@@ -8,7 +8,7 @@
 
 > **WalletAddressDisplayProps** = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:13](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L13)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:13](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L13)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/Wa
 
 > **address**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:15](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L15)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:15](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L15)
 
 The wallet address to display.
 
@@ -26,7 +26,7 @@ The wallet address to display.
 
 > `optional` **chain**: `Chain`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:20](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L20)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:20](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L20)
 
 The viem `Chain` object for the network the address belongs to.
 This is used to generate the correct block explorer link.
@@ -37,6 +37,6 @@ This is used to generate the correct block explorer link.
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:22](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L22)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:22](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L22)
 
 Optional additional CSS classes for the container.

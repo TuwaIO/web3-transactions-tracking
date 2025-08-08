@@ -1,8 +1,8 @@
 /**
  * @file This file contains the `TrackingTxModal`, the main UI for displaying the detailed lifecycle of a single transaction.
  */
-
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import * as Dialog from '@radix-ui/react-dialog';
 import { ActionTxKey } from '@tuwa/evm-transactions-tracking';
 import {
   InitialTransactionParams,
@@ -10,11 +10,11 @@ import {
   Transaction,
   TransactionPool,
   TransactionStatus,
-} from '@tuwa/web3-transactions-tracking-core/dist';
+} from '@tuwa/web3-transactions-tracking-core';
 import { Config } from '@wagmi/core';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
+import { ComponentPropsWithoutRef } from 'react';
 import { JSX, ReactNode, useEffect, useState } from 'react';
-import Modal from 'react-modal';
 import { Chain } from 'viem';
 
 import { useLabels } from '../../providers';
@@ -37,17 +37,29 @@ type CustomFooterProps = {
 /** A registry of functions that can be re-executed via the 'Retry' button. The key should match `actionKey` on a transaction. */
 export type TxActions = Record<string, () => Promise<unknown>>;
 
-/** Defines the customization options for the TrackingTxModal. */
+/**
+ * Defines the customization options for the TrackingTxModal.
+ * Allows customization of modal behavior, animations, and individual UI components.
+ */
 export type TrackingTxModalCustomization<TR, T extends Transaction<TR>> = {
-  modalProps?: Partial<Modal.Props>;
+  /** Custom props to pass to the underlying Radix UI Dialog.Content component */
+  modalProps?: Partial<ComponentPropsWithoutRef<typeof Dialog.Content>>;
+  /** Custom Framer Motion animation properties */
   motionProps?: MotionProps;
+  /** Custom component overrides for different parts of the modal */
   components?: {
+    /** Custom header component */
     header?: (props: CustomHeaderProps) => ReactNode;
-    statusVisual?: (props: TxStatusVisualProps) => ReactNode;
-    progressIndicator?: (props: TxProgressIndicatorProps) => ReactNode;
-    infoBlock?: (props: TxInfoBlockProps<TR, T>) => ReactNode;
-    errorBlock?: (props: TxErrorBlockProps) => ReactNode;
+    /** Custom footer component */
     footer?: (props: CustomFooterProps) => ReactNode;
+    /** Custom status visual component (icons, animations) */
+    statusVisual?: (props: TxStatusVisualProps) => ReactNode;
+    /** Custom progress indicator component */
+    progressIndicator?: (props: TxProgressIndicatorProps) => ReactNode;
+    /** Custom transaction info block component */
+    infoBlock?: (props: TxInfoBlockProps<TR, T>) => ReactNode;
+    /** Custom error block component */
+    errorBlock?: (props: TxErrorBlockProps) => ReactNode;
   };
 };
 
@@ -70,6 +82,7 @@ export interface TrackingTxModalProps<TR, T extends Transaction<TR>>
 /**
  * A detailed modal that displays the real-time status and lifecycle of a transaction.
  * It opens automatically for transactions initiated with `withTrackedModal: true`.
+ * Supports full customization through the customization prop including Radix UI Dialog properties.
  *
  * @param {TrackingTxModalProps<TR, T>} props - The component props.
  * @returns {JSX.Element} The rendered tracking modal.
@@ -146,116 +159,153 @@ export function TrackingTxModal<TR, T extends Transaction<TR>>({
   return (
     <AnimatePresence>
       {isOpen && (
-        <Modal
-          onAfterOpen={() => setTrackedTx(undefined)}
-          isOpen={isOpen}
-          onRequestClose={() => onClose(trackedTx?.txKey)}
-          overlayClassName="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50"
-          className="relative w-full max-w-md outline-none"
-          shouldCloseOnOverlayClick={true}
-          shouldCloseOnEsc={true}
-          bodyOpenClassName="tuwa-tx-tracking-wallet-info-modal-open"
-          appElement={typeof document !== 'undefined' ? document.getElementById('root')! : undefined}
-          {...customization?.modalProps}
-        >
-          <motion.div {...motionProps}>
-            <div
-              className={cn(
-                'relative flex flex-col gap-3 rounded-2xl bg-[var(--tuwa-bg-primary)] p-5 pt-0 shadow-2xl max-h-[98dvh] overflow-y-auto',
-                className,
-              )}
+        <Dialog.Root open={isOpen} onOpenChange={(open) => !open && onClose(trackedTx?.txKey)}>
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50" />
+            <Dialog.Content
+              className="relative w-full max-w-md outline-none"
+              onOpenAutoFocus={() => setTrackedTx(undefined)}
+              {...customization?.modalProps}
             >
-              {/* --- Header --- */}
-              {C?.header ? (
-                C.header({ onClose: () => onClose(trackedTx?.txKey) })
-              ) : (
-                <div className="flex items-start justify-between sticky top-0 left-0 w-full z-10 pt-5 pb-2 bg-[var(--tuwa-bg-primary)]">
-                  <h2 className="text-lg font-bold text-[var(--tuwa-text-primary)]">{labels.trackingModal.title}</h2>
-                  <button
-                    type="button"
-                    onClick={() => onClose(trackedTx?.txKey)}
-                    aria-label={labels.actions.close}
-                    className="cursor-pointer ml-2 -mt-1 rounded-full p-1 text-[var(--tuwa-text-tertiary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
-                  >
-                    <XMarkIcon className="h-5 w-5" />
-                  </button>
-                </div>
-              )}
-
-              {/* --- Main Visuals --- */}
-              <TxStatusVisual
-                isProcessing={isProcessing}
-                isSucceed={txStatus === TransactionStatus.Success}
-                isFailed={isError}
-                isReplaced={txStatus === TransactionStatus.Replaced}
-              />
-              <div className="flex flex-col items-center text-center -mt-2">
-                <StatusAwareText
-                  txStatus={txStatus}
-                  source={txToDisplay?.title}
-                  fallback={txToDisplay?.type}
-                  variant="title"
-                  applyColor
-                  className="text-xl"
-                />
-                <StatusAwareText
-                  txStatus={txStatus}
-                  source={txToDisplay?.description}
-                  variant="description"
-                  className="mt-0"
-                />
-              </div>
-              <TxProgressIndicator
-                isProcessing={isProcessing}
-                isSucceed={txStatus === TransactionStatus.Success}
-                isFailed={isError}
-                isReplaced={txStatus === TransactionStatus.Replaced}
-              />
-
-              {/* --- Info Blocks --- */}
-              <TxInfoBlock tx={txToDisplay as T} appChains={appChains} transactionsPool={transactionsPool} />
-              <TxErrorBlock error={trackedTx?.errorMessage || initialTx?.errorMessage} />
-
-              {/* --- Footer --- */}
-              {C?.footer ? (
-                C.footer({
-                  onClose: () => onClose(trackedTx?.txKey),
-                  onOpenWalletInfo,
-                  isProcessing,
-                  onRetry: canRetry ? handleRetry : undefined,
-                })
-              ) : (
-                <div className="mt-2 flex w-full items-center gap-3 border-t border-[var(--tuwa-border-primary)] pt-4">
-                  {isError && canRetry ? (
-                    <button
-                      type="button"
-                      onClick={handleRetry}
-                      className="cursor-pointer w-full rounded-md bg-[var(--tuwa-button-gradient-from)] py-2 text-sm font-semibold text-[var(--tuwa-text-on-accent)] transition-opacity hover:opacity-90"
-                    >
-                      {labels.trackingModal.retry}
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={onOpenWalletInfo}
-                      className="cursor-pointer w-full rounded-md bg-[var(--tuwa-bg-muted)] py-2 text-sm font-semibold text-[var(--tuwa-text-primary)] transition-colors hover:bg-[var(--tuwa-border-primary)]"
-                    >
-                      {labels.trackingModal.walletInfo}
-                    </button>
+              <motion.div {...motionProps}>
+                <div
+                  className={cn(
+                    'relative flex flex-col gap-3 rounded-2xl bg-[var(--tuwa-bg-primary)] p-5 pt-0 shadow-2xl max-h-[98dvh] overflow-y-auto',
+                    className,
                   )}
-                  <button
-                    type="button"
-                    onClick={() => onClose(trackedTx?.txKey)}
-                    disabled={isProcessing}
-                    className="cursor-pointer w-full rounded-md bg-[var(--tuwa-bg-muted)] py-2 text-sm font-semibold text-[var(--tuwa-text-primary)] transition-colors hover:bg-[var(--tuwa-border-primary)] disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    {isProcessing ? labels.trackingModal.processing : labels.trackingModal.close}
-                  </button>
+                >
+                  {/* --- Header --- */}
+                  {C?.header ? (
+                    C.header({ onClose: () => onClose(trackedTx?.txKey) })
+                  ) : (
+                    <div className="flex items-start justify-between sticky top-0 left-0 w-full z-10 pt-5 pb-2 bg-[var(--tuwa-bg-primary)]">
+                      <Dialog.Title className="text-lg font-bold text-[var(--tuwa-text-primary)]">
+                        {labels.trackingModal.title}
+                      </Dialog.Title>
+                      <Dialog.Close asChild>
+                        <button
+                          type="button"
+                          onClick={() => onClose(trackedTx?.txKey)}
+                          aria-label={labels.actions.close}
+                          className="cursor-pointer ml-2 -mt-1 rounded-full p-1 text-[var(--tuwa-text-tertiary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
+                        >
+                          <XMarkIcon className="h-5 w-5" />
+                        </button>
+                      </Dialog.Close>
+                    </div>
+                  )}
+
+                  {/* --- Main Visuals --- */}
+                  {C?.statusVisual ? (
+                    C.statusVisual({
+                      isProcessing,
+                      isSucceed: txStatus === TransactionStatus.Success,
+                      isFailed: isError,
+                      isReplaced: txStatus === TransactionStatus.Replaced,
+                    })
+                  ) : (
+                    <TxStatusVisual
+                      isProcessing={isProcessing}
+                      isSucceed={txStatus === TransactionStatus.Success}
+                      isFailed={isError}
+                      isReplaced={txStatus === TransactionStatus.Replaced}
+                    />
+                  )}
+
+                  <div className="flex flex-col items-center text-center -mt-2">
+                    <StatusAwareText
+                      txStatus={txStatus}
+                      source={txToDisplay?.title}
+                      fallback={txToDisplay?.type}
+                      variant="title"
+                      applyColor
+                      className="text-xl"
+                    />
+                    <StatusAwareText
+                      txStatus={txStatus}
+                      source={txToDisplay?.description}
+                      variant="description"
+                      className="mt-0"
+                    />
+                  </div>
+
+                  {C?.progressIndicator ? (
+                    C.progressIndicator({
+                      isProcessing,
+                      isSucceed: txStatus === TransactionStatus.Success,
+                      isFailed: isError,
+                      isReplaced: txStatus === TransactionStatus.Replaced,
+                    })
+                  ) : (
+                    <TxProgressIndicator
+                      isProcessing={isProcessing}
+                      isSucceed={txStatus === TransactionStatus.Success}
+                      isFailed={isError}
+                      isReplaced={txStatus === TransactionStatus.Replaced}
+                    />
+                  )}
+
+                  {/* --- Info Blocks --- */}
+                  {C?.infoBlock ? (
+                    C.infoBlock({
+                      tx: txToDisplay as T,
+                      appChains,
+                      transactionsPool,
+                    })
+                  ) : (
+                    <TxInfoBlock tx={txToDisplay as T} appChains={appChains} transactionsPool={transactionsPool} />
+                  )}
+
+                  {C?.errorBlock ? (
+                    C.errorBlock({
+                      error: trackedTx?.errorMessage || initialTx?.errorMessage,
+                    })
+                  ) : (
+                    <TxErrorBlock error={trackedTx?.errorMessage || initialTx?.errorMessage} />
+                  )}
+
+                  {/* --- Footer --- */}
+                  {C?.footer ? (
+                    C.footer({
+                      onClose: () => onClose(trackedTx?.txKey),
+                      onOpenWalletInfo,
+                      isProcessing,
+                      onRetry: canRetry ? handleRetry : undefined,
+                    })
+                  ) : (
+                    <div className="mt-2 flex w-full items-center gap-3 border-t border-[var(--tuwa-border-primary)] pt-4">
+                      {isError && canRetry ? (
+                        <button
+                          type="button"
+                          onClick={handleRetry}
+                          className="cursor-pointer w-full rounded-md bg-[var(--tuwa-button-gradient-from)] py-2 text-sm font-semibold text-[var(--tuwa-text-on-accent)] transition-opacity hover:opacity-90"
+                        >
+                          {labels.trackingModal.retry}
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={onOpenWalletInfo}
+                          className="cursor-pointer w-full rounded-md bg-[var(--tuwa-bg-muted)] py-2 text-sm font-semibold text-[var(--tuwa-text-primary)] transition-colors hover:bg-[var(--tuwa-border-primary)]"
+                        >
+                          {labels.trackingModal.walletInfo}
+                        </button>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => onClose(trackedTx?.txKey)}
+                        disabled={isProcessing}
+                        className="cursor-pointer w-full rounded-md bg-[var(--tuwa-bg-muted)] py-2 text-sm font-semibold text-[var(--tuwa-text-primary)] transition-colors hover:bg-[var(--tuwa-border-primary)] disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        {isProcessing ? labels.trackingModal.processing : labels.trackingModal.close}
+                      </button>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          </motion.div>
-        </Modal>
+              </motion.div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
       )}
     </AnimatePresence>
   );

@@ -8,9 +8,10 @@
 
 > **TrackingTxModalCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:41](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L41)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:44](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L44)
 
 Defines the customization options for the TrackingTxModal.
+Allows customization of modal behavior, animations, and individual UI components.
 
 ## Type Parameters
 
@@ -28,11 +29,15 @@ Defines the customization options for the TrackingTxModal.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:44](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L44)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:50](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L50)
+
+Custom component overrides for different parts of the modal
 
 #### errorBlock()?
 
 > `optional` **errorBlock**: (`props`) => `ReactNode`
+
+Custom error block component
 
 ##### Parameters
 
@@ -48,6 +53,8 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **footer**: (`props`) => `ReactNode`
 
+Custom footer component
+
 ##### Parameters
 
 ###### props
@@ -61,6 +68,8 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 #### header()?
 
 > `optional` **header**: (`props`) => `ReactNode`
+
+Custom header component
 
 ##### Parameters
 
@@ -76,6 +85,8 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **infoBlock**: (`props`) => `ReactNode`
 
+Custom transaction info block component
+
 ##### Parameters
 
 ###### props
@@ -89,6 +100,8 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 #### progressIndicator()?
 
 > `optional` **progressIndicator**: (`props`) => `ReactNode`
+
+Custom progress indicator component
 
 ##### Parameters
 
@@ -104,6 +117,8 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **statusVisual**: (`props`) => `ReactNode`
 
+Custom status visual component (icons, animations)
+
 ##### Parameters
 
 ###### props
@@ -118,9 +133,11 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 ### modalProps?
 
-> `optional` **modalProps**: `Partial`\<`Modal.Props`\>
+> `optional` **modalProps**: `Partial`\<`ComponentPropsWithoutRef`\<*typeof* `Dialog.Content`\>\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L42)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:46](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L46)
+
+Custom props to pass to the underlying Radix UI Dialog.Content component
 
 ***
 
@@ -128,4 +145,6 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **motionProps**: `MotionProps`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L43)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:48](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L48)
+
+Custom Framer Motion animation properties

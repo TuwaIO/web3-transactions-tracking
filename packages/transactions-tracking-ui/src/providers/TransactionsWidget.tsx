@@ -9,7 +9,6 @@ import {
   TransactionStatus,
 } from '@tuwa/web3-transactions-tracking-core';
 import { JSX, useEffect, useMemo, useRef, useState } from 'react';
-import Modal from 'react-modal';
 import { toast, ToastContainer, ToastContainerProps, ToastContentProps, TypeOptions } from 'react-toastify';
 import { Address, Chain } from 'viem';
 
@@ -27,17 +26,6 @@ import { defaultLabels } from '../i18n/en';
 import { TuwaLabels } from '../i18n/types';
 import { deepMerge } from '../utils';
 import { LabelsProvider } from './LabelsProvider';
-
-// Set the app element for react-modal for accessibility.
-if (typeof document !== 'undefined') {
-  let appRoot = document.getElementById('root');
-  if (!appRoot) {
-    appRoot = document.createElement('div');
-    appRoot.setAttribute('id', 'root');
-    document.body.appendChild(appRoot);
-  }
-  Modal.setAppElement('#root');
-}
 
 const STATUS_TO_TOAST_TYPE: Record<string, TypeOptions> = {
   [TransactionStatus.Success]: 'success',

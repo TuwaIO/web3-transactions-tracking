@@ -8,10 +8,11 @@
 
 > **TrackingTxModal**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:77](https://github.com/TuwaIO/web3-transactions-tracking/blob/eb74fc944a51985cd6d7afc611dcca5bad5c8dfd/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L77)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:90](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L90)
 
 A detailed modal that displays the real-time status and lifecycle of a transaction.
 It opens automatically for transactions initiated with `withTrackedModal: true`.
+Supports full customization through the customization prop including Radix UI Dialog properties.
 
 ## Type Parameters
 
