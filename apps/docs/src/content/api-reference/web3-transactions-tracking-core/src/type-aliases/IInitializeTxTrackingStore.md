@@ -8,7 +8,7 @@
 
 > **IInitializeTxTrackingStore**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L43)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L43)
 
 Defines the interface for the base transaction tracking store slice.
 It includes the state and actions for managing transactions.
@@ -33,7 +33,7 @@ The transaction type.
 
 > **addTxToPool**: (`{ tx }`) => `void`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L54)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L54)
 
 Adds a new transaction to the tracking pool.
 
@@ -55,7 +55,7 @@ Adds a new transaction to the tracking pool.
 
 > **closeTxTrackedModal**: (`txKey?`) => `void`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:60](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L60)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:60](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L60)
 
 Closes the tracking modal for a specific transaction.
 
@@ -75,7 +75,7 @@ Closes the tracking modal for a specific transaction.
 
 > **getLastTxKey**: () => `string` \| `undefined`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:62](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L62)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:62](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L62)
 
 Returns the key of the last transaction that was added to the pool.
 
@@ -89,7 +89,7 @@ Returns the key of the last transaction that was added to the pool.
 
 > `optional` **initialTx**: [`InitialTransaction`](InitialTransaction.md)
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L51)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L51)
 
 The state of a transaction that is currently being initiated but not yet submitted.
 
@@ -99,7 +99,7 @@ The state of a transaction that is currently being initiated but not yet submitt
 
 > `optional` **lastAddedTxKey**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L49)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L49)
 
 The key of the most recently added transaction.
 
@@ -109,7 +109,7 @@ The key of the most recently added transaction.
 
 > `optional` **onSucceedCallbacks**: (`tx`) => `Promise`\<`void`\> \| `void`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:45](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L45)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:45](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L45)
 
 An optional callback function to be executed when a transaction successfully completes.
 
@@ -129,7 +129,7 @@ An optional callback function to be executed when a transaction successfully com
 
 > **removeTxFromPool**: (`txKey`) => `void`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:58](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L58)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:58](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L58)
 
 Removes a transaction from the tracking pool using its key.
 
@@ -149,7 +149,7 @@ Removes a transaction from the tracking pool using its key.
 
 > **transactionsPool**: [`TransactionPool`](TransactionPool.md)\<`TR`, `T`\>
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:47](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L47)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:47](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L47)
 
 A pool of all transactions currently being tracked, indexed by their `txKey`.
 
@@ -159,7 +159,7 @@ A pool of all transactions currently being tracked, indexed by their `txKey`.
 
 > **updateTxParams**: (`fields`) => `void`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:56](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L56)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:56](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L56)
 
 Updates one or more parameters of an existing transaction in the pool.
 

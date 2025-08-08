@@ -1,1 +1,1 @@
-echo "pnpm docs:gen && git add apps/docs/src/content/api-reference" > .husky/pre-commit
+pnpm docs:gen && git add apps/docs/src/content/api-reference

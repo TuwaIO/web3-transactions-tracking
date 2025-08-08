@@ -8,7 +8,7 @@
 
 > **safeTracker**(`params`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:136](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L136)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:136](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L136)
 
 A low-level tracker for monitoring Safe multisig transactions.
 It wraps the generic polling tracker with the Safe-specific fetcher logic.

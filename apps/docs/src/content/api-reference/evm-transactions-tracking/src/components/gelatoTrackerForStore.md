@@ -8,7 +8,7 @@
 
 > **gelatoTrackerForStore**\<`T`\>(`__namedParameters`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:170](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L170)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:170](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L170)
 
 A higher-level wrapper for `gelatoTracker` that integrates directly with the Zustand store.
 It provides the necessary callbacks to update the transaction's state in the store.

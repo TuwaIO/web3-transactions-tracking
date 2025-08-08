@@ -8,7 +8,7 @@
 
 > **safeTrackerForStore**\<`T`\>(`__namedParameters`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:146](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L146)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:146](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L146)
 
 A higher-level wrapper for `safeTracker` that integrates directly with the Zustand store.
 

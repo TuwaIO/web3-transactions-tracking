@@ -8,7 +8,7 @@
 
 > **TrackingTxModalCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:41](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L41)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:41](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L41)
 
 Defines the customization options for the TrackingTxModal.
 
@@ -28,7 +28,7 @@ Defines the customization options for the TrackingTxModal.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:44](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L44)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:44](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L44)
 
 #### errorBlock()?
 
@@ -120,7 +120,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **modalProps**: `Partial`\<`Modal.Props`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L42)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L42)
 
 ***
 
@@ -128,4 +128,4 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **motionProps**: `MotionProps`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L43)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L43)

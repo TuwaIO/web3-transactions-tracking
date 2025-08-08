@@ -8,7 +8,7 @@
 
 > **WalletInfoModal**\<`TR`, `T`\>(`props`): `null` \| `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:67](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L67)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:67](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L67)
 
 The main modal component for displaying wallet information and transaction history.
 It is highly customizable through the `customization` prop.

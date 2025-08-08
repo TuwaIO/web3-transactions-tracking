@@ -6,7 +6,7 @@
 
 # TrackingTxModalProps\<TR, T\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L54)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L54)
 
 ## Extends
 
@@ -28,7 +28,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **actions**: [`TxActions`](../type-aliases/TxActions.md)
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:65](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L65)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:65](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L65)
 
 A registry of retryable actions.
 
@@ -38,7 +38,7 @@ A registry of retryable actions.
 
 > **appChains**: `Chain`[]
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:62](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L62)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:62](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L62)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:60](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L60)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:60](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L60)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tr
 
 > `optional` **config**: `Config`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:67](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L67)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:67](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L67)
 
 The wagmi config object, required for the retry functionality.
 
@@ -64,7 +64,7 @@ The wagmi config object, required for the retry functionality.
 
 > `optional` **customization**: [`TrackingTxModalCustomization`](../type-aliases/TrackingTxModalCustomization.md)\<`TR`, `T`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:61](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L61)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:61](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L61)
 
 ***
 
@@ -129,7 +129,7 @@ The state of a transaction that is currently being initiated but not yet submitt
 
 > **onClose**: (`txKey?`) => `void`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:57](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L57)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:57](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L57)
 
 A function to close the modal.
 
@@ -149,7 +149,7 @@ A function to close the modal.
 
 > **onOpenWalletInfo**: () => `void`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:59](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L59)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:59](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L59)
 
 A function to open the main wallet info modal.
 
@@ -163,4 +163,4 @@ A function to open the main wallet info modal.
 
 > **transactionsPool**: `TransactionPool`\<`TR`, `T`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:63](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L63)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:63](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L63)

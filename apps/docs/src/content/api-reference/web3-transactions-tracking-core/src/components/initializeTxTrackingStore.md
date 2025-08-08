@@ -8,7 +8,7 @@
 
 > **initializeTxTrackingStore**\<`TR`, `T`\>(`options`): [`StoreSlice`](../type-aliases/StoreSlice.md)\<[`IInitializeTxTrackingStore`](../type-aliases/IInitializeTxTrackingStore.md)\<`TR`, `T`\>\>
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:72](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L72)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:72](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L72)
 
 Creates a Zustand store slice containing the core logic for transaction tracking.
 This function is a slice creator and is meant to be used within `createStore` from Zustand.

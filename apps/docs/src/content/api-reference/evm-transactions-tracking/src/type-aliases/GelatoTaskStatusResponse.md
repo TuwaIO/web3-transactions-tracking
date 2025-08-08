@@ -8,7 +8,7 @@
 
 > **GelatoTaskStatusResponse** = `object`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L51)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L51)
 
 Defines the shape of the response from the Gelato `getTaskStatus` API endpoint.
 
@@ -18,7 +18,7 @@ Defines the shape of the response from the Gelato `getTaskStatus` API endpoint.
 
 > **task**: `object`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:52](https://github.com/TuwaIO/web3-transactions-tracking/blob/2043cd5621e576c11710316754b2017a7b544567/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L52)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:52](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L52)
 
 #### blockNumber?
 
