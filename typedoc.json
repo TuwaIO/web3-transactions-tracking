@@ -4,14 +4,21 @@
     "packages/web3-transactions-tracking-core/src/index.ts",
     "packages/evm-transactions-tracking/src/index.ts",
     "packages/transactions-tracking-ui/src/index.ts",
-    "packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx",
-    "packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx"
+    "packages/transactions-tracking-ui/src/providers/index.ts"
   ],
   "entryPointStrategy": "expand",
-  "readme": "none",
-  "categorizeByGroup": true,
-  "gitRevision": "main",
   "tsconfig": "tsconfig.json",
-  "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-react"],
-  "out": "apps/docs/src/content/api-reference"
+  "plugin": [
+    "typedoc-plugin-markdown",
+    "typedoc-plugin-react"
+  ],
+  "out": "apps/docs/src/content/api-reference",
+  "readme": "none",
+  "githubPages": false,
+  "hideGenerator": true,
+  "cleanOutputDir": true,
+  "categorizeByGroup": true,
+  "pageTitleTemplates": {
+    "member": "{name}"
+  }
 }

@@ -4,11 +4,11 @@
 
 [@tuwa/web3-txs-tracking-repo](../../../README.md) / [transactions-tracking-ui/src](../README.md) / ToastTransactionProps
 
-# Type Alias: ToastTransactionProps\<TR, T\>
+# ToastTransactionProps\<TR, T\>
 
 > **ToastTransactionProps**\<`TR`, `T`\> = `object` & `Pick`\<[`WalletInfoModalProps`](../interfaces/WalletInfoModalProps.md)\<`TR`, `T`\>, `"transactionsPool"`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/main/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L42)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/b7157ec97601bac11089c33347f8d589c043b005/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L42)
 
 ## Type declaration
 
