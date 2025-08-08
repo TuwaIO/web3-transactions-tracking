@@ -1,0 +1,17 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "packages/web3-transactions-tracking-core/src/index.ts",
+    "packages/evm-transactions-tracking/src/index.ts",
+    "packages/transactions-tracking-ui/src/index.ts",
+    "packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx",
+    "packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx"
+  ],
+  "entryPointStrategy": "expand",
+  "readme": "none",
+  "categorizeByGroup": true,
+  "gitRevision": "main",
+  "tsconfig": "tsconfig.json",
+  "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-react"],
+  "out": "apps/docs/src/content/api-reference"
+}

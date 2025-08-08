@@ -7,7 +7,7 @@ import { JSX } from 'react';
 
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
 import { useLabels } from '../../providers/LabelsProvider';
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils';
 
 export type TxErrorBlockProps = {
   /** The error message string to display. If undefined, the component renders nothing. */

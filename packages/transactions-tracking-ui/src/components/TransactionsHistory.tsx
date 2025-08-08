@@ -6,7 +6,7 @@ import { selectAllTransactionsByActiveWallet, Transaction } from '@tuwa/web3-tra
 import { ComponentType, JSX, ReactNode } from 'react';
 
 import { useLabels } from '../providers/LabelsProvider';
-import { cn } from '../utils/cn';
+import { cn } from '../utils';
 import { TransactionHistoryItem, TransactionHistoryItemProps } from './TransactionHistoryItem';
 import { WalletInfoModalProps } from './WalletInfoModal';
 

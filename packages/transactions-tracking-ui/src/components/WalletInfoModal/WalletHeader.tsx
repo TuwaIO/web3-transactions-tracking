@@ -6,9 +6,7 @@ import { JSX, ReactNode, useEffect, useState } from 'react';
 import { Address, Chain, Hex } from 'viem';
 
 import { useLabels } from '../../providers/LabelsProvider';
-import { cn } from '../../utils/cn';
-import { getAvatar, getName } from '../../utils/ensUtils';
-import { textCenterEllipsis } from '../../utils/textCenterEllipsis';
+import { cn, getAvatar, getName, textCenterEllipsis } from '../../utils';
 import { WalletAddressDisplay } from './WalletAddressDisplay';
 import { WalletAvatar } from './WalletAvatar';
 

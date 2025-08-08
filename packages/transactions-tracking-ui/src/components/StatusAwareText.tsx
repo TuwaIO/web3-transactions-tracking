@@ -5,7 +5,7 @@
 import { TransactionStatus } from '@tuwa/web3-transactions-tracking-core/dist';
 import { ReactNode } from 'react';
 
-import { cn } from '../utils/cn';
+import { cn } from '../utils';
 
 /**
  * A mapping from transaction status to an index and a color class.

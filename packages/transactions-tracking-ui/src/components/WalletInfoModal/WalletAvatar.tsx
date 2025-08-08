@@ -6,7 +6,7 @@ import makeBlockie from 'ethereum-blockies-base64';
 import { JSX } from 'react';
 
 import { useLabels } from '../../providers/LabelsProvider';
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils';
 
 export type WalletAvatarProps = {
   /** The user's wallet address. Used for the blockie fallback and background color generation. */

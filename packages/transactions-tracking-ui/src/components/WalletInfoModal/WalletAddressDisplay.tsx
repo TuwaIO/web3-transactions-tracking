@@ -8,8 +8,7 @@ import { Chain } from 'viem';
 
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard';
 import { useLabels } from '../../providers/LabelsProvider';
-import { cn } from '../../utils/cn';
-import { textCenterEllipsis } from '../../utils/textCenterEllipsis';
+import { cn, textCenterEllipsis } from '../../utils';
 
 export type WalletAddressDisplayProps = {
   /** The wallet address to display. */

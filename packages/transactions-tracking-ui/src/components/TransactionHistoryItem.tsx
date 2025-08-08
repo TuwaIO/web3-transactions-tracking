@@ -11,7 +11,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { JSX, ReactNode } from 'react';
 import { Chain } from 'viem';
 
-import { cn } from '../utils/cn';
+import { cn } from '../utils';
 import { StatusAwareText } from './StatusAwareText';
 import { ToastTransactionKey } from './ToastTransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';

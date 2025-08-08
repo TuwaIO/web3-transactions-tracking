@@ -10,7 +10,7 @@ import Modal from 'react-modal';
 import { Address, Chain } from 'viem';
 
 import { useLabels } from '../../providers/LabelsProvider';
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils';
 import { TransactionsHistory, TransactionsHistoryCustomization } from '../TransactionsHistory';
 import { WalletHeader } from './WalletHeader';
 

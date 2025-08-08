@@ -6,8 +6,7 @@ import { ArrowTopRightOnSquareIcon, CheckIcon, ClipboardIcon } from '@heroicons/
 
 import { useCopyToClipboard } from '../hooks/useCopyToClipboard';
 import { useLabels } from '../providers/LabelsProvider';
-import { cn } from '../utils/cn';
-import { textCenterEllipsis } from '../utils/textCenterEllipsis';
+import { cn, textCenterEllipsis } from '../utils';
 
 /**
  * A component to display a hash string (e.g., transaction hash or address)

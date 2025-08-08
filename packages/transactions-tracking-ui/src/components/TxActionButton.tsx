@@ -7,7 +7,7 @@ import { IInitializeTxTrackingStore, Transaction, TransactionStatus } from '@tuw
 import { ButtonHTMLAttributes, JSX, ReactNode, useEffect, useState } from 'react';
 
 import { useLabels } from '../providers/LabelsProvider';
-import { cn } from '../utils/cn';
+import { cn } from '../utils';
 
 // Defines the possible visual states of the button.
 type ButtonStatus = 'idle' | 'loading' | 'succeed' | 'failed';

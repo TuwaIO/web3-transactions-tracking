@@ -7,7 +7,7 @@ import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking
 import { JSX } from 'react';
 
 import { useLabels } from '../providers/LabelsProvider';
-import { cn } from '../utils/cn';
+import { cn } from '../utils';
 
 type TransactionStatusBadgeProps<TR, T extends Transaction<TR>> = {
   /** The transaction object whose status will be displayed. */

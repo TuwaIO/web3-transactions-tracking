@@ -11,7 +11,7 @@ import { JSX, ReactNode } from 'react';
 import { Chain } from 'viem';
 
 import { useLabels } from '../../providers/LabelsProvider';
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils';
 import { ToastTransactionKey, ToastTransactionKeyProps } from '../ToastTransactionKey';
 
 // --- Prop Types for Customization ---

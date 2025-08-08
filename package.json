@@ -10,7 +10,10 @@
     "build": "pnpm --filter \"./packages/**\" build",
     "postinstall": "pnpm build",
     "lint": "eslint . --ext .ts,.tsx",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "docs:clean": "rimraf apps/docs/src/content/api-reference",
+    "docs:gen": "pnpm docs:clean && typedoc",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -35,8 +38,14 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^16.3.0",
+    "husky": "^9.1.7",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
+    "rimraf": "^6.0.1",
+    "typedoc": "^0.28.9",
+    "typedoc-plugin-markdown": "^4.8.0",
+    "typedoc-plugin-react": "^0.1.0",
+    "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.0"
   }
 }

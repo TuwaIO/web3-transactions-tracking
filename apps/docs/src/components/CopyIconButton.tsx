@@ -1,5 +1,5 @@
 import { CheckCircleIcon, Square2StackIcon } from '@heroicons/react/24/outline';
-import { cn } from '@tuwa/transactions-tracking-ui/dist/utils/cn';
+import { cn } from '@tuwa/transactions-tracking-ui/dist';
 
 interface CopyIconButtonProps {
   copied: boolean;

@@ -6,7 +6,7 @@ import { ArrowPathIcon, CheckIcon, ExclamationTriangleIcon } from '@heroicons/re
 import { ComponentType, JSX } from 'react';
 
 import { useLabels } from '../../providers/LabelsProvider';
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils';
 
 // --- Sub-component: Step ---
 

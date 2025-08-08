@@ -9,7 +9,7 @@ import { JSX, ReactNode } from 'react';
 import { Chain, Hex } from 'viem';
 
 import { useLabels } from '../providers/LabelsProvider';
-import { cn } from '../utils/cn';
+import { cn } from '../utils';
 import { HashLink } from './HashLink';
 import { WalletInfoModalProps } from './WalletInfoModal';
 
