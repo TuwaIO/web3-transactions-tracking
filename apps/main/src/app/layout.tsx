@@ -1,6 +1,7 @@
 import '@/styles/app.css';
 
 import type { Metadata } from 'next';
+import { Head } from 'next/document';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ReactNode } from 'react';
 
@@ -30,6 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        <meta name="apple-mobile-web-app-title" content="TUWA Web3 Transaction Tracking Suite Landing" />
+      </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <Header />

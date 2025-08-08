@@ -2,8 +2,6 @@
 
 ***
 
-[@tuwa/web3-txs-tracking-repo](../../../README.md) / transactions-tracking-ui/src/providers
-
 # transactions-tracking-ui/src/providers
 
 ## Type Aliases

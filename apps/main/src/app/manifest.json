@@ -1,17 +1,21 @@
 {
-  "short_name": "Web3-txs-tracking",
-  "name": "Web3 transactions tracking",
-  "description": "Reliably track the lifecycle of web3 transactions with this intuitive package. Get real-time insights into on-chain processes with ease.",
-  "iconPath": "vercel.svg",
+  "name": "TUWA Web3 Transaction Tracking Suite Landing",
+  "short_name": "TUWA Tx's tracking",
   "icons": [
     {
-      "src": "vercel.svg",
-      "sizes": "32x32",
-      "type": "image/svg"
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
 }

@@ -12,6 +12,7 @@ import { Chain, createClient, PublicClient } from 'viem';
  * @param {number} chainId - The ID of the chain for which to create the client.
  * @param {Chain[]} chains - An array of supported viem Chain objects.
  * @returns {PublicClient | undefined} A viem PublicClient instance if the chain is found in the provided array, otherwise undefined.
+ * @ignore
  */
 export function createViemClient(chainId: number, chains: Chain[]): PublicClient | undefined {
   // Use `find` to get the first matching chain object. It's more direct than `filter`.

@@ -2,8 +2,6 @@
 
 ***
 
-[@tuwa/web3-txs-tracking-repo](../../README.md) / evm-transactions-tracking/src
-
 # evm-transactions-tracking/src
 
 ## Enumerations
@@ -34,7 +32,6 @@
 - [checkIsGelatoAvailable](functions/checkIsGelatoAvailable.md)
 - [checkTransactionsTracker](functions/checkTransactionsTracker.md)
 - [createTxTrackingStore](functions/createTxTrackingStore.md)
-- [createViemClient](functions/createViemClient.md)
 - [evmTracker](functions/evmTracker.md)
 - [evmTrackerForStore](functions/evmTrackerForStore.md)
 - [fetchTxFromGelatoAPI](functions/fetchTxFromGelatoAPI.md)

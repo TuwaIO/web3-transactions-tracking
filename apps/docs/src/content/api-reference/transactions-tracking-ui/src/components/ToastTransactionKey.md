@@ -2,13 +2,11 @@
 
 ***
 
-[@tuwa/web3-txs-tracking-repo](../../../README.md) / [transactions-tracking-ui/src](../README.md) / ToastTransactionKey
-
 # ToastTransactionKey()
 
 > **ToastTransactionKey**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L43)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/ToastTransactionKey.tsx#L43)
 
 A component that intelligently displays the relevant keys and hashes for a transaction.
 It handles different tracker types (EVM, Gelato, Safe) and statuses (e.g., replaced transactions).

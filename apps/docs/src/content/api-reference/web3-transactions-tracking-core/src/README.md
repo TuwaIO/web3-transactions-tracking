@@ -2,8 +2,6 @@
 
 ***
 
-[@tuwa/web3-txs-tracking-repo](../../README.md) / web3-transactions-tracking-core/src
-
 # web3-transactions-tracking-core/src
 
 ## Enumerations

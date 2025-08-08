@@ -18,6 +18,7 @@
   "hideGenerator": true,
   "cleanOutputDir": true,
   "categorizeByGroup": true,
+  "hideBreadcrumbs": true,
   "pageTitleTemplates": {
     "member": "{name}"
   }

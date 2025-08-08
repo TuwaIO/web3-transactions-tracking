@@ -2,13 +2,11 @@
 
 ***
 
-[@tuwa/web3-txs-tracking-repo](../../../README.md) / [evm-transactions-tracking/src](../README.md) / SafeTxStatusResponse
-
 # SafeTxStatusResponse
 
 > **SafeTxStatusResponse** = `object`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L30)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L30)
 
 Defines the shape of the primary response for a single transaction from the Safe Transaction Service API.
 
@@ -18,7 +16,7 @@ Defines the shape of the primary response for a single transaction from the Safe
 
 > **executionDate**: `string` \| `null`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:35](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L35)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:35](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L35)
 
 ***
 
@@ -26,7 +24,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:35](
 
 > **isExecuted**: `boolean`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L33)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L33)
 
 ***
 
@@ -34,7 +32,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:33](
 
 > **isSuccessful**: `boolean` \| `null`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L34)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L34)
 
 ***
 
@@ -42,7 +40,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:34](
 
 > **modified**: `string`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:37](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L37)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:37](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L37)
 
 ***
 
@@ -50,7 +48,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:37](
 
 > **nonce**: `number`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L38)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L38)
 
 ***
 
@@ -58,7 +56,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:38](
 
 > `optional` **replacedHash**: `string`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:39](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L39)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:39](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L39)
 
 ***
 
@@ -66,7 +64,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:39](
 
 > **safeTxHash**: `string`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L32)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L32)
 
 ***
 
@@ -74,7 +72,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:32](
 
 > **submissionDate**: `string` \| `null`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L36)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L36)
 
 ***
 
@@ -82,4 +80,4 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:36](
 
 > **transactionHash**: `string`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L31)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L31)

@@ -50,10 +50,8 @@ const footer = <Footer>Apache License {new Date().getFullYear()} © TUWA.</Foote
 export default async function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <Head
-      // ... Your additional head options
-      >
-        {/* Your additional tags should be passed as `children` of `<Head>` element */}
+      <Head>
+        <meta name="apple-mobile-web-app-title" content="TUWA Web3 Transaction Tracking Suite Docs" />
       </Head>
       <body>
         <Layout

@@ -4,7 +4,7 @@ import { Tabs } from 'nextra/components';
 
 import { RainbowKit } from '@/components/started-blocks/RainbowKit';
 
-const trackingPackages = [
+export const trackingPackages = [
   {
     name: 'EVM',
     packageName: 'evm-transactions-tracking',

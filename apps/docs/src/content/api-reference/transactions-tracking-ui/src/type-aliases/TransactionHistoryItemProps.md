@@ -2,13 +2,11 @@
 
 ***
 
-[@tuwa/web3-txs-tracking-repo](../../../README.md) / [transactions-tracking-ui/src](../README.md) / TransactionHistoryItemProps
-
 # TransactionHistoryItemProps\<TR, T\>
 
 > **TransactionHistoryItemProps**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:50](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L50)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:50](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L50)
 
 ## Type Parameters
 
@@ -26,7 +24,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistory
 
 > **appChains**: `Chain`[]
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L54)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L54)
 
 An array of supported chain objects.
 
@@ -36,7 +34,7 @@ An array of supported chain objects.
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:58](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L58)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:58](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L58)
 
 Optional additional CSS classes for the container.
 
@@ -46,7 +44,7 @@ Optional additional CSS classes for the container.
 
 > `optional` **customization**: [`TransactionHistoryItemCustomization`](TransactionHistoryItemCustomization.md)\<`TR`, `T`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:60](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L60)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:60](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L60)
 
 An object to customize and override the default internal components.
 
@@ -56,7 +54,7 @@ An object to customize and override the default internal components.
 
 > **transactionsPool**: [`TransactionPool`](../../../web3-transactions-tracking-core/src/type-aliases/TransactionPool.md)\<`TR`, `T`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:56](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L56)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:56](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L56)
 
 The entire pool of transactions.
 
@@ -66,6 +64,6 @@ The entire pool of transactions.
 
 > **tx**: `T`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:52](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L52)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:52](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L52)
 
 The transaction object to display.

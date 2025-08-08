@@ -2,11 +2,9 @@
 
 ***
 
-[@tuwa/web3-txs-tracking-repo](../../../README.md) / [web3-transactions-tracking-core/src](../README.md) / TransactionStatus
-
 # TransactionStatus
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/web3-transactions-tracking-core/src/types.ts#L24)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/web3-transactions-tracking-core/src/types.ts#L24)
 
 Represents the final statuses of a transaction.
 
@@ -16,7 +14,7 @@ Represents the final statuses of a transaction.
 
 > **Failed**: `"Failed"`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/web3-transactions-tracking-core/src/types.ts#L26)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/web3-transactions-tracking-core/src/types.ts#L26)
 
 Indicates that the transaction failed to execute.
 
@@ -26,7 +24,7 @@ Indicates that the transaction failed to execute.
 
 > **Replaced**: `"Replaced"`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/web3-transactions-tracking-core/src/types.ts#L30)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/web3-transactions-tracking-core/src/types.ts#L30)
 
 Indicates that the transaction was replaced by another one (e.g., speed-up).
 
@@ -36,6 +34,6 @@ Indicates that the transaction was replaced by another one (e.g., speed-up).
 
 > **Success**: `"Success"`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/web3-transactions-tracking-core/src/types.ts#L28)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/web3-transactions-tracking-core/src/types.ts#L28)
 
 Indicates that the transaction was successfully mined and executed.
