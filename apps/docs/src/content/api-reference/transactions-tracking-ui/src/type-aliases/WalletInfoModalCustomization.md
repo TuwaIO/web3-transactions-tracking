@@ -8,7 +8,7 @@
 
 > **WalletInfoModalCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L28)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L28)
 
 Defines the customization options for the WalletInfoModal.
 Allows customization of modal behavior, animations, and individual UI components.
@@ -29,7 +29,7 @@ Allows customization of modal behavior, animations, and individual UI components
 
 > `optional` **classNames**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L33)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L33)
 
 #### contentWrapper?
 
@@ -43,7 +43,7 @@ CSS classes for the main content wrapper div.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L38)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L38)
 
 Custom component overrides for different parts of the modal
 
@@ -101,7 +101,7 @@ A render prop to replace the `WalletHeader` component.
 
 > `optional` **modalProps**: `Partial`\<`ComponentPropsWithoutRef`\<*typeof* `Dialog.Content`\>\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L30)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L30)
 
 Custom props to pass to the underlying Radix UI Dialog.Content component
 
@@ -111,6 +111,6 @@ Custom props to pass to the underlying Radix UI Dialog.Content component
 
 > `optional` **motionProps**: `MotionProps`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L32)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L32)
 
 Custom Framer Motion animation properties

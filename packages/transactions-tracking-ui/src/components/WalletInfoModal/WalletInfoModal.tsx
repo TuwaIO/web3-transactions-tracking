@@ -78,7 +78,6 @@ export function WalletInfoModal<TR, T extends Transaction<TR>>({
 }): JSX.Element | null {
   const labels = useLabels();
 
-  // Default animation properties for framer-motion.
   const defaultMotionProps: MotionProps = {
     initial: { opacity: 0, scale: 0.95 },
     animate: { opacity: 1, scale: 1 },
@@ -86,66 +85,78 @@ export function WalletInfoModal<TR, T extends Transaction<TR>>({
     transition: { duration: 0.2, ease: 'easeOut' },
   };
 
-  // Merge default and custom motion props.
   const motionProps = { ...defaultMotionProps, ...customization?.motionProps };
-
   const closeModal = () => setIsOpen(false);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <Dialog.Root open={isOpen} onOpenChange={(open) => !open && closeModal()}>
-          <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 bg-black/45 flex items-center justify-center p-2 z-50" />
-            <Dialog.Content className="relative w-full max-w-2xl outline-none" {...customization?.modalProps}>
-              <motion.div {...motionProps}>
-                <div
-                  className={cn(
-                    'relative w-full max-w-2xl outline-none rounded-2xl bg-[var(--tuwa-bg-secondary)] shadow-xl max-h-[98dvh] overflow-y-auto',
-                    customization?.classNames?.contentWrapper,
-                  )}
-                >
-                  {/* --- Modal Header --- */}
-                  {customization?.components?.header ? (
-                    customization.components.header({ closeModal })
-                  ) : (
-                    <div className="flex items-center justify-between border-b border-[var(--tuwa-border-primary)] p-4 sticky top-0 left-0 w-full bg-[var(--tuwa-bg-secondary)] z-10">
-                      <Dialog.Title className="text-lg font-bold text-[var(--tuwa-text-primary)]">
-                        {labels.walletModal.title}
-                      </Dialog.Title>
-                      <Dialog.Close asChild>
-                        <button
-                          type="button"
-                          onClick={closeModal}
-                          aria-label={labels.actions.close}
-                          className="cursor-pointer rounded-full p-1 text-[var(--tuwa-text-tertiary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
-                        >
-                          <XMarkIcon className="h-6 w-6" />
-                        </button>
-                      </Dialog.Close>
+    <Dialog.Root open={isOpen} onOpenChange={(open) => !open && closeModal()}>
+      <Dialog.Portal>
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              <Dialog.Overlay asChild>
+                <motion.div
+                  className="fixed inset-0 bg-black/45 flex items-center justify-center p-2 z-50"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                />
+              </Dialog.Overlay>
+              <Dialog.Content
+                className="fixed left-1/2 top-1/2 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 outline-none z-50"
+                {...customization?.modalProps}
+                asChild
+              >
+                <motion.div {...motionProps}>
+                  <div
+                    className={cn(
+                      'relative w-full max-w-2xl outline-none rounded-2xl bg-[var(--tuwa-bg-secondary)] shadow-xl max-h-[98dvh] overflow-y-auto',
+                      customization?.classNames?.contentWrapper,
+                    )}
+                  >
+                    {/* Header */}
+                    {customization?.components?.header ? (
+                      customization.components.header({ closeModal })
+                    ) : (
+                      <div className="flex items-center justify-between border-b border-[var(--tuwa-border-primary)] p-4 sticky top-0 left-0 w-full bg-[var(--tuwa-bg-secondary)] z-10">
+                        <Dialog.Title className="text-lg font-bold text-[var(--tuwa-text-primary)]">
+                          {labels.walletModal.title}
+                        </Dialog.Title>
+                        <Dialog.Close asChild>
+                          <button
+                            type="button"
+                            onClick={closeModal}
+                            aria-label={labels.actions.close}
+                            className="cursor-pointer rounded-full p-1 text-[var(--tuwa-text-tertiary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
+                          >
+                            <XMarkIcon className="h-6 w-6" />
+                          </button>
+                        </Dialog.Close>
+                      </div>
+                    )}
+
+                    {/* Body */}
+                    <div className="flex flex-col gap-4 p-4 sm:p-6 sm:gap-6">
+                      {customization?.components?.walletInfo ? (
+                        customization.components.walletInfo(props)
+                      ) : (
+                        <WalletHeader walletAddress={props.walletAddress} chain={props.chain} />
+                      )}
+
+                      {customization?.components?.history ? (
+                        customization.components.history(props)
+                      ) : (
+                        <TransactionsHistory {...props} />
+                      )}
                     </div>
-                  )}
-
-                  {/* --- Modal Body --- */}
-                  <div className="flex flex-col gap-4 p-4 sm:p-6 sm:gap-6">
-                    {customization?.components?.walletInfo ? (
-                      customization.components.walletInfo(props)
-                    ) : (
-                      <WalletHeader walletAddress={props.walletAddress} chain={props.chain} />
-                    )}
-
-                    {customization?.components?.history ? (
-                      customization.components.history(props)
-                    ) : (
-                      <TransactionsHistory {...props} />
-                    )}
                   </div>
-                </div>
-              </motion.div>
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
-      )}
-    </AnimatePresence>
+                </motion.div>
+              </Dialog.Content>
+            </>
+          )}
+        </AnimatePresence>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }

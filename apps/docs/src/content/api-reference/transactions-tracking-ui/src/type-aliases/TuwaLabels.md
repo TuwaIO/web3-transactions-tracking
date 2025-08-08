@@ -8,7 +8,7 @@
 
 > **TuwaLabels** = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:9](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L9)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:9](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L9)
 
 Defines the complete structure for all customizable text labels used throughout the transaction tracking UI components.
 
@@ -18,7 +18,7 @@ Defines the complete structure for all customizable text labels used throughout 
 
 > **actions**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:112](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L112)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:112](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L112)
 
 Labels for common action buttons/links.
 
@@ -46,7 +46,7 @@ Text for a link to view the transaction on a block explorer.
 
 > **hashLabels**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L54)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L54)
 
 Labels for different types of transaction hashes/keys.
 
@@ -86,7 +86,7 @@ Label for a Safe Transaction Hash.
 
 > **statuses**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:39](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L39)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:39](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L39)
 
 Standard labels for transaction statuses.
 
@@ -132,7 +132,7 @@ Text for an unknown or indeterminate status.
 
 > **toast**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L34)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L34)
 
 Labels related to toast notifications.
 
@@ -148,7 +148,7 @@ Text for the button/link within a toast to open the wallet modal.
 
 > **trackedTxButton**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:103](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L103)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:103](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L103)
 
 Labels for the main transaction action button.
 
@@ -176,7 +176,7 @@ Text shown on the button after the transaction succeeds.
 
 > **trackingModal**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:81](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L81)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:81](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L81)
 
 Labels for the detailed transaction tracking modal.
 
@@ -240,7 +240,7 @@ Label for the button to open the main wallet info modal.
 
 > **txError**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:74](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L74)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:74](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L74)
 
 Labels for the transaction error block.
 
@@ -262,7 +262,7 @@ The title for the error details section.
 
 > **txInfo**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:67](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L67)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:67](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L67)
 
 Labels for the transaction information block.
 
@@ -284,7 +284,7 @@ Label indicating when the transaction was started.
 
 > **walletModal**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:11](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/i18n/types.ts#L11)
+Defined in: [packages/transactions-tracking-ui/src/i18n/types.ts:11](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/i18n/types.ts#L11)
 
 Labels for the main wallet information modal.
 

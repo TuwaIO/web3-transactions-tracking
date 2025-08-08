@@ -6,7 +6,7 @@
 
 # WalletHeaderProps
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:21](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L21)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:21](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L21)
 
 Defines the props for the `WalletHeader` component, including extensive customization options.
 
@@ -16,7 +16,7 @@ Defines the props for the `WalletHeader` component, including extensive customiz
 
 > `optional` **chain**: `Chain`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:25](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L25)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:25](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L25)
 
 The viem `Chain` object for the currently connected network.
 
@@ -26,7 +26,7 @@ The viem `Chain` object for the currently connected network.
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:27](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L27)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:27](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L27)
 
 Optional additional CSS classes for the container.
 
@@ -36,7 +36,7 @@ Optional additional CSS classes for the container.
 
 > `optional` **renderAddressDisplay**: (`props`) => `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L33)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L33)
 
 A render prop to replace the default `WalletAddressDisplay` component.
 
@@ -56,7 +56,7 @@ A render prop to replace the default `WalletAddressDisplay` component.
 
 > `optional` **renderAvatar**: (`props`) => `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L29)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L29)
 
 A render prop to replace the default `WalletAvatar` component.
 
@@ -76,7 +76,7 @@ A render prop to replace the default `WalletAvatar` component.
 
 > `optional` **renderName**: (`props`) => `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L31)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L31)
 
 A render prop to replace the default ENS name display.
 
@@ -96,7 +96,7 @@ A render prop to replace the default ENS name display.
 
 > `optional` **renderNoWalletContent**: () => `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:35](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L35)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:35](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L35)
 
 A render prop to replace the default content shown when no wallet is connected.
 
@@ -110,6 +110,6 @@ A render prop to replace the default content shown when no wallet is connected.
 
 > `optional` **walletAddress**: `` `0x${string}` ``
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L23)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L23)
 
 The user's wallet address. If undefined, the 'not connected' state is shown.

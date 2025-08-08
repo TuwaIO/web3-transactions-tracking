@@ -8,7 +8,7 @@
 
 > **getActiveWalletAndClient**(`config`): `object`
 
-Defined in: [packages/evm-transactions-tracking/src/utils/getActiveWalletAndClient.ts:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/0ddfef8585a5b555079dba5742e10bcf23985a9e/packages/evm-transactions-tracking/src/utils/getActiveWalletAndClient.ts#L16)
+Defined in: [packages/evm-transactions-tracking/src/utils/getActiveWalletAndClient.ts:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/d33a798a7b6f5ea37a9cf7f32c6601e6ce651d45/packages/evm-transactions-tracking/src/utils/getActiveWalletAndClient.ts#L16)
 
 Retrieves the active wallet account and the viem Wallet Client from the wagmi config.
 It ensures that a wallet is connected by throwing an error if it's not.
