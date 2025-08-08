@@ -8,7 +8,7 @@
 
 > **textCenterEllipsis**(`str`, `from`, `to`): `string`
 
-Defined in: [packages/transactions-tracking-ui/src/utils/textCenterEllipsis.ts:20](https://github.com/TuwaIO/web3-transactions-tracking/blob/abe6a4ef558cb29a4aef96fbcfa8c4d1e494d79d/packages/transactions-tracking-ui/src/utils/textCenterEllipsis.ts#L20)
+Defined in: [packages/transactions-tracking-ui/src/utils/textCenterEllipsis.ts:20](https://github.com/TuwaIO/web3-transactions-tracking/blob/21552a1c460bd6fb4d2af4641aec8b8b8280f1ea/packages/transactions-tracking-ui/src/utils/textCenterEllipsis.ts#L20)
 
 Truncates a string by showing a specified number of characters from the start and end,
 with an ellipsis in the middle. If the string is too short to be truncated, it's returned as is.

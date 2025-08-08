@@ -3,7 +3,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking/dist';
 import { createViemClient } from '@tuwa/evm-transactions-tracking/dist';
-import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers/TransactionsWidget';
+import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers';
 import { TxActionButton } from '@tuwa/transactions-tracking-ui/src/components';
 import { useEffect, useState } from 'react';
 import { Client } from 'viem';
