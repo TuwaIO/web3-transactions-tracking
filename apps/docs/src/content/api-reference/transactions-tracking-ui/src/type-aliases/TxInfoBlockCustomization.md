@@ -6,7 +6,7 @@
 
 > **TxInfoBlockCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L23)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/52081e426a0fe0411bfe24e5b138e8c5a0b34a42/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L23)
 
 Defines the customization options for the `TxInfoBlock` component.
 
@@ -26,7 +26,7 @@ Defines the customization options for the `TxInfoBlock` component.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L24)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/52081e426a0fe0411bfe24e5b138e8c5a0b34a42/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L24)
 
 #### infoRow()?
 

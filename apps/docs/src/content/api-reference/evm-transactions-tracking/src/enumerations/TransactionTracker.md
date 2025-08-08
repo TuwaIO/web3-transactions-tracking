@@ -4,7 +4,7 @@
 
 # TransactionTracker
 
-Defined in: [packages/evm-transactions-tracking/src/types.ts:13](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/types.ts#L13)
+Defined in: [packages/evm-transactions-tracking/src/types.ts:13](https://github.com/TuwaIO/web3-transactions-tracking/blob/52081e426a0fe0411bfe24e5b138e8c5a0b34a42/packages/evm-transactions-tracking/src/types.ts#L13)
 
 Enum representing the different tracking strategies available for EVM transactions.
 
@@ -14,7 +14,7 @@ Enum representing the different tracking strategies available for EVM transactio
 
 > **Ethereum**: `"ethereum"`
 
-Defined in: [packages/evm-transactions-tracking/src/types.ts:15](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/types.ts#L15)
+Defined in: [packages/evm-transactions-tracking/src/types.ts:15](https://github.com/TuwaIO/web3-transactions-tracking/blob/52081e426a0fe0411bfe24e5b138e8c5a0b34a42/packages/evm-transactions-tracking/src/types.ts#L15)
 
 For standard on-chain EVM transactions tracked by their hash.
 
@@ -24,7 +24,7 @@ For standard on-chain EVM transactions tracked by their hash.
 
 > **Gelato**: `"gelato"`
 
-Defined in: [packages/evm-transactions-tracking/src/types.ts:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/types.ts#L19)
+Defined in: [packages/evm-transactions-tracking/src/types.ts:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/52081e426a0fe0411bfe24e5b138e8c5a0b34a42/packages/evm-transactions-tracking/src/types.ts#L19)
 
 For meta-transactions relayed through the Gelato Network.
 
@@ -34,6 +34,6 @@ For meta-transactions relayed through the Gelato Network.
 
 > **Safe**: `"safe"`
 
-Defined in: [packages/evm-transactions-tracking/src/types.ts:17](https://github.com/TuwaIO/web3-transactions-tracking/blob/23f986a0b4a0d56019b0420cc7b526ee2c895afb/packages/evm-transactions-tracking/src/types.ts#L17)
+Defined in: [packages/evm-transactions-tracking/src/types.ts:17](https://github.com/TuwaIO/web3-transactions-tracking/blob/52081e426a0fe0411bfe24e5b138e8c5a0b34a42/packages/evm-transactions-tracking/src/types.ts#L17)
 
 For multi-signature transactions managed by a Safe contract.

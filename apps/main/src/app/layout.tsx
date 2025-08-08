@@ -1,8 +1,8 @@
 import '@/styles/app.css';
 
 import type { Metadata } from 'next';
-import { Head } from 'next/document';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Head from 'next/head';
 import { ReactNode } from 'react';
 
 import { Footer } from '@/components/Footer';
