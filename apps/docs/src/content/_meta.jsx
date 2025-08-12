@@ -6,6 +6,7 @@ export default {
   gettingStarted: 'Getting started',
   libraryComparison: 'Library comparison',
   apiReference: 'API reference',
+  customization: 'Customization',
   '---': {
     type: 'separator',
   },
