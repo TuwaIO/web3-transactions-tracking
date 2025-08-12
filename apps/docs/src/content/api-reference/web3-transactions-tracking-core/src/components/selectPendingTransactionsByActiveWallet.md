@@ -6,7 +6,7 @@
 
 > **selectPendingTransactionsByActiveWallet**\<`TR`, `T`\>(`transactionsPool`, `from`): `T`[]
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:92](https://github.com/TuwaIO/web3-transactions-tracking/blob/4a237b00ed848de7f49da6090247382e0e9beb07/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L92)
+Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:92](https://github.com/TuwaIO/web3-transactions-tracking/blob/0faf1ab988a5a0ce7c9996180cb885a015a6e019/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L92)
 
 Selects all pending transactions initiated by a specific wallet address.
 
