@@ -6,7 +6,7 @@
 
 > **TxProgressIndicator**(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:101](https://github.com/TuwaIO/web3-transactions-tracking/blob/eaf021b82894acf37ea9a64502e1f9dcaf67a571/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L101)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:101](https://github.com/TuwaIO/web3-transactions-tracking/blob/4a237b00ed848de7f49da6090247382e0e9beb07/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L101)
 
 A 3-step progress indicator that visually represents the lifecycle of a transaction.
 
