@@ -6,7 +6,7 @@
 
 > **WalletHeader**(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:46](https://github.com/TuwaIO/web3-transactions-tracking/blob/52081e426a0fe0411bfe24e5b138e8c5a0b34a42/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L46)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx:46](https://github.com/TuwaIO/web3-transactions-tracking/blob/eaf021b82894acf37ea9a64502e1f9dcaf67a571/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletHeader.tsx#L46)
 
 A component that displays the header for the wallet modal, including the user's avatar,
 ENS name (if available), and address. It handles loading states for ENS data and
