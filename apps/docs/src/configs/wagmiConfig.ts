@@ -8,8 +8,8 @@ import { mainnet, sepolia } from 'viem/chains';
 export const appChains = [mainnet, sepolia] as unknown as Draft<Chain[]>;
 
 export const config = getDefaultConfig({
-  appName: 'My RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: 'TUWA docs',
+  projectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID ?? '',
   chains: [mainnet, ...appChains.slice(1)],
   ssr: true,
 });

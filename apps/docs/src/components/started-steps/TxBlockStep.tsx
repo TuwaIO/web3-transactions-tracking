@@ -54,11 +54,11 @@ export const Increment = () => {
 export function TxBlockStep() {
   return (
     <div className="mt-4">
-      <h3 className="mb-2 text-lg font-bold text-[var(--tuwa-text-primary)]">Step 5: Trigger the Transaction</h3>
+      <h3 className="mb-2 text-lg font-bold text-[var(--tuwa-text-primary)]">Step 6: Trigger the Transaction</h3>
       <p className="mb-2 text-[var(--tuwa-text-secondary)]">
-        Finally, let's create a component with a wallet connection button and a button to trigger the transaction. When
-        a user clicks 'Increment', the transaction is sent and immediately tracked in the transaction pool. From here,
-        our library automatically handles all status updates for you.
+        Finally, a component is created with a wallet connection button and another button to trigger the transaction.
+        When a user clicks 'Increment,' the transaction is dispatched and immediately tracked in the transaction pool.
+        From this point on, the tracking suite automatically handles all status updates.
       </p>
       <CodeBlock title="Increment.tsx" titleIcons={<DocumentTextIcon />} textToCopy={codeBlock}>
         <CodeHighlighter children={codeBlock} language="tsx" />

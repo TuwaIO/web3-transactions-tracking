@@ -26,10 +26,10 @@ export function ActionStep() {
     <div className="mt-4">
       <h3 className="mb-2 text-lg font-bold text-[var(--tuwa-text-primary)]">Step 3: Create a Contract Action</h3>
       <p className="mb-2 text-[var(--tuwa-text-secondary)]">
-        Next, we'll wrap a smart contract function into a reusable 'action'. This makes the function compatible with our
-        transaction tracking library. While this step isn't strictly necessary, creating actions is a powerful pattern
-        for simplifying your code and avoiding repetition, especially in larger applications. For this example, we'll
-        create an action for the `increment` function:
+        The next step involves wrapping a smart contract function into a reusable 'action'. This approach makes the
+        function compatible with the transaction tracking suite. While this step isn't strictly necessary, creating
+        actions is a powerful pattern for simplifying code and avoiding repetition, especially in larger applications.
+        This example demonstrates creating an action for the `increment` function:
       </p>
       <CodeBlock title="increment.ts" titleIcons={<DocumentTextIcon />} textToCopy={codeBlock}>
         <CodeHighlighter children={codeBlock} language="ts" />

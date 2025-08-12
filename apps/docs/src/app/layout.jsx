@@ -3,10 +3,9 @@ import '@/styles/app.css';
 
 import { Head } from 'nextra/components';
 import { getPageMap } from 'nextra/page-map';
-import { Footer, Layout, Navbar } from 'nextra-theme-docs';
-import Image from 'next/image';
-import Logo from '@/assets/tuwaLogo.svg';
+import { Footer, Layout } from 'nextra-theme-docs';
 import { Providers } from '../components/Providers';
+import { NavBar } from '../components/NavBar';
 
 // --- Metadata Configuration ---
 export const metadata = {
@@ -44,7 +43,6 @@ export const metadata = {
   },
 };
 
-const navbar = <Navbar logo={<Image width={50} height={50} src={Logo} alt="TUWA Logo" />} />;
 const footer = <Footer>Apache License {new Date().getFullYear()} © TUWA.</Footer>;
 
 export default async function RootLayout({ children }) {
@@ -55,7 +53,7 @@ export default async function RootLayout({ children }) {
       </Head>
       <body>
         <Layout
-          navbar={navbar}
+          navbar={<NavBar key="navbar" />}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/TuwaIO/web3-transactions-tracking/tree/main/apps/docs"
           footer={footer}

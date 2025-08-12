@@ -11,7 +11,7 @@ export function RainbowKit({ trackingPackageName }: PackageInstallationTabsProps
       <div>
         <h3 className="mb-2 text-xl font-semibold text-[var(--tuwa-text-primary)]">Step 1: Wallet Connector Setup</h3>
         <p className="text-[var(--tuwa-text-secondary)]">
-          Our library works with any wagmi-based setup. This guide uses{' '}
+          The TUWA Web3 Tx's Tracking Suite works with any wagmi-based setup. This guide uses{' '}
           <StyledLink href="https://rainbowkit.com/docs/installation">RainbowKit</StyledLink> as an example.
         </p>
         <CombineSteps trackingPackageName={trackingPackageName} />
