@@ -6,7 +6,7 @@
 
 > **isEnsName**(`address`): `boolean`
 
-Defined in: [packages/transactions-tracking-ui/src/utils/ensUtils.ts:79](https://github.com/TuwaIO/web3-transactions-tracking/blob/9164bb13b3845660a18eb5abd8d55876b60a0d93/packages/transactions-tracking-ui/src/utils/ensUtils.ts#L79)
+Defined in: [packages/transactions-tracking-ui/src/utils/ensUtils.ts:79](https://github.com/TuwaIO/web3-transactions-tracking/blob/ef26e0214bae02134bca62097cf4b010e691f9d5/packages/transactions-tracking-ui/src/utils/ensUtils.ts#L79)
 
 A simple heuristic to check if a string could be an ENS name.
 It works by checking if the string is NOT a valid Ethereum address.

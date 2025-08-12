@@ -6,7 +6,7 @@
 
 > **InitialTransaction** = [`InitialTransactionParams`](InitialTransactionParams.md) & `object`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:106](https://github.com/TuwaIO/web3-transactions-tracking/blob/9164bb13b3845660a18eb5abd8d55876b60a0d93/packages/web3-transactions-tracking-core/src/types.ts#L106)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:106](https://github.com/TuwaIO/web3-transactions-tracking/blob/ef26e0214bae02134bca62097cf4b010e691f9d5/packages/web3-transactions-tracking-core/src/types.ts#L106)
 
 Represents a transaction in its initial, pre-submission state within the store.
 This is used for UI feedback while the transaction is being signed and sent.

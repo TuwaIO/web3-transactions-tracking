@@ -6,7 +6,7 @@
 
 > **WalletAddressDisplay**(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/9164bb13b3845660a18eb5abd8d55876b60a0d93/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L32)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/ef26e0214bae02134bca62097cf4b010e691f9d5/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAddressDisplay.tsx#L32)
 
 A component that renders a wallet address in a styled "pill" format,
 including a copy button and a link to the appropriate block explorer.
