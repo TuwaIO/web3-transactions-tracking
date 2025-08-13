@@ -108,6 +108,7 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
           appChains={appChains}
           openWalletInfoModal={enabledFeatures.walletInfoModal ? () => setIsWalletInfoModalOpen(true) : undefined}
           customization={customization?.toast}
+          config={config}
         />
       );
 
@@ -128,6 +129,10 @@ export function TransactionsWidget<TR, T extends Transaction<TR>>({
 
       // Show toast for new pending transactions.
       if (!prevTx && currentTx.pending) {
+        showOrUpdateToast(currentTx, 'info');
+      }
+      // Update toast for pending transactions.
+      if (prevTx && prevTx.nonce !== currentTx?.nonce) {
         showOrUpdateToast(currentTx, 'info');
       }
       // Update toast when a final status is reached or a hash appears.

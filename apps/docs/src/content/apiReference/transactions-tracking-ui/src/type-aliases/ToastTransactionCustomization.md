@@ -6,7 +6,7 @@
 
 > **ToastTransactionCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L29)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L32)
 
 Defines the structure for the `customization` prop, allowing users to override
 default sub-components with their own implementations.
@@ -27,7 +27,39 @@ default sub-components with their own implementations.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L30)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L33)
+
+#### cancelButton()?
+
+> `optional` **cancelButton**: (`props`) => `ReactNode`
+
+Override the default "Cancel" button.
+
+##### Parameters
+
+###### props
+
+`CustomActionButtonProps`
+
+##### Returns
+
+`ReactNode`
+
+#### speedUpButton()?
+
+> `optional` **speedUpButton**: (`props`) => `ReactNode`
+
+Override the default "Speed Up" button.
+
+##### Parameters
+
+###### props
+
+`CustomActionButtonProps`
+
+##### Returns
+
+`ReactNode`
 
 #### statusAwareText()?
 
@@ -87,7 +119,7 @@ Override the default "Open wallet info" button.
 
 ###### props
 
-`CustomWalletInfoButtonProps`
+`CustomActionButtonProps`
 
 ##### Returns
 

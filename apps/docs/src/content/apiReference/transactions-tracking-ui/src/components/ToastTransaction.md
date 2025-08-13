@@ -6,11 +6,11 @@
 
 > **ToastTransaction**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:68](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L68)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:80](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L80)
 
 A composite component that renders the content for a transaction toast notification.
-It is highly customizable via the `customization` prop, which allows for overriding
-its internal components.
+It is highly customizable and includes actions for speeding up or canceling transactions
+when they are in a pending state.
 
 ## Type Parameters
 
@@ -18,9 +18,13 @@ its internal components.
 
 `TR`
 
+The generic type for the transaction tracker registry.
+
 ### T
 
 `T` *extends* `Transaction`\<`TR`\>
+
+The generic type for the transaction object.
 
 ## Parameters
 

@@ -6,7 +6,7 @@
 
 > **ToastTransactionProps**\<`TR`, `T`\> = `object` & `Pick`\<[`WalletInfoModalProps`](../interfaces/WalletInfoModalProps.md)\<`TR`, `T`\>, `"transactionsPool"`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L42)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L49)
 
 ## Type declaration
 
@@ -14,7 +14,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.t
 
 > **appChains**: `Chain`[]
 
-An array of supported chain objects.
+An array of supported chain objects, used for displaying network information.
 
 ### className?
 
@@ -25,6 +25,14 @@ Optional additional CSS classes for the toast container.
 ### closeToast?
 
 > `optional` **closeToast**: `ToastContentProps`\[`"closeToast"`\]
+
+Props from `react-toastify` to control the toast itself.
+
+### config?
+
+> `optional` **config**: `Config`
+
+The wagmi config object, required for Speed Up and Cancel functionality.
 
 ### customization?
 
@@ -42,7 +50,7 @@ An optional custom icon to display instead of the default chain icon.
 
 > `optional` **openWalletInfoModal**: (`value`) => `void`
 
-A function to open the main wallet info modal.
+A function to open the main wallet info modal. If not provided, the button will not be rendered.
 
 #### Parameters
 
