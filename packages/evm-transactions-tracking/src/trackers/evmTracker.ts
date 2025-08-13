@@ -15,6 +15,7 @@ import {
   ReplacementReturnType,
   TransactionReceipt,
   WaitForTransactionReceiptParameters,
+  zeroHash,
 } from 'viem';
 import { getBlock, getTransaction, waitForTransactionReceipt } from 'viem/actions';
 
@@ -71,6 +72,10 @@ export async function evmTracker({
 
   if (onInitialize) {
     onInitialize();
+  }
+
+  if (tx.txKey === zeroHash) {
+    throw new Error('Transaction hash is zeroHash');
   }
 
   if (!client) {

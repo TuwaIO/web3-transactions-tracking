@@ -1,21 +1,56 @@
 /**
- * @file Integration tests for the evmTracker function.
- * These tests interact with a live network (Sepolia) to verify the tracking of real transactions.
- * Note: These tests depend on the availability of the specified transaction hashes on the Sepolia testnet.
+ * @file Unit tests for the evmTracker function.
+ * These tests mock the viem/actions module to simulate various transaction tracking scenarios
+ * without interacting with a live network. This ensures tests are fast, reliable, and deterministic.
  */
 
-import { zeroHash } from 'viem';
+import { Hex, zeroAddress, zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { evmTracker, EVMTrackerParams } from './evmTracker';
 
-// We are testing the actual implementation, so no need to mock the module.
+// Mock the 'viem/actions' module
+vi.mock('viem/actions', async (importActual) => {
+  const original = await importActual<typeof import('viem/actions')>();
+  return {
+    ...original,
+    waitForTransactionReceipt: vi.fn(),
+    getTransaction: vi.fn(),
+  };
+});
 
-describe('evmTracker Integration Tests', () => {
+const { waitForTransactionReceipt, getTransaction } = await import('viem/actions');
+const viemActions = {
+  waitForTransactionReceipt: vi.mocked(waitForTransactionReceipt),
+  getTransaction: vi.mocked(getTransaction),
+};
+
+describe('evmTracker Unit Tests', () => {
   let evmTrackerParams: EVMTrackerParams;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  let consoleErrorSpy: vi.SpyInstance;
 
-  // Set up a base configuration object before each test.
+  const mockTxDetails = {
+    hash: '0x0908f7a70a9f8acd9ced904f4e288bc46ae42923ce82bde706b26fdb8452abec' as Hex,
+    type: 'legacy' as const,
+    from: zeroAddress,
+    gas: 0n,
+    input: '0x' as Hex,
+    nonce: 0,
+    r: zeroHash,
+    s: zeroHash,
+    to: null,
+    typeHex: null,
+    v: 0n,
+    value: 0n,
+    blockHash: null,
+    blockNumber: null,
+    transactionIndex: null,
+    gasPrice: 0n,
+  };
+
   beforeEach(() => {
     evmTrackerParams = {
       onTxDetailsGot: vi.fn(),
@@ -24,72 +59,83 @@ describe('evmTracker Integration Tests', () => {
       onFailed: vi.fn(),
       onReplaced: vi.fn(),
       tx: {
-        // A real, successful transaction hash on Sepolia.
         txKey: '0x0908f7a70a9f8acd9ced904f4e288bc46ae42923ce82bde706b26fdb8452abec',
         chainId: sepolia.id,
       },
       chains: [sepolia],
-      retryCount: 1, // Use a single retry for faster test execution.
     };
+    viemActions.getTransaction.mockResolvedValue(mockTxDetails);
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+    consoleErrorSpy.mockRestore();
   });
 
   test('should call onInitialize when the tracker starts', async () => {
     await evmTracker(evmTrackerParams);
-    expect(evmTrackerParams.onInitialize).toHaveBeenCalledTimes(1);
+    expect(evmTrackerParams.onInitialize).toHaveBeenCalled();
+  });
+
+  test('should call onTxDetailsGot with transaction details', async () => {
+    await evmTracker(evmTrackerParams);
+    expect(evmTrackerParams.onTxDetailsGot).toHaveBeenCalledWith(mockTxDetails);
   });
 
   test('should call onFinished for a successfully mined transaction', async () => {
+    const mockReceipt = { status: 'success', transactionHash: evmTrackerParams.tx.txKey };
+    viemActions.waitForTransactionReceipt.mockResolvedValue(mockReceipt as any);
     await evmTracker(evmTrackerParams);
-    // onFinished is called when a receipt is successfully retrieved.
-    expect(evmTrackerParams.onFinished).toHaveBeenCalledTimes(1);
+    expect(evmTrackerParams.onFinished).toHaveBeenCalledWith(mockTxDetails, mockReceipt, expect.anything());
   });
 
-  test('should call onFinished even for a transaction that was mined but failed (reverted)', async () => {
-    const paramsForFailedTx = {
-      ...evmTrackerParams,
-      tx: {
-        ...evmTrackerParams.tx,
-        // A real transaction hash on Sepolia that was mined but reverted.
-        txKey: '0x2a429e307a27fcbe7ae8379d80c8de0162a1b8ff3403f517f17352a4c8771654',
-      },
-    };
-    await evmTracker(paramsForFailedTx);
-    // onFinished is expected because a receipt was found, even though the tx status is 'failed'.
-    expect(paramsForFailedTx.onFinished).toHaveBeenCalledTimes(1);
+  test('should call onFinished for a reverted transaction', async () => {
+    const mockReceipt = { status: 'reverted', transactionHash: evmTrackerParams.tx.txKey };
+    viemActions.waitForTransactionReceipt.mockResolvedValue(mockReceipt as any);
+    await evmTracker(evmTrackerParams);
+    expect(evmTrackerParams.onFinished).toHaveBeenCalledWith(mockTxDetails, mockReceipt, expect.anything());
   });
 
-  test('should call onFailed if the transaction cannot be found after retries', async () => {
-    const paramsForNotFoundTx = {
-      ...evmTrackerParams,
-      tx: {
-        ...evmTrackerParams.tx,
-        // A zero hash will not be found on the network.
-        txKey: zeroHash,
-      },
-    };
-    await evmTracker(paramsForNotFoundTx);
-    // onFailed is called when `getTransaction` fails after all retries.
-    expect(paramsForNotFoundTx.onFailed).toHaveBeenCalledTimes(1);
-  }, 10000); // Increase timeout to allow for retry logic.
+  test('should call onFailed if getTransaction throws an error', async () => {
+    const mockError = new Error('Transaction not found');
+    viemActions.getTransaction.mockRejectedValue(mockError);
+    await evmTracker({ ...evmTrackerParams, retryCount: 1, retryTimeout: 1 });
+    expect(evmTrackerParams.onFailed).toHaveBeenCalledWith(mockError);
+    expect(consoleErrorSpy).toHaveBeenCalled();
+  });
 
-  // Suggestion for a future test case:
-  test.todo('should call onReplaced when a transaction is replaced (sped up or cancelled)', async () => {
-    // To test this, you would need to mock `viem/actions`.
-    // The mock for `waitForTransactionReceipt` could be implemented to call its `onReplaced` callback.
-    // Example:
-    //
-    // vi.mock('viem/actions', async () => {
-    //   const original = await vi.importActual('viem/actions');
-    //   return {
-    //     ...original,
-    //     waitForTransactionReceipt: vi.fn().mockImplementation(async (client, { onReplaced }) => {
-    //       onReplaced({ transaction: { hash: '0xnewHash' }, reason: 'replaced' });
-    //     }),
-    //     getTransaction: vi.fn().mockResolvedValue({ hash: evmTrackerParams.tx.txKey }),
-    //   };
-    // });
-    //
-    // await evmTracker(evmTrackerParams);
-    // expect(evmTrackerParams.onReplaced).toHaveBeenCalledTimes(1);
+  test('should throw an error if the transaction hash is zeroHash', async () => {
+    const paramsForZeroHash = {
+      ...evmTrackerParams,
+      tx: { ...evmTrackerParams.tx, txKey: zeroHash },
+    };
+    await expect(evmTracker(paramsForZeroHash)).rejects.toThrow('Transaction hash is zeroHash');
+    expect(viemActions.getTransaction).not.toHaveBeenCalled();
+    expect(paramsForZeroHash.onFailed).not.toHaveBeenCalled();
+  });
+
+  test('should call onReplaced and not onFinished when a transaction is replaced', async () => {
+    const replacementData = {
+      reason: 'repriced' as const,
+      transaction: { hash: '0xnewHash' as Hex },
+    };
+
+    // Simulate viem's behavior: onReplaced is called, and then the promise resolves.
+    viemActions.waitForTransactionReceipt.mockImplementation(async (_client, { onReplaced }) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      onReplaced?.(replacementData);
+      return { status: 'success' } as any; // The tracker will resolve with a dummy receipt.
+    });
+
+    await evmTracker(evmTrackerParams);
+
+    // Assert that onReplaced was called correctly.
+    expect(evmTrackerParams.onReplaced).toHaveBeenCalledTimes(1);
+    expect(evmTrackerParams.onReplaced).toHaveBeenCalledWith(replacementData);
+
+    // Assert that onFinished was NOT called, because the internal `txWasReplaced` flag prevents it.
+    expect(evmTrackerParams.onFinished).not.toHaveBeenCalled();
   });
 });

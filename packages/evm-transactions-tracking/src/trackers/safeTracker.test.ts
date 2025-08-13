@@ -8,14 +8,18 @@ import { initializePollingTracker } from '@tuwa/web3-transactions-tracking-core'
 import dayjs from 'dayjs';
 import { zeroAddress, zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { fetchTxFromSafeAPI, safeTracker, SafeTrackerParams, SafeTxStatusResponse } from './safeTracker';
 
 // Mock the core polling utility to isolate the tracker's logic.
-vi.mock('@tuwa/web3-transactions-tracking-core/dist', () => ({
-  initializePollingTracker: vi.fn(),
-}));
+vi.mock('@tuwa/web3-transactions-tracking-core', async (importActual) => {
+  const original = await importActual<typeof import('@tuwa/web3-transactions-tracking-core')>();
+  return {
+    ...original,
+    initializePollingTracker: vi.fn(),
+  };
+});
 
 // --- Test Data and Helpers ---
 
@@ -37,8 +41,24 @@ const createMockSafeResponse = (overrides: Partial<SafeTxStatusResponse> = {}): 
   ...overrides,
 });
 
+// Helper to mock the two sequential fetch calls required by the Safe tracker.
+const mockSafeApiFetches = (
+  primaryTxData: SafeTxStatusResponse,
+  nonceTxsData: { count: number; results: SafeTxStatusResponse[] },
+) => {
+  vi.mocked(fetch)
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => primaryTxData,
+    } as Response)
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => nonceTxsData,
+    } as Response);
+};
+
 describe('safeTracker', () => {
-  it('should call initializePollingTracker with the correct fetcher and parameters', async () => {
+  test('should call initializePollingTracker with the correct fetcher and parameters', async () => {
     const mockParams: SafeTrackerParams = {
       tx: mockTx,
       onSucceed: vi.fn(),
@@ -47,8 +67,8 @@ describe('safeTracker', () => {
 
     await safeTracker(mockParams);
 
-    // Verify that the main polling function is called with the correct fetcher.
-    expect(initializePollingTracker).toHaveBeenCalledOnce();
+    // Verify that the main polling function is called with our Safe-specific fetcher.
+    expect(initializePollingTracker).toHaveBeenCalledTimes(1);
     expect(vi.mocked(initializePollingTracker).mock.calls[0][0]).toEqual(
       expect.objectContaining({
         ...mockParams,
@@ -76,74 +96,87 @@ describe('fetchTxFromSafeAPI', () => {
     vi.clearAllMocks();
   });
 
-  it('should call onSucceed when the transaction is executed and successful', async () => {
-    const primaryResponse = createMockSafeResponse({ isExecuted: true, isSuccessful: true });
-    const nonceResponse = { count: 1, results: [primaryResponse] };
+  test.each([
+    { status: 'successful', isSuccessful: true, callback: 'onSucceed' },
+    { status: 'failed', isSuccessful: false, callback: 'onFailed' },
+  ])('should call $callback when the transaction is executed and $status', async ({ isSuccessful, callback }) => {
+    const primaryResponse = createMockSafeResponse({ isExecuted: true, isSuccessful });
+    mockSafeApiFetches(primaryResponse, { count: 1, results: [primaryResponse] });
 
-    // Mock both fetch calls
-    vi.mocked(fetch)
-      .mockResolvedValueOnce({ ok: true, json: async () => primaryResponse } as Response)
-      .mockResolvedValueOnce({ ok: true, json: async () => nonceResponse } as Response);
+    await fetchTxFromSafeAPI(mockFetcherParams as any);
 
-    await fetchTxFromSafeAPI(mockFetcherParams);
-
-    expect(mockFetcherParams.onSucceed).toHaveBeenCalledWith(primaryResponse);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    expect(mockFetcherParams[callback]).toHaveBeenCalledWith(primaryResponse);
     expect(mockFetcherParams.clearWatch).toHaveBeenCalledWith(true);
+    // Ensure other terminal callbacks were not called.
+    const otherCallback = callback === 'onSucceed' ? 'onFailed' : 'onSucceed';
+    expect(mockFetcherParams[otherCallback]).not.toHaveBeenCalled();
   });
 
-  it('should call onFailed when the transaction is executed and failed', async () => {
-    const primaryResponse = createMockSafeResponse({ isExecuted: true, isSuccessful: false });
-    const nonceResponse = { count: 1, results: [primaryResponse] };
+  test('should call onReplaced when another transaction with the same nonce is executed', async () => {
+    const primaryResponse = createMockSafeResponse({ isExecuted: false }); // Our tx is still pending.
+    const replacedTxHash = '0xREPLACED_SAFE_TX_HASH';
+    const executedTx = createMockSafeResponse({
+      isExecuted: true,
+      isSuccessful: true,
+      safeTxHash: replacedTxHash,
+    });
+    mockSafeApiFetches(primaryResponse, { count: 2, results: [primaryResponse, executedTx] });
 
-    vi.mocked(fetch)
-      .mockResolvedValueOnce({ ok: true, json: async () => primaryResponse } as Response)
-      .mockResolvedValueOnce({ ok: true, json: async () => nonceResponse } as Response);
+    await fetchTxFromSafeAPI(mockFetcherParams as any);
 
-    await fetchTxFromSafeAPI(mockFetcherParams);
-
-    expect(mockFetcherParams.onFailed).toHaveBeenCalledWith(primaryResponse);
+    expect(mockFetcherParams.onReplaced).toHaveBeenCalledWith({
+      ...primaryResponse,
+      replacedHash: replacedTxHash,
+    });
     expect(mockFetcherParams.clearWatch).toHaveBeenCalledWith(true);
+    expect(mockFetcherParams.onSucceed).not.toHaveBeenCalled();
+    expect(mockFetcherParams.onFailed).not.toHaveBeenCalled();
   });
 
-  it('should call onReplaced when another transaction with the same nonce is executed', async () => {
-    const primaryResponse = createMockSafeResponse({ isExecuted: false }); // Our tx is pending
-    const replacedTxHash = '0xREPLACED';
-    const executedTx = createMockSafeResponse({ isExecuted: true, isSuccessful: true, safeTxHash: replacedTxHash });
-    const nonceResponse = { count: 2, results: [primaryResponse, executedTx] };
-
-    vi.mocked(fetch)
-      .mockResolvedValueOnce({ ok: true, json: async () => primaryResponse } as Response)
-      .mockResolvedValueOnce({ ok: true, json: async () => nonceResponse } as Response);
-
-    await fetchTxFromSafeAPI(mockFetcherParams);
-
-    expect(mockFetcherParams.onReplaced).toHaveBeenCalledWith({ ...primaryResponse, replacedHash: replacedTxHash });
-    expect(mockFetcherParams.clearWatch).toHaveBeenCalledWith(true);
-  });
-
-  it('should only call onIntervalTick when the transaction is still pending', async () => {
+  test('should only call onIntervalTick when the transaction is still pending', async () => {
     const primaryResponse = createMockSafeResponse({ isExecuted: false });
-    const nonceResponse = { count: 1, results: [primaryResponse] };
+    mockSafeApiFetches(primaryResponse, { count: 1, results: [primaryResponse] });
 
-    vi.mocked(fetch)
-      .mockResolvedValueOnce({ ok: true, json: async () => primaryResponse } as Response)
-      .mockResolvedValueOnce({ ok: true, json: async () => nonceResponse } as Response);
-
-    await fetchTxFromSafeAPI(mockFetcherParams);
+    await fetchTxFromSafeAPI(mockFetcherParams as any);
 
     expect(mockFetcherParams.onIntervalTick).toHaveBeenCalledWith(primaryResponse);
     expect(mockFetcherParams.clearWatch).not.toHaveBeenCalled();
     expect(mockFetcherParams.onSucceed).not.toHaveBeenCalled();
     expect(mockFetcherParams.onFailed).not.toHaveBeenCalled();
+    expect(mockFetcherParams.onReplaced).not.toHaveBeenCalled();
   });
 
-  it('should not proceed if the primary fetch fails', async () => {
+  test('should call clearWatch for a stale pending transaction', async () => {
+    const oldDate = dayjs().subtract(2, 'days').toISOString();
+    const primaryResponse = createMockSafeResponse({ isExecuted: false, modified: oldDate });
+    mockSafeApiFetches(primaryResponse, { count: 1, results: [primaryResponse] });
+
+    await fetchTxFromSafeAPI(mockFetcherParams as any);
+
+    expect(mockFetcherParams.clearWatch).toHaveBeenCalledWith(); // No `true`, so it gets removed from the pool.
+    expect(mockFetcherParams.onIntervalTick).not.toHaveBeenCalled(); // Should clear before the interval tick.
+  });
+
+  test('should not proceed if the primary fetch fails', async () => {
     vi.mocked(fetch).mockResolvedValueOnce({ ok: false } as Response);
 
-    await fetchTxFromSafeAPI(mockFetcherParams);
+    await fetchTxFromSafeAPI(mockFetcherParams as any);
 
-    // Expect the second fetch to not even be called
-    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(1); // The second fetch should not be called.
+    expect(mockFetcherParams.onIntervalTick).not.toHaveBeenCalled();
+  });
+
+  test('should not proceed if the secondary (nonce) fetch fails', async () => {
+    const primaryResponse = createMockSafeResponse();
+    vi.mocked(fetch)
+      .mockResolvedValueOnce({ ok: true, json: async () => primaryResponse } as Response)
+      .mockResolvedValueOnce({ ok: false } as Response); // Nonce fetch fails.
+
+    await fetchTxFromSafeAPI(mockFetcherParams as any);
+
+    expect(fetch).toHaveBeenCalledTimes(2);
     expect(mockFetcherParams.onIntervalTick).not.toHaveBeenCalled();
   });
 });

@@ -6,7 +6,7 @@
 
 > **useLabels**(): [`TuwaLabels`](../../type-aliases/TuwaLabels.md)
 
-Defined in: [packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/a2b33dd12eef06eb58b1d85d26fc06937a20a7e4/packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx#L42)
+Defined in: [packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx#L42)
 
 A custom hook to easily access the i18n labels from any component
 within the `LabelsProvider` tree.
