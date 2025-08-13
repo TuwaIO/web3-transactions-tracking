@@ -72,5 +72,7 @@ export const defaultLabels: TuwaLabels = {
     copy: 'Copy address',
     viewOnExplorer: 'View on explorer',
     close: 'Close',
+    cancel: 'Cancel',
+    speedUp: 'Speed up',
   },
 };

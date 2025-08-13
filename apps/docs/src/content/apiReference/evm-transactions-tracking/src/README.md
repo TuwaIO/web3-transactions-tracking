@@ -27,6 +27,7 @@
 
 ## Functions
 
+- [cancelTxAction](functions/cancelTxAction.md)
 - [checkAndInitializeTrackerInStore](functions/checkAndInitializeTrackerInStore.md)
 - [checkChainForTx](functions/checkChainForTx.md)
 - [checkIsGelatoAvailable](functions/checkIsGelatoAvailable.md)
@@ -43,4 +44,5 @@
 - [safeTracker](functions/safeTracker.md)
 - [safeTrackerForStore](functions/safeTrackerForStore.md)
 - [selectTxExplorerLink](functions/selectTxExplorerLink.md)
+- [speedUpTxAction](functions/speedUpTxAction.md)
 - [useInitializeTransactionsPool](functions/useInitializeTransactionsPool.md)

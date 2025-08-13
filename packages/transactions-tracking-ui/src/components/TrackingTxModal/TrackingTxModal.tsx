@@ -3,7 +3,7 @@
  */
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import * as Dialog from '@radix-ui/react-dialog';
-import { ActionTxKey } from '@tuwa/evm-transactions-tracking';
+import { ActionTxKey, cancelTxAction, speedUpTxAction } from '@tuwa/evm-transactions-tracking';
 import {
   InitialTransactionParams,
   ITxTrackingStore,
@@ -129,6 +129,8 @@ export function TrackingTxModal<TR, T extends Transaction<TR>>({
   const isProcessing = isInitializing || isPending;
   const isError = trackedTx?.isError || !!initialTx?.errorMessage;
   const canRetry = txToDisplay?.actionKey && actions?.[txToDisplay.actionKey] && handleTransaction && config;
+  const canReplace =
+    config && trackedTx?.nonce && trackedTx.pending && trackedTx.maxFeePerGas && trackedTx.maxPriorityFeePerGas;
 
   const handleRetry = async () => {
     if (!canRetry || !txToDisplay?.actionKey) return;
@@ -150,6 +152,24 @@ export function TrackingTxModal<TR, T extends Transaction<TR>>({
       actionFunction: actions[txToDisplay.actionKey],
       params: retryParams,
     });
+  };
+
+  const handleCancel = async () => {
+    if (canReplace) {
+      await cancelTxAction({
+        config,
+        tx: trackedTx,
+      });
+    }
+  };
+
+  const handleSpeedUp = async () => {
+    if (canReplace && trackedTx.to && trackedTx.value && trackedTx.input) {
+      await speedUpTxAction({
+        config,
+        tx: trackedTx,
+      });
+    }
   };
 
   const isOpen = (trackedTx?.isTrackedModalOpen || initialTx?.withTrackedModal) ?? false;
@@ -281,33 +301,54 @@ export function TrackingTxModal<TR, T extends Transaction<TR>>({
                         onRetry: canRetry ? handleRetry : undefined,
                       })
                     ) : (
-                      <div className="mt-2 flex w-full items-center gap-3 border-t border-[var(--tuwa-border-primary)] pt-4">
-                        {isError && canRetry ? (
-                          <button
-                            type="button"
-                            onClick={handleRetry}
-                            className="cursor-pointer w-full rounded-md bg-[var(--tuwa-button-gradient-from)] py-2 text-sm font-semibold text-[var(--tuwa-text-on-accent)] transition-opacity hover:opacity-90"
-                          >
-                            {labels.trackingModal.retry}
-                          </button>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={onOpenWalletInfo}
-                            className="cursor-pointer w-full rounded-md bg-[var(--tuwa-bg-muted)] py-2 text-sm font-semibold text-[var(--tuwa-text-primary)] transition-colors hover:bg-[var(--tuwa-border-primary)]"
-                          >
-                            {labels.trackingModal.walletInfo}
-                          </button>
+                      <>
+                        {canReplace && (
+                          <div className="mt-2 flex w-full items-center gap-3 border-t border-[var(--tuwa-border-primary)] pt-4">
+                            <button
+                              type="button"
+                              onClick={handleCancel}
+                              className="cursor-pointer w-full rounded-md bg-[var(--tuwa-button-gradient-from)] py-2 text-sm font-semibold text-[var(--tuwa-text-on-accent)] transition-opacity hover:opacity-90"
+                            >
+                              {labels.actions.cancel}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handleSpeedUp}
+                              className="cursor-pointer w-full rounded-md bg-[var(--tuwa-button-gradient-from)] py-2 text-sm font-semibold text-[var(--tuwa-text-on-accent)] transition-opacity hover:opacity-90"
+                            >
+                              {labels.actions.speedUp}
+                            </button>
+                          </div>
                         )}
-                        <button
-                          type="button"
-                          onClick={() => onClose(trackedTx?.txKey)}
-                          disabled={isProcessing}
-                          className="cursor-pointer w-full rounded-md bg-[var(--tuwa-bg-muted)] py-2 text-sm font-semibold text-[var(--tuwa-text-primary)] transition-colors hover:bg-[var(--tuwa-border-primary)] disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                          {isProcessing ? labels.trackingModal.processing : labels.trackingModal.close}
-                        </button>
-                      </div>
+
+                        <div className="mt-2 flex w-full items-center gap-3 border-t border-[var(--tuwa-border-primary)] pt-4">
+                          {isError && canRetry ? (
+                            <button
+                              type="button"
+                              onClick={handleRetry}
+                              className="cursor-pointer w-full rounded-md bg-[var(--tuwa-button-gradient-from)] py-2 text-sm font-semibold text-[var(--tuwa-text-on-accent)] transition-opacity hover:opacity-90"
+                            >
+                              {labels.trackingModal.retry}
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={onOpenWalletInfo}
+                              className="cursor-pointer w-full rounded-md bg-[var(--tuwa-bg-muted)] py-2 text-sm font-semibold text-[var(--tuwa-text-primary)] transition-colors hover:bg-[var(--tuwa-border-primary)]"
+                            >
+                              {labels.trackingModal.walletInfo}
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => onClose(trackedTx?.txKey)}
+                            disabled={isProcessing}
+                            className="cursor-pointer w-full rounded-md bg-[var(--tuwa-bg-muted)] py-2 text-sm font-semibold text-[var(--tuwa-text-primary)] transition-colors hover:bg-[var(--tuwa-border-primary)] disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            {isProcessing ? labels.trackingModal.processing : labels.trackingModal.close}
+                          </button>
+                        </div>
+                      </>
                     )}
                   </div>
                 </motion.div>

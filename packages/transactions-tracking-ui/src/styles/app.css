@@ -78,3 +78,7 @@
   --tuwa-button-gradient-from-hover: theme('colors.blue.600');
   --tuwa-button-gradient-to-hover: theme('colors.purple.600');
 }
+
+.Toastify {
+  pointer-events: auto;
+}

@@ -79,7 +79,7 @@ export function ToastTransactionKey<TR, T extends Transaction<TR>>({
             label: labels.hashLabels.replaced,
             hash: tx.replacedTxHash as Hex,
             // The explorer link should point to the NEW (replaced) transaction.
-            explorerUrl: selectTxExplorerLink(transactionsPool, appChains, tx.replacedTxHash as Hex),
+            explorerUrl: selectTxExplorerLink(transactionsPool, appChains, tx.hash as Hex, tx.replacedTxHash as Hex),
           })}
         </>
       ) : (

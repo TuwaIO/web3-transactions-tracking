@@ -32,6 +32,10 @@ type UpdatedParamsFields<TR> = Pick<
   | 'finishedTimestamp'
   | 'isTrackedModalOpen'
   | 'isError'
+  | 'maxPriorityFeePerGas'
+  | 'maxFeePerGas'
+  | 'input'
+  | 'value'
 >;
 
 /**

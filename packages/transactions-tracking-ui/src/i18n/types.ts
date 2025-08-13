@@ -116,5 +116,9 @@ export type TuwaLabels = {
     viewOnExplorer: string;
     /** Text for a generic "Close" action. */
     close: string;
+    /** Text for a generic "Cancel" action. */
+    cancel: string;
+    /** Text for a generic "Speed up" action. */
+    speedUp: string;
   };
 };

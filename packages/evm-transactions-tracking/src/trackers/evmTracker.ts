@@ -29,6 +29,8 @@ export type EVMTrackerParams = {
   tx: Pick<Transaction<TransactionTracker>, 'chainId' | 'txKey'>;
   /** An array of `viem` chain objects supported by the application. */
   chains: Chain[];
+  /** Callback executed when the getTransaction info got successfully. */
+  onTxDetailsGot: (localTx: GetTransactionReturnType) => void;
   /** Callback executed when the transaction is successfully mined and included in a block. */
   onFinished: (localTx: GetTransactionReturnType, receipt: TransactionReceipt, client: Client) => Promise<void>;
   /** Callback executed when the transaction is replaced (e.g., sped up or cancelled). */
@@ -54,6 +56,7 @@ export type EVMTrackerParams = {
  */
 export async function evmTracker({
   onInitialize,
+  onTxDetailsGot,
   onFinished,
   onFailed,
   onReplaced,
@@ -83,6 +86,8 @@ export async function evmTracker({
       // 1. Attempt to fetch the transaction details.
       const localTx = await getTransaction(client, { hash: tx.txKey as Hex });
 
+      onTxDetailsGot(localTx);
+
       let txWasReplaced = false;
 
       try {
@@ -93,8 +98,8 @@ export async function evmTracker({
             txWasReplaced = true;
             onReplaced(replacement);
           },
+          pollingInterval: 10_000,
           ...waitForTransactionReceiptParams,
-          pollingInterval: waitForTransactionReceiptParams?.pollingInterval ?? 10_000,
         });
 
         // If onReplaced was called, the promise resolves but we should not proceed.
@@ -152,6 +157,19 @@ export async function evmTrackerForStore<T extends Transaction<TransactionTracke
         txKey: tx.txKey,
         hash: tx.txKey as Hex,
         pending: tx.pending,
+      });
+    },
+    onTxDetailsGot: (localTx) => {
+      updateTxParams({
+        to: localTx.to ?? '',
+        input: localTx.input,
+        value: String(localTx.value),
+        txKey: tx.txKey,
+        pending: tx.pending,
+        nonce: localTx.nonce,
+        hash: localTx.hash,
+        maxFeePerGas: String(localTx.maxFeePerGas),
+        maxPriorityFeePerGas: String(localTx.maxPriorityFeePerGas),
       });
     },
     onFinished: async (localTx, receipt, client) => {

@@ -77,6 +77,14 @@ export type Transaction<T> = {
   isTrackedModalOpen?: boolean;
   /** A flag indicating if has error status. */
   isError?: boolean;
+  /** The maximum fee per gas for the transaction (EIP-1559). */
+  maxFeePerGas?: string;
+  /** The maximum priority fee per gas for the transaction (EIP-1559). */
+  maxPriorityFeePerGas?: string;
+  /** The value (in wei) being sent with the transaction. */
+  value?: string;
+  /** The data payload for the transaction, typically for contract interactions. */
+  input?: string;
 };
 
 /**

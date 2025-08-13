@@ -18,6 +18,7 @@ describe('evmTracker Integration Tests', () => {
   // Set up a base configuration object before each test.
   beforeEach(() => {
     evmTrackerParams = {
+      onTxDetailsGot: vi.fn(),
       onInitialize: vi.fn(),
       onFinished: vi.fn(),
       onFailed: vi.fn(),
