@@ -2,7 +2,7 @@ import '../src/styles/app.css';
 
 import type { Preview } from '@storybook/react-vite';
 
-import { defaultLabels } from '../src';
+import { defaultLabels } from '../src/i18n/en';
 import { LabelsProvider } from '../src/providers';
 
 const preview: Preview = {

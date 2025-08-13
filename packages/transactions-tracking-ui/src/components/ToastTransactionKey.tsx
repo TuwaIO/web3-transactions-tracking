@@ -55,7 +55,7 @@ export function ToastTransactionKey<TR, T extends Transaction<TR>>({
   const containerClasses =
     variant === 'toast'
       ? 'mt-2 flex w-full flex-col gap-y-2 border-t border-[var(--tuwa-border-primary)] pt-2'
-      : 'flex w-full flex-col gap-y-1';
+      : 'flex w-full flex-col gap-y-2';
 
   // Helper to use the render prop if provided, otherwise default to HashLink.
   const renderHash = (props: CustomHashLinkProps) => {

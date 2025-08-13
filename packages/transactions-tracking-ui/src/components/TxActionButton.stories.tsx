@@ -30,6 +30,7 @@ type StoryArgs = Partial<TxActionButtonProps<unknown, Transaction<unknown>>>;
 
 const meta: Meta<StoryArgs> = {
   title: 'UI Components/TxActionButton',
+  // @ts-expect-error
   component: TxActionButton,
   tags: ['autodocs'],
   parameters: {

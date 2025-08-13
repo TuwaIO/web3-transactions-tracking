@@ -4,7 +4,7 @@
 
 # TxActionButtonProps\<TR, T\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L24)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L24)
 
 ## Extends
 
@@ -50,7 +50,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > **action**: () => `Promise`\<`void`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L30)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L30)
 
 The asynchronous function to execute when the button is clicked. This function should initiate the transaction and return a promise.
 
@@ -351,7 +351,7 @@ Indicates that the element is perceivable but disabled, so it is not editable or
 
 ### ~~aria-dropeffect?~~
 
-> `optional` **aria-dropeffect**: `"link"` \| `"copy"` \| `"none"` \| `"execute"` \| `"move"` \| `"popup"`
+> `optional` **aria-dropeffect**: `"link"` \| `"none"` \| `"copy"` \| `"execute"` \| `"move"` \| `"popup"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2473
 
@@ -989,7 +989,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > **children**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L28)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L28)
 
 The default content to display when the button is in its 'idle' state. Typically the button's primary call to action text.
 
@@ -1037,7 +1037,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 ### contentEditable?
 
-> `optional` **contentEditable**: `"inherit"` \| `Booleanish` \| `"plaintext-only"`
+> `optional` **contentEditable**: `Booleanish` \| `"inherit"` \| `"plaintext-only"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2703
 
@@ -1149,7 +1149,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 ### enterKeyHint?
 
-> `optional` **enterKeyHint**: `"search"` \| `"done"` \| `"enter"` \| `"go"` \| `"next"` \| `"previous"` \| `"send"`
+> `optional` **enterKeyHint**: `"search"` \| `"enter"` \| `"done"` \| `"go"` \| `"next"` \| `"previous"` \| `"send"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2707
 
@@ -1179,7 +1179,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > `optional` **failedContent**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L38)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L38)
 
 Optional custom content to display in the 'failed' state. If not provided, a default error icon and text will be used.
 
@@ -1261,7 +1261,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > **getLastTxKey**: () => `undefined` \| `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L32)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L32)
 
 A function that returns the unique key (e.g., transaction hash) of the most recently initiated transaction. This is used to link the button's state to a specific transaction in the pool.
 
@@ -1325,7 +1325,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 ### inputMode?
 
-> `optional` **inputMode**: `"search"` \| `"url"` \| `"text"` \| `"none"` \| `"tel"` \| `"email"` \| `"numeric"` \| `"decimal"`
+> `optional` **inputMode**: `"search"` \| `"text"` \| `"none"` \| `"tel"` \| `"url"` \| `"email"` \| `"numeric"` \| `"decimal"`
 
 Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/index.d.ts:2765
 
@@ -1435,7 +1435,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > `optional` **loadingContent**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L34)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L34)
 
 Optional custom content to display in the 'loading' state. If not provided, a default spinner and text will be used.
 
@@ -3581,7 +3581,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > `optional` **replacedContent**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:40](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L40)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:40](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L40)
 
 Optional custom content to display in the 'replaced' state. If not provided, a default icon and text will be used.
 
@@ -3591,7 +3591,7 @@ Optional custom content to display in the 'replaced' state. If not provided, a d
 
 > `optional` **resetTimeout**: `number`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L42)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L42)
 
 The duration (in milliseconds) to display the 'succeed', 'failed', or 'replaced' state before automatically resetting the button to 'idle'. Defaults to 2500ms.
 
@@ -3697,7 +3697,7 @@ Defined in: node\_modules/.pnpm/@types+react@19.1.9/node\_modules/@types/react/i
 
 > `optional` **succeedContent**: `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/3081a57d5574d8647dc433129ed2c38de6defd83/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L36)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/1c531e3315ee04126f921b4f2611e5bf6a27395e/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L36)
 
 Optional custom content to display in the 'succeed' state. If not provided, a default success icon and text will be used.
 
