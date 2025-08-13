@@ -67,6 +67,7 @@ export const defaultLabels: TuwaLabels = {
     loading: 'Processing...',
     succeed: 'Success',
     failed: 'Failed',
+    replaced: 'Replaced',
   },
   actions: {
     copy: 'Copy address',

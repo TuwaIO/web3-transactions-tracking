@@ -6,10 +6,11 @@
 
 > **TxActionButton**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:41](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L41)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L55)
 
 A stateful button that provides real-time feedback for a transaction's lifecycle.
-It shows loading, success, and failure states by listening to the transaction pool.
+It listens for changes in the global `transactionsPool` to automatically update its
+visual state, showing loading, success, failure, and replaced statuses.
 
 ## Type Parameters
 
@@ -17,9 +18,13 @@ It shows loading, success, and failure states by listening to the transaction po
 
 `TR`
 
+The generic type for the transaction tracker registry.
+
 ### T
 
 `T` *extends* `Transaction`\<`TR`\>
+
+The generic type for the transaction object.
 
 ## Parameters
 
@@ -33,4 +38,4 @@ The component props.
 
 `Element`
 
-The rendered action button.
+The rendered stateful action button.

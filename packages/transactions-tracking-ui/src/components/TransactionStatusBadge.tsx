@@ -2,7 +2,7 @@
  * @file This file contains the `TransactionStatusBadge` component for visually displaying a transaction's status.
  */
 
-import { ArrowPathIcon, CheckCircleIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/solid';
+import { ArrowPathIcon, CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
 import { JSX } from 'react';
 
@@ -33,7 +33,7 @@ export function TransactionStatusBadge<TR, T extends Transaction<TR>>({
   const STATUS_CONFIG = {
     Pending: {
       label: labels.statuses.pending,
-      Icon: ClockIcon,
+      Icon: ArrowPathIcon,
       badgeClasses: 'bg-[var(--tuwa-pending-bg)] text-[var(--tuwa-pending-text)]',
       iconClasses: 'animate-spin text-[var(--tuwa-pending-icon)]',
     },

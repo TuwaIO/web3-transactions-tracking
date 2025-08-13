@@ -107,6 +107,8 @@ export type TuwaLabels = {
     succeed: string;
     /** Text shown on the button if the transaction fails to initialize. */
     failed: string;
+    /** Text shown on the button if the transaction replaced to initialize. */
+    replaced: string;
   };
   /** Labels for common action buttons/links. */
   actions: {

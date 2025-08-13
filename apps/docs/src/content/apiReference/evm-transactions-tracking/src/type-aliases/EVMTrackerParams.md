@@ -6,7 +6,7 @@
 
 > **EVMTrackerParams** = `object`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L28)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L28)
 
 Defines the parameters for the low-level EVM transaction tracker.
 
@@ -16,7 +16,7 @@ Defines the parameters for the low-level EVM transaction tracker.
 
 > **chains**: `Chain`[]
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L32)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L32)
 
 An array of `viem` chain objects supported by the application.
 
@@ -26,7 +26,7 @@ An array of `viem` chain objects supported by the application.
 
 > **onFailed**: (`error?`) => `void`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:40](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L40)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:40](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L40)
 
 Callback executed if an error occurs during tracking or if the transaction fails.
 
@@ -46,7 +46,7 @@ Callback executed if an error occurs during tracking or if the transaction fails
 
 > **onFinished**: (`localTx`, `receipt`, `client`) => `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L36)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L36)
 
 Callback executed when the transaction is successfully mined and included in a block.
 
@@ -74,7 +74,7 @@ Callback executed when the transaction is successfully mined and included in a b
 
 > `optional` **onInitialize**: () => `void`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L42)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L42)
 
 Optional callback executed once when the tracker starts.
 
@@ -88,7 +88,7 @@ Optional callback executed once when the tracker starts.
 
 > **onReplaced**: (`replacement`) => `void`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L38)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:38](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L38)
 
 Callback executed when the transaction is replaced (e.g., sped up or cancelled).
 
@@ -108,7 +108,7 @@ Callback executed when the transaction is replaced (e.g., sped up or cancelled).
 
 > **onTxDetailsGot**: (`localTx`) => `void`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L34)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L34)
 
 Callback executed when the getTransaction info got successfully.
 
@@ -128,7 +128,7 @@ Callback executed when the getTransaction info got successfully.
 
 > `optional` **retryCount**: `number`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:44](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L44)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:44](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L44)
 
 The number of times to retry fetching the transaction if it's not found initially. Defaults to 10.
 
@@ -138,7 +138,7 @@ The number of times to retry fetching the transaction if it's not found initiall
 
 > `optional` **retryTimeout**: `number`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:46](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L46)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:46](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L46)
 
 The delay (in milliseconds) between retry attempts. Defaults to 3000ms.
 
@@ -148,7 +148,7 @@ The delay (in milliseconds) between retry attempts. Defaults to 3000ms.
 
 > **tx**: `Pick`\<`Transaction`\<[`TransactionTracker`](../enumerations/TransactionTracker.md)\>, `"chainId"` \| `"txKey"`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L30)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L30)
 
 The transaction object to track, requiring at least `chainId` and `txKey` (the transaction hash).
 
@@ -158,6 +158,6 @@ The transaction object to track, requiring at least `chainId` and `txKey` (the t
 
 > `optional` **waitForTransactionReceiptParams**: `WaitForTransactionReceiptParameters`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:48](https://github.com/TuwaIO/web3-transactions-tracking/blob/f8d699df89c32cb5de5ecc3bf5431b3c080f2660/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L48)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:48](https://github.com/TuwaIO/web3-transactions-tracking/blob/d30dc6a3e80476f3e836f0385d8c40646abfed41/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L48)
 
 Optional parameters to pass to viem's `waitForTransactionReceipt` function.
