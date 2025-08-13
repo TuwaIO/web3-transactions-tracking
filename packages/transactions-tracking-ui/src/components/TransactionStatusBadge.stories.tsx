@@ -26,7 +26,7 @@ type StoryArgs = Partial<typeof TransactionStatusBadge>;
 // --- Storybook Meta Configuration ---
 
 const meta: Meta<StoryArgs> = {
-  title: 'UI Components/TransactionStatusBadge',
+  title: 'UI Components/basic/TransactionStatusBadge',
   component: TransactionStatusBadge,
   tags: ['autodocs'],
   parameters: {

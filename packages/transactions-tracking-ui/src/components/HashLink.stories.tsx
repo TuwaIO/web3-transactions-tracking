@@ -5,7 +5,7 @@ import { HashLink } from './HashLink';
 // --- Storybook Meta Configuration ---
 
 const meta: Meta<typeof HashLink> = {
-  title: 'UI Components/HashLink',
+  title: 'UI Components/basic/HashLink',
   component: HashLink,
   tags: ['autodocs'],
   parameters: {

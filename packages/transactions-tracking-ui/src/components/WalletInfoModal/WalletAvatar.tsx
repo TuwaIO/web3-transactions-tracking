@@ -3,7 +3,8 @@
  */
 
 import makeBlockie from 'ethereum-blockies-base64';
-import { JSX } from 'react';
+import { JSX, useEffect, useState } from 'react';
+import { isHex, zeroAddress } from 'viem';
 
 import { useLabels } from '../../providers';
 import { cn } from '../../utils';
@@ -32,13 +33,20 @@ export function WalletAvatar({ address, ensAvatar, className }: WalletAvatarProp
   // Generate a unique, consistent background color from the first 6 hex characters of the address.
   const bgColor = `#${address.slice(2, 8)}`;
 
+  const [avatar, setAvatar] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setAvatar(ensAvatar ?? makeBlockie(isHex(address) ? address : zeroAddress));
+  }, [ensAvatar, address]);
+
   return (
     <div className={cn('h-12 w-12 flex-shrink-0 rounded-full', className)} style={{ backgroundColor: bgColor }}>
       <img
         className="h-full w-full rounded-full object-cover"
         // Use the ENS avatar if provided, otherwise generate a blockie as a fallback.
-        src={ensAvatar ?? makeBlockie(address)}
+        src={avatar}
         alt={`${labels.walletModal.header.avatarAlt} ${address}`}
+        onError={() => setAvatar(makeBlockie(isHex(address) ? address : zeroAddress))}
       />
     </div>
   );

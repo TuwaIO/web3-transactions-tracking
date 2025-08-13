@@ -6,7 +6,7 @@ import { ToastCloseButton } from './ToastCloseButton';
 // --- Storybook Meta Configuration ---
 
 const meta: Meta<typeof ToastCloseButton> = {
-  title: 'UI Components/ToastCloseButton',
+  title: 'UI Components/Toast/ToastCloseButton',
   component: ToastCloseButton,
   tags: ['autodocs'],
   parameters: {

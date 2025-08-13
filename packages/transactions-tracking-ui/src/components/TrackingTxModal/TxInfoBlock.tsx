@@ -12,7 +12,7 @@ import { Chain } from 'viem';
 
 import { useLabels } from '../../providers';
 import { cn } from '../../utils';
-import { ToastTransactionKey, ToastTransactionKeyProps } from '../ToastTransactionKey';
+import { ToastTransactionKeyProps, TransactionKey } from '../TransactionKey';
 
 // --- Prop Types for Customization ---
 type CustomInfoRowProps = { label: ReactNode; value: ReactNode };
@@ -26,7 +26,7 @@ export type TxInfoBlockCustomization<TR, T extends Transaction<TR>> = {
     infoRow?: (props: CustomInfoRowProps) => ReactNode;
     /**
      * A render prop to customize the rendering of the transaction keys/hashes.
-     * This is passed down to the underlying `ToastTransactionKey` component.
+     * This is passed down to the underlying `TransactionKey` component.
      */
     transactionKey?: ToastTransactionKeyProps<TR, T>['renderHashLink'];
   };
@@ -98,9 +98,9 @@ export function TxInfoBlock<TR, T extends Transaction<TR>>({
         })}
 
       {/* --- Transaction Hashes/Keys --- */}
-      {/* Reusing the ToastTransactionKey component to avoid code duplication. */}
+      {/* Reusing the TransactionKey component to avoid code duplication. */}
       <div className="border-t border-[var(--tuwa-border-primary)] pt-3">
-        <ToastTransactionKey
+        <TransactionKey
           tx={tx}
           appChains={appChains}
           transactionsPool={transactionsPool}

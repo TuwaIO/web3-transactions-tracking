@@ -2,7 +2,7 @@
  * @file This file contains the `HashLink` component, a UI element for displaying hashes with copy and explorer link functionality.
  */
 
-import { ArrowTopRightOnSquareIcon, CheckIcon, ClipboardIcon } from '@heroicons/react/24/solid';
+import { ArrowTopRightOnSquareIcon, CheckIcon, DocumentDuplicateIcon } from '@heroicons/react/24/solid';
 
 import { useCopyToClipboard } from '../hooks/useCopyToClipboard';
 import { useLabels } from '../providers';
@@ -80,7 +80,7 @@ export function HashLink({
           {isCopied ? (
             <CheckIcon className="h-4 w-4 text-[var(--tuwa-success-icon)]" />
           ) : (
-            <ClipboardIcon className="h-4 w-4" />
+            <DocumentDuplicateIcon className="h-4 w-4" />
           )}
         </button>
       </div>

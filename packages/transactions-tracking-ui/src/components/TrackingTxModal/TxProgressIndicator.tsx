@@ -10,7 +10,7 @@ import { cn } from '../../utils';
 
 // --- Sub-component: Step ---
 
-type StepStatus = 'active' | 'completed' | 'error' | 'inactive' | 'replaced';
+export type StepStatus = 'active' | 'completed' | 'error' | 'inactive' | 'replaced';
 export type StepProps = { status: StepStatus; label: string; isFirst?: boolean; isLast?: boolean; className?: string };
 
 /**
@@ -49,7 +49,7 @@ function Step({ status, label, isFirst = false }: StepProps): JSX.Element {
   };
 
   return (
-    <div className="relative flex flex-1 flex-col items-center">
+    <div className="relative flex flex-1 flex-col items-center min-w-[80px]">
       {/* Connecting line */}
       {!isFirst && <div className={cn('absolute right-1/2 top-[10px] h-0.5 w-full', colorConfig.line)} />}
 

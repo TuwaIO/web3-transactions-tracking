@@ -1,8 +1,9 @@
+import 'tailwindcss';
 import '../src/styles/app.css';
 
 import type { Preview } from '@storybook/react-vite';
 
-import { defaultLabels } from '../src/i18n/en';
+import { defaultLabels } from '../src';
 import { LabelsProvider } from '../src/providers';
 
 const preview: Preview = {

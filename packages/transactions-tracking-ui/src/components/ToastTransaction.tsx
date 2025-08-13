@@ -14,13 +14,13 @@ import { Chain } from 'viem';
 import { useLabels } from '../providers';
 import { cn } from '../utils';
 import { StatusAwareText } from './StatusAwareText';
-import { ToastTransactionKey } from './ToastTransactionKey';
+import { TransactionKey } from './TransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';
 import { WalletInfoModalProps } from './WalletInfoModal';
 
 // --- Prop Types for Customization ---
 type CustomStatusAwareTextProps = Parameters<typeof StatusAwareText>[0];
-type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof ToastTransactionKey<TR, T>>[0];
+type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionKey<TR, T>>[0];
 type CustomStatusBadgeProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionStatusBadge<TR, T>>[0];
 /** Props provided to custom action buttons like 'Wallet Info', 'Speed Up', or 'Cancel'. */
 type CustomActionButtonProps = { onClick: () => void; children: ReactNode };
@@ -134,7 +134,7 @@ export function ToastTransaction<TR, T extends Transaction<TR>>({
         {C?.transactionKey ? (
           C.transactionKey({ transactionsPool, appChains, tx, variant: 'toast' })
         ) : (
-          <ToastTransactionKey transactionsPool={transactionsPool} appChains={appChains} tx={tx} variant="toast" />
+          <TransactionKey transactionsPool={transactionsPool} appChains={appChains} tx={tx} variant="toast" />
         )}
         <div className="mt-3 flex items-center justify-between">
           {C?.statusBadge ? C.statusBadge({ tx }) : <TransactionStatusBadge tx={tx} />}

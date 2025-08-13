@@ -13,7 +13,7 @@ import { Chain } from 'viem';
 
 import { cn } from '../utils';
 import { StatusAwareText } from './StatusAwareText';
-import { ToastTransactionKey } from './ToastTransactionKey';
+import { TransactionKey } from './TransactionKey';
 import { TransactionStatusBadge } from './TransactionStatusBadge';
 
 // Extend dayjs with the relativeTime plugin to format timestamps as "a few seconds ago".
@@ -24,7 +24,7 @@ type CustomIconProps = { chainId: number };
 type CustomStatusAwareTextProps = Parameters<typeof StatusAwareText>[0];
 type CustomTimestampProps = { timestamp?: number };
 type CustomStatusBadgeProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionStatusBadge<TR, T>>[0];
-type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof ToastTransactionKey<TR, T>>[0];
+type CustomTransactionKeyProps<TR, T extends Transaction<TR>> = Parameters<typeof TransactionKey<TR, T>>[0];
 
 /**
  * Defines the structure for the `customization` prop, allowing users to override
@@ -126,7 +126,7 @@ export function TransactionHistoryItem<TR, T extends Transaction<TR>>({
       {C?.transactionKey ? (
         C.transactionKey({ tx, appChains, transactionsPool, variant: 'history' })
       ) : (
-        <ToastTransactionKey tx={tx} appChains={appChains} transactionsPool={transactionsPool} variant="history" />
+        <TransactionKey tx={tx} appChains={appChains} transactionsPool={transactionsPool} variant="history" />
       )}
     </div>
   );

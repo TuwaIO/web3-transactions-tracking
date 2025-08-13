@@ -1,5 +1,5 @@
 /**
- * @file This file contains the `ToastTransactionKey` component, which is responsible for displaying
+ * @file This file contains the `TransactionKey` component, which is responsible for displaying
  * the various identifiers associated with a transaction (e.g., hash, Gelato Task ID).
  */
 
@@ -40,7 +40,7 @@ export interface ToastTransactionKeyProps<TR, T extends Transaction<TR>>
  * @param {ToastTransactionKeyProps<TR, T>} props - The component props.
  * @returns {JSX.Element} The rendered component.
  */
-export function ToastTransactionKey<TR, T extends Transaction<TR>>({
+export function TransactionKey<TR, T extends Transaction<TR>>({
   tx,
   appChains,
   transactionsPool,

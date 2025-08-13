@@ -5,7 +5,7 @@ import { zeroAddress } from 'viem';
 import { mainnet, sepolia } from 'viem/chains';
 
 import { HashLink } from './HashLink';
-import { ToastTransactionKey } from './ToastTransactionKey';
+import { TransactionKey } from './TransactionKey';
 
 // --- Mocks and Helpers ---
 
@@ -38,9 +38,9 @@ const createMockTransactionsPool = (tx: Transaction<unknown>) => ({
 
 // --- Storybook Meta Configuration ---
 
-const meta: Meta<typeof ToastTransactionKey> = {
-  title: 'UI Components/ToastTransactionKey',
-  component: ToastTransactionKey,
+const meta: Meta<typeof TransactionKey> = {
+  title: 'UI Components/basic/TransactionKey',
+  component: TransactionKey,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',

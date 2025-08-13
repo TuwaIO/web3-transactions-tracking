@@ -2,7 +2,7 @@
  * @file This file contains the `WalletAddressDisplay` component, a UI element for showing a wallet address.
  */
 
-import { ArrowTopRightOnSquareIcon, CheckIcon, ClipboardIcon } from '@heroicons/react/24/solid';
+import { ArrowTopRightOnSquareIcon, CheckIcon, DocumentDuplicateIcon } from '@heroicons/react/24/solid';
 import { JSX } from 'react';
 import { Chain } from 'viem';
 
@@ -55,7 +55,7 @@ export function WalletAddressDisplay({ address, chain, className }: WalletAddres
         {isCopied ? (
           <CheckIcon className="h-4 w-4 text-[var(--tuwa-success-icon)]" />
         ) : (
-          <ClipboardIcon className="h-4 w-4" />
+          <DocumentDuplicateIcon className="h-4 w-4" />
         )}
       </button>
 

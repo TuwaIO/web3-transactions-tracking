@@ -108,32 +108,46 @@ export function WalletHeader({
 
   // --- Render "Connected" State ---
   return (
-    <div className={cn('flex items-center gap-4', className)}>
-      {renderAvatar ? (
-        renderAvatar({ address: walletAddress, ensAvatar })
-      ) : (
-        <WalletAvatar address={walletAddress} ensAvatar={ensAvatar} />
-      )}
+    <div className={cn('flex items-center gap-4 min-h-[4rem]', className)}>
+      <div>
+        {renderAvatar ? (
+          renderAvatar({ address: walletAddress, ensAvatar })
+        ) : (
+          <WalletAvatar address={walletAddress} ensAvatar={ensAvatar} />
+        )}
+      </div>
 
-      <div className="flex flex-col gap-y-1">
+      <div className="flex flex-col justify-center min-h-[3.5rem] min-w-[200px]">
         {renderName ? (
           renderName({ ensName: ensNameAbbreviated, isLoading, address: walletAddress })
         ) : (
-          <div className="h-7">
-            {isLoading ? (
-              <div className="h-full w-48 animate-pulse rounded-md bg-[var(--tuwa-bg-muted)]" />
-            ) : (
-              ensNameAbbreviated && (
+          <div className="flex flex-col">
+            {/* Primary content area - ENS name or large address */}
+            <div className="h-7 flex items-center mb-1.5">
+              {isLoading ? (
+                <div className="h-full w-48 animate-pulse rounded-md bg-[var(--tuwa-bg-muted)]" />
+              ) : ensNameAbbreviated ? (
                 <h2 className="text-xl font-bold text-[var(--tuwa-text-primary)]">{ensNameAbbreviated}</h2>
-              )
-            )}
-          </div>
-        )}
+              ) : (
+                <WalletAddressDisplay
+                  address={walletAddress}
+                  chain={chain}
+                  className="text-xl font-bold text-[var(--tuwa-text-primary)] bg-transparent px-0 py-0 rounded-none"
+                />
+              )}
+            </div>
 
-        {renderAddressDisplay ? (
-          renderAddressDisplay({ address: walletAddress, chain })
-        ) : (
-          <WalletAddressDisplay address={walletAddress} chain={chain} />
+            {/* Secondary content area - small address display (only when ENS exists) */}
+            <div className="h-5 flex items-center">
+              {!isLoading &&
+                ensNameAbbreviated &&
+                (renderAddressDisplay ? (
+                  renderAddressDisplay({ address: walletAddress, chain })
+                ) : (
+                  <WalletAddressDisplay address={walletAddress} chain={chain} />
+                ))}
+            </div>
+          </div>
         )}
       </div>
     </div>

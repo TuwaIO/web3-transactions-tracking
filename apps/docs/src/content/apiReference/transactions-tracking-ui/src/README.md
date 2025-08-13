@@ -16,6 +16,7 @@
 ## Type Aliases
 
 - [StepProps](type-aliases/StepProps.md)
+- [StepStatus](type-aliases/StepStatus.md)
 - [ToastTransactionCustomization](type-aliases/ToastTransactionCustomization.md)
 - [ToastTransactionProps](type-aliases/ToastTransactionProps.md)
 - [TrackingTxModalCustomization](type-aliases/TrackingTxModalCustomization.md)
@@ -49,9 +50,9 @@
 - [textCenterEllipsis](functions/textCenterEllipsis.md)
 - [ToastCloseButton](functions/ToastCloseButton.md)
 - [ToastTransaction](functions/ToastTransaction.md)
-- [ToastTransactionKey](functions/ToastTransactionKey.md)
 - [TrackingTxModal](functions/TrackingTxModal.md)
 - [TransactionHistoryItem](functions/TransactionHistoryItem.md)
+- [TransactionKey](functions/TransactionKey.md)
 - [TransactionsHistory](functions/TransactionsHistory.md)
 - [TransactionStatusBadge](functions/TransactionStatusBadge.md)
 - [TxActionButton](functions/TxActionButton.md)

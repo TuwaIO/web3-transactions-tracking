@@ -6,7 +6,7 @@ import { StatusAwareText } from './StatusAwareText';
 // --- Storybook Meta Configuration ---
 
 const meta: Meta<typeof StatusAwareText> = {
-  title: 'UI Components/StatusAwareText',
+  title: 'UI Components/basic/StatusAwareText',
   component: StatusAwareText,
   tags: ['autodocs'],
   parameters: {
