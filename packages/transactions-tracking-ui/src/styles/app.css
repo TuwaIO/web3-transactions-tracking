@@ -1,9 +1,4 @@
 @import "tailwindcss";
-@import "@rainbow-me/rainbowkit/styles.css";
-
-.tuwa-tx-tracking-wallet-info-modal-open {
-  overflow: hidden;
-}
 
 :root {
   --tuwa-success-bg: theme('colors.green.100');
