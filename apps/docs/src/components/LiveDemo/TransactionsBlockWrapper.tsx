@@ -50,7 +50,7 @@ export const TransactionsBlockWrapper = ({ connectButton, config }: { connectBut
   const handleIncrement = async () => {
     await handleTransaction({
       config,
-      actionFunction: async () => await txActions.increment(config),
+      actionFunction: async () => await txActions.increment({ config }),
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,

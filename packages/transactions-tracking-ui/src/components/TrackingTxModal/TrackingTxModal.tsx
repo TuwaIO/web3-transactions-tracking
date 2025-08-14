@@ -162,7 +162,7 @@ export function TrackingTxModal<TR, T extends Transaction<TR>>({
       config: config!,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
-      actionFunction: actions![txToDisplay.actionKey],
+      actionFunction: () => actions![txToDisplay.actionKey]({ config, ...txToDisplay.payload }),
       params: retryParams,
     });
   };

@@ -14,7 +14,7 @@ import { appChains } from '@/configs/wagmiConfig';
 const queryClient = new QueryClient();
 
 const config = createConfig({
-  chains: [mainnet, ...appChains.slice(1)],
+  chains: appChains,
   multiInjectedProviderDiscovery: false,
   transports: {
     [mainnet.id]: http(),

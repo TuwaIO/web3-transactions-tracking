@@ -1,15 +1,14 @@
 import { getDefaultConfig } from 'connectkit';
-import { Draft } from 'immer';
 import { Chain } from 'viem';
 import { mainnet, sepolia } from 'viem/chains';
 import { createConfig, http } from 'wagmi';
 
 // Your dApps chains
-export const appChains = [mainnet, sepolia] as unknown as Draft<Chain[]>;
+export const appChains = [mainnet, sepolia] as [Chain, ...Chain[]];
 
 export const config = createConfig(
   getDefaultConfig({
-    chains: [mainnet, ...appChains.slice(1)],
+    chains: appChains,
     transports: {
       // RPC URL for each chain
       [mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`),

@@ -181,7 +181,7 @@ export const ReadmeCards: React.FC = () => {
       description: 'Next.js application using Reown AppKit for a minimal and clean wallet connection experience.',
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Reown AppKit', 'Wagmi', 'TailwindCSS'],
-      status: 'coming-soon',
+      status: 'ready',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-reown',
       difficulty: 'intermediate',
     },

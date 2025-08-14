@@ -4,7 +4,7 @@ import { increment } from './increment';
 import { incrementGelato } from './incrementGelato';
 
 export const txActions = {
-  increment: (config?: Config) => increment({ config }),
+  increment: ({ config }: { config?: Config }) => increment({ config }),
   incrementGelato: () => incrementGelato(),
 };
 
