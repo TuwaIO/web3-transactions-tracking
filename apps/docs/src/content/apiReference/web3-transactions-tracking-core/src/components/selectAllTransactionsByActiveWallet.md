@@ -6,7 +6,7 @@
 
 > **selectAllTransactionsByActiveWallet**\<`TR`, `T`\>(`transactionsPool`, `from`): `T`[]
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:77](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L77)
+Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:77](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L77)
 
 Selects all transactions initiated by a specific wallet address.
 

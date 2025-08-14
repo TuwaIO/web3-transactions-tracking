@@ -6,7 +6,7 @@
 
 > `const` **createBoundedUseStore**: \<`S`\>(`store`) => \{(): `ExtractState`\<`S`\>; \<`T`\>(`selector`): `T`; \}
 
-Defined in: [packages/web3-transactions-tracking-core/src/utils/createBoundedUseStore.ts:25](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/web3-transactions-tracking-core/src/utils/createBoundedUseStore.ts#L25)
+Defined in: [packages/web3-transactions-tracking-core/src/utils/createBoundedUseStore.ts:25](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/web3-transactions-tracking-core/src/utils/createBoundedUseStore.ts#L25)
 
 Creates a bounded `useStore` hook from a vanilla Zustand store instance.
 The returned hook is fully typed and can be used with or without a selector.

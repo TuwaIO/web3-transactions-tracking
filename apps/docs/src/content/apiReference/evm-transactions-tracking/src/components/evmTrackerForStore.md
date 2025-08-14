@@ -6,7 +6,7 @@
 
 > **evmTrackerForStore**\<`T`\>(`__namedParameters`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:144](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L144)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:144](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L144)
 
 A higher-level wrapper for `evmTracker` that integrates directly with the Zustand store.
 It provides the necessary callbacks to update the transaction's state in the store.

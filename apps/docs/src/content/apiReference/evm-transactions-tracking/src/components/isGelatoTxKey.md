@@ -6,7 +6,7 @@
 
 > **isGelatoTxKey**(`txKey`): `txKey is GelatoTxKey`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L31)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:31](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L31)
 
 A type guard to determine if an ActionTxKey is a GelatoTxKey.
 

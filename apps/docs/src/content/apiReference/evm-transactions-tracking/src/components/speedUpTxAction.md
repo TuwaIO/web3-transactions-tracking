@@ -6,7 +6,7 @@
 
 > **speedUpTxAction**\<`TR`, `T`\>(`params`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [packages/evm-transactions-tracking/src/utils/speedUpTxAction.ts:35](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/evm-transactions-tracking/src/utils/speedUpTxAction.ts#L35)
+Defined in: [packages/evm-transactions-tracking/src/utils/speedUpTxAction.ts:35](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/evm-transactions-tracking/src/utils/speedUpTxAction.ts#L35)
 
 Speeds up a pending transaction by resubmitting it with the same nonce but higher gas fees.
 This is a common strategy to prevent a transaction from getting stuck.

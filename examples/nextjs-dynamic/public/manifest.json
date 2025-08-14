@@ -1,0 +1,9 @@
+{
+  "name": "TUWA Transaction Tracking App",
+  "description": "Track and manage your multisig transactions with a seamless UX.",
+  "iconPath": "/src/app/icon0.svg",
+  "providedBy": {
+    "name": "TUWA",
+    "url": "https://docs.tuwa.co.ua/"
+  }
+}

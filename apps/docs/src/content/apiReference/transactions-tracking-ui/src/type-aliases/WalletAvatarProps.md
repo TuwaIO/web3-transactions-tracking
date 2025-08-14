@@ -6,7 +6,7 @@
 
 > **WalletAvatarProps** = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:12](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L12)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:12](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L12)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/Wa
 
 > **address**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L14)
 
 The user's wallet address. Used for the blockie fallback and background color generation.
 
@@ -24,7 +24,7 @@ The user's wallet address. Used for the blockie fallback and background color ge
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L18)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L18)
 
 Optional additional CSS classes for the container.
 
@@ -34,6 +34,6 @@ Optional additional CSS classes for the container.
 
 > `optional` **ensAvatar**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L16)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletAvatar.tsx#L16)
 
 An optional URL for the user's ENS avatar image.

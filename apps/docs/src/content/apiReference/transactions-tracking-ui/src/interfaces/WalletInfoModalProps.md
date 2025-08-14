@@ -4,7 +4,7 @@
 
 # WalletInfoModalProps\<TR, T\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L51)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L51)
 
 Defines the core props for the WalletInfoModal and its children.
 
@@ -24,7 +24,7 @@ Defines the core props for the WalletInfoModal and its children.
 
 > **appChains**: `Chain`[]
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:59](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L59)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:59](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L59)
 
 An array of all chains supported by the application.
 
@@ -34,7 +34,7 @@ An array of all chains supported by the application.
 
 > `optional` **chain**: `Chain`
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L55)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L55)
 
 The viem `Chain` object for the currently connected network.
 
@@ -44,7 +44,7 @@ The viem `Chain` object for the currently connected network.
 
 > **transactionsPool**: `TransactionPool`\<`TR`, `T`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:57](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L57)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:57](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L57)
 
 The entire pool of transactions from the store.
 
@@ -54,6 +54,6 @@ The entire pool of transactions from the store.
 
 > `optional` **walletAddress**: `` `0x${string}` ``
 
-Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:53](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L53)
+Defined in: [packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx:53](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/transactions-tracking-ui/src/components/WalletInfoModal/WalletInfoModal.tsx#L53)
 
 The connected wallet's address.
