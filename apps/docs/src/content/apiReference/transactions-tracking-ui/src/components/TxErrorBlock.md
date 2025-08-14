@@ -6,7 +6,7 @@
 
 > **TxErrorBlock**(`props`): `null` \| `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/9d5a6a77e31cc19732f906ad17380ab6b5619e56/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx#L29)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/ffa5dbf79c04b57872450e9158d614053896b913/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx#L29)
 
 A component that displays a formatted block for a transaction error message.
 It includes a title, an icon, the error message in a scrollable area,

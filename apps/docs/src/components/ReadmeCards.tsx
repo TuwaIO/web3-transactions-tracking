@@ -194,15 +194,6 @@ export const ReadmeCards: React.FC = () => {
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-web3auth',
       difficulty: 'intermediate',
     },
-    {
-      title: 'Next.js + Web3 Onboard',
-      description: 'Next.js application using Web3 Onboard for a minimal and clean wallet connection experience.',
-      framework: 'Next.js 15',
-      technologies: ['React 19', 'TypeScript', 'Web3 Onboard', 'Wagmi', 'TailwindCSS'],
-      status: 'coming-soon',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-web3onboard',
-      difficulty: 'intermediate',
-    },
   ];
 
   return (
