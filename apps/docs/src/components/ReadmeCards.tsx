@@ -139,24 +139,13 @@ const ExampleCard: React.FC<ExampleCardProps> = ({
 export const ReadmeCards: React.FC = () => {
   const examples: ExampleCardProps[] = [
     {
-      title: 'Next.js + RainbowKit',
-      description:
-        'Full-featured Next.js App Directory example with beautiful wallet connection UI and comprehensive transaction tracking.',
+      title: 'Next.js + Dynamic.xyz',
+      description: 'Next.js application using Dynamic.xyz for a minimal and clean wallet connection experience.',
       framework: 'Next.js 15',
-      technologies: ['React 19', 'TypeScript', 'RainbowKit', 'Wagmi', 'TailwindCSS'],
+      technologies: ['React 19', 'TypeScript', 'Dynamic.xyz', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-rainbowkit',
-      difficulty: 'beginner',
-    },
-    {
-      title: 'Vite + RainbowKit',
-      description:
-        'Lightweight and fast Vite React application with RainbowKit integration. Perfect for rapid development and testing.',
-      framework: 'Vite + React',
-      technologies: ['React 19', 'TypeScript', 'Vite', 'RainbowKit', 'TailwindCSS'],
-      status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/vite-rainbowkit',
-      difficulty: 'beginner',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-dynamic',
+      difficulty: 'intermediate',
     },
     {
       title: 'Next.js + ConnectKit',
@@ -168,22 +157,25 @@ export const ReadmeCards: React.FC = () => {
       difficulty: 'beginner',
     },
     {
-      title: 'Next.js + Dynamic.xyz',
-      description: 'Next.js application using Dynamic.xyz for a minimal and clean wallet connection experience.',
-      framework: 'Next.js 15',
-      technologies: ['React 19', 'TypeScript', 'Dynamic.xyz', 'Wagmi', 'TailwindCSS'],
-      status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-dynamic',
-      difficulty: 'intermediate',
-    },
-    {
       title: 'Next.js + Reown AppKit',
       description: 'Next.js application using Reown AppKit for a minimal and clean wallet connection experience.',
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Reown AppKit', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-reown',
+      demoUrl: 'https://web3-transactions-tracking-nextjs-r.vercel.app/',
       difficulty: 'intermediate',
+    },
+    {
+      title: 'Next.js + RainbowKit',
+      description:
+        'Full-featured Next.js App Directory example with beautiful wallet connection UI and comprehensive transaction tracking.',
+      framework: 'Next.js 15',
+      technologies: ['React 19', 'TypeScript', 'RainbowKit', 'Wagmi', 'TailwindCSS'],
+      status: 'ready',
+      demoUrl: 'https://web3-transactions-tracking-nextjs-r-two.vercel.app/',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-rainbowkit',
+      difficulty: 'beginner',
     },
     {
       title: 'Next.js + Web3Auth',
@@ -193,6 +185,16 @@ export const ReadmeCards: React.FC = () => {
       status: 'ready',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-web3auth',
       difficulty: 'intermediate',
+    },
+    {
+      title: 'Vite + RainbowKit',
+      description:
+        'Lightweight and fast Vite React application with RainbowKit integration. Perfect for rapid development and testing.',
+      framework: 'Vite + React',
+      technologies: ['React 19', 'TypeScript', 'Vite', 'RainbowKit', 'TailwindCSS'],
+      status: 'ready',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/vite-rainbowkit',
+      difficulty: 'beginner',
     },
   ];
 

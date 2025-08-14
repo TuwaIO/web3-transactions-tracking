@@ -6,7 +6,7 @@
 
 > **TransactionPool**\<`TR`, `T`\> = `Record`\<`string`, `T`\>
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:15](https://github.com/TuwaIO/web3-transactions-tracking/blob/ffa5dbf79c04b57872450e9158d614053896b913/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L15)
+Defined in: [packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts:15](https://github.com/TuwaIO/web3-transactions-tracking/blob/e6f38bfab450649788c22def7fd642efe2ed7d65/packages/web3-transactions-tracking-core/src/store/initializeTxTrackingStore.ts#L15)
 
 Defines the structure of the transaction pool, which is a record of transactions indexed by their unique keys.
 
