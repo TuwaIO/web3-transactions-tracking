@@ -6,7 +6,7 @@
 
 > **StoreSlice**\<`T`, `E`\> = (`set`, `get`) => `T`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/c00dfab7739fc95457ad32909e117b091845b823/packages/web3-transactions-tracking-core/src/types.ts#L16)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/web3-transactions-tracking-core/src/types.ts#L16)
 
 A utility type for creating modular Zustand store slices.
 
