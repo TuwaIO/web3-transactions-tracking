@@ -10,9 +10,9 @@ import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
 
-import { COUNTER_ADDRESS } from '../../constants';
 import { CounterAbi } from '../abis/CounterAbi';
 import { appChains, config } from '../configs/wagmiConfig';
+import { COUNTER_ADDRESS } from '../constants';
 import { useTxTrackingStore } from '../hooks/txTrackingHooks';
 import { TxAction, txActions } from '../transactions/actions';
 import { TxType } from '../transactions/onSucceedCallbacks';

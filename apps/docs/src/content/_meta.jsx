@@ -4,6 +4,7 @@ export default {
     type: 'separator',
   },
   gettingStarted: 'Getting started',
+  quickStart: 'Quick Start',
   libraryComparison: 'Library comparison',
   apiReference: 'API reference',
   customization: 'Customization',

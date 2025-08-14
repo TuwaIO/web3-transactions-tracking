@@ -1,3 +1,4 @@
+import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking';
 import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers';
 import { useAccount } from 'wagmi';
 
@@ -10,6 +11,9 @@ export function TxWidgetProvider() {
   const initialTx = useTxTrackingStore((state) => state.initialTx);
   const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
+  const initializeTransactionsPool = useTxTrackingStore((state) => state.initializeTransactionsPool);
+
+  useInitializeTransactionsPool(initializeTransactionsPool);
 
   const { address, chain } = useAccount();
 
