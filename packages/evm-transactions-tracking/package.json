@@ -59,8 +59,8 @@
     "zustand": ">=5"
   },
   "devDependencies": {
-    "@types/react": "^19.1.9",
-    "@wagmi/core": "^2.18.1",
+    "@types/react": "^19.1.10",
+    "@wagmi/core": "^2.19.0",
     "dayjs": "^1.11.13",
     "immer": "^10.1.1",
     "jsdom": "^26.1.0",
@@ -68,7 +68,7 @@
     "react-dom": "^19.1.1",
     "tsup": "^8.5.0",
     "typescript": "^5.9.2",
-    "viem": "^2.33.2",
+    "viem": "^2.33.3",
     "vitest": "^3.2.4",
     "zustand": "^5.0.7"
   }
