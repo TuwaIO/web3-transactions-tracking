@@ -160,7 +160,7 @@ export const TransactionsBlock = () => {
                   className="w-full h-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
                 >
-                  <span className="text-lg leading-none">➕</span>
+                  <span className="text-xl leading-none contents text-white">+</span>
                   <span className="leading-none">Increment Counter</span>
                 </TxActionButton>
               </div>

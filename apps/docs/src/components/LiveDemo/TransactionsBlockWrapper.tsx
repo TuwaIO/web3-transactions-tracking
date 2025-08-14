@@ -1,24 +1,24 @@
 'use client';
 
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking';
 import { createViemClient } from '@tuwa/evm-transactions-tracking';
 import { TxActionButton } from '@tuwa/transactions-tracking-ui';
 import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers';
-import { useEffect, useState } from 'react';
+import { Config } from '@wagmi/core';
+import { ReactNode, useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
 import { useAccount } from 'wagmi';
 
 import { CounterAbi } from '@/abis/CounterAbi';
-import { appChains, config } from '@/configs/wagmiConfig';
+import { appChains } from '@/configs/wagmiConfig';
 import { COUNTER_ADDRESS } from '@/constants';
 import { useTxTrackingStore } from '@/hooks/txTrackingHooks';
 import { TxAction, txActions } from '@/transactions/actions';
 import { TxType } from '@/transactions/onSucceedCallbacks';
 
-export const RainbowKitTransactionsBlock = () => {
+export const TransactionsBlockWrapper = ({ connectButton, config }: { connectButton: ReactNode; config: Config }) => {
   const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
   const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
   const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
@@ -50,7 +50,7 @@ export const RainbowKitTransactionsBlock = () => {
   const handleIncrement = async () => {
     await handleTransaction({
       config,
-      actionFunction: txActions.increment,
+      actionFunction: async () => await txActions.increment(config),
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,
@@ -63,6 +63,7 @@ export const RainbowKitTransactionsBlock = () => {
           'Transaction was replaced. Please check your wallet.',
         ],
         payload: { value: currentCount },
+        withTrackedModal: true,
       },
     });
   };
@@ -83,15 +84,14 @@ export const RainbowKitTransactionsBlock = () => {
           'Transaction was replaced. Please check your wallet.',
         ],
         payload: { value: currentCount },
+        withTrackedModal: true,
       },
     });
   };
 
   return (
     <div className="my-6 rounded-xl border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]">
-      <div className="flex justify-end p-4">
-        <ConnectButton />
-      </div>
+      <div className="flex justify-end p-4">{connectButton}</div>
 
       <div className="p-4 pt-0 sm:p-6 sm:pt-0">
         <div className="mb-6 rounded-lg bg-[var(--tuwa-bg-primary)] p-4 text-center">
@@ -128,9 +128,12 @@ export const RainbowKitTransactionsBlock = () => {
         closeTxTrackedModal={closeTxTrackedModal}
         config={config}
         handleTransaction={handleTransaction}
-        actions={txActions}
         chain={chain}
         walletAddress={address}
+        actions={txActions}
+        features={{
+          toasts: false,
+        }}
       />
     </div>
   );

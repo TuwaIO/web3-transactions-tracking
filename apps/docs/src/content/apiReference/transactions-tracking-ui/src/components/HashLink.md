@@ -6,7 +6,7 @@
 
 > **HashLink**(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/HashLink.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/ea59d6d2af883c1abd152bc759b34f842aad6dd3/packages/transactions-tracking-ui/src/components/HashLink.tsx#L23)
+Defined in: [packages/transactions-tracking-ui/src/components/HashLink.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/926476a2e29dd99c5b16e664ed8df05f81039399/packages/transactions-tracking-ui/src/components/HashLink.tsx#L23)
 
 A component to display a hash string (e.g., transaction hash or address)
 with an optional label, a link to a block explorer, and a copy-to-clipboard button.

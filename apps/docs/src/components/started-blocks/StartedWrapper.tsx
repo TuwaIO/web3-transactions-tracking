@@ -29,10 +29,6 @@ const walletConnectors = [
 export function StartedWrapper() {
   return (
     <div className="mt-6">
-      {/* Внешние вкладки для выбора экосистемы (сейчас только EVM).
-        Этот код закомментирован, так как сейчас у вас только один вариант,
-        но он готов к расширению в будущем.
-      */}
       {/* <Tabs items={trackingPackages.map((p) => p.name)}>
         {trackingPackages.map((p) => (
           <Tabs.Tab key={p.name}>

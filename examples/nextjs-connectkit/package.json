@@ -2,7 +2,7 @@
   "name": "tuwa-nextjs-connectkit-example",
   "version": "1.0.0",
   "private": true,
-  "description": "Example React app demonstrating TUWA Web3 Transaction Tracking Suite with NextJS + RainbowKit",
+  "description": "Example React app demonstrating TUWA Web3 Transaction Tracking Suite with NextJS + ConnectKit",
   "keywords": [
     "web3",
     "transaction-tracking",

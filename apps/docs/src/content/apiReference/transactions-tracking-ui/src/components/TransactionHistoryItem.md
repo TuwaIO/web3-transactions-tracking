@@ -6,7 +6,7 @@
 
 > **TransactionHistoryItem**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:70](https://github.com/TuwaIO/web3-transactions-tracking/blob/ea59d6d2af883c1abd152bc759b34f842aad6dd3/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L70)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:70](https://github.com/TuwaIO/web3-transactions-tracking/blob/926476a2e29dd99c5b16e664ed8df05f81039399/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L70)
 
 A component that renders a single row in the transaction history list.
 It is highly customizable via the `customization` prop.

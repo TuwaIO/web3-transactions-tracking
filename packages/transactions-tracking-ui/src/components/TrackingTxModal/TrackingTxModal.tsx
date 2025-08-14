@@ -40,7 +40,7 @@ type CustomFooterProps = {
 };
 
 /** A registry of functions that can be re-executed via the 'Retry' button. The key should match `actionKey` on a transaction. */
-export type TxActions = Record<string, () => Promise<unknown>>;
+export type TxActions = Record<string, (config?: Config) => Promise<unknown>>;
 
 /**
  * Defines the customization options for the TrackingTxModal.

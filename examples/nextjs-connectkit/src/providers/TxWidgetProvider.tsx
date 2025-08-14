@@ -1,5 +1,3 @@
-'use client';
-
 import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking';
 import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers';
 import { useAccount } from 'wagmi';

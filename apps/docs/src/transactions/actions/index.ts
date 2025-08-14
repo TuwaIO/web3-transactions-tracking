@@ -1,10 +1,10 @@
-import { config } from '@/configs/wagmiConfig';
+import { Config } from '@wagmi/core';
 
 import { increment } from './increment';
 import { incrementGelato } from './incrementGelato';
 
 export const txActions = {
-  increment: () => increment({ wagmiConfig: config }),
+  increment: (config?: Config) => increment({ config }),
   incrementGelato: () => incrementGelato(),
 };
 

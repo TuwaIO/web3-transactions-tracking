@@ -6,7 +6,7 @@
 
 > **TxActionButton**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/ea59d6d2af883c1abd152bc759b34f842aad6dd3/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L55)
+Defined in: [packages/transactions-tracking-ui/src/components/TxActionButton.tsx:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/926476a2e29dd99c5b16e664ed8df05f81039399/packages/transactions-tracking-ui/src/components/TxActionButton.tsx#L55)
 
 A stateful button that provides real-time feedback for a transaction's lifecycle.
 It listens for changes in the global `transactionsPool` to automatically update its

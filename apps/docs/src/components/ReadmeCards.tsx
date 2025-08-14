@@ -172,8 +172,8 @@ export const ReadmeCards: React.FC = () => {
       description: 'Next.js application using Dynamic.xyz for a minimal and clean wallet connection experience.',
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Dynamic.xyz', 'Wagmi', 'TailwindCSS'],
-      status: 'coming-soon',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-connectkit',
+      status: 'ready',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-dynamic',
       difficulty: 'intermediate',
     },
     {
@@ -182,7 +182,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Reown AppKit', 'Wagmi', 'TailwindCSS'],
       status: 'coming-soon',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-connectkit',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-reown',
       difficulty: 'intermediate',
     },
     {
@@ -191,7 +191,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Web3Auth', 'Wagmi', 'TailwindCSS'],
       status: 'coming-soon',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-connectkit',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-web3auth',
       difficulty: 'intermediate',
     },
     {
@@ -200,7 +200,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Web3 Onboard', 'Wagmi', 'TailwindCSS'],
       status: 'coming-soon',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-connectkit',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-web3onboard',
       difficulty: 'intermediate',
     },
   ];

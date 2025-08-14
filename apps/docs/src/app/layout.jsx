@@ -4,9 +4,9 @@ import '@/styles/app.css';
 import { Head } from 'nextra/components';
 import { getPageMap } from 'nextra/page-map';
 import { Footer, Layout } from 'nextra-theme-docs';
-import { Providers } from '../components/Providers';
 import { NavBar } from '../components/NavBar';
 import NextTopLoader from 'nextjs-toploader';
+import { DemoWrapper } from '../components/LiveDemo/DemoWrapper';
 
 // --- Metadata Configuration ---
 export const metadata = {
@@ -60,10 +60,8 @@ export default async function RootLayout({ children }) {
           footer={footer}
           navigation={{ prev: true, next: true }}
         >
-          <Providers>
-            <NextTopLoader color="#2299DD" showSpinner={false} />
-            {children}
-          </Providers>
+          <NextTopLoader color="#2299DD" showSpinner={false} />
+          {children}
         </Layout>
       </body>
     </html>
