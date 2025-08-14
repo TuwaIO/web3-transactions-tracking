@@ -190,7 +190,7 @@ export const ReadmeCards: React.FC = () => {
       description: 'Next.js application using Web3Auth for a minimal and clean wallet connection experience.',
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Web3Auth', 'Wagmi', 'TailwindCSS'],
-      status: 'coming-soon',
+      status: 'ready',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-web3auth',
       difficulty: 'intermediate',
     },

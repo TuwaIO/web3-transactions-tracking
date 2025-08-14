@@ -6,7 +6,7 @@
 
 > **useCopyToClipboard**(`timeout?`): `object`
 
-Defined in: [packages/transactions-tracking-ui/src/hooks/useCopyToClipboard.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/27cafae30bccefa7ba3ea936ed9bfbdaf84605d5/packages/transactions-tracking-ui/src/hooks/useCopyToClipboard.ts#L30)
+Defined in: [packages/transactions-tracking-ui/src/hooks/useCopyToClipboard.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/9d5a6a77e31cc19732f906ad17380ab6b5619e56/packages/transactions-tracking-ui/src/hooks/useCopyToClipboard.ts#L30)
 
 A custom React hook that provides functionality to copy text to the clipboard.
 It also manages a "copied" state with a timeout for user feedback.

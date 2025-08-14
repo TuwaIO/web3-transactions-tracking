@@ -6,7 +6,7 @@
 
 > **checkChainForTx**(`chainId`, `config`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/utils/checkChainForTx.ts:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/27cafae30bccefa7ba3ea936ed9bfbdaf84605d5/packages/evm-transactions-tracking/src/utils/checkChainForTx.ts#L18)
+Defined in: [packages/evm-transactions-tracking/src/utils/checkChainForTx.ts:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/9d5a6a77e31cc19732f906ad17380ab6b5619e56/packages/evm-transactions-tracking/src/utils/checkChainForTx.ts#L18)
 
 Checks if the user's wallet is connected to the specified chain. If not, it prompts
 the user to switch to the correct chain and waits for the operation to complete.

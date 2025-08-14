@@ -6,7 +6,7 @@
 
 > **checkAndInitializeTrackerInStore**\<`T`\>(`params`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/utils/checkAndInitializeTrackerInStore.ts:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/27cafae30bccefa7ba3ea936ed9bfbdaf84605d5/packages/evm-transactions-tracking/src/utils/checkAndInitializeTrackerInStore.ts#L29)
+Defined in: [packages/evm-transactions-tracking/src/utils/checkAndInitializeTrackerInStore.ts:29](https://github.com/TuwaIO/web3-transactions-tracking/blob/9d5a6a77e31cc19732f906ad17380ab6b5619e56/packages/evm-transactions-tracking/src/utils/checkAndInitializeTrackerInStore.ts#L29)
 
 Initializes the appropriate tracker for a given transaction based on its `tracker` type.
 This function acts as a central router, delegating to the specific tracker implementation

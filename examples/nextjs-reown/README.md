@@ -107,7 +107,7 @@ pnpm build
 ## 🔧 Environment Variables
 Create a `.env.local` file in your project root:
 ```env
-# Required: Wallet Connect Project ID
+# Required: REOWN_PROJECT_ID
 NEXT_PUBLIC_REOWN_PROJECT_ID=your_reown_project_id
 # Optional: Gelato project API key
 NEXT_PUBLIC_GELATO_API_KEY=your_project_key

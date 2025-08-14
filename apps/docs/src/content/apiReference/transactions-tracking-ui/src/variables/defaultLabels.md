@@ -6,7 +6,7 @@
 
 > `const` **defaultLabels**: [`TuwaLabels`](../type-aliases/TuwaLabels.md)
 
-Defined in: [packages/transactions-tracking-ui/src/i18n/en.ts:13](https://github.com/TuwaIO/web3-transactions-tracking/blob/27cafae30bccefa7ba3ea936ed9bfbdaf84605d5/packages/transactions-tracking-ui/src/i18n/en.ts#L13)
+Defined in: [packages/transactions-tracking-ui/src/i18n/en.ts:13](https://github.com/TuwaIO/web3-transactions-tracking/blob/9d5a6a77e31cc19732f906ad17380ab6b5619e56/packages/transactions-tracking-ui/src/i18n/en.ts#L13)
 
 An object containing the default English text for all labels used in the UI.
 This object implements the `TuwaLabels` type and can be used as a template

@@ -6,7 +6,7 @@
 
 > **getName**(`address`): `Promise`\<`undefined` \| `string`\>
 
-Defined in: [packages/transactions-tracking-ui/src/utils/ensUtils.ts:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/27cafae30bccefa7ba3ea936ed9bfbdaf84605d5/packages/transactions-tracking-ui/src/utils/ensUtils.ts#L23)
+Defined in: [packages/transactions-tracking-ui/src/utils/ensUtils.ts:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/9d5a6a77e31cc19732f906ad17380ab6b5619e56/packages/transactions-tracking-ui/src/utils/ensUtils.ts#L23)
 
 Fetches the primary ENS name for a given Ethereum address.
 Performs the lookup on Ethereum Mainnet.
