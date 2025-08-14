@@ -15,16 +15,16 @@ export const trackingPackages = [
 
 const walletConnectors = [
   {
-    name: 'RainbowKit',
-    component: <RainbowKit trackingPackageName={trackingPackages[0].packageName} />,
+    name: 'Dynamic.xyz',
+    component: <Dynamic trackingPackageName={trackingPackages[0].packageName} />,
   },
   {
     name: 'ConnectKit',
     component: <ConnectKit trackingPackageName={trackingPackages[0].packageName} />,
   },
   {
-    name: 'Dynamic.xyz',
-    component: <Dynamic trackingPackageName={trackingPackages[0].packageName} />,
+    name: 'RainbowKit',
+    component: <RainbowKit trackingPackageName={trackingPackages[0].packageName} />,
   },
 ];
 

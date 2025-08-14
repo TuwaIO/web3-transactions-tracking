@@ -1,46 +1,63 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { Tabs } from 'nextra/components';
-import React from 'react';
+import React, { useState } from 'react';
 
-import { ConnectKitTransactionsBlock } from '@/components/LiveDemo/ConnectKitTransactionsBlock';
-import { DynamicTransactionsBlock } from '@/components/LiveDemo/DynamicTransactionsBlock';
-import { RainbowKitTransactionsBlock } from '@/components/LiveDemo/RainbowKitTransactionsBlock';
+const DynamicTransactionsBlock = dynamic(
+  () =>
+    import('@/components/LiveDemo/DynamicTransactionsBlock').then((mod) => ({
+      default: mod.DynamicTransactionsBlock,
+    })),
+  { ssr: false },
+);
+
+const ConnectKitTransactionsBlock = dynamic(
+  () =>
+    import('@/components/LiveDemo/ConnectKitTransactionsBlock').then((mod) => ({
+      default: mod.ConnectKitTransactionsBlock,
+    })),
+  { ssr: false },
+);
 
 const walletConnectors = [
   {
-    name: 'RainbowKit',
-    component: <RainbowKitTransactionsBlock />,
+    name: 'Dynamic.xyz',
+    component: DynamicTransactionsBlock,
   },
   {
     name: 'ConnectKit',
-    component: <ConnectKitTransactionsBlock />,
-  },
-  {
-    name: 'Dynamic.xyz',
-    component: <DynamicTransactionsBlock />,
+    component: ConnectKitTransactionsBlock,
   },
 ];
 
 export function DemoWrapper() {
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [loadedTabs, setLoadedTabs] = useState<Set<number>>(new Set([0])); // Первый таб загружаем сразу
+
+  const handleTabChange = (index: number) => {
+    setActiveTabIndex(index);
+    setLoadedTabs((prev) => new Set(prev).add(index));
+  };
+
   return (
     <div className="mt-6">
-      {/* <Tabs items={trackingPackages.map((p) => p.name)}>
-        {trackingPackages.map((p) => (
-          <Tabs.Tab key={p.name}>
-            ...
-          </Tabs.Tab>
-        ))}
-      </Tabs> */}
-
       <div>
         <h3 className="mb-4 text-xl font-semibold text-[var(--tuwa-text-primary)]">
           Choose your preferred wallet connector:
         </h3>
-        <Tabs items={walletConnectors.map((c) => c.name)}>
-          {walletConnectors.map((connector) => (
-            <Tabs.Tab key={connector.name}>{connector.component}</Tabs.Tab>
-          ))}
+        <Tabs items={walletConnectors.map((c) => c.name)} onChange={handleTabChange}>
+          {walletConnectors.map((connector, index) => {
+            const Component = connector.component;
+            const shouldLoad = loadedTabs.has(index);
+            const isActive = index === activeTabIndex;
+
+            return (
+              <Tabs.Tab key={connector.name}>
+                <div style={{ display: isActive ? 'block' : 'none' }}>{shouldLoad && <Component />}</div>
+              </Tabs.Tab>
+            );
+          })}
         </Tabs>
       </div>
     </div>

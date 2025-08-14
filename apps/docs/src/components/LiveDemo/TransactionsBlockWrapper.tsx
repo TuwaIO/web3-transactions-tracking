@@ -131,9 +131,6 @@ export const TransactionsBlockWrapper = ({ connectButton, config }: { connectBut
         chain={chain}
         walletAddress={address}
         actions={txActions}
-        features={{
-          toasts: false,
-        }}
       />
     </div>
   );

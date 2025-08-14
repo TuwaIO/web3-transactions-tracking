@@ -11,7 +11,7 @@ import { appChains } from '@/configs/wagmiConfig';
 
 const queryClient = new QueryClient();
 
-export const config = getDefaultConfig({
+const config = getDefaultConfig({
   appName: 'TUWA docs',
   projectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID ?? '',
   chains: [mainnet, ...appChains.slice(1)],

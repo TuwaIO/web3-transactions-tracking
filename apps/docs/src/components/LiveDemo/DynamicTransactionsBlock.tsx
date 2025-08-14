@@ -13,7 +13,7 @@ import { appChains } from '@/configs/wagmiConfig';
 
 const queryClient = new QueryClient();
 
-export const config = createConfig({
+const config = createConfig({
   chains: [mainnet, ...appChains.slice(1)],
   multiInjectedProviderDiscovery: false,
   transports: {

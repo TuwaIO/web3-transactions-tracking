@@ -6,7 +6,7 @@
 
 > **fetchTxFromGelatoAPI**(`params`): `Promise`\<`Response`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:111](https://github.com/TuwaIO/web3-transactions-tracking/blob/4213bf7834a513b30af4118488533895caa3d00a/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L111)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:111](https://github.com/TuwaIO/web3-transactions-tracking/blob/b5153949c59e82f6ac101c4b51be3e5161d4301e/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L111)
 
 The fetcher function passed to `initializePollingTracker` to get the status of a Gelato task.
 

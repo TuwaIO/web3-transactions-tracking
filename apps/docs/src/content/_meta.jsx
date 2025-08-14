@@ -5,6 +5,7 @@ export default {
   },
   gettingStarted: 'Getting started',
   quickStart: 'Quick Start',
+  trackersStandalone: 'EVM Trackers Standalone',
   libraryComparison: 'Library comparison',
   apiReference: 'API reference',
   customization: 'Customization',

@@ -6,7 +6,7 @@
 
 > **TransactionStatusBadge**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionStatusBadge.tsx:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/4213bf7834a513b30af4118488533895caa3d00a/packages/transactions-tracking-ui/src/components/TransactionStatusBadge.tsx#L26)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionStatusBadge.tsx:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/b5153949c59e82f6ac101c4b51be3e5161d4301e/packages/transactions-tracking-ui/src/components/TransactionStatusBadge.tsx#L26)
 
 A component that displays a transaction's status as a styled badge
 with a corresponding icon, color, and label.
