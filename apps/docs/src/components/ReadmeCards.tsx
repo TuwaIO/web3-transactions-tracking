@@ -89,7 +89,7 @@ const ExampleCard: React.FC<ExampleCardProps> = ({
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className={`flex-1 px-4 py-2 text-sm font-medium text-center rounded-lg transition-all duration-200 ${
+          className={`flex items-center justify-center flex-1 px-4 py-2 text-sm font-medium text-center rounded-lg transition-all duration-200 ${
             isDisabled
               ? 'bg-[var(--tuwa-bg-muted)] text-[var(--tuwa-text-tertiary)] cursor-not-allowed'
               : 'text-[var(--tuwa-text-on-accent)]'
@@ -184,7 +184,7 @@ export const ReadmeCards: React.FC = () => {
       technologies: ['React 19', 'TypeScript', 'Web3Auth', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-web3auth',
-      difficulty: 'intermediate',
+      difficulty: 'advanced',
     },
     {
       title: 'Vite + RainbowKit',

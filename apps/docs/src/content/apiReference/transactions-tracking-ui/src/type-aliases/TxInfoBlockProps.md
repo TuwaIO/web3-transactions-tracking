@@ -6,7 +6,7 @@
 
 > **TxInfoBlockProps**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:45](https://github.com/TuwaIO/web3-transactions-tracking/blob/e6f38bfab450649788c22def7fd642efe2ed7d65/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L45)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:45](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L45)
 
 ## Type Parameters
 
@@ -24,7 +24,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > **appChains**: `Chain`[]
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/e6f38bfab450649788c22def7fd642efe2ed7d65/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L49)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L49)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/e6f38bfab450649788c22def7fd642efe2ed7d65/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L51)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L51)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > `optional` **customization**: [`TxInfoBlockCustomization`](TxInfoBlockCustomization.md)\<`TR`, `T`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:52](https://github.com/TuwaIO/web3-transactions-tracking/blob/e6f38bfab450649788c22def7fd642efe2ed7d65/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L52)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:52](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L52)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > **transactionsPool**: [`TransactionPool`](../../../web3-transactions-tracking-core/src/type-aliases/TransactionPool.md)\<`TR`, `T`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:50](https://github.com/TuwaIO/web3-transactions-tracking/blob/e6f38bfab450649788c22def7fd642efe2ed7d65/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L50)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:50](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L50)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > **tx**: `T` & `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:46](https://github.com/TuwaIO/web3-transactions-tracking/blob/e6f38bfab450649788c22def7fd642efe2ed7d65/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L46)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:46](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L46)
 
 #### Type declaration
 

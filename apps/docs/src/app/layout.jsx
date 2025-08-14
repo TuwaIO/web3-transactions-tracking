@@ -1,12 +1,11 @@
-import 'nextra-theme-docs/style.css';
 import '@/styles/app.css';
 
 import { Head } from 'nextra/components';
 import { getPageMap } from 'nextra/page-map';
-import { Footer, Layout } from 'nextra-theme-docs';
-import { NavBar } from '../components/NavBar';
+import { Layout } from 'nextra-theme-docs';
+import { Navbar } from '../components/NavBar';
+import { Footer } from '../components/Footer';
 import NextTopLoader from 'nextjs-toploader';
-import { DemoWrapper } from '../components/LiveDemo/DemoWrapper';
 
 // --- Metadata Configuration ---
 export const metadata = {
@@ -44,8 +43,6 @@ export const metadata = {
   },
 };
 
-const footer = <Footer>Apache License {new Date().getFullYear()} © TUWA.</Footer>;
-
 export default async function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
@@ -54,13 +51,13 @@ export default async function RootLayout({ children }) {
       </Head>
       <body>
         <Layout
-          navbar={<NavBar key="navbar" />}
+          navbar={<Navbar key="navbar" />}
+          footer={<Footer key="footer" />}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/TuwaIO/web3-transactions-tracking/tree/main/apps/docs"
-          footer={footer}
           navigation={{ prev: true, next: true }}
         >
-          <NextTopLoader color="#2299DD" showSpinner={false} />
+          <NextTopLoader color="#6366f1" showSpinner={false} />
           {children}
         </Layout>
       </body>

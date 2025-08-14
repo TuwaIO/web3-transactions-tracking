@@ -6,7 +6,7 @@
 
 > **checkIsGelatoAvailable**(`chainId`): `Promise`\<`boolean`\>
 
-Defined in: [packages/evm-transactions-tracking/src/utils/checkIsGelatoAvailable.ts:17](https://github.com/TuwaIO/web3-transactions-tracking/blob/e6f38bfab450649788c22def7fd642efe2ed7d65/packages/evm-transactions-tracking/src/utils/checkIsGelatoAvailable.ts#L17)
+Defined in: [packages/evm-transactions-tracking/src/utils/checkIsGelatoAvailable.ts:17](https://github.com/TuwaIO/web3-transactions-tracking/blob/f13dd81a68ee1c8ba3221b0bd2545be1f2a19fb4/packages/evm-transactions-tracking/src/utils/checkIsGelatoAvailable.ts#L17)
 
 Checks if the Gelato Relay service supports a given chain ID.
 The result is cached in memory for 5 minutes to avoid excessive network requests.
