@@ -1,8 +1,8 @@
 # TUWA Web3 Transaction Tracking Suite
 
-<video width="100%" height="auto" style="max-height: 400px; border-radius: 8px;">
-  <source src="./video/tuwa_preview.mp4" type="video/mp4">
-</video>
+<div align="center">
+  <img src="./preview/tuwa_preview.gif" alt="TUWA Preview Demo" width="100%" max-width="800px" />
+</div>
 
 Tracking the status of user transactions in a dApp is complex. Users are often left wondering if their transaction succeeded, failed, or is simply pending. The **TUWA Web3 Transaction Tracking Suite** solves this by providing a complete, end-to-end solution to monitor transactions in real-time and present beautiful, informative feedback to your users.
 
