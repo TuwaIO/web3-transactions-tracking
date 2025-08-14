@@ -6,7 +6,7 @@
 
 > `const` **safeSdkOptions**: `object`
 
-Defined in: [packages/evm-transactions-tracking/src/utils/safeConstants.ts:12](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aebbce149913a5fb7a35a60e4556bc602bd2f8e/packages/evm-transactions-tracking/src/utils/safeConstants.ts#L12)
+Defined in: [packages/evm-transactions-tracking/src/utils/safeConstants.ts:12](https://github.com/TuwaIO/web3-transactions-tracking/blob/ea59d6d2af883c1abd152bc759b34f842aad6dd3/packages/evm-transactions-tracking/src/utils/safeConstants.ts#L12)
 
 Configuration options for the Safe Apps SDK.
 This is typically used when integrating with the Safe environment.

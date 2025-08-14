@@ -6,7 +6,7 @@
 
 > **evmTracker**(`params`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:58](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aebbce149913a5fb7a35a60e4556bc602bd2f8e/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L58)
+Defined in: [packages/evm-transactions-tracking/src/trackers/evmTracker.ts:58](https://github.com/TuwaIO/web3-transactions-tracking/blob/ea59d6d2af883c1abd152bc759b34f842aad6dd3/packages/evm-transactions-tracking/src/trackers/evmTracker.ts#L58)
 
 A low-level tracker for monitoring a standard EVM transaction by its hash.
 It retries fetching the transaction and then waits for its receipt.

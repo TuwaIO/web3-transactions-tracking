@@ -20,6 +20,10 @@ const walletConnectors = [
     name: 'ConnectKit',
     component: <div className="mt-4 text-center text-[var(--tuwa-text-secondary)]">In progress...</div>,
   },
+  {
+    name: 'Dynamic.xyz',
+    component: <div className="mt-4 text-center text-[var(--tuwa-text-secondary)]">In progress...</div>,
+  },
 ];
 
 export function StartedWrapper() {

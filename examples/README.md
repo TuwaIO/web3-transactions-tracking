@@ -4,11 +4,12 @@ Ready-to-use examples demonstrating how to integrate **TUWA Web3 Transaction Tra
 
 ## 🚀 Available Examples
 
-| Framework | Description | Status |
-|-----------|-------------|--------|
+| Framework                                        | Description                                                                   | Status |
+|--------------------------------------------------|-------------------------------------------------------------------------------|--------|
 | **[Next.js + RainbowKit](./nextjs-rainbowkit/)** | Full-featured Next.js App Directory example with RainbowKit wallet connection | ✅ Ready |
-| **[Vite + RainbowKit](./vite-rainbowkit/)** | Lightweight Vite React app with RainbowKit integration | ✅ Ready |
-| **[Next.js + ConnectKit](./nextjs-connectkit/)** | Next.js example using ConnectKit for wallet connection | 🚧 Coming Soon |
+| **[Vite + RainbowKit](./vite-rainbowkit/)**      | Lightweight Vite React app with RainbowKit integration                        | ✅ Ready |
+| **[Next.js + ConnectKit](./nextjs-connectkit/)** | Next.js example using ConnectKit for wallet connection                        | ✅ Ready |
+| **[Next.js + Dynamic](./nextjs-dynamic/)**       | Next.js example using Dynamic.xyz for wallet connection                       | 🚧 Coming Soon |
 
 ## 🎯 What You'll Learn
 

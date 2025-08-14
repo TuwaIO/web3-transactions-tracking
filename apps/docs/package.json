@@ -38,6 +38,7 @@
     "@tuwa/transactions-tracking-ui": "workspace:*",
     "@tuwa/web3-transactions-tracking-core": "workspace:*",
     "@wagmi/core": "^2.19.0",
+    "connectkit": "^1.9.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "immer": "^10.1.1",

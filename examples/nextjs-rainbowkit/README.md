@@ -140,11 +140,10 @@ Found an issue or want to improve this example?
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
 3. Install dependencies: `pnpm install`
 4. Make your changes
-5. Run linting and type checks: `pnpm lint && pnpm type-check`
-6. Test the build: `pnpm build`
-7. Commit your changes: `git commit -m 'Add amazing feature'`
-8. Push to the branch: `git push origin feature/amazing-feature`
-9. Submit a pull request
+5. Test the build: `pnpm build`
+6. Commit your changes: `git commit -m 'Add amazing feature'`
+7. Push to the branch: `git push origin feature/amazing-feature`
+8. Submit a pull request
 
 ## 🙋‍♂️ Need Help?
 - [GitHub Issues](https://github.com/TuwaIO/web3-transactions-tracking/issues)

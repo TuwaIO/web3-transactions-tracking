@@ -1,20 +1,38 @@
-import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { Tabs } from 'nextra/components';
+'use client';
 
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { ConnectKitProvider } from 'connectkit';
+import { Tabs } from 'nextra/components';
+import { WagmiProvider } from 'wagmi';
+
+import { ConnectKitTransactionsBlock } from '@/components/ConnectKitTransactionsBlock';
 import { RainbowKitTransactionsBlock } from '@/components/RainbowKitTransactionsBlock';
+import { config, configConnectKit } from '@/configs/wagmiConfig';
 
 const walletConnectors = [
   {
     name: 'RainbowKit',
     component: (
-      <RainbowKitProvider>
-        <RainbowKitTransactionsBlock />
-      </RainbowKitProvider>
+      <WagmiProvider config={config}>
+        <RainbowKitProvider>
+          <RainbowKitTransactionsBlock />
+        </RainbowKitProvider>
+      </WagmiProvider>
     ),
   },
   {
     name: 'ConnectKit',
-    component: <div className="mt-4 text-center text-[var(--tuwa-text-secondary)]">In progress...</div>,
+    component: (
+      <WagmiProvider config={configConnectKit}>
+        <ConnectKitProvider>
+          <ConnectKitTransactionsBlock />
+        </ConnectKitProvider>
+      </WagmiProvider>
+    ),
+  },
+  {
+    name: 'Dynamic.xyz',
+    component: <p>In progress</p>,
   },
 ];
 
