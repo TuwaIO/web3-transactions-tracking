@@ -2,6 +2,8 @@
 
 import { Tabs } from 'nextra/components';
 
+import { ConnectKit } from '@/components/started-blocks/ConnectKit';
+import { Dynamic } from '@/components/started-blocks/Dynamic';
 import { RainbowKit } from '@/components/started-blocks/RainbowKit';
 
 export const trackingPackages = [
@@ -18,11 +20,11 @@ const walletConnectors = [
   },
   {
     name: 'ConnectKit',
-    component: <div className="mt-4 text-center text-[var(--tuwa-text-secondary)]">In progress...</div>,
+    component: <ConnectKit trackingPackageName={trackingPackages[0].packageName} />,
   },
   {
     name: 'Dynamic.xyz',
-    component: <div className="mt-4 text-center text-[var(--tuwa-text-secondary)]">In progress...</div>,
+    component: <Dynamic trackingPackageName={trackingPackages[0].packageName} />,
   },
 ];
 

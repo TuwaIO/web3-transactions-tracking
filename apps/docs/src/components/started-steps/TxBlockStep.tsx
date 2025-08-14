@@ -3,9 +3,15 @@ import { DocumentTextIcon } from '@heroicons/react/24/outline';
 import { CodeBlock } from '@/components/CodeBlock';
 import { CodeHighlighter } from '@/components/CodeHighlighter';
 
-const codeBlock = `'use client';
+export interface TxBlockStepCodeGenerateParams {
+  importLine: string;
+  buttonLine: string;
+}
 
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+const txBlockStepCodeGenerate = ({ importLine, buttonLine }: TxBlockStepCodeGenerateParams) => {
+  return `'use client';
+
+${importLine}
 import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking';
 import { sepolia } from 'viem/chains';
 
@@ -15,7 +21,8 @@ import { increment } from '@/transactions/actions/increment';
 import { TxType } from '@/transactions/onSucceedCallbacks';
 
 export const Increment = () => {
-  const { handleTransaction, initializeTransactionsPool } = useTxTrackingStore();
+  const initializeTransactionsPool = useTxTrackingStore(state => state.initializeTransactionsPool);
+  const handleTransaction = useTxTrackingStore(state => state.handleTransaction);
   // This hook ensures that transaction tracking continues even after a page reload.
   useInitializeTransactionsPool(initializeTransactionsPool);
 
@@ -36,7 +43,7 @@ export const Increment = () => {
 
   return (
     <div className="flex flex-col items-start">
-      <ConnectButton />
+      ${buttonLine}
       <div className="mt-4">
         <button
           type="button"
@@ -50,8 +57,11 @@ export const Increment = () => {
   );
 };
 `;
+};
 
-export function TxBlockStep() {
+export function TxBlockStep({ importLine, buttonLine }: TxBlockStepCodeGenerateParams) {
+  const codeBlock = txBlockStepCodeGenerate({ importLine, buttonLine });
+
   return (
     <div className="mt-4">
       <h3 className="mb-2 text-lg font-bold text-[var(--tuwa-text-primary)]">Step 6: Trigger the Transaction</h3>
