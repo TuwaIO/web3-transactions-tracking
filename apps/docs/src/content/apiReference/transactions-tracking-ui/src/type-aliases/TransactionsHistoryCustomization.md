@@ -6,7 +6,7 @@
 
 > **TransactionsHistoryCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/e8fc17df1e7aa9c38ef9c156281f0501e50bc7fd/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L18)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L18)
 
 Defines the customization options for the TransactionsHistory component.
 
@@ -26,7 +26,7 @@ Defines the customization options for the TransactionsHistory component.
 
 > `optional` **classNames**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/e8fc17df1e7aa9c38ef9c156281f0501e50bc7fd/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L19)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L19)
 
 #### listWrapper?
 
@@ -40,7 +40,7 @@ CSS classes for the list's wrapper `div`.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/e8fc17df1e7aa9c38ef9c156281f0501e50bc7fd/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L23)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L23)
 
 #### HistoryItem?
 

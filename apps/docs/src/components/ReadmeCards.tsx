@@ -144,7 +144,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Dynamic.xyz', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-dynamic',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking-examples/tree/main/examples/nextjs-dynamic',
       difficulty: 'intermediate',
       demoUrl: 'https://dynamic.example.tuwa.io/',
     },
@@ -154,7 +154,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'ConnectKit', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-connectkit',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking-examples/tree/main/examples/nextjs-connectkit',
       difficulty: 'beginner',
       demoUrl: 'https://connectkit.example.tuwa.io/',
     },
@@ -164,7 +164,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Reown AppKit', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-reown',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking-examples/tree/main/examples/nextjs-reown',
       difficulty: 'intermediate',
     },
     {
@@ -174,7 +174,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'RainbowKit', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-rainbowkit',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking-examples/tree/main/examples/nextjs-rainbowkit',
       difficulty: 'beginner',
     },
     {
@@ -183,7 +183,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'Web3Auth', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-web3auth',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking-examples/tree/main/examples/nextjs-web3auth',
       difficulty: 'advanced',
     },
     {
@@ -193,7 +193,7 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Vite + React',
       technologies: ['React 19', 'TypeScript', 'Vite', 'RainbowKit', 'TailwindCSS'],
       status: 'ready',
-      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/vite-rainbowkit',
+      githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking-examples/tree/main/examples/vite-rainbowkit',
       difficulty: 'beginner',
     },
   ];
