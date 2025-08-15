@@ -4,7 +4,7 @@
 
 # GelatoTaskState
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:39](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L39)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:39](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L39)
 
 Enum representing the possible states of a Gelato task.
 
@@ -18,7 +18,7 @@ https://docs.gelato.network/developer-services/relay/api/get-task-status
 
 > **Cancelled**: `"Cancelled"`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:45](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L45)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:45](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L45)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:45
 
 > **CheckPending**: `"CheckPending"`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:40](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L40)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:40](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L40)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:40
 
 > **ExecPending**: `"ExecPending"`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:41](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L41)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:41](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L41)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:41
 
 > **ExecReverted**: `"ExecReverted"`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:44](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L44)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:44](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L44)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:44
 
 > **ExecSuccess**: `"ExecSuccess"`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L43)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L43)
 
 ***
 
@@ -58,4 +58,4 @@ Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:43
 
 > **WaitingForConfirmation**: `"WaitingForConfirmation"`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L42)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L42)

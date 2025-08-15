@@ -4,7 +4,7 @@
 
 # TransactionStatus
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/web3-transactions-tracking-core/src/types.ts#L24)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/web3-transactions-tracking-core/src/types.ts#L24)
 
 Represents the final statuses of a transaction.
 
@@ -14,7 +14,7 @@ Represents the final statuses of a transaction.
 
 > **Failed**: `"Failed"`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/web3-transactions-tracking-core/src/types.ts#L26)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/web3-transactions-tracking-core/src/types.ts#L26)
 
 Indicates that the transaction failed to execute.
 
@@ -24,7 +24,7 @@ Indicates that the transaction failed to execute.
 
 > **Replaced**: `"Replaced"`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/web3-transactions-tracking-core/src/types.ts#L30)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/web3-transactions-tracking-core/src/types.ts#L30)
 
 Indicates that the transaction was replaced by another one (e.g., speed-up).
 
@@ -34,6 +34,6 @@ Indicates that the transaction was replaced by another one (e.g., speed-up).
 
 > **Success**: `"Success"`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/web3-transactions-tracking-core/src/types.ts#L28)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:28](https://github.com/TuwaIO/web3-transactions-tracking/blob/c4501805f0653586df89a8ca8b457a9b9dbc45fd/packages/web3-transactions-tracking-core/src/types.ts#L28)
 
 Indicates that the transaction was successfully mined and executed.
