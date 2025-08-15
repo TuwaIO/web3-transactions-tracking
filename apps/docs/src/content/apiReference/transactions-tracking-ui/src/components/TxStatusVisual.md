@@ -6,7 +6,7 @@
 
 > **TxStatusVisual**(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/b63ee874e01b037e0ee503214c6cfe4d0ac7491c/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L26)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L26)
 
 A component that renders a large, animated icon to visually represent the
 current state of a transaction within the tracking modal.

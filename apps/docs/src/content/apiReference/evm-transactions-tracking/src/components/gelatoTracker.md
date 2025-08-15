@@ -6,7 +6,7 @@
 
 > **gelatoTracker**(`params`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:157](https://github.com/TuwaIO/web3-transactions-tracking/blob/b63ee874e01b037e0ee503214c6cfe4d0ac7491c/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L157)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:157](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L157)
 
 A low-level tracker for monitoring Gelato transactions. It wraps the generic polling
 tracker with the Gelato-specific fetcher logic.

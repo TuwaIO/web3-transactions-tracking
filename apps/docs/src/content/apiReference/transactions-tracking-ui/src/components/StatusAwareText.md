@@ -6,7 +6,7 @@
 
 > **StatusAwareText**(`props`): `ReactNode`
 
-Defined in: [packages/transactions-tracking-ui/src/components/StatusAwareText.tsx:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/b63ee874e01b037e0ee503214c6cfe4d0ac7491c/packages/transactions-tracking-ui/src/components/StatusAwareText.tsx#L51)
+Defined in: [packages/transactions-tracking-ui/src/components/StatusAwareText.tsx:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/transactions-tracking-ui/src/components/StatusAwareText.tsx#L51)
 
 A component that renders text conditionally based on a transaction's status.
 It's designed to work with the `title` and `description` fields of a transaction,
