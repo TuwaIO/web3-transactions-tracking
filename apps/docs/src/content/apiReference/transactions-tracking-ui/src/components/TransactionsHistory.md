@@ -6,7 +6,7 @@
 
 > **TransactionsHistory**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L54)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:54](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L54)
 
 A component that displays a scrollable list of transactions for the connected wallet.
 It handles states for when a wallet is not connected or when there is no history.

@@ -6,7 +6,7 @@
 
 > **StepProps** = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > `optional` **isFirst**: `boolean`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > `optional` **isLast**: `boolean`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > **label**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > **status**: [`StepStatus`](StepStatus.md)
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxProgressIndicator.tsx#L14)

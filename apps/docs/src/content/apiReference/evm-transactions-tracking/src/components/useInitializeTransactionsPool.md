@@ -6,7 +6,7 @@
 
 > **useInitializeTransactionsPool**(`initializeTransactionsPool`, `customErrorHandler?`): `void`
 
-Defined in: [packages/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool.tsx:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool.tsx#L34)
+Defined in: [packages/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool.tsx:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/evm-transactions-tracking/src/hooks/useInitializeTransactionsPool.tsx#L34)
 
 A React hook that triggers the initialization of the transaction pool when the component mounts.
 This ensures that any pending transactions from a previous session are picked up and tracked again.

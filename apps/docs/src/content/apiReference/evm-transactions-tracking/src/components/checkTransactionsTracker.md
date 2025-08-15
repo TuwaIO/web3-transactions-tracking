@@ -6,7 +6,7 @@
 
 > **checkTransactionsTracker**(`actionTxKey`, `walletType`): `object`
 
-Defined in: [packages/evm-transactions-tracking/src/utils/checkTransactionsTracker.ts:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/evm-transactions-tracking/src/utils/checkTransactionsTracker.ts#L24)
+Defined in: [packages/evm-transactions-tracking/src/utils/checkTransactionsTracker.ts:24](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/evm-transactions-tracking/src/utils/checkTransactionsTracker.ts#L24)
 
 Determines which transaction tracker to use based on the format of the transaction key and the wallet type.
 

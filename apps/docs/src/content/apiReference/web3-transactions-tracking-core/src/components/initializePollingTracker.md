@@ -6,7 +6,7 @@
 
 > **initializePollingTracker**\<`R`, `T`, `TR`\>(`params`): `Promise`\<`void`\>
 
-Defined in: [packages/web3-transactions-tracking-core/src/utils/initializePollingTracker.ts:61](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/web3-transactions-tracking-core/src/utils/initializePollingTracker.ts#L61)
+Defined in: [packages/web3-transactions-tracking-core/src/utils/initializePollingTracker.ts:61](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/web3-transactions-tracking-core/src/utils/initializePollingTracker.ts#L61)
 
 Initializes a generic polling tracker that repeatedly calls a fetcher function
 to monitor the status of a transaction or any asynchronous task.

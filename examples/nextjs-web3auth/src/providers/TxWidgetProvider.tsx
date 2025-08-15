@@ -2,9 +2,9 @@
 
 import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking';
 import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers';
-import { useAccount } from 'wagmi';
+import { useAccount, useConfig } from 'wagmi';
 
-import { appChains, config } from '@/configs/wagmiConfig';
+import { appChains } from '@/constants';
 import { useTxTrackingStore } from '@/hooks/txTrackingHooks';
 import { txActions } from '@/transactions/actions';
 
@@ -17,6 +17,7 @@ export function TxWidgetProvider() {
 
   useInitializeTransactionsPool(initializeTransactionsPool);
 
+  const config = useConfig();
   const { address, chain } = useAccount();
 
   return (

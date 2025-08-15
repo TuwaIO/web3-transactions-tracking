@@ -1,3 +1,5 @@
+'use client';
+
 import { ChevronDownIcon, UserCircleIcon, WalletIcon } from '@heroicons/react/24/outline';
 import { useWeb3AuthConnect, useWeb3AuthDisconnect, useWeb3AuthUser } from '@web3auth/modal/react';
 import { motion } from 'framer-motion';
@@ -29,7 +31,7 @@ export function ConnectButton() {
       <motion.button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className="
-          flex items-center gap-3 px-4 py-3 rounded-2xl
+          cursor-pointer flex items-center gap-3 px-4 py-3 rounded-2xl
           bg-[var(--tuwa-success-bg)] text-[var(--tuwa-success-text)]
           border border-[var(--tuwa-success-icon)]
           hover:shadow-lg transition-all duration-200

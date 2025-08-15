@@ -6,6 +6,6 @@
 
 > **TxActions** = `Record`\<`string`, (...`args`) => `Promise`\<`unknown`\>\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/a1e18c8dd44998cdb601034c1ed713d4d7c5d2f9/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L43)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/c12e1012b38a49f4546c719dd8dfd1a6bb4dbd9d/packages/transactions-tracking-ui/src/components/TrackingTxModal/TrackingTxModal.tsx#L43)
 
 A registry of functions that can be re-executed via the 'Retry' button. The key should match `actionKey` on a transaction.
