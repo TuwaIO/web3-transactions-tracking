@@ -6,7 +6,7 @@
 
 > **Transaction**\<`T`\> = `object`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:37](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L37)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:37](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L37)
 
 Represents a transaction object being tracked by the system.
 
@@ -24,7 +24,7 @@ The type of the tracker associated with the transaction (e.g., 'evm', 'gelato').
 
 > `optional` **actionKey**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L43)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:43](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L43)
 
 A key identifying the retry logic for this transaction from the actions registry.
 
@@ -34,7 +34,7 @@ A key identifying the retry logic for this transaction from the actions registry
 
 > **chainId**: `number`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:47](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L47)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:47](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L47)
 
 The ID of the blockchain network.
 
@@ -44,7 +44,7 @@ The ID of the blockchain network.
 
 > `optional` **description**: `string` \| \[`string`, `string`, `string`, `string`\]
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:71](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L71)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:71](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L71)
 
 A description for the transaction, with the same structure as the title.
 
@@ -54,7 +54,7 @@ A description for the transaction, with the same structure as the title.
 
 > `optional` **errorMessage**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:75](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L75)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:75](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L75)
 
 An error message if the transaction failed.
 
@@ -64,7 +64,7 @@ An error message if the transaction failed.
 
 > `optional` **finishedTimestamp**: `number`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:65](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L65)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:65](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L65)
 
 The timestamp (in seconds) when the transaction was finalized on-chain.
 
@@ -74,7 +74,7 @@ The timestamp (in seconds) when the transaction was finalized on-chain.
 
 > **from**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L49)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L49)
 
 The sender's address.
 
@@ -84,7 +84,7 @@ The sender's address.
 
 > `optional` **hash**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L55)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:55](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L55)
 
 The on-chain transaction hash (optional, becomes available after submission).
 
@@ -94,7 +94,7 @@ The on-chain transaction hash (optional, becomes available after submission).
 
 > `optional` **input**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:87](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L87)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:87](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L87)
 
 The data payload for the transaction, typically for contract interactions.
 
@@ -104,7 +104,7 @@ The data payload for the transaction, typically for contract interactions.
 
 > `optional` **isError**: `boolean`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:79](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L79)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:79](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L79)
 
 A flag indicating if has error status.
 
@@ -114,7 +114,7 @@ A flag indicating if has error status.
 
 > `optional` **isTrackedModalOpen**: `boolean`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:77](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L77)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:77](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L77)
 
 A flag indicating if the detailed tracking modal should be open for this transaction. For UI purposes.
 
@@ -124,7 +124,7 @@ A flag indicating if the detailed tracking modal should be open for this transac
 
 > **localTimestamp**: `number`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:63](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L63)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:63](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L63)
 
 The local timestamp (in seconds) when the transaction was initiated by the user.
 
@@ -134,7 +134,7 @@ The local timestamp (in seconds) when the transaction was initiated by the user.
 
 > `optional` **maxFeePerGas**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:81](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L81)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:81](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L81)
 
 The maximum fee per gas for the transaction (EIP-1559).
 
@@ -144,7 +144,7 @@ The maximum fee per gas for the transaction (EIP-1559).
 
 > `optional` **maxPriorityFeePerGas**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:83](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L83)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:83](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L83)
 
 The maximum priority fee per gas for the transaction (EIP-1559).
 
@@ -154,7 +154,7 @@ The maximum priority fee per gas for the transaction (EIP-1559).
 
 > `optional` **nonce**: `number`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:53](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L53)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:53](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L53)
 
 The transaction nonce (optional).
 
@@ -164,7 +164,7 @@ The transaction nonce (optional).
 
 > `optional` **payload**: `object`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:73](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L73)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:73](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L73)
 
 Any additional data associated with the transaction.
 
@@ -174,7 +174,7 @@ Any additional data associated with the transaction.
 
 > **pending**: `boolean`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:61](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L61)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:61](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L61)
 
 Indicates if the transaction is still pending confirmation.
 
@@ -184,7 +184,7 @@ Indicates if the transaction is still pending confirmation.
 
 > `optional` **replacedTxHash**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:57](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L57)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:57](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L57)
 
 The hash of a transaction that this one replaced (e.g., for speed-up).
 
@@ -194,7 +194,7 @@ The hash of a transaction that this one replaced (e.g., for speed-up).
 
 > `optional` **status**: [`TransactionStatus`](../enumerations/TransactionStatus.md)
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:59](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L59)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:59](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L59)
 
 The final status of the transaction.
 
@@ -204,7 +204,7 @@ The final status of the transaction.
 
 > `optional` **title**: `string` \| \[`string`, `string`, `string`, `string`\]
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:69](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L69)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:69](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L69)
 
 A title for the transaction, can be a single string or an array for different states [pending, success, error, replaced].
 
@@ -214,7 +214,7 @@ A title for the transaction, can be a single string or an array for different st
 
 > `optional` **to**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L51)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:51](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L51)
 
 The recipient's address (optional).
 
@@ -224,7 +224,7 @@ The recipient's address (optional).
 
 > **tracker**: `T`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:39](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L39)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:39](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L39)
 
 The specific tracker responsible for monitoring this transaction (e.g., 'evm', 'safe', 'gelato').
 
@@ -234,7 +234,7 @@ The specific tracker responsible for monitoring this transaction (e.g., 'evm', '
 
 > **txKey**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:41](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L41)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:41](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L41)
 
 The unique key for this transaction, used as an identifier throughout the system (e.g., transaction hash, gelato task id).
 
@@ -244,7 +244,7 @@ The unique key for this transaction, used as an identifier throughout the system
 
 > **type**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:45](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L45)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:45](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L45)
 
 The type or category of the transaction (e.g., 'increment', 'approve').
 
@@ -254,7 +254,7 @@ The type or category of the transaction (e.g., 'increment', 'approve').
 
 > `optional` **value**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:85](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L85)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:85](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L85)
 
 The value (in wei) being sent with the transaction.
 
@@ -264,6 +264,6 @@ The value (in wei) being sent with the transaction.
 
 > **walletType**: `string`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:67](https://github.com/TuwaIO/web3-transactions-tracking/blob/770740dda3d4574741c78576c8d447a8659b112f/packages/web3-transactions-tracking-core/src/types.ts#L67)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:67](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L67)
 
 The type of wallet used for the transaction.
