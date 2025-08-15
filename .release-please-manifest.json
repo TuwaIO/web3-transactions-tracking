@@ -1,5 +1,5 @@
 {
   "packages/evm-transactions-tracking": "0.0.1",
-  "packages/transactions-tracking-ui": "0.0.1",
+  "packages/transactions-tracking-ui": "0.0.2",
   "packages/web3-transactions-tracking-core": "0.0.1"
 }

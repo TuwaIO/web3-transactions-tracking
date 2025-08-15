@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/TuwaIO/web3-transactions-tracking/compare/transactions-tracking-ui-v0.0.1...transactions-tracking-ui-v0.0.2) (2025-08-15)
+
+
+### Bug Fixes
+
+* deploy ([0509311](https://github.com/TuwaIO/web3-transactions-tracking/commit/0509311528ba40de99250681cd5d959a880305f3))
+
 ## 0.0.1 (2025-08-15)
 
 
