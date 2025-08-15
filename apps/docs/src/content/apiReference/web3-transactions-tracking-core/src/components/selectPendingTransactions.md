@@ -6,7 +6,7 @@
 
 > **selectPendingTransactions**\<`TR`, `T`\>(`transactionsPool`): `T`[]
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:27](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L27)
+Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:27](https://github.com/TuwaIO/web3-transactions-tracking/blob/cafcfd51767ecca0fea12270d048f0222d6b65a2/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L27)
 
 Selects all transactions that are currently in a pending state.
 

@@ -6,7 +6,7 @@
 
 > **cn**(...`inputs`): `string`
 
-Defined in: [packages/transactions-tracking-ui/src/utils/cn.ts:25](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/utils/cn.ts#L25)
+Defined in: [packages/transactions-tracking-ui/src/utils/cn.ts:25](https://github.com/TuwaIO/web3-transactions-tracking/blob/cafcfd51767ecca0fea12270d048f0222d6b65a2/packages/transactions-tracking-ui/src/utils/cn.ts#L25)
 
 A utility function to conditionally join class names together and resolve
 conflicting Tailwind CSS classes.

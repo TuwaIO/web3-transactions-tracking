@@ -6,7 +6,7 @@
 
 > **TransactionsWidgetProps**\<`TR`, `T`\> = `object` & `Pick`\<`IInitializeTxTrackingStore`\<`TR`, `T`\>, `"closeTxTrackedModal"`\> & `ToastContainerProps` & `Pick`\<[`TrackingTxModalProps`](../../interfaces/TrackingTxModalProps.md)\<`TR`, `T`\>, `"handleTransaction"` \| `"actions"` \| `"config"` \| `"appChains"` \| `"transactionsPool"` \| `"initialTx"`\>
 
-Defined in: [packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx#L36)
+Defined in: [packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx:36](https://github.com/TuwaIO/web3-transactions-tracking/blob/cafcfd51767ecca0fea12270d048f0222d6b65a2/packages/transactions-tracking-ui/src/providers/TransactionsWidget.tsx#L36)
 
 ## Type declaration
 

@@ -1,6 +1,5 @@
 @import "nextra-theme-docs/style.css";
 @import "tailwindcss";
-@import "@rainbow-me/rainbowkit/styles.css";
 @import "@tuwaio/transactions-tracking-ui/dist/index.css";
 
 :root {
