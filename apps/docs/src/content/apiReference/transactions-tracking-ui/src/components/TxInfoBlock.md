@@ -6,7 +6,7 @@
 
 > **TxInfoBlock**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:62](https://github.com/TuwaIO/web3-transactions-tracking/blob/a5b6681b81f2ac2ebab5a209571fc0fd463f436b/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L62)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx:62](https://github.com/TuwaIO/web3-transactions-tracking/blob/c87bb81c0dc080f98f542d784eb666c2213977c9/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxInfoBlock.tsx#L62)
 
 A component that displays a block of essential transaction details,
 such as network, start time, and relevant hashes/keys.

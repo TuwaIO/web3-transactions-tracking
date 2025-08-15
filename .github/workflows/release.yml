@@ -15,10 +15,9 @@ jobs:
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
-          monorepo-tags: true
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
@@ -45,6 +44,6 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Publish packages to NPM
-        run: pnpm publish --filter "@tuwa/*" --no-git-checks
+        run: pnpm publish --filter "@tuwaio/*" --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

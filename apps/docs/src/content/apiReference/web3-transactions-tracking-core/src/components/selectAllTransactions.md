@@ -6,7 +6,7 @@
 
 > **selectAllTransactions**\<`TR`, `T`\>(`transactionsPool`): `T`[]
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/a5b6681b81f2ac2ebab5a209571fc0fd463f436b/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L16)
+Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/c87bb81c0dc080f98f542d784eb666c2213977c9/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L16)
 
 Selects all transactions from the pool and sorts them by their creation timestamp.
 
