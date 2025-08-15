@@ -52,7 +52,7 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
 
     await handleTransaction({
       config,
-      actionFunction: txActions.increment,
+      actionFunction: () => txActions.increment({ config }),
       params: {
         type: TxType.increment,
         desiredChainID: sepolia.id,
