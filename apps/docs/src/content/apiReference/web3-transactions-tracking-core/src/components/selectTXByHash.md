@@ -6,7 +6,7 @@
 
 > **selectTXByHash**\<`TR`, `T`\>(`transactionsPool`, `hash`): `undefined` \| `T`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:58](https://github.com/TuwaIO/web3-transactions-tracking/blob/c87bb81c0dc080f98f542d784eb666c2213977c9/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L58)
+Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:58](https://github.com/TuwaIO/web3-transactions-tracking/blob/c41f5708079d0be5a252ccc504a3465e6f5aafc4/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L58)
 
 Selects a single transaction from the pool by its on-chain hash.
 It first attempts a direct lookup assuming the hash is the `txKey`, then falls back to a full search.
