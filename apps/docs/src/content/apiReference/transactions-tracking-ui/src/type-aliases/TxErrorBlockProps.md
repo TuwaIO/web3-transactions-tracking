@@ -6,7 +6,7 @@
 
 > **TxErrorBlockProps** = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/b389bfa5867b1844b26d40be43be5bc5566575ea/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx#L14)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > `optional` **className**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx#L18)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/b389bfa5867b1844b26d40be43be5bc5566575ea/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx#L18)
 
 Optional additional CSS classes for the container.
 
@@ -24,6 +24,6 @@ Optional additional CSS classes for the container.
 
 > `optional` **error**: `string`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx#L16)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/b389bfa5867b1844b26d40be43be5bc5566575ea/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxErrorBlock.tsx#L16)
 
 The error message string to display. If undefined, the component renders nothing.

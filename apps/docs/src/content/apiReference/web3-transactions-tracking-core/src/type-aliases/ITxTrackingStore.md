@@ -6,7 +6,7 @@
 
 > **ITxTrackingStore**\<`TR`, `T`, `C`, `A`\> = [`IInitializeTxTrackingStore`](IInitializeTxTrackingStore.md)\<`TR`, `T`\> & `object`
 
-Defined in: [packages/web3-transactions-tracking-core/src/types.ts:132](https://github.com/TuwaIO/web3-transactions-tracking/blob/b15830caeb9f515b3d96db7ae5c355861a7c93a1/packages/web3-transactions-tracking-core/src/types.ts#L132)
+Defined in: [packages/web3-transactions-tracking-core/src/types.ts:132](https://github.com/TuwaIO/web3-transactions-tracking/blob/b389bfa5867b1844b26d40be43be5bc5566575ea/packages/web3-transactions-tracking-core/src/types.ts#L132)
 
 Interface for the complete transaction tracking store.
 
