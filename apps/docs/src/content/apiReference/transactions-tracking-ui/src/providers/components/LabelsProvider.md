@@ -6,7 +6,7 @@
 
 > **LabelsProvider**(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/b389bfa5867b1844b26d40be43be5bc5566575ea/packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx#L26)
+Defined in: [packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx:26](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/transactions-tracking-ui/src/providers/LabelsProvider.tsx#L26)
 
 A React component that provides a custom set of labels to all child components.
 Wrap your application or component tree with this provider to apply custom translations.

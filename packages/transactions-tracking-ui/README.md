@@ -7,7 +7,6 @@ The suite includes automated toast notifications, a detailed wallet history moda
 *(A GIF demonstrating the toast notifications and modal window would look great here)*
 
 ## Installation
-
 Install the package with your favorite package manager:
 
 **npm**
