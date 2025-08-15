@@ -6,7 +6,7 @@
 
 > **TxStatusVisualProps** = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:8](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L8)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:8](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L8)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/Tx
 
 > `optional` **isFailed**: `boolean`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L14)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:14](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L14)
 
 True if the transaction has failed or was reverted.
 
@@ -24,7 +24,7 @@ True if the transaction has failed or was reverted.
 
 > `optional` **isProcessing**: `boolean`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:10](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L10)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:10](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L10)
 
 True if the transaction is currently being processed (e.g., in the mempool).
 
@@ -34,7 +34,7 @@ True if the transaction is currently being processed (e.g., in the mempool).
 
 > `optional` **isReplaced**: `boolean`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L16)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:16](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L16)
 
 True if the transaction was replaced (e.g., sped up).
 
@@ -44,6 +44,6 @@ True if the transaction was replaced (e.g., sped up).
 
 > `optional` **isSucceed**: `boolean`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:12](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L12)
+Defined in: [packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx:12](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/components/TrackingTxModal/TxStatusVisual.tsx#L12)
 
 True if the transaction has successfully completed.

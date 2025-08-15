@@ -6,7 +6,7 @@
 
 > **TransactionHistoryItemCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L33)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L33)
 
 Defines the structure for the `customization` prop, allowing users to override
 default sub-components with their own implementations for a history item.
@@ -27,7 +27,7 @@ default sub-components with their own implementations for a history item.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/65f363300724bdf9b035eaffd2ca6ee39c3a7709/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L34)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/8756609a5523c78e41057cc5e1684ed645ee913e/packages/transactions-tracking-ui/src/components/TransactionHistoryItem.tsx#L34)
 
 #### description()?
 
