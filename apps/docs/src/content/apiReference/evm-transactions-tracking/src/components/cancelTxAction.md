@@ -1,4 +1,4 @@
-[**@tuwa/web3-txs-tracking-repo**](../../../README.md)
+[**@tuwaio/web3-txs-tracking-repo**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 > **cancelTxAction**\<`T`\>(`params`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [packages/evm-transactions-tracking/src/utils/cancelTxAction.ts:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/evm-transactions-tracking/src/utils/cancelTxAction.ts#L34)
+Defined in: [packages/evm-transactions-tracking/src/utils/cancelTxAction.ts:34](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/evm-transactions-tracking/src/utils/cancelTxAction.ts#L34)
 
 Cancels a pending transaction by sending a new, zero-value transaction to oneself
 with the same nonce but a higher gas price.

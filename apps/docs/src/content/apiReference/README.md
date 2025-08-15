@@ -1,8 +1,8 @@
-**@tuwa/web3-txs-tracking-repo**
+**@tuwaio/web3-txs-tracking-repo**
 
 ***
 
-# @tuwa/web3-txs-tracking-repo
+# @tuwaio/web3-txs-tracking-repo
 
 ## Modules
 

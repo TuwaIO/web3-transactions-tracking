@@ -1,4 +1,4 @@
-# @tuwa/transactions-tracking-ui
+# @tuwaio/transactions-tracking-ui
 
 This package provides a suite of beautiful, pre-styled React components designed to work seamlessly with the TUWA Web3 transaction tracking ecosystem. Built with **Tailwind CSS**, this library offers a plug-and-play solution for providing users with real-time feedback on their transaction status.
 
@@ -12,30 +12,30 @@ Install the package with your favorite package manager:
 **npm**
 
 ```bash
-npm install @tuwa/transactions-tracking-ui
+npm install @tuwaio/transactions-tracking-ui
 ```
 
 **yarn**
 
 ```bash
-yarn add @tuwa/transactions-tracking-ui
+yarn add @tuwaio/transactions-tracking-ui
 ```
 
 **pnpm**
 
 ```bash
-pnpm add @tuwa/transactions-tracking-ui
+pnpm add @tuwaio/transactions-tracking-ui
 ```
 
 **bun**
 
 ```bash
-bun add @tuwa/transactions-tracking-ui
+bun add @tuwaio/transactions-tracking-ui
 ```
 
 ### Peer Dependencies
 
-This package requires you to have the following packages installed in your project: `react`, `react-dom`, `react-toastify`, `@radix-ui/react-dialog`, `framer-motion`, `tailwindcss`, and the other `@tuwa` core packages.
+This package requires you to have the following packages installed in your project: `react`, `react-dom`, `react-toastify`, `@radix-ui/react-dialog`, `framer-motion`, `tailwindcss`, and the other `@tuwaio` core packages.
 
 ## Key Features
 
@@ -53,7 +53,7 @@ Place the `<TransactionsWidget />` component in your main application layout. It
 ```jsx
 // In your main layout file, e.g., Providers.tsx
 
-import { TransactionsWidget } from '@tuwa/transactions-tracking-ui';
+import { TransactionsWidget } from '@tuwaio/transactions-tracking-ui';
 import { useAccount } from 'wagmi';
 import { useTxTrackingStore } from '../hooks/txTrackingHooks'; // Your app's hook
 import { txActions } from '../transactions/actions'; // Your app's action registry

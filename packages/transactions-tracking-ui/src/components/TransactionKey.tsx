@@ -3,8 +3,8 @@
  * the various identifiers associated with a transaction (e.g., hash, Gelato Task ID).
  */
 
-import { selectTxExplorerLink, TransactionTracker } from '@tuwa/evm-transactions-tracking';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core';
+import { selectTxExplorerLink, TransactionTracker } from '@tuwaio/evm-transactions-tracking';
+import { Transaction } from '@tuwaio/web3-transactions-tracking-core';
 import { JSX, ReactNode } from 'react';
 import { Chain, Hex } from 'viem';
 

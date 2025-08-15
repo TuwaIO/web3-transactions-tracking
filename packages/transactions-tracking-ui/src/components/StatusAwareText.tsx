@@ -2,7 +2,7 @@
  * @file This file contains the `StatusAwareText` component, which displays different text based on a transaction's status.
  */
 
-import { TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
+import { TransactionStatus } from '@tuwaio/web3-transactions-tracking-core';
 import { ReactNode } from 'react';
 
 import { cn } from '../utils';

@@ -2,15 +2,15 @@
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "packages": {
     "packages/evm-transactions-tracking": {
-      "package-name": "@tuwa/evm-transactions-tracking",
+      "package-name": "@tuwaio/evm-transactions-tracking",
       "release-type": "node"
     },
     "packages/transactions-tracking-ui": {
-      "package-name": "@tuwa/transactions-tracking-ui",
+      "package-name": "@tuwaio/transactions-tracking-ui",
       "release-type": "node"
     },
     "packages/web3-transactions-tracking-core": {
-      "package-name": "@tuwa/web3-transactions-tracking-core",
+      "package-name": "@tuwaio/web3-transactions-tracking-core",
       "release-type": "node"
     }
   },

@@ -1,5 +1,5 @@
 {
-  "name": "@tuwa/transactions-tracking-ui",
+  "name": "@tuwaio/transactions-tracking-ui",
   "version": "0.0.2",
   "private": false,
   "author": "Oleksandr Tkach",
@@ -50,8 +50,8 @@
     }
   ],
   "dependencies": {
-    "@tuwa/evm-transactions-tracking": "workspace:^",
-    "@tuwa/web3-transactions-tracking-core": "workspace:^",
+    "@tuwaio/evm-transactions-tracking": "workspace:^",
+    "@tuwaio/web3-transactions-tracking-core": "workspace:^",
     "ethereum-blockies-base64": "^1.0.2"
   },
   "peerDependencies": {

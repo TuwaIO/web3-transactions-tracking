@@ -26,7 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Environment (please complete the following information):**
 - OS: [e.g. macOS, Windows]
 - Browser: [e.g. Chrome, Safari]
-- Package versions (`@tuwa/...`): [e.g. 0.0.1]
+- Package versions (`@tuwaio/...`): [e.g. 0.0.1]
 
 **Additional context**
 Add any other context about the problem here.

@@ -3,8 +3,8 @@ import { DocumentTextIcon } from '@heroicons/react/24/outline';
 import { CodeBlock } from '@/components/CodeBlock';
 import { CodeHighlighter } from '@/components/CodeHighlighter';
 
-const codeBlock = `import { createTxTrackingStore } from '@tuwa/evm-transactions-tracking';
-import { createBoundedUseStore } from '@tuwa/web3-transactions-tracking-core';
+const codeBlock = `import { createTxTrackingStore } from '@tuwaio/evm-transactions-tracking';
+import { createBoundedUseStore } from '@tuwaio/web3-transactions-tracking-core';
 import { sepolia } from 'viem/chains';
 
 import { onSucceedCallbacks, TransactionUnion } from './transactions/onSucceedCallbacks';

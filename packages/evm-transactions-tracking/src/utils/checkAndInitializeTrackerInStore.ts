@@ -3,7 +3,7 @@
  * Based on a transaction's `tracker` property, it delegates the tracking task to the appropriate implementation.
  */
 
-import { ITxTrackingStore, Transaction } from '@tuwa/web3-transactions-tracking-core';
+import { ITxTrackingStore, Transaction } from '@tuwaio/web3-transactions-tracking-core';
 import { Config } from '@wagmi/core';
 import { Chain } from 'viem';
 

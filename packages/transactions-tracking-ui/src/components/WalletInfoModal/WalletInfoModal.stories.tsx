@@ -1,7 +1,7 @@
 import { StarIcon, UserIcon } from '@heroicons/react/24/solid';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Transaction, TransactionPool } from '@tuwa/web3-transactions-tracking-core';
-import { TransactionStatus } from '@tuwa/web3-transactions-tracking-core/src';
+import { Transaction, TransactionPool } from '@tuwaio/web3-transactions-tracking-core';
+import { TransactionStatus } from '@tuwaio/web3-transactions-tracking-core/src';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { Address } from 'viem';

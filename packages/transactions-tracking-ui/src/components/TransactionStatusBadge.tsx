@@ -3,7 +3,7 @@
  */
 
 import { ArrowPathIcon, CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
+import { Transaction, TransactionStatus } from '@tuwaio/web3-transactions-tracking-core';
 import { JSX } from 'react';
 
 import { useLabels } from '../providers';

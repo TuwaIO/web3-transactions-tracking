@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
+import { TransactionStatus } from '@tuwaio/web3-transactions-tracking-core';
 
 import { StatusAwareText } from './StatusAwareText';
 

@@ -4,8 +4,8 @@
  */
 
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core';
-import { TransactionPool } from '@tuwa/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
+import { Transaction } from '@tuwaio/web3-transactions-tracking-core';
+import { TransactionPool } from '@tuwaio/web3-transactions-tracking-core/src/store/initializeTxTrackingStore';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { JSX, ReactNode } from 'react';

@@ -7,7 +7,7 @@ import {
   Transaction,
   TransactionPool,
   TransactionStatus,
-} from '@tuwa/web3-transactions-tracking-core';
+} from '@tuwaio/web3-transactions-tracking-core';
 import { JSX, useEffect, useMemo, useRef, useState } from 'react';
 import { toast, ToastContainer, ToastContainerProps, ToastContentProps, TypeOptions } from 'react-toastify';
 import { Address, Chain } from 'viem';

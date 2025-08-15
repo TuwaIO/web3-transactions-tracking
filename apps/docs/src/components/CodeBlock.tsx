@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@tuwa/transactions-tracking-ui';
-import { useCopyToClipboard } from '@tuwa/transactions-tracking-ui/src/hooks/useCopyToClipboard';
+import { cn } from '@tuwaio/transactions-tracking-ui';
+import { useCopyToClipboard } from '@tuwaio/transactions-tracking-ui/src/hooks/useCopyToClipboard';
 import { ReactNode } from 'react';
 
 import { CopyIconButton } from '@/components/CopyIconButton';

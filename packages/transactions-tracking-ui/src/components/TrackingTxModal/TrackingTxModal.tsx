@@ -4,14 +4,14 @@
  */
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import * as Dialog from '@radix-ui/react-dialog';
-import { ActionTxKey, cancelTxAction, speedUpTxAction } from '@tuwa/evm-transactions-tracking';
+import { ActionTxKey, cancelTxAction, speedUpTxAction } from '@tuwaio/evm-transactions-tracking';
 import {
   InitialTransactionParams,
   ITxTrackingStore,
   Transaction,
   TransactionPool,
   TransactionStatus,
-} from '@tuwa/web3-transactions-tracking-core';
+} from '@tuwaio/web3-transactions-tracking-core';
 import { Config } from '@wagmi/core';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
 import { ComponentPropsWithoutRef, JSX, ReactNode, useEffect, useState } from 'react';

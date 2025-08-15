@@ -4,7 +4,7 @@
 
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Transaction, TransactionPool } from '@tuwa/web3-transactions-tracking-core';
+import { Transaction, TransactionPool } from '@tuwaio/web3-transactions-tracking-core';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
 import { ComponentPropsWithoutRef, JSX, ReactNode } from 'react';
 import { Address, Chain } from 'viem';

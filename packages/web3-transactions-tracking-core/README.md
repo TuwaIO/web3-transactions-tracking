@@ -1,4 +1,4 @@
-# @tuwa/web3-transactions-tracking-core
+# @tuwaio/web3-transactions-tracking-core
 
 This package provides the core, headless engine for the TUWA Web3 transaction tracking suite. It manages the state of all tracked transactions, handling the full lifecycle from submission (pending) to finality (success, failed, reverted) and complex scenarios like dropped or replaced transactions.
 
@@ -11,25 +11,25 @@ Install the package with your favorite package manager:
 **npm**
 
 ```bash
-npm install @tuwa/web3-transactions-tracking-core
+npm install @tuwaio/web3-transactions-tracking-core
 ```
 
 **yarn**
 
 ```bash
-yarn add @tuwa/web3-transactions-tracking-core
+yarn add @tuwaio/web3-transactions-tracking-core
 ```
 
 **pnpm**
 
 ```bash
-pnpm add @tuwa/web3-transactions-tracking-core
+pnpm add @tuwaio/web3-transactions-tracking-core
 ```
 
 **bun**
 
 ```bash
-bun add @tuwa/web3-transactions-tracking-core
+bun add @tuwaio/web3-transactions-tracking-core
 ```
 
 ## Key Features

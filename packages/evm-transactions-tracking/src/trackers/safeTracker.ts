@@ -9,7 +9,7 @@ import {
   ITxTrackingStore,
   Transaction,
   TransactionStatus,
-} from '@tuwa/web3-transactions-tracking-core';
+} from '@tuwaio/web3-transactions-tracking-core';
 import { Config } from '@wagmi/core';
 import dayjs from 'dayjs';
 import { Hex, zeroHash } from 'viem';

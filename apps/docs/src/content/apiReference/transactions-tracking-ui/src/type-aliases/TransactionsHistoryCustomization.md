@@ -1,4 +1,4 @@
-[**@tuwa/web3-txs-tracking-repo**](../../../README.md)
+[**@tuwaio/web3-txs-tracking-repo**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 > **TransactionsHistoryCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L18)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:18](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L18)
 
 Defines the customization options for the TransactionsHistory component.
 
@@ -26,7 +26,7 @@ Defines the customization options for the TransactionsHistory component.
 
 > `optional` **classNames**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L19)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:19](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L19)
 
 #### listWrapper?
 
@@ -40,7 +40,7 @@ CSS classes for the list's wrapper `div`.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L23)
+Defined in: [packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/transactions-tracking-ui/src/components/TransactionsHistory.tsx#L23)
 
 #### HistoryItem?
 

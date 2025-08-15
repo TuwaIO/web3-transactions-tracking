@@ -4,7 +4,7 @@
  * @vitest-environment jsdom
  */
 
-import { initializePollingTracker } from '@tuwa/web3-transactions-tracking-core';
+import { initializePollingTracker } from '@tuwaio/web3-transactions-tracking-core';
 import dayjs from 'dayjs';
 import { zeroAddress, zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';
@@ -13,8 +13,8 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { fetchTxFromSafeAPI, safeTracker, SafeTrackerParams, SafeTxStatusResponse } from './safeTracker';
 
 // Mock the core polling utility to isolate the tracker's logic.
-vi.mock('@tuwa/web3-transactions-tracking-core', async (importActual) => {
-  const original = await importActual<typeof import('@tuwa/web3-transactions-tracking-core')>();
+vi.mock('@tuwaio/web3-transactions-tracking-core', async (importActual) => {
+  const original = await importActual<typeof import('@tuwaio/web3-transactions-tracking-core')>();
   return {
     ...original,
     initializePollingTracker: vi.fn(),

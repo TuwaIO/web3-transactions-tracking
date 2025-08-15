@@ -4,7 +4,7 @@
  * a transaction's lifecycle from submission to finality.
  */
 
-import { ITxTrackingStore, Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
+import { ITxTrackingStore, Transaction, TransactionStatus } from '@tuwaio/web3-transactions-tracking-core';
 import { Config } from '@wagmi/core';
 import {
   Chain,

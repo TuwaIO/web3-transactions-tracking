@@ -1,5 +1,5 @@
 {
-  "name": "@tuwa/evm-transactions-tracking",
+  "name": "@tuwaio/evm-transactions-tracking",
   "version": "0.0.1",
   "private": false,
   "author": "Oleksandr Tkach",
@@ -47,7 +47,7 @@
     }
   ],
   "dependencies": {
-    "@tuwa/web3-transactions-tracking-core": "workspace:^"
+    "@tuwaio/web3-transactions-tracking-core": "workspace:^"
   },
   "peerDependencies": {
     "@wagmi/core": ">=2",

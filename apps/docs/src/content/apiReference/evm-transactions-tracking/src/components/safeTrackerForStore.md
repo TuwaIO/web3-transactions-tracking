@@ -1,4 +1,4 @@
-[**@tuwa/web3-txs-tracking-repo**](../../../README.md)
+[**@tuwaio/web3-txs-tracking-repo**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 > **safeTrackerForStore**\<`T`\>(`__namedParameters`): `Promise`\<`void`\>
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:146](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L146)
+Defined in: [packages/evm-transactions-tracking/src/trackers/safeTracker.ts:146](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/evm-transactions-tracking/src/trackers/safeTracker.ts#L146)
 
 A higher-level wrapper for `safeTracker` that integrates directly with the Zustand store.
 

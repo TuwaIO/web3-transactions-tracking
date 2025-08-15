@@ -30,7 +30,7 @@ const tabsItems = [
 ];
 
 export function PackageInstallationTabs({ trackingPackageName }: PackageInstallationTabsProps) {
-  const packages = `@tuwa/web3-transactions-tracking-core @tuwa/${trackingPackageName}`;
+  const packages = `@tuwaio/web3-transactions-tracking-core @tuwaio/${trackingPackageName}`;
 
   return (
     <div className="my-4">

@@ -1,4 +1,4 @@
-[**@tuwa/web3-txs-tracking-repo**](../../../README.md)
+[**@tuwaio/web3-txs-tracking-repo**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 > **deepMerge**\<`T`\>(`target`, `source`): `T`
 
-Defined in: [packages/transactions-tracking-ui/src/utils/deepMerge.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/transactions-tracking-ui/src/utils/deepMerge.ts#L30)
+Defined in: [packages/transactions-tracking-ui/src/utils/deepMerge.ts:30](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/transactions-tracking-ui/src/utils/deepMerge.ts#L30)
 
 Recursively merges the properties of a source object into a target object.
 This function creates a new object and does not mutate the original target.

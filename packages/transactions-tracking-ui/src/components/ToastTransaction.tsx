@@ -4,8 +4,8 @@
 
 import { Web3Icon } from '@bgd-labs/react-web3-icons';
 import { getChainName } from '@bgd-labs/react-web3-icons/dist/utils';
-import { cancelTxAction, speedUpTxAction } from '@tuwa/evm-transactions-tracking';
-import { Transaction } from '@tuwa/web3-transactions-tracking-core';
+import { cancelTxAction, speedUpTxAction } from '@tuwaio/evm-transactions-tracking';
+import { Transaction } from '@tuwaio/web3-transactions-tracking-core';
 import { Config } from '@wagmi/core';
 import { JSX, ReactNode } from 'react';
 import { ToastContainerProps, ToastContentProps } from 'react-toastify';

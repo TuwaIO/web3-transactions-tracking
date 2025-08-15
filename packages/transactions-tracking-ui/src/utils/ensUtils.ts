@@ -3,7 +3,7 @@
  * It provides methods for resolving names to addresses, addresses to names, and fetching avatars.
  */
 
-import { createViemClient } from '@tuwa/evm-transactions-tracking';
+import { createViemClient } from '@tuwaio/evm-transactions-tracking';
 import makeBlockie from 'ethereum-blockies-base64';
 import { Address, Hex, isAddress } from 'viem';
 import { mainnet } from 'viem/chains';

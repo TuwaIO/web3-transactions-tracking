@@ -1,4 +1,4 @@
-[**@tuwa/web3-txs-tracking-repo**](../../../README.md)
+[**@tuwaio/web3-txs-tracking-repo**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 > **selectTXByKey**\<`TR`, `T`\>(`transactionsPool`, `key`): `undefined` \| `T`
 
-Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L42)
+Defined in: [packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts:42](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/web3-transactions-tracking-core/src/store/transactionsSelectors.ts#L42)
 
 Selects a single transaction from the pool by its unique transaction key (`txKey`).
 This is the most direct way to retrieve a transaction.

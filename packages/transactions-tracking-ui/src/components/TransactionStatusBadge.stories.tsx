@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TransactionTracker } from '@tuwa/evm-transactions-tracking/src';
-import { Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
+import { TransactionTracker } from '@tuwaio/evm-transactions-tracking/src';
+import { Transaction, TransactionStatus } from '@tuwaio/web3-transactions-tracking-core';
 import { zeroAddress, zeroHash } from 'viem';
 import { sepolia } from 'viem/chains';
 

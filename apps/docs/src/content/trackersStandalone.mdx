@@ -1,6 +1,6 @@
 # Using EVM Trackers Standalone
 
-While the `@tuwa/web3-transactions-tracking` library provides a comprehensive solution with a UI (`@tuwa/transactions-tracking-ui`) and a Zustand-based state store (`@tuwa/evm-transactions-tracking`), its architecture is modular. You can use the low-level **trackers** (`evmTracker`, `gelatoTracker`, `safeTracker`) directly, without installing or configuring the state management store.
+While the `@tuwaio/web3-transactions-tracking` library provides a comprehensive solution with a UI (`@tuwaio/transactions-tracking-ui`) and a Zustand-based state store (`@tuwaio/evm-transactions-tracking`), its architecture is modular. You can use the low-level **trackers** (`evmTracker`, `gelatoTracker`, `safeTracker`) directly, without installing or configuring the state management store.
 
 This is incredibly useful if:
 * You already have your own state management solution (Redux, MobX, Valtio, etc.) and want to integrate only the tracking logic.
@@ -38,8 +38,7 @@ This is the primary tracker for monitoring standard on-chain transactions in EVM
 #### Example Usage
 
 ```tsx
-import { evmTracker } from '@tuwa/evm-transactions-tracking';
-import { parseGwei } from 'viem';
+import { evmTracker } from '@tuwaio/evm-transactions-tracking';
 
 async function trackMyTransaction(txHash, chains) {
   console.log(`Starting to track transaction: ${txHash}`);
@@ -93,7 +92,7 @@ This tracker is designed for monitoring meta-transactions relayed via the Gelato
 #### Example Usage
 
 ```tsx
-import { gelatoTracker, GelatoTaskState } from '@tuwa/evm-transactions-tracking';
+import { gelatoTracker, GelatoTaskState } from '@tuwaio/evm-transactions-tracking';
 
 async function trackGelatoTask(taskId) {
   console.log(`Starting to track Gelato task: ${taskId}`);
@@ -135,7 +134,7 @@ Similar to `gelatoTracker`, it uses polling, but this time against the Safe Tran
 #### Example Usage
 
 ```tsx
-import { safeTracker } from '@tuwa/evm-transactions-tracking';
+import { safeTracker } from '@tuwaio/evm-transactions-tracking';
 
 async function trackSafeTransaction(safeTxHash, chainId, safeAddress) {
   console.log(`Tracking Safe transaction: ${safeTxHash}`);
@@ -173,7 +172,7 @@ The library exports several utilities that simplify working with the trackers.
 This is a key routing function. After you submit a transaction, you get back a key (`ActionTxKey`). This function helps you determine which tracker to use for that key.
 
 ```tsx
-import { checkTransactionsTracker, TransactionTracker, isGelatoTxKey } from '@tuwa/evm-transactions-tracking';
+import { checkTransactionsTracker, TransactionTracker, isGelatoTxKey } from '@tuwaio/evm-transactions-tracking';
 
 function determineTracker(actionTxKey, walletType) {
   const { tracker, txKey } = checkTransactionsTracker(actionTxKey, walletType);
@@ -212,7 +211,7 @@ determineTracker('0xabc...', 'safe');
 A simple but important utility that checks if the user is on the correct network, and if not, prompts them to switch using `wagmi`.
 
 ```tsx
-import { checkChainForTx } from '@tuwa/evm-transactions-tracking';
+import { checkChainForTx } from '@tuwaio/evm-transactions-tracking';
 import { wagmiConfig } from './config'; // Your wagmi config
 
 async function safeSendTransaction() {

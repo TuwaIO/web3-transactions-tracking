@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
-import { useState } from 'react';
+import { TransactionStatus } from '@tuwaio/web3-transactions-tracking-core';
 
 import { defaultLabels } from '../../i18n/en';
 import { LabelsProvider } from '../../providers';

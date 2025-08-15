@@ -1,9 +1,9 @@
 'use client';
 
-import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking';
-import { createViemClient } from '@tuwa/evm-transactions-tracking';
-import { TxActionButton } from '@tuwa/transactions-tracking-ui';
-import { TransactionsWidget } from '@tuwa/transactions-tracking-ui/dist/providers';
+import { useInitializeTransactionsPool } from '@tuwaio/evm-transactions-tracking';
+import { createViemClient } from '@tuwaio/evm-transactions-tracking';
+import { TxActionButton } from '@tuwaio/transactions-tracking-ui';
+import { TransactionsWidget } from '@tuwaio/transactions-tracking-ui/dist/providers';
 import { Config } from '@wagmi/core';
 import { ReactNode, useEffect, useState } from 'react';
 import { Client } from 'viem';

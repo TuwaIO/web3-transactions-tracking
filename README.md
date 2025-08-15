@@ -20,11 +20,11 @@ This monorepo contains a collection of packages that work together to provide a 
 
 This project is a monorepo containing the following packages:
 
-| Package                                                                                  | Description                                                                                             | Version                                                                                                                              |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| [`@tuwa/web3-transactions-tracking-core`](./packages/web3-transactions-tracking-core)     | The framework-agnostic core with the Zustand store, types, and foundational logic.                     | [](https://www.npmjs.com/package/%40tuwa/web3-transactions-tracking-core)         |
-| [`@tuwa/evm-transactions-tracking`](./packages/evm-transactions-tracking)                 | The EVM implementation layer with specialized trackers for on-chain, Gelato, and Safe transactions.      | [](https://www.npmjs.com/package/%40tuwa/evm-transactions-tracking)             |
-| [`@tuwa/transactions-tracking-ui`](./packages/transactions-tracking-ui)                   | A set of pre-styled React components (toasts, modals) for a beautiful user experience out-of-the-box. | [](https://www.npmjs.com/package/%40tuwa/transactions-tracking-ui)                 |
+| Package                                                                                  | Description                                                                                             | Version                                                                     |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |-----------------------------------------------------------------------------|
+| [`@tuwaio/web3-transactions-tracking-core`](./packages/web3-transactions-tracking-core)     | The framework-agnostic core with the Zustand store, types, and foundational logic.                     | [](https://www.npmjs.com/package/%40tuwaio/web3-transactions-tracking-core) |
+| [`@tuwaio/evm-transactions-tracking`](./packages/evm-transactions-tracking)                 | The EVM implementation layer with specialized trackers for on-chain, Gelato, and Safe transactions.      | [](https://www.npmjs.com/package/%40tuwaio/evm-transactions-tracking)       |
+| [`@tuwaio/transactions-tracking-ui`](./packages/transactions-tracking-ui)                   | A set of pre-styled React components (toasts, modals) for a beautiful user experience out-of-the-box. | [](https://www.npmjs.com/package/%40tuwaio/transactions-tracking-ui)        |
 
 ## Running the Docs Project
 

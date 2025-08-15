@@ -1,4 +1,4 @@
-import { Transaction } from '@tuwa/web3-transactions-tracking-core';
+import { Transaction } from '@tuwaio/web3-transactions-tracking-core';
 import { Config, getAccount, sendTransaction } from '@wagmi/core';
 import { Hex } from 'viem';
 

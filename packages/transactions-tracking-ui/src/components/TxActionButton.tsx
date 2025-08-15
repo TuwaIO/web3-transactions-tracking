@@ -5,7 +5,7 @@
  */
 
 import { ArrowPathIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
-import { IInitializeTxTrackingStore, Transaction, TransactionStatus } from '@tuwa/web3-transactions-tracking-core';
+import { IInitializeTxTrackingStore, Transaction, TransactionStatus } from '@tuwaio/web3-transactions-tracking-core';
 import { ButtonHTMLAttributes, JSX, ReactNode, useEffect, useState } from 'react';
 
 import { useLabels } from '../providers';

@@ -3,7 +3,7 @@
  * These selectors help derive UI-specific data, such as block explorer links, from the store state.
  */
 
-import { selectTXByHash, Transaction, TransactionPool } from '@tuwa/web3-transactions-tracking-core';
+import { selectTXByHash, Transaction, TransactionPool } from '@tuwaio/web3-transactions-tracking-core';
 import { Chain, Hex } from 'viem';
 
 import { TransactionTracker } from '../types';

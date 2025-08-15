@@ -1,4 +1,4 @@
-[**@tuwa/web3-txs-tracking-repo**](../../../README.md)
+[**@tuwaio/web3-txs-tracking-repo**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 > **ToastTransactionCustomization**\<`TR`, `T`\> = `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L32)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:32](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L32)
 
 Defines the structure for the `customization` prop, allowing users to override
 default sub-components with their own implementations.
@@ -27,7 +27,7 @@ default sub-components with their own implementations.
 
 > `optional` **components**: `object`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/f61e365332b37eac7250c41319315eecba3a08d6/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L33)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:33](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L33)
 
 #### cancelButton()?
 

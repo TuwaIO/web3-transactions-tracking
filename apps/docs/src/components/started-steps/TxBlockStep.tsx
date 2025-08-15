@@ -12,7 +12,7 @@ const txBlockStepCodeGenerate = ({ importLine, buttonLine }: TxBlockStepCodeGene
   return `'use client';
 
 ${importLine}
-import { useInitializeTransactionsPool } from '@tuwa/evm-transactions-tracking';
+import { useInitializeTransactionsPool } from '@tuwaio/evm-transactions-tracking';
 import { sepolia } from 'viem/chains';
 
 import { config } from '@/configs/wagmiConfig';
