@@ -21,7 +21,7 @@ export const metadata = {
     title: 'TUWA Web3 Transaction Tracking Suite',
     description:
       'A powerful, end-to-end solution to simplify and automate real-time transaction monitoring in your dApp.',
-    url: 'https://docs.tuwa.co.ua/',
+    url: 'https://docs.tuwa.io/',
     siteName: 'TUWA Suite Docs',
     images: [
       {

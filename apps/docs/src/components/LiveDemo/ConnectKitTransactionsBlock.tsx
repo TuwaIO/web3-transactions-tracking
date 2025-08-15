@@ -27,7 +27,7 @@ export const config = createConfig(
 
     // Optional App Info
     appDescription: 'TUWA docs',
-    appUrl: 'https://docs.tuwa.co.ua/', // your app's url
+    appUrl: 'https://docs.tuwa.io/', // your app's url
     appIcon: 'https://family.co/logo.png', // your app's icon, no bigger than 1024x1024px (max. 1MB) TODO
     ssr: true,
   }),

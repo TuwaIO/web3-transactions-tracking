@@ -5,7 +5,7 @@ export const tuwaTheme = create({
   base: 'light',
 
   brandTitle: 'TUWA UI Components',
-  brandUrl: 'https://docs.tuwa.co.ua/',
+  brandUrl: 'https://docs.tuwa.io/',
   brandImage: './logo.svg',
   brandTarget: '_self',
 
@@ -34,7 +34,7 @@ export const tuwaDarkTheme = create({
   base: 'dark',
 
   brandTitle: 'TUWA UI Components',
-  brandUrl: 'https://docs.tuwa.co.ua/',
+  brandUrl: 'https://docs.tuwa.io/',
   brandImage: './logo-dark.svg',
   brandTarget: '_self',
 

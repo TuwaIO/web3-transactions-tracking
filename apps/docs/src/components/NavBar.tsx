@@ -22,7 +22,7 @@ export function Navbar() {
     >
       <div className="flex items-center gap-3">
         <Link
-          href="https://stories.tuwa.co.ua/?path=/docs/introduction--docs"
+          href="https://stories.tuwa.io/?path=/docs/introduction--docs"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden sm:flex items-center gap-1 px-2 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"

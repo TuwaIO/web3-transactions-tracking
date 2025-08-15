@@ -146,6 +146,7 @@ export const ReadmeCards: React.FC = () => {
       status: 'ready',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-dynamic',
       difficulty: 'intermediate',
+      demoUrl: 'https://dynamic.example.tuwa.io/',
     },
     {
       title: 'Next.js + ConnectKit',
@@ -155,6 +156,7 @@ export const ReadmeCards: React.FC = () => {
       status: 'ready',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-connectkit',
       difficulty: 'beginner',
+      demoUrl: 'https://connectkit.example.tuwa.io/',
     },
     {
       title: 'Next.js + Reown AppKit',
@@ -163,7 +165,6 @@ export const ReadmeCards: React.FC = () => {
       technologies: ['React 19', 'TypeScript', 'Reown AppKit', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-reown',
-      demoUrl: 'https://web3-transactions-tracking-nextjs-r.vercel.app/',
       difficulty: 'intermediate',
     },
     {
@@ -173,7 +174,6 @@ export const ReadmeCards: React.FC = () => {
       framework: 'Next.js 15',
       technologies: ['React 19', 'TypeScript', 'RainbowKit', 'Wagmi', 'TailwindCSS'],
       status: 'ready',
-      demoUrl: 'https://web3-transactions-tracking-nextjs-r-two.vercel.app/',
       githubUrl: 'https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-rainbowkit',
       difficulty: 'beginner',
     },

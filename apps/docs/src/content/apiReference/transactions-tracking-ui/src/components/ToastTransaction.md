@@ -6,7 +6,7 @@
 
 > **ToastTransaction**\<`TR`, `T`\>(`props`): `Element`
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:80](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L80)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:80](https://github.com/TuwaIO/web3-transactions-tracking/blob/e8fc17df1e7aa9c38ef9c156281f0501e50bc7fd/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L80)
 
 A composite component that renders the content for a transaction toast notification.
 It is highly customizable and includes actions for speeding up or canceling transactions

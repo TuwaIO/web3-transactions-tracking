@@ -6,7 +6,7 @@
 
 > **GelatoTxKey** = `object`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:22](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L22)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:22](https://github.com/TuwaIO/web3-transactions-tracking/blob/e8fc17df1e7aa9c38ef9c156281f0501e50bc7fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L22)
 
 Defines the shape of the identifier for a Gelato transaction task.
 
@@ -16,4 +16,4 @@ Defines the shape of the identifier for a Gelato transaction task.
 
 > **taskId**: `string`
 
-Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/1aaff35a5933c1afa3a42f6972b2fa8d6d4b6fc5/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L23)
+Defined in: [packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts:23](https://github.com/TuwaIO/web3-transactions-tracking/blob/e8fc17df1e7aa9c38ef9c156281f0501e50bc7fd/packages/evm-transactions-tracking/src/trackers/gelatoTracker.ts#L23)
