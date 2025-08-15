@@ -27,7 +27,6 @@ This project is a monorepo containing the following packages:
 | [`@tuwa/transactions-tracking-ui`](./packages/transactions-tracking-ui)                   | A set of pre-styled React components (toasts, modals) for a beautiful user experience out-of-the-box. | [](https://www.npmjs.com/package/%40tuwa/transactions-tracking-ui)                 |
 
 ## Running the Docs Project
-
 To run the documentation and example website locally:
 
 ```bash

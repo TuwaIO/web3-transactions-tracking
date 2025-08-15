@@ -6,7 +6,7 @@
 
 > **ToastTransactionProps**\<`TR`, `T`\> = `object` & `Pick`\<[`WalletInfoModalProps`](../interfaces/WalletInfoModalProps.md)\<`TR`, `T`\>, `"transactionsPool"`\>
 
-Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/c41f5708079d0be5a252ccc504a3465e6f5aafc4/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L49)
+Defined in: [packages/transactions-tracking-ui/src/components/ToastTransaction.tsx:49](https://github.com/TuwaIO/web3-transactions-tracking/blob/b90304bc8064531937db86944c69f0931d7db871/packages/transactions-tracking-ui/src/components/ToastTransaction.tsx#L49)
 
 ## Type declaration
 
